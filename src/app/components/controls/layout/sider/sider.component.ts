@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'ks-sider',
+    selector: 'a-sider',
     templateUrl: './sider.component.html',
     styleUrls: ['./sider.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'ks-footer',
+    selector: 'a-footer',
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'ks-content',
+    selector: 'a-content',
     templateUrl: './content.component.html',
     styleUrls: ['./content.component.scss']
 })

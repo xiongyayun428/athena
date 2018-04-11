@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { SiderComponent } from './sider/sider.component';
 
 @Component({
-    selector: 'ks-layout',
+    selector: 'a-layout',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss']
 })

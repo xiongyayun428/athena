@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ks-controls-toolbox',
+  selector: 'a-controls-toolbox',
   templateUrl: './controls-toolbox.component.html',
   styleUrls: ['./controls-toolbox.component.scss']
 })

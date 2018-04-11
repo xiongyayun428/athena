@@ -1,18 +1,91 @@
 <nz-tabset [nzTabPosition]="'top'" [nzType]="'line'" style="height:100%;">
-    <nz-tab>
+    <nz-tab style="height:100%;">
         <ng-template #nzTabHeading>
             <i ngClass="anticon anticon-apple"></i>
             设计
         </ng-template>
-        <span>
-            <nz-layout>
-                <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed"  style="height:100%;">哎哎哎
-                    <!-- <ks-controls-toolbox></ks-controls-toolbox> -->
+        <nz-layout style="height:100%;">
+            <div style="width: 0;" #left></div>
+            <nz-sider nzCollapsible [(nzCollapsed)]="isLeftCollapsed" [nzTrigger]="null" [nzWidth]="leftSiderWidth" #leftSider>
+                <span >
+                    <i class="anticon trigger" [class.anticon-menu-fold]="!isLeftCollapsed" [class.anticon-menu-unfold]="isLeftCollapsed" (click)="isLeftCollapsed=!isLeftCollapsed"></i>
+                    <span class="nav-text" style="font-size: 20px;">控件工具箱</span>
+                </span>
+                <ul nz-menu [nzTheme]="'dark'" [nzMode]="isLeftCollapsed?'vertical':'inline'">
+                    <li nz-submenu>
+                        <span title>
+                            <i class="anticon anticon-user"></i>
+                            <span class="nav-text">常用控件</span>
+                        </span>
+                        <ul>
+                            <li nz-menu-item>Tom</li>
+                            <li nz-menu-item>Bill</li>
+                            <li nz-menu-item>Alex</li>
+                        </ul>
+                    </li>
+                    <li nz-submenu>
+                        <span title>
+                            <i class="anticon anticon-team"></i>
+                            <span class="nav-text">容器</span>
+                        </span>
+                        <ul>
+                            <li nz-menu-item>Team 1</li>
+                            <li nz-menu-item>Team 2</li>
+                        </ul>
+                    </li>
+                    <li nz-menu-item>
+                        <span>
+                            <i class="anticon anticon-file"></i>
+                            <span class="nav-text">数据</span>
+                        </span>
+                    </li>
+                </ul>
+            </nz-sider>
+            <div id="line" (mousedown)="mousedown($event)"></div>
+            <div style="width: 0;" #right></div>
+            <!-- <nz-layout> -->
+                <nz-content>这是内容...............................................................................
+                        .....................................................................................................................74563324153245...................................................................................................................................................撒旦法师打发斯蒂芬......................................................................................................................................................................................................................................................................................................................................7.....................................666..........................................55558888888888999999999afdsgadg阿斯顿发送到发撒旦法师打发斯蒂芬...............结尾。。。。。。
+
+                        呵呵呵呵呵
+                </nz-content>
+                <nz-sider nzCollapsible [(nzCollapsed)]="isRightCollapsed">
+                    <span style="font-size: 20px;">
+                        <i ngClass="anticon anticon-apple"></i>
+                        <span class="nav-text">属性</span>
+                    </span>
+                    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isRightCollapsed?'vertical':'inline'">
+                        <li nz-submenu>
+                            <span title>
+                                <i class="anticon anticon-user"></i>
+                                <span class="nav-text">常用控件</span>
+                            </span>
+                            <ul>
+                                <li nz-menu-item>Tom</li>
+                                <li nz-menu-item>Bill</li>
+                                <li nz-menu-item>Alex</li>
+                            </ul>
+                        </li>
+                        <li nz-submenu>
+                            <span title>
+                                <i class="anticon anticon-team"></i>
+                                <span class="nav-text">容器</span>
+                            </span>
+                            <ul>
+                                <li nz-menu-item>Team 1</li>
+                                <li nz-menu-item>Team 2</li>
+                            </ul>
+                        </li>
+                        <li nz-menu-item>
+                            <span>
+                                <i class="anticon anticon-file"></i>
+                                <span class="nav-text">数据</span>
+                            </span>
+                        </li>
+                    </ul>
                 </nz-sider>
-                <nz-content>Content</nz-content>
-                <nz-sider>sider</nz-sider>
-            </nz-layout>
-        </span>
+            <!-- </nz-layout> -->
+        </nz-layout>
     </nz-tab>
     <nz-tab>
         <ng-template #nzTabHeading>

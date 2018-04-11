@@ -1,0 +1,42 @@
+:host ::ng-deep .ant-tabs-bar {
+    // margin-bottom: 5px;
+}
+
+:host ::ng-deep .ant-tabs-content {
+    // background: rgba(16, 142, 233, 1);
+    color: #fff;
+    height: 100%;
+}
+
+:host ::ng-deep .ant-layout-sider {
+    color: #fff;
+}
+
+:host ::ng-deep .ant-layout-content {
+    background: rgba(16, 142, 233, 1);
+    color: #fff;
+  }
+
+:host ::ng-deep .ant-layout-sider-collapsed .nav-text {
+    display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
+    display: none;
+}
+
+:host ::ng-deep .ant-layout-sider-collapsed .anticon {
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+:host ::ng-deep .ant-layout-sider-trigger {
+    position: relative;
+}
+
+#line {
+    width: 5px;
+    height: 100%;
+    background-color: red;
+    cursor: e-resize;
+}
