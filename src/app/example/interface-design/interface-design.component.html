@@ -1,0 +1,24 @@
+<nz-tabset [nzTabPosition]="'top'" [nzType]="'line'" style="height:100%;">
+    <nz-tab>
+        <ng-template #nzTabHeading>
+            <i ngClass="anticon anticon-apple"></i>
+            设计
+        </ng-template>
+        <span>
+            <nz-layout>
+                <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed"  style="height:100%;">哎哎哎
+                    <!-- <ks-controls-toolbox></ks-controls-toolbox> -->
+                </nz-sider>
+                <nz-content>Content</nz-content>
+                <nz-sider>sider</nz-sider>
+            </nz-layout>
+        </span>
+    </nz-tab>
+    <nz-tab>
+        <ng-template #nzTabHeading>
+            <i ngClass="anticon anticon-apple"></i>
+            源码
+        </ng-template>
+        <span>Content of Tab Pane 源码</span>
+    </nz-tab>
+</nz-tabset>
