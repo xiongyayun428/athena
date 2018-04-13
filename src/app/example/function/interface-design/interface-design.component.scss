@@ -7,6 +7,9 @@
     color: #fff;
     height: 100%;
 }
+:host ::ng-deep .ant-tabs-tabpane {
+    height: 100%;
+}
 
 :host ::ng-deep .ant-layout-sider {
     color: #fff;

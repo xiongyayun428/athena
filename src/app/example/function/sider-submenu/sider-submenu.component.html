@@ -1,0 +1,87 @@
+<!-- <ul>
+    <li nz-menu-item>
+        <span title>
+            <i class="anticon anticon-mail"></i>
+            <span>没有子节点1</span>
+        </span>
+    </li>
+    <li nz-menu-item>
+        <span title>
+            <i class="anticon anticon-mail"></i>
+            <span>没有子节点2</span>
+        </span>
+    </li>
+    <li nz-submenu>
+        <span title>
+            <i class="anticon anticon-mail"></i>
+            <span class="nav-text">A</span>
+        </span>
+        <ul>
+            <li nz-submenu>
+                <span title>
+                    <i class="anticon anticon-mail"></i>
+                    <span>B</span>
+                </span>
+                <ul>
+                    <li nz-menu-item>
+                        <span title>
+                            <i class="anticon anticon-mail"></i>
+                            <span>C1</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item>
+                        <span title>
+                            <i class="anticon anticon-mail"></i>
+                            <span>C2</span>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul> -->
+
+
+<ng-container *ngFor="let value of values">
+    <li nz-menu-item *ngIf="value.items == null">
+        <span title>
+            <i [class]="value.icon"></i>
+            <span class="nav-text">{{value.name}}</span>
+        </span>
+    </li>
+    <li nz-submenu *ngIf="value.items != null">
+        <span title>
+            <i [class]="value.icon"></i>
+            <span class="nav-text">{{value.name}}</span>
+        </span>
+        <ul>
+            <!-- <li nz-menu-item>
+                <span title>
+                    <i class="anticon anticon-mail"></i>
+                    <span>A</span>
+                </span>
+            </li>
+            <li nz-submenu>
+                <span title>
+                    <i class="anticon anticon-mail"></i>
+                    <span>B</span>
+                </span>
+                <ul>
+                    <li nz-menu-item>
+                        <span title>
+                            <i class="anticon anticon-mail"></i>
+                            <span>C1</span>
+                        </span>
+                    </li>
+                    <li nz-menu-item>
+                        <span title>
+                            <i class="anticon anticon-mail"></i>
+                            <span>C2</span>
+                        </span>
+                    </li>
+                </ul>
+            </li> -->
+            <a-sider-submenu [values]="value.items"></a-sider-submenu>
+        </ul>
+    </li>
+</ng-container>

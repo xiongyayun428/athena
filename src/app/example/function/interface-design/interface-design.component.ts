@@ -1,4 +1,5 @@
 import { Component, OnInit, ContentChild, ContentChildren, ViewChildren, ViewChild, ElementRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'a-interface-design',
@@ -15,7 +16,9 @@ export class InterfaceDesignComponent implements OnInit {
     @ViewChild('left') left: ElementRef;
     @ViewChild('right') right: ElementRef;
 
-    constructor() { }
+    constructor(private title: Title) {
+        title.setTitle('功能点界面设计');
+    }
 
     ngOnInit() {
     }

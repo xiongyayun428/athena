@@ -3,11 +3,15 @@ import { ModuleWithProviders } from '@angular/core';
 
 const routes: Routes = [
     {
-        path: 'design',
-        loadChildren: './example/interface-design/interface-design.module#InterfaceDesignModule',
+        path: 'function',
+        loadChildren: './example/function/function.module#FunctionModule',
     },
-    { path: '', redirectTo: 'design', pathMatch: 'full' },
-    { path: '**', redirectTo: 'design', pathMatch: 'full' }
+    // {
+    //     path: 'design',
+    //     loadChildren: './example/interface-design/interface-design.module#InterfaceDesignModule',
+    // },
+    { path: '', redirectTo: 'function', pathMatch: 'full' },
+    { path: '**', redirectTo: 'function', pathMatch: 'full' }
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);
