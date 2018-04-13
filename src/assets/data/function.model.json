@@ -68,17 +68,21 @@
             "chmod": 777,
             "items": [{
                 "name": "呵呵呵",
+                "icon": "anticon anticon-user",
                 "items": [{
                         "name": "用户账号",
-                        "desc": "这是用户功能点"
+                        "desc": "这是用户功能点",
+                        "icon": "anticon anticon-user"
                     },
                     {
                         "name": "角色配置",
-                        "desc": "这是角色配置功能点"
+                        "desc": "这是角色配置功能点",
+                        "icon": "anticon anticon-user"
                     },
                     {
                         "name": "权限管理",
-                        "desc": "这是权限管理功能点"
+                        "desc": "这是权限管理功能点",
+                        "icon": "anticon anticon-user"
                     }
                 ]
             }]
