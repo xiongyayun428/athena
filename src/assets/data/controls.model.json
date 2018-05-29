@@ -1,0 +1,70 @@
+{
+    "name": "控件工具箱",
+    "desc": "这是控件工具箱",
+    "icon": "anticon anticon-file",
+    "expanded": true,
+    "disabled": false,
+    "chmod": 555,
+    "items": [
+        {
+            "name": "常用控件",
+            "desc": "这是常用控件",
+            "icon": "anticon anticon-file",
+            "expanded": true,
+            "disabled": false,
+            "chmod": 555,
+            "items": [
+                {
+                    "name": "Table",
+                    "desc": "表格",
+                    "icon": "anticon anticon-user",
+                    "expanded": true,
+                    "chmod": 777
+                },
+                {
+                    "name": "Input",
+                    "desc": "输入框",
+                    "icon": "anticon anticon-team",
+                    "expanded": true,
+                    "chmod": 777
+                },
+                {
+                    "name": "Dropdown",
+                    "desc": "下拉菜单",
+                    "icon": "anticon anticon-team",
+                    "chmod": 777
+                }
+            ]
+        },
+        {
+            "name": "容器",
+            "desc": "这是容器",
+            "icon": "anticon anticon-file",
+            "expanded": false,
+            "disabled": false,
+            "chmod": 555,
+            "items": [
+                {
+                    "name": "Table1",
+                    "desc": "表格1",
+                    "icon": "anticon anticon-user",
+                    "expanded": true,
+                    "chmod": 777
+                },
+                {
+                    "name": "Input1",
+                    "desc": "输入框1",
+                    "icon": "anticon anticon-team",
+                    "expanded": true,
+                    "chmod": 777
+                },
+                {
+                    "name": "Dropdown1",
+                    "desc": "下拉菜单1",
+                    "icon": "anticon anticon-team",
+                    "chmod": 777
+                }
+            ]
+        }
+    ]
+}

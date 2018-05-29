@@ -5,10 +5,19 @@ import { HeaderComponent } from './header/header.component';
 import { SiderComponent } from './sider/sider.component';
 import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        NgZorroAntdModule
+    ],
+    exports: [
+        LayoutComponent,
+        HeaderComponent,
+        SiderComponent,
+        ContentComponent,
+        FooterComponent
     ],
     declarations: [
         LayoutComponent,
@@ -16,6 +25,13 @@ import { FooterComponent } from './footer/footer.component';
         SiderComponent,
         ContentComponent,
         FooterComponent
-    ]
+    ],
+    // entryComponents: [
+    //     LayoutComponent,
+    //     HeaderComponent,
+    //     SiderComponent,
+    //     ContentComponent,
+    //     FooterComponent
+    // ]
 })
 export class LayoutModule { }

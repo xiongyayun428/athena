@@ -1,3 +1,43 @@
-<ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
-    <a-sider-submenu [values]="values"></a-sider-submenu>
+<ng-container *ngIf="values">
+<span title>
+    <i [class]="values.icon"></i>
+    <span class="nav-text" style="font-size: 20px;">{{values.name}}</span>
+</span>
+<ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+    <ng-container *ngTemplateOutlet="list; context: {'$implicit': values.items}"></ng-container>
+    <ng-template #list let-datas>
+        <ng-container *ngFor="let value of datas">
+            <!-- 可拖拽-->
+            <div *ngIf="draggable" [dragula]="value">
+                <li nz-menu-item *ngIf="value.items == null" (click)="click(value)" (dblclick)="dblclick(value)">
+                    <span title>
+                        <i [class]="value.icon"></i>
+                        <span class="nav-text">{{value.name}}</span>
+                    </span>
+                </li>
+            </div>
+            <ng-container *ngIf="!draggable">
+                <li nz-menu-item *ngIf="value.items == null" (click)="click(value)" (dblclick)="dblclick(value)">
+                    <span title>
+                        <i [class]="value.icon"></i>
+                        <span class="nav-text">{{value.name}}</span>
+                    </span>
+                </li>
+            </ng-container>
+            <li nz-submenu *ngIf="value.items != null" [nzOpen]="value.expanded">
+                <span title>
+                    <i [class]="value.icon"></i>
+                    <span class="nav-text">{{value.name}}</span>
+                </span>
+                <ul>
+                    <ng-container *ngTemplateOutlet="list; context: {'$implicit': value.items}"></ng-container>
+                </ul>
+            </li>
+        </ng-container>
+    </ng-template>
+
+    <!-- <ng-template #item>
+
+    </ng-template> -->
 </ul>
+</ng-container>

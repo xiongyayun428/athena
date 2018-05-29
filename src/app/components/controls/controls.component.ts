@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'a-controls',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./controls.component.scss']
 })
 export class ControlsComponent implements OnInit {
+
+    @Output() attributes = new EventEmitter<ControlsComponent>();
 
     constructor() { }
 

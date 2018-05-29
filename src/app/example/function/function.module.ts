@@ -7,7 +7,9 @@ import { InterfaceDesignComponent } from './interface-design/interface-design.co
 import { ControlsToolboxModule } from '../controls-toolbox/controls-toolbox.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SiderMenuComponent } from './sider-menu/sider-menu.component';
-import { SiderSubmenuComponent } from './sider-submenu/sider-submenu.component';
+import { DesignContentComponent } from './design-content/design-content.component';
+import { ControlsModule } from '../../components/controls/controls.module';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     imports: [
@@ -15,13 +17,15 @@ import { SiderSubmenuComponent } from './sider-submenu/sider-submenu.component';
         FunctionRoutes,
         HttpClientModule,
         NgZorroAntdModule,
-        ControlsToolboxModule
+        ControlsToolboxModule,
+        ControlsModule,
+        DragulaModule
     ],
     declarations: [
         FunctionComponent,
         SiderMenuComponent,
-        SiderSubmenuComponent,
         InterfaceDesignComponent,
-]
+        DesignContentComponent
+    ]
 })
 export class FunctionModule { }

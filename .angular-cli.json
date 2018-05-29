@@ -18,9 +18,12 @@
         "testTsconfig": "tsconfig.spec.json",
         "prefix": "a",
         "styles": [
-            "styles.scss"
+            "styles.scss",
+            "../node_modules/ng-zorro-antd/src/ng-zorro-antd.less"
         ],
-        "scripts": [],
+        "scripts": [
+            "assets/js/click-love.js"
+        ],
         "environmentSource": "environments/environment.ts",
         "environments": {
             "dev": "environments/environment.ts",

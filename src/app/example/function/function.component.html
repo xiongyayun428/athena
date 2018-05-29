@@ -1,27 +1,22 @@
 <nz-layout style="height:100%;">
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="300">
-        <span>
-            <i [class]="siderData.icon"></i>
-            <span class="nav-text" style="font-size: 20px;">{{siderData.name}}</span>
-        </span>
-        <a-sider-menu [values]="siderData.items"></a-sider-menu>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="300" [nzReverseArrow]="'false'">
+        <a-sider-menu [values]="siderData" [isCollapsed]="isCollapsed" (onclick)="dblclick($event)" [draggable]="'true'"></a-sider-menu>
     </nz-sider>
-    <nz-content>
-        <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" style="height:100%;" [nzSelectedIndex]="tabSelectedIndex">
-            <nz-tab *ngFor="let tab of tabs" style="height:100%;">
-                <ng-template #nzTabHeading>
-                    <!-- <div [routerLink]="['design']"> -->
-                    <div nz-tooltip="{{tab.name}}">
-                        <!-- <a target="_blank" href="javascript:void(0)" (dblclick)="openWin(tab)"> -->
-                        <!-- <a target="_blank" [routerLink]="['design', tab.name]"> -->
+    <nz-layout>
+        <nz-content style="margin:0 8px; height: 100%;">
+            <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" style="height:100%;" [nzSelectedIndex]="tabSelectedIndex">
+                <nz-tab *ngFor="let tab of tabs" style="height:100%;" [nzTitle]="titleTemplate">
+                    <ng-template #titleTemplate>
+                        <div nz-tooltip="{{tab.name}}" (dblclick)="openWin(tab)">
                             <i ngClass="anticon anticon-apple"></i>
                             {{tab.name}}
-                        <!-- </a> -->
-                        <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
-                    </div>
-                </ng-template>
-                <a-interface-design></a-interface-design>
-            </nz-tab>
-        </nz-tabset>
-    </nz-content>
+                            <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
+                        </div>
+                    </ng-template>
+                    <a-interface-design [values]="tab"></a-interface-design>
+                </nz-tab>
+            </nz-tabset>
+        </nz-content>
+        <nz-footer style="text-align: center;">Athena ©2018 Implement By Angular v{{version}}</nz-footer>
+    </nz-layout>
 </nz-layout>

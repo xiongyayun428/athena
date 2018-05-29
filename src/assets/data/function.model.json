@@ -1,24 +1,29 @@
 {
     "name": "功能点",
     "desc": "这是功能点",
-    "icon": "anticon anticon-apple",
+    "icon": "anticon anticon-file",
+    "expanded": true,
+    "disabled": false,
     "chmod": 555,
     "items": [
         {
             "name": "系统功能点",
             "desc": "这是系统功能点",
             "icon": "anticon anticon-user",
+            "expanded": true,
             "chmod": 777,
             "items": [
                 {
                     "name": "用户管理",
                     "desc": "这是用户管理功能点",
                     "icon": "anticon anticon-user",
+                    "expanded": false,
                     "chmod": 777,
                     "items": [{
                             "name": "用户账号",
                             "desc": "这是用户功能点",
                             "icon": "anticon anticon-user",
+                            "expanded": false,
                             "chmod": 777,
                             "items": [{
                                     "name": "用户账号1",
@@ -65,10 +70,13 @@
             "name": "应用功能点",
             "desc": "这是应用功能点",
             "icon": "anticon anticon-team",
+            "expanded": true,
             "chmod": 777,
             "items": [{
                 "name": "呵呵呵",
                 "icon": "anticon anticon-user",
+                "expanded": false,
+                "chmod": 777,
                 "items": [{
                         "name": "用户账号",
                         "desc": "这是用户功能点",

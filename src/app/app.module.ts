@@ -6,6 +6,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
+import { EeveeModule } from './components/eevee/eevee.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { AppRoutes } from './app.routing';
         BrowserAnimationsModule,
         AppRoutes,
         NgZorroAntdModule.forRoot(),
+        EeveeModule
     ],
     providers: [],
     bootstrap: [AppComponent]

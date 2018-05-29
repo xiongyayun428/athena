@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,8 @@ export class FunctionComponent implements OnInit {
 
     tabs = [];
 
+    version = VERSION.full;
+
     constructor(private title: Title,
         private router: Router,
         private route: ActivatedRoute,
@@ -29,7 +31,7 @@ export class FunctionComponent implements OnInit {
     ) {
         title.setTitle('功能点');
         http.get('assets/data/function.model.json').subscribe((data: any) => {
-            console.log(data);
+            // console.log(data);
             this.siderData = data;
         });
     }
@@ -41,9 +43,9 @@ export class FunctionComponent implements OnInit {
         this.tabs.splice(this.tabs.indexOf(tab), 1);
     }
     openWin(tab) {
-        console.log('新开窗口', tab);
-        // this.router.navigate(['design', tab.name], {relativeTo: this.route});
-        // this.tabs.splice(this.tabs.indexOf(tab), 1);
+        const encodeData = encodeURIComponent(JSON.stringify(tab));
+        const url = this.router.url + '/design/' + encodeData;
+        window.open(url);
     }
 
     dblclick(item: any) {
