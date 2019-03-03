@@ -34,6 +34,45 @@ spring:
             # 配置发送到SBA Server的SBA Client的端点安全密码
             user.name: ${spring.security.user.name}
             user.password: ${spring.security.user.password}
+  datasource:
+    url: jdbc:mysql://localhost:3306/athena?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 1qaz@WSX
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filter:
+        stat:
+          log-slow-sql: true
+      # 初始化大小，最小，最大
+      initial-size: 1
+      min-idle: 10
+      max-active: 200
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # 校验SQL，Oracle配置 spring.datasource.validationQuery=SELECT 1 FROM DUAL，如果不配validationQuery项，则下面三项配置无用
+      validation-query: SELECT 'X'
+      validation-query-timeout: 3000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: "stat,wall,log4j"
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-enable: false
+        session-stat-max-count: 1000
+      #      stat-view-servlet:
+      #        login-username: admin
+      #        login-password: 1qaz@WSX
+      aop-patterns: com.hljinke.core.mapper
 # 官方文档中有提到， SpringBoot 的 Logging 配置的级别有7个：TRACE , DEBUG , INFO , WARN , ERROR , FATAL , OFF
 logging:
   # 设置日志保存的路径，path和file只需要设置一个，指定path则日志名称固定为spring.log
