@@ -1,0 +1,53 @@
+server:
+  port: 10100
+  undertow:
+    worker-threads: 10
+info:
+  app:
+    name: com.xyy.athena.user
+    version: v1.0.0
+  contact:
+    email: xiongyayun428@163.com
+spring:
+  devtools:
+    restart:
+      enabled: false
+  security:
+    user:
+      name: admin
+      password: 123456
+  application:
+    name: athena-user
+  datasource:
+    url: jdbc:mysql://10.8.3.202:3306/flyorder?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: prolink
+    password: prolink
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: AthenaHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      ribbon:
+        ConnectTimeout: 1000
+        ReadTimeout: 3000
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000

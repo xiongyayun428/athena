@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- 当前Maven模型的版本号，对于Maven2和Maven3来说，它只能是4.0.0 -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.xyy</groupId>
+	<artifactId>athena</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>athena for spring boot</name>
+	<description>雅典娜</description>
+
+	<!-- 项目开发者列表 -->
+	<developers>
+		<developer>
+			<!--SCM里项目开发者的唯一标识符 -->
+			<id>XYY</id>
+			<!--项目开发者的全名 -->
+			<name>Yayun.Xiong</name>
+			<!--项目开发者的email -->
+			<email>xiongyayun428@163.com</email>
+			<!--项目开发者的主页的URL -->
+			<url>http://www.xiongyayun.com</url>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>9</java.version>
+		<spring-cloud.version>Finchley.SR3</spring-cloud.version>
+		<docker.image.prefix>springboot</docker.image.prefix>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<!-- 依赖,jar包管理,默认被所有的子项目继承 -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 屏蔽依赖关系 去除springboot 中默认的Tomcat 依赖 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+			<!-- maven认为，程序对外部的依赖会随着程序的所处阶段和应用场景而变化，所以maven中的依赖关系有作用域(scope)的限制。 -->
+			<!--scope包含如下的取值：compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围） -->
+			<scope>provided</scope>
+		</dependency>
+		<!-- spring-boot-starter-actuator 管理工具/web 查看堆栈，动态刷新配置 -->
+		<!-- 健康监控 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+	        <groupId>de.codecentric</groupId>
+	        <artifactId>spring-boot-admin-starter-client</artifactId>
+	        <version>2.1.3</version>
+	    </dependency>
+		<!-- 测试 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--热部署 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+	        <groupId>javax.xml.bind</groupId>
+	        <artifactId>jaxb-api</artifactId>
+	    </dependency>
+		<dependency>
+	        <groupId>com.sun.xml.bind</groupId>
+	        <artifactId>jaxb-impl</artifactId>
+	        <version>2.3.2</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.sun.xml.bind</groupId>
+	        <artifactId>jaxb-core</artifactId>
+	        <version>2.3.2</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>javax.activation</groupId>
+	        <artifactId>activation</artifactId>
+	        <version>1.1.1</version>
+	    </dependency>
+	    
+	    <dependency>
+		    <groupId>org.liquibase</groupId>
+		    <artifactId>liquibase-core</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<!-- 声明依赖，并不实现引入，子项目需要显示的声明需要的依赖 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+				<!-- 设置指依赖是否可选，默认为false,即子项目默认都继承:为true,则子项目必需显示的引入，与dependencyManagement里定义的依赖类似 -->
+				<optional>false</optional>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-server</artifactId>
+				<version>2.1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-server-ui</artifactId>
+				<version>2.1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<dependency>
+			    <groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.9.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>3.7.0</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>4.5.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.8.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- 构建配置 -->
+	<build>
+		<!-- 使用的插件列表 -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 	            <groupId>com.spotify</groupId> -->
+<!-- 	            <artifactId>dockerfile-maven-plugin</artifactId> -->
+<!-- 	            <version>1.4.0</version> -->
+<!-- 	            <configuration> -->
+<!-- 	                <repository>${docker.image.prefix}/${project.artifactId}</repository> -->
+<!-- 	                <buildArgs> -->
+<!-- 	                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE> -->
+<!-- 	                </buildArgs> -->
+<!-- 	            </configuration> -->
+<!-- 	        </plugin> -->
+		</plugins>
+<!-- 		<extensions> -->
+<!-- 			<extension> -->
+<!-- 				<groupId>com.spotify</groupId> -->
+<!-- 				<artifactId>dockerfile-maven-extension</artifactId> -->
+<!-- 				<version>${version}</version> -->
+<!-- 			</extension> -->
+<!-- 		</extensions> -->
+	</build>
+
+	<modules>
+		<module>athena.admin.server</module>
+		<module>athena.config.server</module>
+		<module>athena.consul.discovery</module>
+		<module>athena.core</module>
+		<module>athena.eureka.discovery</module>
+		<module>athena.journal</module>
+		<module>athena.role</module>
+		<module>athena.role.api</module>
+    	<module>athena.swagger</module>
+		<module>athena.user</module>
+		<module>athena.user.api</module>
+		<module>athena.zuul</module>
+	</modules>
+
+	<!-- 仓库配置 -->
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://localhost:8081/repository/maven-public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- 发布配置 在执行mvn deploy后表示要发布的位置 -->
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://localhost:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

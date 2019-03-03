@@ -1,0 +1,18 @@
+server:
+  port: 10200
+info:
+  app:
+    name: com.xyy.athena.role
+    version: v1.0.0
+  contact:
+    email: xiongyayun428@163.com
+spring:
+  devtools:
+    restart:
+      enabled: false
+  security:
+    user:
+      name: admin
+      password: 123456
+  application:
+    name: athena-role

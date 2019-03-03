@@ -1,0 +1,45 @@
+server:
+  port: 10002
+info:
+  app:
+    name: com.xyy.athena.zuul
+    version: v1.0.0
+  contact:
+    email: xiongyayun428@163.com
+spring:
+  application:
+    name: athena-zuul
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:10000/eureka/
+zuul:
+  routes:
+    api-user:
+      path: /user/**
+      service-id: athena-user
+    api-role:
+      path: /role/**
+      service-id: athena-role
+#ribbon:
+#  ReadTimeout: 10000
+#  ConnectTimeout: 10000
+#feign:
+#  hystrix:
+#    enabled: true
+#hystrix:
+#  command:
+#    default:
+#      ribbon:
+#        ConnectTimeout: 1000
+#        ReadTimeout: 3000
+#      execution:
+#        timeout:
+#          enabled: false
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 100000

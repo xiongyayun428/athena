@@ -1,0 +1,26 @@
+# 开启配置服务发现
+spring:
+  cloud:
+    config:
+      # 启动一个服务时无法连接到服务端能够快速返回失败
+      fail-fast: true
+      profile: dev
+      label: master
+      # 文件名
+      name: config
+      discovery:
+        enabled: true
+        service-id: athena-config-server
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:10000/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
