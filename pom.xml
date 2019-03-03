@@ -14,21 +14,17 @@
 	<!-- 项目开发者列表 -->
 	<developers>
 		<developer>
-			<!--SCM里项目开发者的唯一标识符 -->
 			<id>XYY</id>
-			<!--项目开发者的全名 -->
 			<name>Yayun.Xiong</name>
-			<!--项目开发者的email -->
 			<email>xiongyayun428@163.com</email>
-			<!--项目开发者的主页的URL -->
-			<url>http://www.xiongyayun.com</url>
+			<url>https://www.xiongyayun.com</url>
 		</developer>
 	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>9</java.version>
+		<java.version>11</java.version>
 		<spring-cloud.version>Finchley.SR3</spring-cloud.version>
 		<docker.image.prefix>springboot</docker.image.prefix>
 	</properties>
@@ -88,7 +84,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 	        <groupId>javax.xml.bind</groupId>
 	        <artifactId>jaxb-api</artifactId>
 	    </dependency>
@@ -106,7 +102,7 @@
 	        <groupId>javax.activation</groupId>
 	        <artifactId>activation</artifactId>
 	        <version>1.1.1</version>
-	    </dependency>
+	    </dependency>-->
 	    
 	    <dependency>
 		    <groupId>org.liquibase</groupId>

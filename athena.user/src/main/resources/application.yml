@@ -4,7 +4,7 @@ server:
     worker-threads: 10
 info:
   app:
-    name: com.xyy.athena.user
+    name: athena.user
     version: v1.0.0
   contact:
     email: xiongyayun428@163.com
