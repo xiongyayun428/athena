@@ -18,10 +18,10 @@ import cn.hutool.http.HttpUtil;
 
 public class SystemUtil {
 	private static Set<String> _localAddress;
-	
+
 	/**
 	 * 获取来访者的浏览器版本
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -49,7 +49,7 @@ public class SystemUtil {
 
 	/**
 	 * 获取系统版本信息
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -98,23 +98,39 @@ public class SystemUtil {
 
 	/**
 	 * 获取客户端IP
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getClientIP(HttpServletRequest request) {
-		String ip = HttpUtil.getClientIP(request);
-		if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
-        	try {
-				return InetAddress.getLocalHost().getHostAddress();
-			} catch (UnknownHostException e) {
-				return "";
+		if (request == null)
+			return null;
+		String s = request.getHeader("X-Forwarded-For");
+		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
+			s = request.getHeader("Proxy-Client-IP");
+		}
+		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
+			s = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
+			s = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
+			s = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
+			s = request.getRemoteAddr();
+		}
+		if ("127.0.0.1".equals(s) || "0:0:0:0:0:0:0:1".equals(s)) {
+			try {
+				s = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException unknownhostexception) {
 			}
-        }
-		return ip;
+		}
+		return s;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param ip
 	 * @return
 	 */
@@ -132,7 +148,6 @@ public class SystemUtil {
 
 	/**
 	 * 获取客户端MAC
-	 * @param ip
 	 * @param request
 	 * @return
 	 */
@@ -222,7 +237,8 @@ public class SystemUtil {
 				_localAddress = new HashSet<>();
 				synchronized (SystemUtil.class) {
 					if (_localAddress == null) {
-						InetAddress ia = InetAddress.getLocalHost();// 获取本地IP对象
+						// 获取本地IP对象
+						InetAddress ia = InetAddress.getLocalHost();
 						_localAddress.add("127.0.0.1");
 						_localAddress.add("0:0:0:0:0:0:0:1");
 						_localAddress.add("localhost");

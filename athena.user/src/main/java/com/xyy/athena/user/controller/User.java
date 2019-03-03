@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xyy.athena.core.utils.SystemUtil;
 import com.xyy.athena.role.api.RoleApi;
 
+/**
+ * User
+ *
+ * @author Yayun.Xiong
+ * @date 2019-03-03 16:29
+ */
 @RestController
 @RequestMapping("/user")
 public class User {

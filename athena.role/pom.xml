@@ -44,7 +44,7 @@
 
 		<dependency>
 			<groupId>com.xyy</groupId>
-			<artifactId>com.xyy.athena.role.api</artifactId>
+			<artifactId>athena.role.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		

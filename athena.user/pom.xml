@@ -41,7 +41,7 @@
 <!-- 		</dependency> -->
 		<dependency>
 			<groupId>com.xyy</groupId>
-			<artifactId>com.xyy.athena.role.api</artifactId>
+			<artifactId>athena.role.api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -54,12 +54,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.xyy</groupId>
-			<artifactId>com.xyy.athena.core</artifactId>
+			<artifactId>athena.core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xyy</groupId>
-			<artifactId>com.xyy.athena.swagger</artifactId>
+			<artifactId>athena.swagger</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	    

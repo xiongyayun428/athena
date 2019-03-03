@@ -22,7 +22,7 @@ spring:
     url: jdbc:mysql://10.8.3.202:3306/flyorder?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: prolink
     password: prolink
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 5
