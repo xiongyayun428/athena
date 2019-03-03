@@ -13,8 +13,8 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
  */
 @SpringBootApplication
 @EnableAdminServer
-public class Application {
+public class AdminServerApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(AdminServerApplication.class, args);
 	}
 }
