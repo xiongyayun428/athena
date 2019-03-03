@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>athena.swagger</artifactId>
+	<packaging>jar</packaging>
 	<name>athena swagger</name>
 	<description>雅典娜（Swagger）</description>
 

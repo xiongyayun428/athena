@@ -3,7 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>athena.zuul</artifactId>
-	<description>雅典娜（服务网关）</description>
+	<packaging>jar</packaging>
+	<name>athena zuul</name>
+	<description>用户服务接口</description>
 
 	<parent>
 		<groupId>com.xyy</groupId>
