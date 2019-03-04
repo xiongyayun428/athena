@@ -41,11 +41,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- 屏蔽依赖关系 去除springboot 中默认的Tomcat 依赖 -->
 			<exclusions>
+				<!-- 屏蔽依赖关系 去除springboot 中默认的Tomcat 依赖 -->
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<!-- 去掉有默认的logback日志管理 -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -56,8 +61,7 @@
 			<!--scope包含如下的取值：compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围） -->
 			<scope>provided</scope>
 		</dependency>
-		<!-- spring-boot-starter-actuator 管理工具/web 查看堆栈，动态刷新配置 -->
-		<!-- 健康监控 -->
+		<!-- 健康监控 spring-boot-starter-actuator 管理工具/web 查看堆栈，动态刷新配置 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -78,6 +82,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<!-- 使用log4j2 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -200,19 +213,19 @@
 	</build>
 
 	<modules>
-		<module>athena.admin.server</module>
-		<module>athena.config.server</module>
-		<module>athena.consul.discovery</module>
-		<module>athena.core</module>
-		<module>athena.eureka.discovery</module>
-		<module>athena.journal</module>
-		<module>athena.role</module>
-		<module>athena.role.api</module>
-    	<module>athena.swagger</module>
-		<module>athena.user</module>
-		<module>athena.user.api</module>
-		<module>athena.zuul</module>
-		<module>athena.db</module>
+		<module>athena-admin-server</module>
+		<module>athena-config-server</module>
+		<module>athena-consul-discovery</module>
+		<module>athena-core</module>
+		<module>athena-eureka-discovery</module>
+		<module>athena-journal</module>
+		<module>athena-role</module>
+		<module>athena-role-api</module>
+    	<module>athena-swagger</module>
+		<module>athena-user</module>
+		<module>athena-user-api</module>
+		<module>athena-zuul</module>
+		<module>athena-db</module>
 	</modules>
 
 	<!-- 仓库配置 -->
