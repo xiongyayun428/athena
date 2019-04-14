@@ -8,7 +8,7 @@
 
 	<properties>
         <property name="LOG_PATH">logs/</property>
-        <property name="LOG_ROOT_LEVEL">DEBUG</property>
+        <property name="LOG_ROOT_LEVEL">INFO</property>
     </properties>
 
     <!--先定义所有的appender-->

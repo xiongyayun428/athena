@@ -1,7 +1,11 @@
 server:
-  port: 20100
-  undertow:
-    worker-threads: 10
+  port: 22222
+  servlet:
+#    context-path: /db
+    session:
+      timeout: 3600
+      cookie:
+        http-only: true
 info:
   app:
     name: athena-db
@@ -11,11 +15,13 @@ info:
 spring:
   application:
     name: athena-db
-  # 配置SBA Client连接的安全账号密码
   security:
     user:
       name: admin
       password: admin
+    basic:
+      # 关掉security框架自带的登陆弹出框
+      enabled: false
   boot:
     admin:
       ui:
@@ -27,13 +33,13 @@ spring:
         # 这个URL地址是SBA Server的服务地址，你需要将你的应用注册到该地址上
         url: http://localhost:20100
         # 配置连接到监测管理平台的Security安全密码
-        username: admin
-        password: admin
-        instance:
-          metadata:
-            # 配置发送到SBA Server的SBA Client的端点安全密码
-            user.name: ${spring.security.user.name}
-            user.password: ${spring.security.user.password}
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+#        instance:
+#          metadata:
+#            # 配置发送到SBA Server的SBA Client的端点安全密码
+#            user.name: ${spring.security.user.name}
+#            user.password: ${spring.security.user.password}
   datasource:
     url: jdbc:mysql://localhost:3306/athena?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: app
@@ -69,26 +75,32 @@ spring:
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
         session-stat-enable: false
         session-stat-max-count: 1000
-        stat-view-servlet:
-          login-username: admin
-          login-password: admin
+      stat-view-servlet:
+        enabled: true
+        url-pattern: "/druid/*"
+        login-username: admin
+        login-password: admin
       aop-patterns: com.athena.core.mapper
 # 官方文档中有提到， SpringBoot 的 Logging 配置的级别有7个：TRACE , DEBUG , INFO , WARN , ERROR , FATAL , OFF
 logging:
+  config:
+    classpath: "log4j2-dev.xml"
   # 设置日志保存的路径，path和file只需要设置一个，指定path则日志名称固定为spring.log
-  path: /java-log
+  path: ./logs
   # 打印日志的级别
   level:
     root: debug
 # 在默认情况下大多数Actuator的端点并没有完全公开，这里我将所有端点都进行公开进行管理
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-#  endpoint:
-#    health:
-#      show-details: ALWAYS
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#    logfile:
+#      external-file: logs/info.log
+  endpoint:
+    health:
+      show-details: ALWAYS
 #eureka:
 #  instance:
 #    hostname: localhost

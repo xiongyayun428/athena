@@ -1,5 +1,7 @@
 package com.xyy.athena.admin.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,6 +16,8 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @SpringBootApplication
 @EnableAdminServer
 public class AdminServerApplication {
+//	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	public static void main(String[] args) {
 		SpringApplication.run(AdminServerApplication.class, args);
 	}

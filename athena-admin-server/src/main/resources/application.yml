@@ -4,10 +4,12 @@ server:
     worker-threads: 10
 info:
   app:
-    name: athena.user
+    name: athena-admin-server
     version: v1.0.0
   contact:
     email: xiongyayun428@163.com
+  tags:
+    environment: prod
 spring:
   application:
     name: athena-admin-server
@@ -16,31 +18,43 @@ spring:
     user:
       name: admin
       password: admin
+  resources:
+    static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/
   boot:
     admin:
       ui:
         # 修改网页显示的tab标题
         title: "雅典娜应用监控管理"
+#        favicon: static/img/favicon.ico
         # 修改网页的brand的图标和标题
-        brand: "<img src='assets/imgs/icon-spring-boot-admin.svg'><span>雅典娜应用监控管理</span>"
+        brand: "<img src='static/img/icon-spring-boot-admin.svg'><span>雅典娜应用监控管理</span>"
       client:
         # 这个URL地址是SBA Server的服务地址，你需要将你的应用注册到该地址上
         url: http://localhost:20100
-        # 配置连接到监测管理平台的Security安全密码
-        username: admin
-        password: admin
         instance:
           metadata:
             # 配置发送到SBA Server的SBA Client的端点安全密码
             user.name: ${spring.security.user.name}
             user.password: ${spring.security.user.password}
-# 官方文档中有提到， SpringBoot 的 Logging 配置的级别有7个：TRACE , DEBUG , INFO , WARN , ERROR , FATAL , OFF
-logging:
-  # 设置日志保存的路径，path和file只需要设置一个，指定path则日志名称固定为spring.log
-  path: /java-log
-  # 打印日志的级别
-  level:
-    root: info
+#      notify:
+#        mail:
+#          from: Product@hljinke.com
+#          to: xiongyayun@prolinkwm.com
+#          cc: minyafeng@prolinkwm.com, shajisheng@hljinke.com
+#        dingtalk:
+#          enabled: true
+#          webhook-token: https://oapi.dingtalk.com/robot/send?access_token=5f588ab27b1f7c1f0b2bd82cbe3ee609554141bbf51fad8f133ef2a747945c2f
+    mail:
+      host: smtp.exmail.qq.com
+      username: Product@hljinke.com
+      password: 1qaz@WSX
+      protocol: smtp
+      default-encoding: UTF-8
+      test-connection: false
+      properties:
+        mail:
+          smtp:
+            auth: true
 # 在默认情况下大多数Actuator的端点并没有完全公开，这里我将所有端点都进行公开进行管理
 management:
   endpoints:
@@ -50,29 +64,3 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:10000/eureka/
-ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
-feign:
-  hystrix:
-    enabled: true
-hystrix:
-  command:
-    default:
-      ribbon:
-        ConnectTimeout: 1000
-        ReadTimeout: 3000
-      execution:
-        timeout:
-          enabled: false
-        isolation:
-          thread:
-            timeoutInMilliseconds: 100000
