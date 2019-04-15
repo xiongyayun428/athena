@@ -1,5 +1,6 @@
 package com.xyy.athena.service.id.sequence;
 
+import com.xyy.athena.service.id.SequenceFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.logging.Log;

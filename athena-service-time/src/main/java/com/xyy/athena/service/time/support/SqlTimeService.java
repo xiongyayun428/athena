@@ -25,6 +25,9 @@ public class SqlTimeService extends DefaultTimeService {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
+			if (this.dataSource == null) {
+				throw new RuntimeException("you must set dataSource in tableIdFactory.");
+			}
 			conn = this.dataSource.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(this.timestampSql);

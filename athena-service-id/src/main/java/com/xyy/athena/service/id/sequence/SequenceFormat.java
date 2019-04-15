@@ -90,13 +90,23 @@ public class SequenceFormat {
 	protected Format parse(String t) {
 		char z = t.charAt(0);
 		switch (z) {
-		case '#':
-			return new NumberFormat(t.length());
-		case '$':
-			return new FieldFormat(t.substring(1));
+			case '#':
+				return new NumberFormat(t.length());
+			case '$':
+				return new FieldFormat(t.substring(1));
+			default:
+				this.datePattern = t;
+				return new DateTimeFormat(t);
 		}
-		this.datePattern = t;
-		return new DateTimeFormat(t);
+	}
+
+	interface Format {
+		/**
+		 * 格式化
+		 * @param data
+		 * @param buf
+		 */
+		void format(Object data, StringBuffer buf);
 	}
 
 	class DateTimeFormat implements SequenceFormat.Format {
@@ -149,15 +159,6 @@ public class SequenceFormat {
 		FieldFormat(String fName) {
 			this.fName = (Character.toUpperCase(fName.charAt(0)) + fName.substring(1));
 		}
-	}
-
-	interface Format {
-		/**
-		 * 格式化
-		 * @param paramObject
-		 * @param paramStringBuffer
-		 */
-		void format(Object paramObject, StringBuffer paramStringBuffer);
 	}
 
 	class NumberFormat implements SequenceFormat.Format {

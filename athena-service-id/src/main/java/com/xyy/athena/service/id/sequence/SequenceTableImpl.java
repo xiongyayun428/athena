@@ -29,15 +29,15 @@ public class SequenceTableImpl extends AbstractSequenceTable {
 				try {
 					// 创建表
 					String sql = "CREATE TABLE " + getTableName() + "(" + getTypeColume() + " CHAR(50) NOT NULL, " + getIdColume() + " BIGINT, DATETIME TIMESTAMP, PRIMARY KEY(" + getTypeColume() + "))".toUpperCase();
-					boolean falg = stmt.execute(sql);
+					boolean flag = stmt.execute(sql);
 					System.err.println(sql);
-					log.info("table '" + getTableName() + "' init " + (falg ? "failure" : "succeed"));
-				} catch (SQLException sqle) {
-					log.warn("cannot create sequence table, " + sqle.getMessage(), sqle);
+					log.info("table '" + getTableName() + "' init " + (flag ? "failure" : "succeed"));
+				} catch (SQLException se) {
+					log.warn("cannot create sequence table, " + se.getMessage(), se);
 				}
 			}
-		} catch (Throwable sqle) {
-			throw new RuntimeException("init table: '" + getTableName() + "' error", sqle);
+		} catch (Throwable e) {
+			throw new RuntimeException("init table: '" + getTableName() + "' error", e);
 		} finally {
 			try {
 				if (stmt != null) {
@@ -62,11 +62,11 @@ public class SequenceTableImpl extends AbstractSequenceTable {
 			System.err.println(sql);
 			log.info("table '" + getTableName() + "' reset " + (flag ? "failure" : "succeed"));
 			conn.commit();
-		} catch (SQLException sqle) {
-			log.warn("cannot reset sequence table, " + sqle.getMessage());
+		} catch (SQLException e) {
+			log.warn("cannot reset sequence table, " + e.getMessage());
 			try {
 				conn.rollback();
-			} catch (SQLException e) {}
+			} catch (SQLException se) {}
 		} finally {
 			try {
 				conn.close();
@@ -131,8 +131,8 @@ public class SequenceTableImpl extends AbstractSequenceTable {
 			ps.setLong(2, start);
 			ps.setTimestamp(3, new Timestamp(timestamp));
 			ps.executeUpdate();
-		} catch (SQLException sqle) {
-			throw sqle;
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			ps.close();
 		}
@@ -146,8 +146,8 @@ public class SequenceTableImpl extends AbstractSequenceTable {
 			ps.setString(2, type);
 			ps.setLong(3, seq);
 			return ps.executeUpdate();
-		} catch (SQLException sqle) {
-			throw sqle;
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			ps.close();
 		}
@@ -162,8 +162,8 @@ public class SequenceTableImpl extends AbstractSequenceTable {
 			ps.setString(3, type);
 			ps.setLong(4, seq);
 			return ps.executeUpdate();
-		} catch (SQLException sqle) {
-			throw sqle;
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			ps.close();
 		}

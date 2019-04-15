@@ -42,7 +42,7 @@ public abstract class AbstractSequenceTable implements SequenceTable, Initializi
 	
 	
 	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		init();
 	}
 

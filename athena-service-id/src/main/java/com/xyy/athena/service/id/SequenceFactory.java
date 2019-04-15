@@ -1,6 +1,7 @@
-package com.xyy.athena.service.id.sequence;
+package com.xyy.athena.service.id;
 
 import com.xyy.athena.service.id.IdFactory;
+import com.xyy.athena.service.id.sequence.SequenceFormat;
 
 /**
  * 序号工厂
