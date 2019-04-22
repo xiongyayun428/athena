@@ -1,4 +1,4 @@
-package com.xyy.athena.access.role.controller;
+package com.xyy.athena.role.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -8,7 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xyy.athena.role.api.RoleApi;
 
-@RefreshScope //允许动态刷新配置
+/**
+ * 角色
+ * 允许动态刷新配置
+ *
+ * @author Yayun.Xiong
+ * @date 2019-04-22
+ */
+@RefreshScope
 @RestController
 @RequestMapping("/role")
 public class RoleController implements RoleApi {
