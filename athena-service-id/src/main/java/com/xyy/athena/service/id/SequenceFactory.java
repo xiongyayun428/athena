@@ -1,6 +1,5 @@
 package com.xyy.athena.service.id;
 
-import com.xyy.athena.service.id.IdFactory;
 import com.xyy.athena.service.id.sequence.SequenceFormat;
 
 /**

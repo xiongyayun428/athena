@@ -230,14 +230,14 @@
 		<module>athena-role</module>
 		<module>athena-role-api</module>
     	<module>athena-swagger</module>
+		<module>athena-access</module>
 		<module>athena-user</module>
 		<module>athena-user-api</module>
 		<module>athena-zuul</module>
 		<module>athena-db</module>
-		<module>capcplus-spring-boot-starter</module>
 		<module>athena-service-id</module>
         <module>athena-service-time</module>
-    </modules>
+	</modules>
 
 	<!-- 仓库配置 -->
 	<repositories>
