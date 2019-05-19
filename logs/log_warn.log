@@ -1,2 +1,0 @@
-2019-05-20 00:31:56.438 [restartedMain] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.xyy.athena.admin]' package. Please check your configuration.
-2019-05-20 00:31:56.830 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
