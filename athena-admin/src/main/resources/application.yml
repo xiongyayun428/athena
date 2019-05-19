@@ -1,0 +1,23 @@
+server:
+  port: 9090
+  undertow:
+    worker-threads: 10
+info:
+  app:
+    name: athena.admin
+    version: v1.0.0
+  contact:
+    email: xiongyayun428@163.com
+spring:
+  devtools:
+    restart:
+      enabled: false
+  security:
+    user:
+      name: admin
+      password: 123456
+  application:
+    name: athena-admin
+logging:
+  config: classpath:log/logback-spring.xml
+  path: ./logs

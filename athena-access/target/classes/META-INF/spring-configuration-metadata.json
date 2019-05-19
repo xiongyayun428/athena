@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "access.data",
+      "type": "com.xyy.athena.access.properties.DataAccessProperties",
+      "sourceType": "com.xyy.athena.access.properties.DataAccessProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
