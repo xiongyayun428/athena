@@ -1,4 +1,4 @@
-package com.xyy.athena.access.eureka.discovery;
+package com.xyy.athena.eureka.discovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

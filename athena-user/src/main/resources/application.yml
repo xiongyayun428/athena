@@ -1,38 +1,20 @@
-server:
-  port: 10100
-  undertow:
-    worker-threads: 10
-info:
-  app:
-    name: athena.user
-    version: v1.0.0
-  contact:
-    email: xiongyayun428@163.com
-spring:
-  devtools:
-    restart:
-      enabled: false
-  security:
-    user:
-      name: admin
-      password: 123456
-  application:
-    name: athena-user
-#ribbon:
-#  ReadTimeout: 10000
-#  ConnectTimeout: 10000
-#feign:
-#  hystrix:
-#    enabled: true
-#hystrix:
-#  command:
-#    default:
-#      ribbon:
-#        ConnectTimeout: 1000
-#        ReadTimeout: 3000
-#      execution:
-#        timeout:
-#          enabled: false
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 100000
+#server:
+#  port: 10100
+#  undertow:
+#    worker-threads: 10
+#info:
+#  app:
+#    name: athena.user
+#    version: v1.0.0
+#  contact:
+#    email: xiongyayun428@163.com
+#spring:
+#  devtools:
+#    restart:
+#      enabled: false
+#  security:
+#    user:
+#      name: admin
+#      password: 123456
+#  application:
+#    name: athena-user

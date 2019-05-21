@@ -13,6 +13,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public int delete(String userId) {
+        userMapper.select();
+        return 0;
+    }
 //    @Autowired
 //    private UserMapper userMapper;
 }

@@ -71,7 +71,7 @@ spring:
         url-pattern: "/druid/*"
         login-username: admin
         login-password: admin
-      aop-patterns: com.athena.core.mapper
+      aop-patterns: com.xyy.athena.user.mapper
 logging:
   path: ./logs
   config: classpath:log/logback-spring.xml

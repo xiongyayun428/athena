@@ -1,6 +1,8 @@
 package com.xyy.athena.user.controller;
 
-//import com.xyy.athena.core.utils.SystemUtil;
+import com.xyy.athena.core.utils.SystemUtil;
+import com.xyy.athena.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +28,11 @@ public class UserController {
 //		return "Hello World! > " + roles;
 //	}
 	
-//	@RequestMapping("/test")
-//	String test(HttpServletRequest request) {
-//		return "<div>IP: " + SystemUtil.getClientIP(request) + "</div>"
-//				+ "<div>MAC: " + SystemUtil.getClientMac(request) + "</div>";
-//	}
+	@RequestMapping("/test")
+	String test(HttpServletRequest request) {
+		return "<div>IP: " + SystemUtil.getClientIP(request) + "</div>"
+				+ "<div>MAC: " + SystemUtil.getClientMac(request) + "</div>";
+	}
 //	/**
 //     * LoadBalanced 注解表明restTemplate使用LoadBalancerClient执行请求
 //     *
@@ -41,6 +43,8 @@ public class UserController {
 //    RestTemplate restTemplate() {
 //        return new RestTemplate();
 //    }
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 根据userId查询用户信息
@@ -48,6 +52,7 @@ public class UserController {
 	 */
 	@GetMapping("findUserById/{userId}")
 	public void findUserById(@PathVariable("userId") String userId) {
+	    userService.delete("111");
 		System.out.println("----------findUserById/" + userId);
 	}
 

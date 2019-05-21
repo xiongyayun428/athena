@@ -144,6 +144,11 @@
 				<artifactId>athena-user</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>com.xyy.athena</groupId>
+				<artifactId>athena-db</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
