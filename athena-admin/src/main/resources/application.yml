@@ -1,5 +1,11 @@
 server:
   port: 9090
+  servlet:
+    context-path: /admin
+    session:
+      timeout: 3600
+      cookie:
+        http-only: true
   undertow:
     worker-threads: 10
 info:
@@ -9,6 +15,13 @@ info:
   contact:
     email: xiongyayun428@163.com
 spring:
+  profiles:
+    active: dev
+  messages:
+    basename: i18n/messages
+  output:
+    ansi:
+      enabled: ALWAYS
   devtools:
     restart:
       enabled: false
@@ -62,3 +75,5 @@ spring:
 logging:
   path: ./logs
   config: classpath:log/logback-spring.xml
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml

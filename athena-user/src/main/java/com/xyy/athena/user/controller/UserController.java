@@ -1,6 +1,6 @@
 package com.xyy.athena.user.controller;
 
-import com.xyy.athena.core.utils.SystemUtil;
+//import com.xyy.athena.core.utils.SystemUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +26,11 @@ public class UserController {
 //		return "Hello World! > " + roles;
 //	}
 	
-	@RequestMapping("/test")
-	String test(HttpServletRequest request) {
-		return "<div>IP: " + SystemUtil.getClientIP(request) + "</div>"
-				+ "<div>MAC: " + SystemUtil.getClientMac(request) + "</div>";
-	}
+//	@RequestMapping("/test")
+//	String test(HttpServletRequest request) {
+//		return "<div>IP: " + SystemUtil.getClientIP(request) + "</div>"
+//				+ "<div>MAC: " + SystemUtil.getClientMac(request) + "</div>";
+//	}
 //	/**
 //     * LoadBalanced 注解表明restTemplate使用LoadBalancerClient执行请求
 //     *
@@ -48,12 +48,12 @@ public class UserController {
 	 */
 	@GetMapping("findUserById/{userId}")
 	public void findUserById(@PathVariable("userId") String userId) {
-
+		System.out.println("----------findUserById/" + userId);
 	}
 
 	@PostMapping("add")
 	public void add() {
-
+		System.out.println("----------add");
 	}
 
 	@PutMapping("update")

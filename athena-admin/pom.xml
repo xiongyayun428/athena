@@ -21,10 +21,14 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.xyy</groupId>-->
-            <!--<artifactId>athena-user</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.xyy.athena</groupId>
+            <artifactId>athena-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xyy.athena</groupId>
+            <artifactId>athena-user</artifactId>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

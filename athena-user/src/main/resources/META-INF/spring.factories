@@ -1,5 +1,5 @@
 # Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.xyy.athena.user.autoconfigure.UserAutoConfiguration,\
-  org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.xyy.athena.user.autoconfigure.UserGroupAutoConfiguration
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+#com.xyy.athena.user.autoconfigure.UserAutoConfiguration,
+#  org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+#com.xyy.athena.user.autoconfigure.UserGroupAutoConfiguration
