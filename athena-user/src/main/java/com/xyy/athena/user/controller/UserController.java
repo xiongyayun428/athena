@@ -1,6 +1,8 @@
 package com.xyy.athena.user.controller;
 
+import com.github.pagehelper.Page;
 import com.xyy.athena.core.utils.SystemUtil;
+import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -69,5 +71,11 @@ public class UserController {
 	@DeleteMapping("delete")
 	public void delete() {
 
+	}
+
+	@GetMapping("selectAll")
+	public Object selectAll() {
+		Object obj = userService.selectAll();
+		return obj;
 	}
 }

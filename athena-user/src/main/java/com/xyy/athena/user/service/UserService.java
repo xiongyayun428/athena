@@ -1,5 +1,9 @@
 package com.xyy.athena.user.service;
 
+import com.github.pagehelper.Page;
+import com.xyy.athena.db.Pagination;
+import com.xyy.athena.user.model.User;
+
 /**
  * UserService
  *
@@ -16,4 +20,6 @@ public interface UserService {
      * @return
      */
     int delete(String userId);
+
+    Pagination<User> selectAll();
 }

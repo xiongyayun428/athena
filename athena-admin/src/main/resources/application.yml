@@ -17,6 +17,11 @@ info:
 spring:
   profiles:
     active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   messages:
     basename: i18n/messages
   output:
@@ -77,3 +82,12 @@ logging:
   config: classpath:log/logback-spring.xml
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
+  configLocation: classpath:/mybatis-config.xml
+pagehelper:
+  helperDialect: mysql
+  pageSizeZero: false
+  offsetAsPageNum: false
+  rowBoundsWithCount: false
+  reasonable: false
+  supportMethodsArguments: true
+#  params: count=countSql
