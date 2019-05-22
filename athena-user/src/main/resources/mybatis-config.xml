@@ -1,30 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-       Copyright 2015-2016 the original author or authors.
-       Licensed under the Apache License, Version 2.0 (the "License");
-       you may not use this file except in compliance with the License.
-       You may obtain a copy of the License at
-          http://www.apache.org/licenses/LICENSE-2.0
-       Unless required by applicable law or agreed to in writing, software
-       distributed under the License is distributed on an "AS IS" BASIS,
-       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-       See the License for the specific language governing permissions and
-       limitations under the License.
--->
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
-    <!--设置mybatis日志类型-->
+    <!-- 全局参数 -->
     <settings>
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
-        <!--配置的缓存的全局开关。-->
+        <!-- 使全局的映射器启用或禁用缓存。 -->
         <setting name="cacheEnabled" value="true"/>
-        <!--延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置fetchType属性来覆盖该项的开关状态。-->
+        <!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。 -->
         <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。 -->
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <!-- 是否允许单条sql 返回多个数据集  (取决于驱动的兼容性) default:true -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!-- 是否可以使用列的别名 (取决于驱动的兼容性) default:true -->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false  -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!-- 指定 MyBatis 如何自动映射 数据基表的列 NONE：不隐射　PARTIAL:部分  FULL:全部  -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- 这是默认的执行类型  （SIMPLE: 简单； REUSE: 执行器可能重复使用prepared statements语句；BATCH: 执行器可以重复执行语句和批量更新）  -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- 使用驼峰命名法转换字段。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 设置本地缓存范围 session:就会有数据的共享  statement:语句范围 (这样就不会有数据的共享 ) defalut:session -->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型 -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
+
     <typeAliases>
-        <typeAlias type="com.prolinkwm.api.dao.model.CrmOrderDO" alias="crmOrder"></typeAlias>
+        <!--        <typeAlias type="com.prolinkwm.api.dao.model.CrmOrderDO" alias="crmOrder"></typeAlias>-->
     </typeAliases>
 
+    <!--    <plugins>-->
+    <!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+    <!--            &lt;!&ndash; 默认值为 false，该参数对使用 RowBounds 作为分页参数时有效。 当该参数设置为 true 时，会将 RowBounds 中的 offset 参数当成 pageNum 使用，可以用页码和页面大小两个参数进行分页&ndash;&gt;-->
+    <!--            <property name="offsetAsPageNum" value="false"/>-->
+    <!--            &lt;!&ndash; 默认值为false，该参数对使用 RowBounds 作为分页参数时有效。 当该参数设置为true时，使用 RowBounds 分页会进行 count 查询。&ndash;&gt;-->
+    <!--            <property name="rowBoundsWithCount" value="false"/>-->
+    <!--            &lt;!&ndash; 默认值为 false，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型） &ndash;&gt;-->
+    <!--            <property name="pageSizeZero" value="false"/>-->
+    <!--            &lt;!&ndash; 分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询 &ndash;&gt;-->
+    <!--            <property name="reasonable" value="false"/>-->
+    <!--            &lt;!&ndash; 支持通过 Mapper 接口参数来传递分页参数，默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页&ndash;&gt;-->
+    <!--            <property name="supportMethodsArguments" value="false"/>-->
+    <!--            &lt;!&ndash; 为了支持startPage(Object params)方法，增加了该参数来配置参数映射，用于从对象中根据属性名取值， 可以配置 pageNum,pageSize,count,pageSizeZero,reasonable，不配置映射的用默认值， 默认值为pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero&ndash;&gt;-->
+    <!--            <property name="params" value="pageNum=pageNumKey;pageSize=pageSizeKey;count=countSql"/>-->
+    <!--        </plugin>-->
+    <!--    </plugins>-->
 </configuration>
