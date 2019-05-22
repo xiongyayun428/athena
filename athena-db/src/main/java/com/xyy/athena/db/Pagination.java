@@ -1,5 +1,6 @@
 package com.xyy.athena.db;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
 
@@ -38,12 +39,12 @@ public class Pagination<T> implements Serializable {
      */
     private List<T> rows;
 
-    public Pagination(List<T> list) {
-        PageInfo<T> pageInfo = new PageInfo<>(list);
+    public Pagination(Page<T> page) {
+        PageInfo<T> pageInfo = new PageInfo<>(page);
         this.pageIndex = pageInfo.getPageNum();
         this.pageSize = pageInfo.getPageSize();
         this.total = pageInfo.getTotal();
         this.pageCount = total / pageSize + ((total % pageSize) > 0 ? 1 : 0);
-        this.rows = list;
+        this.rows = page.getResult();
     }
 }

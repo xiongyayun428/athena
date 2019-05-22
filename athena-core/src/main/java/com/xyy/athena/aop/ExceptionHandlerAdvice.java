@@ -3,6 +3,7 @@ package com.xyy.athena.aop;
 import com.xyy.athena.response.ResBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -69,6 +70,19 @@ public class ExceptionHandlerAdvice {
         logger.error("IllegalArgumentException:", ex);
         var res = new ResBody();
         res.isError(ex.getMessage());
+        return res;
+    }
+
+    /**
+     * sql语句异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BadSqlGrammarException.class)
+    public ResBody doBadSqlGrammarException(BadSqlGrammarException e) {
+        logger.error("BadSqlGrammarException:", e);
+        var res = new ResBody();
+        res.isError(e.getMessage());
         return res;
     }
 

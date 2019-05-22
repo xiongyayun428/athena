@@ -88,6 +88,6 @@ pagehelper:
   pageSizeZero: false
   offsetAsPageNum: false
   rowBoundsWithCount: false
-  reasonable: false
+  reasonable: true
   supportMethodsArguments: true
 #  params: count=countSql

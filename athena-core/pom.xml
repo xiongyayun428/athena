@@ -22,6 +22,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.xyy.athena</groupId>
+			<artifactId>athena-db</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 		</dependency>

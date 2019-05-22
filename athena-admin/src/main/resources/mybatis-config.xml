@@ -29,7 +29,7 @@
     </settings>
 
     <typeAliases>
-<!--        <typeAlias type="com.prolinkwm.api.dao.model.CrmOrderDO" alias="crmOrder"></typeAlias>-->
+        <typeAlias type="com.xyy.athena.user.model.User" alias="user"></typeAlias>
     </typeAliases>
 
 <!--    <plugins>-->
