@@ -30,6 +30,8 @@ spring:
   devtools:
     restart:
       enabled: false
+  jackson:
+    time-zone: GMT+8
   security:
     user:
       name: admin
@@ -37,7 +39,7 @@ spring:
   application:
     name: athena-admin
   datasource:
-    url: jdbc:mysql://localhost:3306/athena?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/athena?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: app
     password: app
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -83,6 +85,12 @@ logging:
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configLocation: classpath:/mybatis-config.xml
+  type-aliases-package: tk.mybatis.springboot.model
+mapper:
+  mappers:
+    - tk.mybatis.springboot.util.MyMapper
+  not-empty: false
+  identity: MYSQL
 pagehelper:
   helperDialect: mysql
   pageSizeZero: false
@@ -90,4 +98,4 @@ pagehelper:
   rowBoundsWithCount: false
   reasonable: true
   supportMethodsArguments: true
-#  params: count=countSql
+  params: pageNum=pageIndex

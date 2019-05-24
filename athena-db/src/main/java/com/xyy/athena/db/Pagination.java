@@ -21,11 +21,11 @@ public class Pagination<T> implements Serializable {
     /**
      * 当前页码
      */
-    private int pageIndex = PAGE_INDEX;
+    private int pageIndex;
     /**
      * 每页记录条数
      */
-    private int pageSize = PAGE_SIZE;
+    private int pageSize;
     /**
      * 总页数
      */

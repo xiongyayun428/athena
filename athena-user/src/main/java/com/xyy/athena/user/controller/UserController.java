@@ -1,13 +1,9 @@
 package com.xyy.athena.user.controller;
 
-import com.github.pagehelper.Page;
-import com.xyy.athena.core.utils.SystemUtil;
 import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * User
@@ -18,35 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-//	@Autowired
-//	private RestTemplate restTemplate;
-//	@Autowired
-//	private RoleApi roleApi;
-//
-//	@RequestMapping(value = "/users", method = RequestMethod.GET)
-//	String users(@RequestParam String userId) {
-////		String roles = restTemplate.getForObject("http://athena-role/role/roles?userId=" + userId, String.class);
-//		String roles = roleApi.get(userId);
-//		return "Hello World! > " + roles;
-//	}
-	
-	@RequestMapping("/test")
-	String test(HttpServletRequest request) {
-		return "<div>IP: " + SystemUtil.getClientIP(request) + "</div>"
-				+ "<div>MAC: " + SystemUtil.getClientMac(request) + "</div>";
-	}
-//	/**
-//     * LoadBalanced 注解表明restTemplate使用LoadBalancerClient执行请求
-//     *
-//     * @return
-//     */
-//	@Bean
-//    @LoadBalanced
-//    RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
 	@Autowired
 	private UserService userService;
+
+	@GetMapping("selectAll")
+	public Object selectAll(User user) {
+		return userService.selectAll(user);
+	}
 
 	/**
 	 * 根据userId查询用户信息
@@ -73,9 +47,5 @@ public class UserController {
 
 	}
 
-	@GetMapping("selectAll")
-	public Object selectAll() {
-		Object obj = userService.selectAll();
-		return obj;
-	}
+
 }

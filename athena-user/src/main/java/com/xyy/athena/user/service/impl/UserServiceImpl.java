@@ -1,6 +1,5 @@
 package com.xyy.athena.user.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xyy.athena.db.Pagination;
 import com.xyy.athena.user.mapper.UserMapper;
@@ -27,8 +26,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Pagination<User> selectAll() {
-        PageHelper.startPage(2, 2);
-        return new Pagination(userMapper.selectAll());
+    public Pagination<User> selectAll(User user) {
+        PageHelper.startPage(user);
+        return new Pagination(userMapper.selectAll(user));
     }
 }

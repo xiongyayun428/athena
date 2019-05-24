@@ -12,12 +12,21 @@ import java.util.Date;
  * @date 2019-05-22
  */
 @Data
-public class Model implements Serializable {
+public class BaseModel implements Serializable {
+    /**
+     * 创建用户
+     */
     private String createUser;
-
+    /**
+     * 创建时间
+     */
     private Date createTime;
-
+    /**
+     * 最后更新用户
+     */
     private String lastUpdateUser;
-
+    /**
+     * 最后更新时间
+     */
     private Date lastUpdateTime;
 }

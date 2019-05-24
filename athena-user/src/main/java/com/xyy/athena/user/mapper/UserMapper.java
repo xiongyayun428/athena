@@ -2,7 +2,6 @@ package com.xyy.athena.user.mapper;
 
 import com.github.pagehelper.Page;
 import com.xyy.athena.user.model.User;
-import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(String userId);
@@ -11,7 +10,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(String userId);
 
-    Page<User> selectAll();
+    Page<User> selectAll(User user);
 
     int updateByPrimaryKey(User record);
 

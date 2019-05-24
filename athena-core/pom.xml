@@ -29,6 +29,11 @@
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+    </dependencies>
 
 </project>

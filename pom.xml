@@ -153,6 +153,12 @@
 				<version>1.18.8</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- ip地址查询库-->
+			<dependency>
+				<groupId>org.lionsoul</groupId>
+				<artifactId>ip2region</artifactId>
+				<version>1.7.2</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.xyy.athena</groupId>
@@ -229,10 +235,14 @@
 	<repositories>
 		<repository>
 			<id>nexus</id>
-			<url>http://localhost:8081/repository/maven-public/</url>
+			<url>http://10.8.3.201:8081/repository/maven-public/</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>aliyun</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 
