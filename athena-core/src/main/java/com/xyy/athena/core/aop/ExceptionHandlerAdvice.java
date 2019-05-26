@@ -1,18 +1,23 @@
-package com.xyy.athena.aop;
+package com.xyy.athena.core.aop;
 
-import com.xyy.athena.response.ResBody;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.xyy.athena.core.ErrorConstant;
+import com.xyy.athena.core.i18n.I18nService;
+import com.xyy.athena.core.response.ResBody;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 /**
@@ -24,7 +29,10 @@ import java.sql.SQLException;
 @RestControllerAdvice
 @ResponseBody
 public class ExceptionHandlerAdvice {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Log logger = LogFactory.getLog(getClass());
+
+    @Autowired
+    private I18nService i18nService;
 
 //    @ExceptionHandler(value = AuthorizationException.class)
 //    public ResBody doAuthorizationException(AuthorizationException ex) {
@@ -35,41 +43,38 @@ public class ExceptionHandlerAdvice {
 //    }
 
     @ExceptionHandler(value = Throwable.class)
-    public ResBody doThrowable(Throwable ex) {
-        logger.error("Throwable:", ex);
-        var res = new ResBody();
-        res.isError("系统繁忙，请稍后再试");
-        return res;
+    public ResBody throwable(Throwable e) {
+        return new ResBody(i18nService, ErrorConstant.SYSTEM_ERROR_UNCAUGHT, e);
     }
 
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-    public ResBody doHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
-        logger.error("HttpRequestMethodNotSupportedException:", ex);
-        var res = new ResBody();
-        res.isError("不支持的方法");
-        return res;
+    public ResBody doHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+//        res.isError("不支持的方法");
+        return new ResBody(i18nService, ErrorConstant.HTTP_REQUEST_METHOD_NOT_SUPPORTED, e);
     }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = NoHandlerFoundException.class)
     public ResBody doNoHandlerFoundException(NoHandlerFoundException ex) {
         logger.error("NoHandlerFoundException:", ex);
-        var res = new ResBody();
-        res.isError("无效的请求路径");
+        var res = new ResBody(i18nService, ErrorConstant.SYSTEM_NO_HANDLER_FOUND, ex);
+//        res.isError("无效的请求路径");
         return res;
     }
 
     @ExceptionHandler(value = SQLException.class)
     public ResBody doSQLException(SQLException ex) {
         logger.error("SQLException:", ex);
-        var res = new ResBody();
-        res.isError("数据库操作异常，请联系管理员");
+        var res = new ResBody(i18nService, ErrorConstant.SYSTEM_SQL, ex);
+//        res.isError("数据库操作异常，请联系管理员");
         return res;
     }
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResBody doIllegalArgumentException(IllegalArgumentException ex) {
         logger.error("IllegalArgumentException:", ex);
-        var res = new ResBody();
-        res.isError(ex.getMessage());
+        var res = new ResBody(i18nService, ErrorConstant.SYSTEM_ILLEGAL_ARGUMENT, ex);
+//        res.isError(ex.getMessage());
         return res;
     }
 
@@ -81,8 +86,8 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(value = BadSqlGrammarException.class)
     public ResBody doBadSqlGrammarException(BadSqlGrammarException e) {
         logger.error("BadSqlGrammarException:", e);
-        var res = new ResBody();
-        res.isError(e.getMessage());
+        var res = new ResBody(i18nService, ErrorConstant.SYSTEM_BAD_SQL_GRAMMAR, e);
+//        res.isError(e.getMessage());
         return res;
     }
 
@@ -93,13 +98,13 @@ public class ExceptionHandlerAdvice {
 //        return res;
 //    }
 
-    @ExceptionHandler(value = RemoteException.class)
-    public ResBody doRemoteException(RemoteException ex) {
-        logger.error("RemoteException:", ex);
-        var res = new ResBody();
-        res.isError(ex.getMessage());
-        return res;
-    }
+//    @ExceptionHandler(value = RemoteException.class)
+//    public ResBody doRemoteException(RemoteException ex) {
+//        logger.error("RemoteException:", ex);
+//        var res = new ResBody();
+//        res.isError(ex.getMessage());
+//        return res;
+//    }
 
 //    @ExceptionHandler(value = NotAllowedException.class)
 //    public ResBody doNotAllowedException(NotAllowedException ex) {
@@ -110,19 +115,18 @@ public class ExceptionHandlerAdvice {
 //    }
 
     @ExceptionHandler(value = BindException.class)
-    public ResBody doBindException(BindException ex) {
-        logger.error("BindException:", ex);
-        var res = new ResBody();
-        res.isError(ex.getFieldError().getDefaultMessage());
+    public ResBody bindException(BindException ex) {
+        FieldError fieldError = ex.getBindingResult().getFieldError();
+        Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
+        var res = new ResBody(i18nService, ErrorConstant.SYSTEM_BIND, args, fieldError.getDefaultMessage());
         return res;
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResBody doMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        logger.error("MethodArgumentNotValidException:", ex);
-        var res = new ResBody();
-        res.isError(ex.getBindingResult().getFieldError().getDefaultMessage());
-        return res;
+    public ResBody methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        FieldError fieldError = ex.getBindingResult().getFieldError();
+        Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
+        return new ResBody(i18nService, ErrorConstant.SYSTEM_METHOD_ARGUMENT_NOT_VALID, args, fieldError.getDefaultMessage());
     }
 
 }

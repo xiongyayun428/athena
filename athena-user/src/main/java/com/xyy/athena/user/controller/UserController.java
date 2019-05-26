@@ -1,9 +1,12 @@
 package com.xyy.athena.user.controller;
 
+import com.xyy.athena.core.annotation.Logger;
 import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * User
@@ -17,8 +20,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Logger("查询所有用户信息")
 	@GetMapping("selectAll")
-	public Object selectAll(User user) {
+	public Object selectAll(@Valid User user) {
 		return userService.selectAll(user);
 	}
 

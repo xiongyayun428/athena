@@ -1,5 +1,6 @@
 package com.xyy.athena.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -37,10 +38,12 @@ public class BaseEntity implements Serializable {
     /**
      * 默认当前页码
      */
+    @JsonIgnore
     private int pageIndex = 1;
     /**
      * 默认每页记录条数
      */
+    @JsonIgnore
     private int pageSize = 10;
     /**
      * 默认排序

@@ -22,6 +22,7 @@ public class User extends BaseEntity {
     @Id
     @Column(name = "user_id")
     private String userId;
+//    @NotBlank(message = "用户名不能为空")
     @Column(name = "user_name")
     private String userName;
     @Column(name = "real_name")

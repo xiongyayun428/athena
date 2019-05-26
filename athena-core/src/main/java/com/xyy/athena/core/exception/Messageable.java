@@ -1,4 +1,4 @@
-package com.xyy.athena.exception;
+package com.xyy.athena.core.exception;
 
 import java.io.Serializable;
 

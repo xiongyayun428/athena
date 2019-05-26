@@ -1,5 +1,8 @@
 package com.xyy.athena.core.utils;
 
+import cn.hutool.core.util.StrUtil;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -10,10 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-
-import cn.hutool.core.util.StrUtil;
 
 public class SystemUtil {
 	private static Set<String> _localAddress;
@@ -101,8 +100,9 @@ public class SystemUtil {
 	 * @return
 	 */
 	public static String getClientIP(HttpServletRequest request) {
-		if (request == null)
+		if (request == null) {
 			return null;
+		}
 		String s = request.getHeader("X-Forwarded-For");
 		if (s == null || s.length() == 0 || "unknown".equalsIgnoreCase(s)) {
 			s = request.getHeader("Proxy-Client-IP");

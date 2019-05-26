@@ -166,13 +166,13 @@
     -->
 
     <!--开发环境:打印控制台-->
-    <springProfile name="dev">
-        <logger name="com.xyy.athena" level="debug"/>
-    </springProfile>
+    <!--<springProfile name="dev">-->
+        <!--<logger name="com.xyy.athena" level="debug"/>-->
+    <!--</springProfile>-->
 
-    <root level="debug">
-        <appender-ref ref="CONSOLE" />
-    </root>
+    <!--<root level="OFF">-->
+        <!--<appender-ref ref="CONSOLE" />-->
+    <!--</root>-->
 
     <!--开发环境:输出到控制台-->
     <springProfile name="dev">
@@ -182,13 +182,13 @@
     </springProfile>
 
     <!--生产环境:输出到文件-->
-    <springProfile name="prod">
-        <root level="info">
-            <appender-ref ref="DEBUG_FILE" />
-            <appender-ref ref="INFO_FILE" />
-            <appender-ref ref="ERROR_FILE" />
-            <appender-ref ref="WARN_FILE" />
-        </root>
-    </springProfile>
+    <!--<springProfile name="prod">-->
+        <!--<root level="info">-->
+            <!--<appender-ref ref="DEBUG_FILE" />-->
+            <!--<appender-ref ref="INFO_FILE" />-->
+            <!--<appender-ref ref="ERROR_FILE" />-->
+            <!--<appender-ref ref="WARN_FILE" />-->
+        <!--</root>-->
+    <!--</springProfile>-->
 
 </configuration>

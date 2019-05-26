@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class Pagination<T> implements Serializable {
     /**
      * 分页数据
      */
-    private List<T> rows;
+    private List<T> pageData;
 
     public Pagination(Page<T> page) {
         PageInfo<T> pageInfo = new PageInfo<>(page);
@@ -45,6 +46,6 @@ public class Pagination<T> implements Serializable {
         this.pageSize = pageInfo.getPageSize();
         this.total = pageInfo.getTotal();
         this.pageCount = total / pageSize + ((total % pageSize) > 0 ? 1 : 0);
-        this.rows = page.getResult();
+        this.pageData = new ArrayList<>(page.getResult());
     }
 }

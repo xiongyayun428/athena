@@ -1,24 +1,24 @@
-package com.xyy.athena.exception;
+package com.xyy.athena.core.exception;
 
-import org.springframework.core.NestedRuntimeException;
+import org.springframework.core.NestedCheckedException;
 
 /**
- * AthenaRuntimeException
+ * AthenaException
  *
  * @author: 熊亚运
  * @date: 2019-05-21
  */
-public class AthenaRuntimeException extends NestedRuntimeException {
-    private static final long serialVersionUID = 672694596335429564L;
+public class AthenaException extends NestedCheckedException {
+    private static final long serialVersionUID = -5547644358612306631L;
     private MessageSupport messageSupport = new MessageSupport();
     private static final String DEFAULTMESSAGE = "xyy.error.undefined";
 
-    public AthenaRuntimeException() {
+    public AthenaException() {
         super("");
         this.messageSupport.setDefaultMessage(DEFAULTMESSAGE);
     }
 
-    public AthenaRuntimeException(String msg) {
+    public AthenaException(String msg) {
         super(msg);
         if ((msg == null) || (msg.trim().length() == 0)) {
             this.messageSupport.setMessageKey(DEFAULTMESSAGE);
@@ -27,12 +27,12 @@ public class AthenaRuntimeException extends NestedRuntimeException {
         }
     }
 
-    public AthenaRuntimeException(String msg, Object[] args) {
+    public AthenaException(String msg, Object[] args) {
         this(msg);
         this.messageSupport.setArgs(args);
     }
 
-    public AthenaRuntimeException(String msg, Throwable throwable) {
+    public AthenaException(String msg, Throwable throwable) {
         super(msg, throwable);
         if ((msg == null) || (msg.trim().length() == 0)) {
             this.messageSupport.setMessageKey(DEFAULTMESSAGE);
@@ -41,7 +41,7 @@ public class AthenaRuntimeException extends NestedRuntimeException {
         }
     }
 
-    public AthenaRuntimeException(String msg, Throwable throwable, Object[] args) {
+    public AthenaException(String msg, Throwable throwable, Object[] args) {
         super(msg, throwable);
         if ((msg == null) || (msg.trim().length() == 0)) {
             this.messageSupport.setMessageKey(DEFAULTMESSAGE);
@@ -51,7 +51,7 @@ public class AthenaRuntimeException extends NestedRuntimeException {
         this.messageSupport.setArgs(args);
     }
 
-    public AthenaRuntimeException(Throwable throwable) {
+    public AthenaException(Throwable throwable) {
         super("", throwable);
         this.messageSupport.setMessageKey(DEFAULTMESSAGE);
     }
