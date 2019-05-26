@@ -1,4 +1,4 @@
-package com.xyy.athena.access.config.server;
+package com.xyy.athena.config.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

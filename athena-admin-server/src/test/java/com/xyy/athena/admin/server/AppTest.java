@@ -1,4 +1,4 @@
-package com.xyy.athena.access.admin.server;
+package com.xyy.athena.admin.server;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

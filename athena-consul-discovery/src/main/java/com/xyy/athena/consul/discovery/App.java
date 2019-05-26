@@ -1,4 +1,4 @@
-package com.xyy.athena.access.consul.discovery;
+package com.xyy.athena.consul.discovery;
 
 /**
  * Hello world!
