@@ -69,6 +69,9 @@ spring:
     druid:
       filter:
         stat:
+          # 慢SQL记录
+          # merge-sql: true
+          # slow-sql-millis: 3000
           log-slow-sql: true
       # 初始化大小，最小，最大
       initial-size: 1
