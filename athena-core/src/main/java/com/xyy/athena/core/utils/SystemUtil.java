@@ -1,7 +1,13 @@
 package com.xyy.athena.core.utils;
 
 import cn.hutool.core.util.StrUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.core.log.LogFormatUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,12 +15,13 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class SystemUtil {
+	private final static Log log = LogFactory.getLog(SystemUtil.class);
 	private static Set<String> _localAddress;
 
 	/**
@@ -295,6 +302,48 @@ public class SystemUtil {
 		String cmdResult = callCmd(cmd);
 		result = filterMacAddress(ip, cmdResult, ":");
 		return result;
+	}
+
+	public static void logRequest(HttpServletRequest request) {
+		LogFormatUtils.traceDebug(log, traceOn -> {
+			String params;
+//            if (isEnableLoggingRequestDetails()) {
+			params = request.getParameterMap().entrySet().stream()
+					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
+					.collect(Collectors.joining(", "));
+//            }
+//            else {
+//                params = (request.getParameterMap().isEmpty() ? "" : "masked");
+//            }
+
+			String queryString = request.getQueryString();
+			String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
+			String dispatchType = (!request.getDispatcherType().equals(DispatcherType.REQUEST) ?
+					"\"" + request.getDispatcherType().name() + "\" dispatch for " : "");
+			String message = (dispatchType + request.getMethod() + " \"" + getRequestUri(request) +
+					queryClause + "\", parameters={" + params + "}");
+
+			if (traceOn) {
+				List<String> values = Collections.list(request.getHeaderNames());
+				String headers = values.size() > 0 ? "masked" : "";
+//                if (isEnableLoggingRequestDetails()) {
+				headers = values.stream().map(name -> name + ":" + Collections.list(request.getHeaders(name)))
+						.collect(Collectors.joining(", "));
+//                }
+				return message + ", headers={" + headers + "}"; // in DispatcherServlet '" + getServletName() + "'";
+			}
+			else {
+				return message;
+			}
+		});
+	}
+
+	public static String getRequestUri(HttpServletRequest request) {
+		String uri = (String) request.getAttribute(WebUtils.INCLUDE_REQUEST_URI_ATTRIBUTE);
+		if (uri == null) {
+			uri = request.getRequestURI();
+		}
+		return uri;
 	}
 	
 	public static void main(String[] args) {

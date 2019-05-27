@@ -7,13 +7,40 @@ server:
       cookie:
         http-only: true
   undertow:
+#    accesslog:
+#      enabled: true
+#      pattern: '%t %a "%r" %s (%D ms)'
     worker-threads: 10
+  http2:
+    enabled: true
 info:
+  java:
+    version: @java.version@
   app:
-    name: athena.admin
-    version: v1.0.0
+    name: @project.name@
+    description: @project.description@
+    encoding: @project.build.sourceEncoding@
+    version: @project.version@
   contact:
     email: xiongyayun428@163.com
+debug: true
+trace: true
+logging:
+  level:
+    root: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG
+        beans: INFO
+        jdbc: INFO
+      hibernate: ERROR
+      mybatis: INFO
+    com:
+      xyy: DEBUG
+      alibaba:
+        druid: INFO
+  file: log/athena.log
 spring:
   profiles:
     active: dev
@@ -22,6 +49,7 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
+    log-request-details: true
   messages:
     basename: i18n/messages,i18n/error
     encoding: UTF-8
@@ -34,6 +62,8 @@ spring:
   jackson:
     time-zone: GMT+8
     default-property-inclusion: non_null #如果某一个字段为null，就不再返回这个字段
+    mapper:
+      sort-properties-alphabetically: true
   security:
     user:
       name: admin
@@ -81,9 +111,6 @@ spring:
         login-username: admin
         login-password: admin
       aop-patterns: com.xyy.athena.user.mapper
-logging:
-  path: ./logs
-  config: classpath:log/logback-spring.xml
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configLocation: classpath:/mybatis-config.xml

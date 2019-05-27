@@ -4,6 +4,7 @@ import com.xyy.athena.core.annotation.Logger;
 import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,6 +48,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("delete")
+	@Nullable
 	public void delete() {
 
 	}

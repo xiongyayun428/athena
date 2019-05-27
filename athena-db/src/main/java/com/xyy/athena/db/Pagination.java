@@ -1,5 +1,6 @@
 package com.xyy.athena.db;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.List;
  * @date: 2019-05-22
  */
 @Data
+@JsonPropertyOrder({"pageIndex", "pageSize", "pageCount", "total", "pageData"})
 public class Pagination<T> implements Serializable {
     public final static int PAGE_INDEX = 1;
     public final static int PAGE_SIZE = 10;
