@@ -13,6 +13,9 @@ info:
 spring:
   application:
     name: athena-admin-server
+  output:
+    ansi:
+      enabled: ALWAYS
   # 配置SBA Client连接的安全账号密码
   security:
     user:

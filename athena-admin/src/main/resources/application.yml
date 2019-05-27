@@ -13,18 +13,8 @@ server:
     worker-threads: 10
   http2:
     enabled: true
-info:
-  java:
-    version: @java.version@
-  app:
-    name: @project.name@
-    description: @project.description@
-    encoding: @project.build.sourceEncoding@
-    version: @project.version@
-  contact:
-    email: xiongyayun428@163.com
 debug: true
-trace: true
+trace: false
 logging:
   level:
     root: DEBUG
@@ -40,7 +30,7 @@ logging:
       xyy: DEBUG
       alibaba:
         druid: INFO
-  file: log/athena.log
+  file: logs/athena.log
 spring:
   profiles:
     active: dev
