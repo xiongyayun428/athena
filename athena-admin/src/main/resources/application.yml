@@ -15,6 +15,16 @@ server:
     enabled: true
 debug: true
 trace: false
+info:
+  java:
+    version: @java.version@
+  app:
+    name: @project.name@
+    description: @project.description@
+    encoding: @project.build.sourceEncoding@
+    version: @project.version@
+  contact:
+    email: xiongyayun428@163.com
 logging:
   level:
     root: DEBUG
@@ -31,6 +41,18 @@ logging:
       alibaba:
         druid: INFO
   file: logs/athena.log
+management:
+  endpoints:
+    web:
+      exposure:
+        #加载所有的端点，默认只加载了info、health
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    #可以关闭指定的端点
+    shutdown:
+      enabled: false
 spring:
   profiles:
     active: dev
@@ -54,12 +76,26 @@ spring:
     default-property-inclusion: non_null #如果某一个字段为null，就不再返回这个字段
     mapper:
       sort-properties-alphabetically: true
-  # security:
-  #   user:
-  #     name: admin
-  #     password: 123456
   application:
     name: athena-admin
+  security:
+    user:
+      name: admin
+      password: admin
+  boot:
+    admin:
+      client:
+        instance:
+          service-url: http://localhost:${server.port}${server.servlet.context-path}
+          # 如果pom.xml中加入spring-boot-starter-security这个包，就需要开启下面的用户密码信息
+#          metadata:
+#            user:
+#              name: ${spring.security.user.name}
+#              password: ${spring.security.user.password}
+        # 使用HTTP基本身份验证保护SBA服务器api、用户名、密码。
+        url: http://localhost:20100
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
   datasource:
     url: jdbc:mysql://localhost:3306/athena?connectTimeout=1000&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: app

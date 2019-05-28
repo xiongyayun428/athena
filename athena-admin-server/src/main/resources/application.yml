@@ -31,14 +31,14 @@ spring:
 #        favicon: static/img/favicon.ico
         # 修改网页的brand的图标和标题
         brand: "<img src='static/img/icon-spring-boot-admin.svg'><span>雅典娜应用监控管理</span>"
-      client:
-        # 这个URL地址是SBA Server的服务地址，你需要将你的应用注册到该地址上
-        url: http://localhost:20100
-        instance:
-          metadata:
-            # 配置发送到SBA Server的SBA Client的端点安全密码
-            user.name: ${spring.security.user.name}
-            user.password: ${spring.security.user.password}
+#      client:
+#        # 这个URL地址是SBA Server的服务地址，你需要将你的应用注册到该地址上
+#        url: http://localhost:20100
+#        instance:
+#          metadata:
+#            user:
+#              name: ${spring.security.user.name}
+#              password: ${spring.security.user.password}
 #      notify:
 #        mail:
 #          from: Product@hljinke.com
@@ -63,7 +63,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        #加载所有的端点，默认只加载了info、health
+        include: '*'
   endpoint:
     health:
-      show-details: ALWAYS
+      show-details: always
+    #可以关闭指定的端点
+    shutdown:
+      enabled: false
