@@ -30,8 +30,11 @@ logging:
     root: DEBUG
     org:
       springframework:
+        boot:
+          actuate: INFO
+          actuate.endpoint.web: INFO
         security: DEBUG
-        web: DEBUG
+        web: INFO
         beans: INFO
         jdbc: INFO
       hibernate: ERROR
@@ -40,6 +43,10 @@ logging:
       xyy: DEBUG
       alibaba:
         druid: INFO
+    de:
+      codecentric:
+        boot:
+          admin: INFO
   file: logs/athena.log
 management:
   endpoints:
