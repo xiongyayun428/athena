@@ -109,7 +109,7 @@ public class LoggerAspect {
             loggerThreadLocal.get().setSpendTime(System.currentTimeMillis() - startTime.get());
             loggerThreadLocal.get().setRespParams(truncatedValue);
             // TODO 保存
-            System.out.println(loggerThreadLocal.get());
+//            System.out.println(loggerThreadLocal.get());
         }
 
         if (logger.isDebugEnabled()) {

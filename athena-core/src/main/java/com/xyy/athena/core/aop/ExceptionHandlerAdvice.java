@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -74,7 +75,6 @@ public class ExceptionHandlerAdvice {
     public ResBody doIllegalArgumentException(IllegalArgumentException ex) {
         logger.error("IllegalArgumentException:", ex);
         var res = new ResBody(i18nService, ErrorConstant.SYSTEM_ILLEGAL_ARGUMENT, ex);
-//        res.isError(ex.getMessage());
         return res;
     }
 
@@ -87,7 +87,6 @@ public class ExceptionHandlerAdvice {
     public ResBody doBadSqlGrammarException(BadSqlGrammarException e) {
         logger.error("BadSqlGrammarException:", e);
         var res = new ResBody(i18nService, ErrorConstant.SYSTEM_BAD_SQL_GRAMMAR, e);
-//        res.isError(e.getMessage());
         return res;
     }
 
@@ -127,6 +126,11 @@ public class ExceptionHandlerAdvice {
         FieldError fieldError = ex.getBindingResult().getFieldError();
         Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
         return new ResBody(i18nService, ErrorConstant.SYSTEM_METHOD_ARGUMENT_NOT_VALID, args, fieldError.getDefaultMessage());
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResBody httpMessageNotReadableException(HttpMessageNotReadableException e) {
+        return new ResBody(i18nService, ErrorConstant.HTTP_MESSAGE_NOT_READABLE_EXCEPTION, e);
     }
 
 }

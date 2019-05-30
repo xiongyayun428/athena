@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,12 +24,11 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2019-05-26
  */
 @Slf4j
-@RestControllerAdvice(basePackages = { "com.xyy.athena" })
+@RestControllerAdvice()
 public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        // 判断是否有此注解
-        return methodParameter.getParameterAnnotation(RequestBody.class) != null;
+        return true;
     }
 
     @Override
@@ -55,7 +53,7 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
             } catch (JsonProcessingException e) {
                 log.error(e.getMessage(), e);
             }
-            log.debug("接口返回数据: {}", JSONUtil.toJsonStr(value));
+            log.debug("--->RESPONSE: {}", JSONUtil.toJsonStr(value));
         }
         return returnValue;
     }

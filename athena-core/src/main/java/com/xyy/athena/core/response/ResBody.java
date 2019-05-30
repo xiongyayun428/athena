@@ -7,6 +7,7 @@ import com.xyy.athena.core.i18n.I18nService;
 import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
 
 /**
  * ResponseBody
@@ -38,6 +39,9 @@ public class ResBody implements ResponseEntity {
 
     @JsonIgnore
     private I18nService i18nService;
+
+    @JsonIgnore
+    private Object[] args;
 
     public ResBody() {
         this.rtnCode = SUCCESS_CODE;
@@ -74,6 +78,31 @@ public class ResBody implements ResponseEntity {
         if (i18nService != null) {
             this.rtnMsg = i18nService.get(rtnCode, args, defaultMsg);
         }
+    }
+
+    public ResBody withCode(String rtnCode) {
+        this.rtnCode = rtnCode;
+        return this;
+    }
+
+    public ResBody withCode(Object[] args) {
+        this.args = args;
+        return this;
+    }
+
+    public ResBody withMsg(String rtnMsg) {
+        this.rtnMsg = rtnMsg;
+        return this;
+    }
+
+    public ResBody withMsg(Object rtnData) {
+        this.rtnData = rtnData;
+        return this;
+    }
+
+    public ResBody withStatus(HttpStatus status) {
+//        this.rtnData = status;
+        return this;
     }
 
 }

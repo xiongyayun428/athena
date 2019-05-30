@@ -19,4 +19,5 @@ public class ErrorConstant implements Constant {
     public static final String SYSTEM_BAD_SQL_GRAMMAR = "system.bad_sql_grammar";
     public static final String SYSTEM_BIND = "system.bind";
     public static final String SYSTEM_METHOD_ARGUMENT_NOT_VALID = "system.method_argument_not_valid";
+    public static final String HTTP_MESSAGE_NOT_READABLE_EXCEPTION = "HttpMessageNotReadableException";
 }

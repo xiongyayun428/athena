@@ -1,6 +1,5 @@
 package com.xyy.athena.core.aop;
 
-import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
@@ -26,24 +25,33 @@ public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
         return true;
     }
 
+    /**
+     * 在数据读出之前可以做的事情
+     * @param inputMessage
+     * @param parameter
+     * @param targetType
+     * @param converterType
+     * @return
+     * @throws IOException
+     */
     @Override
     public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
         Method method = parameter.getMethod();
-        log.info("beforeBodyRead -> {}.{}:{}",method.getDeclaringClass().getSimpleName(),method.getName(), targetType.getTypeName());
+        log.info("-----beforeBodyRead -> {}.{}:{}",method.getDeclaringClass().getSimpleName(),method.getName(), targetType.getTypeName());
         return inputMessage;
     }
 
     @Override
     public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         Method method = parameter.getMethod();
-        log.info("afterBodyRead -> {}.{}:{}",method.getDeclaringClass().getSimpleName(),method.getName(), JSONUtil.toJsonStr(body));
+        log.info("-----afterBodyRead -> {}.{}:{}",method.getDeclaringClass().getSimpleName(),method.getName(), body);
         return body;
     }
 
     @Override
     public Object handleEmptyBody(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         Method method = parameter.getMethod();
-        log.info("handleEmptyBody -> {}.{}:{}",method.getDeclaringClass().getSimpleName(),method.getName(), JSONUtil.toJsonStr(body));
+        log.info(method + " body is empty");
         return body;
     }
 }
