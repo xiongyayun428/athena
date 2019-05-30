@@ -50,4 +50,13 @@ public class Pagination<T> implements Serializable {
         this.pageCount = total / pageSize + ((total % pageSize) > 0 ? 1 : 0);
         this.pageData = new ArrayList<>(page.getResult());
     }
+
+    public Pagination(List<T> list) {
+        PageInfo<T> pageInfo = new PageInfo<>(list);
+        this.pageIndex = pageInfo.getPageNum();
+        this.pageSize = pageInfo.getPageSize();
+        this.total = pageInfo.getTotal();
+        this.pageCount = total / pageSize + ((total % pageSize) > 0 ? 1 : 0);
+        this.pageData = list;
+    }
 }

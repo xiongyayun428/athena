@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,16 +38,23 @@ public class BaseEntity implements Serializable {
     private Date lastUpdateTime;
     /**
      * 默认当前页码
+     * <code>@Transient</code>非数据库表中字段
      */
     @JsonIgnore
+    @Transient
     private int pageIndex = 1;
     /**
      * 默认每页记录条数
+     * <code>@Transient</code>非数据库表中字段
      */
     @JsonIgnore
+    @Transient
     private int pageSize = 10;
     /**
      * 默认排序
+     * <code>@Transient</code>非数据库表中字段
      */
+    @JsonIgnore
+    @Transient
     private String orderBy = "last_update_time desc, create_time desc";
 }

@@ -151,11 +151,11 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configLocation: classpath:/mybatis-config.xml
   type-aliases-package: tk.mybatis.springboot.model
-mapper:
-  mappers:
-    - tk.mybatis.springboot.util.MyMapper
-  not-empty: false
-  identity: MYSQL
+#mapper:
+#  mappers:
+#    - tk.mybatis.mapper.common.Mapper
+#  not-empty: true
+#  identity: MYSQL
 pagehelper:
   helperDialect: mysql
   pageSizeZero: false

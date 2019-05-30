@@ -1,9 +1,9 @@
 package com.xyy.athena.admin;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * AdminApplication
@@ -15,7 +15,8 @@ import org.springframework.context.annotation.ComponentScan;
 //@EnableEurekaClient
 //@EnableFeignClients(basePackages = { "com.xyy.athena.role.api", "com.xyy.athena.user" })
 @ComponentScan(basePackages = { "com.xyy.athena" })
-@MapperScan("com.xyy.athena.*.mapper")
+@tk.mybatis.spring.annotation.MapperScan("com.xyy.athena.*.mapper")
+@EnableTransactionManagement
 public class AdminApplication {
 
 	public static void main(String[] args) {

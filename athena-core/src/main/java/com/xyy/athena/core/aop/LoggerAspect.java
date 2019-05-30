@@ -36,11 +36,18 @@ public class LoggerAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
     ThreadLocal<com.xyy.athena.core.model.support.Logger> loggerThreadLocal = new ThreadLocal<>();
 
+    /**
+     * 切入点
+     */
     @Pointcut("@annotation(com.xyy.athena.core.annotation.Logger)")
     public void doAspect() {}
 
+    /**
+     * 前置通知（Before advice） ：在某连接点（JoinPoint）——核心代码（类或者方法）之前执行的通知，但这个通知不能阻止连接点前的执行。
+     * @param point
+     */
     @Before("doAspect()")
-    public void around(JoinPoint point) {
+    public void before(JoinPoint point) {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
         Logger annotation = method.getAnnotation(Logger.class);
@@ -69,6 +76,20 @@ public class LoggerAspect {
         }
     }
 
+    /**
+     * 当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）
+     * @param joinPoint
+     */
+    @After("doAspect()")
+    public void after(JoinPoint joinPoint) {
+        log.info("已经记录下操作日志@After 方法执行后-->" + joinPoint.getSignature().getName());
+
+    }
+
+    /**
+     * 返回后通知（After return advice） ：在某连接点正常完成后执行的通知，不包括抛出异常的情况。
+     * @param resultValue
+     */
     @AfterReturning(returning = "resultValue", pointcut = "doAspect()")
     public void afterReturning(Object resultValue) {
         if (null == resultValue) {
@@ -98,10 +119,13 @@ public class LoggerAspect {
         }
     }
 
-    @After("doAspect()")
-    public void after(JoinPoint joinPoint) {
-        log.info("已经记录下操作日志@After 方法执行后-->" + joinPoint.getSignature().getName());
-
+    /**
+     * 抛出异常后通知（After throwing advice） ： 在方法抛出异常退出时执行的通知。
+     * @param e
+     */
+    @AfterThrowing(throwing="e", pointcut = "doAspect()")
+    public void afterThrowing(Throwable e) {
+        log.error("===>执行异常：" + e.getMessage());
     }
 
 }

@@ -1,3 +1,8 @@
 info:
   tags:
     environment: dev
+spring:
+  boot:
+    admin:
+      client:
+        enabled: false

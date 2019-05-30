@@ -97,6 +97,11 @@
 			<optional>true</optional>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 声明依赖，并不实现引入，子项目需要显示的声明需要的依赖 -->
