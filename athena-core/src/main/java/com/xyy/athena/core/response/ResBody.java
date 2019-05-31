@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.xyy.athena.core.i18n.I18nService;
-import lombok.Data;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.http.HttpStatus;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * ResponseBody
@@ -15,25 +13,26 @@ import org.springframework.http.HttpStatus;
  * @author: 熊亚运
  * @date: 2019-05-21
  */
-@Data
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody implements ResponseEntity {
-    @JsonIgnore
-    protected Log log = LogFactory.getLog(this.getClass());
     private static final String SUCCESS_CODE = "000000";
     private static final String SUCCESS_MSG = "SUCCESS";
-
 
     /**
      * 返回码
      */
+    @Setter
+    @Getter
     private String rtnCode;
 
     /**
      * 返回信息
      */
+    @Setter
     private String rtnMsg;
 
+    @Setter
+    @Getter
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object rtnData;
 
@@ -48,14 +47,8 @@ public class ResBody implements ResponseEntity {
         this.rtnMsg = SUCCESS_MSG;
     }
 
-    public ResBody(I18nService i18nService, String rtnCode, Throwable e) {
+    public ResBody(String rtnCode) {
         this.rtnCode = rtnCode;
-        if (i18nService != null) {
-            this.rtnMsg = i18nService.get(rtnCode);
-        }
-        if (e != null) {
-            log.error(this.rtnMsg, e);
-        }
     }
 
     public ResBody(String rtnCode, String rtnMsg) {
@@ -63,21 +56,21 @@ public class ResBody implements ResponseEntity {
         this.rtnMsg = rtnMsg;
     }
 
-    public ResBody(I18nService i18nService, String rtnCode, Object[] args, Throwable e) {
+    public ResBody(String rtnCode, Object[] args) {
         this.rtnCode = rtnCode;
-        if (i18nService != null) {
-            this.rtnMsg = i18nService.get(rtnCode, args);
-        }
-        if (e != null) {
-            log.error(this.rtnMsg, e);
-        }
+        this.args = args;
     }
 
-    public ResBody(I18nService i18nService, String rtnCode, Object[] args, String defaultMsg) {
-        this.rtnCode = rtnCode;
-        if (i18nService != null) {
-            this.rtnMsg = i18nService.get(rtnCode, args, defaultMsg);
+    public String getRtnMsg() {
+        if (this.rtnMsg == null && i18nService != null) {
+            this.rtnMsg = i18nService.get(rtnCode, args);
         }
+        return this.rtnMsg;
+    }
+
+    public ResBody withI18nService(I18nService i18nService) {
+        this.i18nService = i18nService;
+        return this;
     }
 
     public ResBody withCode(String rtnCode) {
@@ -85,23 +78,13 @@ public class ResBody implements ResponseEntity {
         return this;
     }
 
-    public ResBody withCode(Object[] args) {
+    public ResBody withMsg(String msg) {
+        this.rtnMsg = msg;
+        return this;
+    }
+
+    public ResBody withArgs(Object[] args) {
         this.args = args;
-        return this;
-    }
-
-    public ResBody withMsg(String rtnMsg) {
-        this.rtnMsg = rtnMsg;
-        return this;
-    }
-
-    public ResBody withMsg(Object rtnData) {
-        this.rtnData = rtnData;
-        return this;
-    }
-
-    public ResBody withStatus(HttpStatus status) {
-//        this.rtnData = status;
         return this;
     }
 

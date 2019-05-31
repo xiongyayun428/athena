@@ -1,6 +1,7 @@
 package com.xyy.athena.user.controller;
 
 import com.xyy.athena.core.annotation.Logger;
+import com.xyy.athena.core.exception.AthenaException;
 import com.xyy.athena.user.model.Menu;
 import com.xyy.athena.user.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,8 @@ public class MenuController {
 
     @Logger("新增菜单")
     @PostMapping("add")
-    public void add(@Valid @RequestBody Menu menu) {
+    public void add(@Valid @RequestBody Menu menu) throws AthenaException {
         log.debug("add", menu);
+        throw new AthenaException(new NullPointerException());
     }
 }

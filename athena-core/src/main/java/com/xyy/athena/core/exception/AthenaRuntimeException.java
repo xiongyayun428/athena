@@ -1,6 +1,12 @@
 package com.xyy.athena.core.exception;
 
+import com.xyy.athena.core.ErrorConstant;
+import com.xyy.athena.core.i18n.I18nService;
+import com.xyy.athena.core.utils.SpringContextUtil;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.core.NestedRuntimeException;
+import org.springframework.lang.Nullable;
 
 /**
  * AthenaRuntimeException
@@ -10,101 +16,71 @@ import org.springframework.core.NestedRuntimeException;
  */
 public class AthenaRuntimeException extends NestedRuntimeException {
     private static final long serialVersionUID = 672694596335429564L;
-    private MessageSupport messageSupport = new MessageSupport();
-    private static final String DEFAULTMESSAGE = "xyy.error.undefined";
+    @Setter
+    @Getter
+    private String messageKey;
+    @Setter
+    @Getter
+    private Object[] args = new Object[0];
 
     public AthenaRuntimeException() {
         super("");
-        this.messageSupport.setDefaultMessage(DEFAULTMESSAGE);
-    }
-
-    public AthenaRuntimeException(String msg) {
-        super(msg);
-        if ((msg == null) || (msg.trim().length() == 0)) {
-            this.messageSupport.setMessageKey(DEFAULTMESSAGE);
-        } else {
-            this.messageSupport.setMessageKey(msg);
-        }
-    }
-
-    public AthenaRuntimeException(String msg, Object[] args) {
-        this(msg);
-        this.messageSupport.setArgs(args);
-    }
-
-    public AthenaRuntimeException(String msg, Throwable throwable) {
-        super(msg, throwable);
-        if ((msg == null) || (msg.trim().length() == 0)) {
-            this.messageSupport.setMessageKey(DEFAULTMESSAGE);
-        } else {
-            this.messageSupport.setMessageKey(msg);
-        }
-    }
-
-    public AthenaRuntimeException(String msg, Throwable throwable, Object[] args) {
-        super(msg, throwable);
-        if ((msg == null) || (msg.trim().length() == 0)) {
-            this.messageSupport.setMessageKey(DEFAULTMESSAGE);
-        } else {
-            this.messageSupport.setMessageKey(msg);
-        }
-        this.messageSupport.setArgs(args);
+        this.messageKey = ErrorConstant.SYSTEM_ERROR_UNDEFINED;
     }
 
     public AthenaRuntimeException(Throwable throwable) {
         super("", throwable);
-        this.messageSupport.setMessageKey(DEFAULTMESSAGE);
+        this.messageKey = ErrorConstant.SYSTEM_ERROR_UNDEFINED;
     }
 
-    public void setDefaultMessage(String messageSupport) {
-        this.messageSupport.setDefaultMessage(messageSupport);
+    public AthenaRuntimeException(@Nullable String messageKey) {
+        super(messageKey);
+        this.messageKey = messageKey;
     }
 
-    public String getMessageKey() {
-        return this.messageSupport.getMessageKey();
+    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Object[] args) {
+        this(messageKey);
+        this.messageKey = messageKey;
+        this.args = args;
     }
 
-    public Object[] getArgs() {
-        return this.messageSupport.getArgs();
+    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Throwable throwable) {
+        super(messageKey, throwable);
+        this.messageKey = messageKey;
     }
 
-    public String getDefaultMessage() {
-        String defaultMessage = this.messageSupport.getDefaultMessage();
-        if (defaultMessage == null) {
-            StringBuffer sb = new StringBuffer(super.getClass().getName())
-                    .append(" MessageCode: ").append(getMessageKey());
-            if (this.messageSupport.getArgs() != null) {
-                Object[] args = this.messageSupport.getArgs();
-                if (args.length > 0) {
-                    sb.append(" Args:");
-                }
-                for (int i = 0; i < args.length; i++) {
-                    sb.append(args[i]).append(" ");
-                }
+    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Object[] args, @Nullable Throwable throwable) {
+        super(messageKey, throwable);
+        this.messageKey = messageKey;
+        this.args = args;
+    }
+
+
+    @Override
+    public String getMessage() {
+        try {
+            I18nService i18nService = SpringContextUtil.getBean(I18nService.class);
+            if (i18nService != null) {
+                return i18nService.get(this.messageKey, this.args, ErrorConstant.SYSTEM_ERROR_UNDEFINED);
             }
-            if (getCause() != null) {
-                sb.append(" nested exception is: ").append(getCause());
-            }
-            return sb.toString();
-        }
-        return defaultMessage;
+        } catch (Exception e) {}
+        return super.getMessage();
     }
 
-    public boolean hasDefaultMessage() {
-        return this.messageSupport.hasDefaultMessage();
-    }
-
-    public String toString() {
-        StringBuffer sb = new StringBuffer(super.toString());
-        if (this.messageSupport.getArgs() != null) {
-            Object[] args = this.messageSupport.getArgs();
-            if (args.length > 0) {
-                sb.append(" Args:");
-            }
-            for (int i = 0; i < args.length; i++) {
-                sb.append(args[i]).append(" ");
-            }
-        }
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuffer sb = new StringBuffer();
+//        try {
+//            I18nService i18nService = SpringContextUtil.getBean(I18nService.class);
+//            if (i18nService != null) {
+//                sb.append("{messageKey: ");
+//                sb.append(this.messageKey);
+//                sb.append(", message: ");
+//                sb.append(i18nService.get(this.messageKey, this.args, ErrorConstant.SYSTEM_ERROR_UNDEFINED));
+//                sb.append("}; ");
+//            }
+//        } catch (Exception e) {}
+//        sb.append(super.toString());
+//        return sb.toString();
+//    }
 }

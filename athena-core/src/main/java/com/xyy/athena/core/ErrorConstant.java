@@ -8,16 +8,19 @@ package com.xyy.athena.core;
  */
 public class ErrorConstant implements Constant {
     /** 系统繁忙，请稍后再试 */
-    public static final String SYSTEM_ERROR_UNDEFINED = "system.error_undefined";
+    public static final String SYSTEM_ERROR_UNDEFINED = "athena.error.undefined";
     /** 系统繁忙，未捕获异常 */
     public static final String SYSTEM_ERROR_UNCAUGHT = "system.error_uncaught";
 
-    public static final String HTTP_REQUEST_METHOD_NOT_SUPPORTED = "http.request_method_not_supported";
-    public static final String SYSTEM_NO_HANDLER_FOUND = "system.no_handler_found";
-    public static final String SYSTEM_SQL = "system.sql";
-    public static final String SYSTEM_ILLEGAL_ARGUMENT = "system.illegal_argument";
-    public static final String SYSTEM_BAD_SQL_GRAMMAR = "system.bad_sql_grammar";
-    public static final String SYSTEM_BIND = "system.bind";
-    public static final String SYSTEM_METHOD_ARGUMENT_NOT_VALID = "system.method_argument_not_valid";
+    public static final String HTTP_REQUEST_METHOD_NOT_SUPPORTED = "HttpRequestMethodNotSupportedException";
+    public static final String SYSTEM_NO_HANDLER_FOUND = "NoHandlerFoundException";
+    public static final String SQL_EXCEPTION = "SQLException";
+    public static final String ILLEGAL_ARGUMENT_EXCEPTION = "IllegalArgumentException";
+    public static final String BAD_SQL_GRAMMAR_EXCEPTION = "BadSqlGrammarException";
+    public static final String BIND_EXCEPTION = "BindException";
+    public static final String METHOD_ARGUMENT_NOT_VALID_EXCEPTION = "MethodArgumentNotValidException";
     public static final String HTTP_MESSAGE_NOT_READABLE_EXCEPTION = "HttpMessageNotReadableException";
+    public static final String MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION = "MissingServletRequestParameterException";
+    public static final String TYPE_MISMATCH_EXCEPTION = "TypeMismatchException";
+    public static final String HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION = "HttpMediaTypeNotSupportedException";
 }

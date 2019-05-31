@@ -89,6 +89,10 @@ spring:
     user:
       name: admin
       password: admin
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
   boot:
     admin:
       client:
@@ -151,11 +155,14 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configLocation: classpath:/mybatis-config.xml
   type-aliases-package: tk.mybatis.springboot.model
-#mapper:
-#  mappers:
-#    - tk.mybatis.mapper.common.Mapper
-#  not-empty: true
-#  identity: MYSQL
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    - com.xyy.athena.db.tk.TkMapper
+  not-empty: true
+  identity: MYSQL
+  safe-delete: true
+  safeUpdate: true
 pagehelper:
   helperDialect: mysql
   pageSizeZero: false
