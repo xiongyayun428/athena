@@ -2,6 +2,7 @@ package com.xyy.athena.service.time.support;
 
 import com.xyy.athena.service.time.TimeService;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -15,6 +16,7 @@ import java.util.TimeZone;
  * @since JDK 1.8
  *
  */
+@Service
 public class DefaultTimeService implements TimeService {
 	private long timestamp;
 	private long localTimestamp;

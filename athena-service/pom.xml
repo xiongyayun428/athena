@@ -2,10 +2,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>athena-service-id</artifactId>
+    <artifactId>athena-service</artifactId>
     <packaging>jar</packaging>
-    <name>athena id service</name>
-    <description>ID服务</description>
+    <name>athena service</name>
+    <description>服务</description>
 
     <parent>
         <groupId>com.xyy.athena</groupId>
@@ -21,15 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.xyy.athena</groupId>
-            <artifactId>athena-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xyy.athena</groupId>
-            <artifactId>athena-service-time</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>

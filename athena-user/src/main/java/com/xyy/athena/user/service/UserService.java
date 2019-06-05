@@ -11,7 +11,21 @@ import com.xyy.athena.user.model.User;
  */
 public interface UserService {
 
-//    int add();
+    Pagination<User> selectAll(User user);
+
+    /**
+     * 新增用户
+     * @param user
+     * @return
+     */
+    int add(User user);
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    int update(User user);
 
     /**
      * 删除用户
@@ -20,5 +34,10 @@ public interface UserService {
      */
     int delete(String userId);
 
-    Pagination<User> selectAll(User user);
+    /**
+     * 根据主键ID查询用户信息
+     * @param userId
+     * @return
+     */
+    User findUserById(String userId);
 }

@@ -1,6 +1,7 @@
 package com.xyy.athena.service.time.support;
 
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -14,6 +15,7 @@ import java.sql.*;
  *
  */
 @Setter
+@Service
 public class SqlTimeService extends DefaultTimeService {
 	@Setter
 	private String timestampSql = "values(current_timestamp)";

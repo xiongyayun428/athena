@@ -1,5 +1,7 @@
 package com.xyy.athena.service.time;
 
+import com.xyy.athena.service.Service;
+
 /**
  * <p><b>时间服务</b></p>
  *
@@ -8,7 +10,7 @@ package com.xyy.athena.service.time;
  * @since JDK 1.8
  *
  */
-public interface TimeService {
+public interface TimeService extends Service {
 	int FIRST_DAY_OF_WEEK = 2;
 	int MINUTE = 12;
 	int HOUR = 11;

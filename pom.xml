@@ -24,7 +24,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
+		<java.version>12</java.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
 		<docker.image.prefix>springboot</docker.image.prefix>
 	</properties>
@@ -209,6 +209,11 @@
 				<artifactId>athena-db</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>com.xyy.athena</groupId>
+				<artifactId>athena-service</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -259,8 +264,8 @@
 		<module>athena-access</module>
 		<module>athena-user</module>
 		<module>athena-user-api</module>
-		<module>athena-zuul</module>
 		<module>athena-db</module>
+		<module>athena-service</module>
 		<module>athena-service-id</module>
         <module>athena-service-time</module>
 	</modules>
@@ -291,12 +296,12 @@
 	<!-- 发布配置 在执行mvn deploy后表示要发布的位置 -->
 	<distributionManagement>
 		<repository>
-			<id>nexus-releases</id>
-			<url>http://localhost:8081/repository/maven-releases/</url>
+			<id>rdc-releases</id>
+			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
 		</repository>
 		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>http://localhost:8081/repository/maven-snapshots/</url>
+			<id>rdc-snapshots</id>
+			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

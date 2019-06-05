@@ -11,8 +11,10 @@ import org.jasypt.util.text.BasicTextEncryptor;
 public class JasyptEncryptorTest {
     public static void main(String[] args) {
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        // 密钥
         textEncryptor.setPassword("xiongyayun428");
-        String password = textEncryptor.encrypt("app");
+        // 被加密字段
+        String password = textEncryptor.encrypt("athena");
 
         System.out.println(password);
         System.out.println(textEncryptor.decrypt(password));

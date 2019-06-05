@@ -4,7 +4,6 @@ import com.xyy.athena.core.annotation.Logger;
 import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,8 +21,8 @@ public class UserController {
 	private UserService userService;
 
 	@Logger("查询所有用户信息")
-	@GetMapping("selectAll")
-	public Object selectAll(@Valid User user) {
+	@GetMapping("select")
+	public Object select(@Valid User user) {
 		return userService.selectAll(user);
 	}
 
@@ -31,26 +30,27 @@ public class UserController {
 	 * 根据userId查询用户信息
 	 * @param userId
 	 */
-	@GetMapping("findUserById/{userId}")
-	public void findUserById(@PathVariable("userId") String userId) {
-	    userService.delete("111");
-		System.out.println("----------findUserById/" + userId);
+	@GetMapping("select/{userId}")
+	public User findUserById(@PathVariable("userId") String userId) {
+	    return userService.findUserById(userId);
 	}
 
+	@Logger("新增用户信息")
 	@PostMapping("add")
-	public void add() {
-		System.out.println("----------add");
+	public int add(@Valid User user) {
+		return userService.add(user);
 	}
 
+	@Logger("修改用户信息")
 	@PutMapping("update")
-	public void update() {
-
+	public int update(@Valid User user) {
+		return userService.update(user);
 	}
 
-	@DeleteMapping("delete")
-	@Nullable
-	public void delete() {
-
+	@Logger("删除用户信息")
+	@DeleteMapping("delete/{userId}")
+	public int delete(@PathVariable("userId") String userId) {
+		return userService.delete(userId);
 	}
 
 

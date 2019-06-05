@@ -1,5 +1,7 @@
 package com.xyy.athena.service.id;
 
+import com.xyy.athena.service.Service;
+
 /**
  * ID生成工厂服务
  *

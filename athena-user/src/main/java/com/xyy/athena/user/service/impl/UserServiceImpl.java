@@ -21,13 +21,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int delete(String userId) {
+        User user = new User();
+        user.setUserId(userId);
+        return userMapper.delete(user);
+    }
 
-        return 0;
+    @Override
+    public User findUserById(String userId) {
+        User user = new User();
+        user.setUserId(userId);
+        return userMapper.selectOne(user);
     }
 
     @Override
     public Pagination<User> selectAll(User user) {
         PageHelper.startPage(user);
-        return new Pagination(userMapper.selectAll(user));
+        return new Pagination(userMapper.select(user));
+    }
+
+    @Override
+    public int add(User user) {
+//        user.setUserId();
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public int update(User user) {
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 }

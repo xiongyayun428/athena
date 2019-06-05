@@ -12,43 +12,92 @@ import java.util.Date;
 /**
  * User
  *
- * @author Yayun.Xiong
- * @date 2019-05-22
+ * @author: XYY
+ * @date: 2019-06-05
  */
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 public class User extends BaseEntity {
-    @Id
-    @Column(name = "user_id")
-    private String userId;
-//    @NotBlank(message = "用户名不能为空")
-    @Column(name = "user_name")
-    private String userName;
-    @Column(name = "real_name")
-    private String realName;
-    @Column(name = "nick_name")
-    private String nickName;
+	private static final long serialVersionUID = 8047275337956610971L;
 
-    private String accessIp;
+	/**
+	 * 用户主键ID
+	 */
+	@Id
+	@Column(name = "`user_id`")
+	private String userId;
 
-    private String accessMac;
+	/**
+	 * 用户名
+	 */
+	@Column(name = "`user_name`")
+	private String userName;
 
-    private Integer status;
+	/**
+	 * 真实姓名
+	 */
+	@Column(name = "`real_name`")
+	private String realName;
 
-    private String lastVisitIp;
+	/**
+	 * 昵称
+	 */
+	@Column(name = "`nick_name`")
+	private String nickName;
 
-    private Date lastVisitDate;
+	/**
+	 * 限制登录的IP地址
+	 */
+	@Column(name = "`access_ip`")
+	private String accessIp;
 
-    private Integer visitCount;
+	/**
+	 * 限制登录的MAC地址
+	 */
+	@Column(name = "`access_mac`")
+	private String accessMac;
 
-    private Date visitDate;
+	/**
+	 * 状态
+	 */
+	@Column(name = "`status`")
+	private Integer status;
 
-    private Integer errorTimes;
+	/**
+	 * 最近登录的IP地址
+	 */
+	@Column(name = "`last_visit_ip`")
+	private String lastVisitIp;
 
-    private Integer ifAllowDelete;
+	/**
+	 * 最近登录的时间
+	 */
+	@Column(name = "`last_visit_date`")
+	private Date lastVisitDate;
 
+	/**
+	 * 访问次数
+	 */
+	@Column(name = "`visit_count`")
+	private Integer visitCount;
 
-    private static final long serialVersionUID = 1L;
+	/**
+	 * 有效期限
+	 */
+	@Column(name = "`visit_date`")
+	private Date visitDate;
+
+	/**
+	 * 登录密码错误次数
+	 */
+	@Column(name = "`error_times`")
+	private Integer errorTimes;
+
+	/**
+	 * 是否允许删除(0: false，1: true)
+	 */
+	@Column(name = "`allow_delete`")
+	private Boolean allowDelete;
 
 }
