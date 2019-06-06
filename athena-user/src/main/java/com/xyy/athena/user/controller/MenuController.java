@@ -26,7 +26,7 @@ public class MenuController {
     private MenuService menuService;
 
     @Logger("查询所有菜单信息")
-    @GetMapping("selectAll")
+    @GetMapping("select")
     public List<Menu> selectAll() {
         throw new AthenaRuntimeException(new NullPointerException());
 //        return menuService.selectAll();

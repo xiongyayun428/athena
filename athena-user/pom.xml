@@ -29,6 +29,10 @@
 			<groupId>com.xyy.athena</groupId>
 			<artifactId>athena-db</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.xyy.athena</groupId>
+			<artifactId>athena-service</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
