@@ -41,7 +41,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>12</java.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-		<docker.image.prefix>springboot</docker.image.prefix>
 	</properties>
 
 	<parent>
@@ -149,12 +148,12 @@
 			<dependency>
 				<groupId>com.auth0</groupId>
 				<artifactId>java-jwt</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 			</dependency>
 			<dependency>
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-all</artifactId>
-				<version>4.5.10</version>
+				<version>4.5.11</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -164,7 +163,7 @@
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid-spring-boot-starter</artifactId>
-				<version>1.1.16</version>
+				<version>1.1.17</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
@@ -176,26 +175,20 @@
 				<artifactId>mapper-spring-boot-starter</artifactId>
 				<version>2.1.5</version>
 			</dependency>
-<!--			<dependency>-->
-<!--				<groupId>tk.mybatis</groupId>-->
-<!--				<artifactId>mapper</artifactId>-->
-<!--				<version>4.1.5</version>-->
-<!--			</dependency>-->
+			<dependency>
+				<groupId>tk.mybatis</groupId>
+				<artifactId>mapper</artifactId>
+				<version>4.1.5</version>
+			</dependency>
 			<dependency>
 				<groupId>com.github.pagehelper</groupId>
 				<artifactId>pagehelper-spring-boot-starter</artifactId>
-				<version>1.2.10</version>
+				<version>1.2.12</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.pagehelper</groupId>
 				<artifactId>pagehelper</artifactId>
-				<version>5.1.8</version>
-			</dependency>
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>1.18.8</version>
-				<scope>provided</scope>
+				<version>5.1.10</version>
 			</dependency>
 			<!-- ip地址查询库-->
 			<dependency>
