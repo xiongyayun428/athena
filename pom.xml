@@ -222,6 +222,11 @@
 				<artifactId>athena-service</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>com.xyy.athena</groupId>
+				<artifactId>athena-service-websocker</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -230,7 +235,14 @@
 	<build>
 		<!-- 使用的插件列表 -->
 		<plugins>
-
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					&lt;!&ndash; fork: 如果没有该项配置，devtools不会起作用，即不会restart &ndash;&gt;-->
+<!--					<fork>true</fork>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -319,6 +331,7 @@
 		<module>athena-service</module>
 		<module>athena-service-id</module>
         <module>athena-service-time</module>
+        <module>athena-service-websocket</module>
 	</modules>
 
 	<!-- 仓库配置 -->

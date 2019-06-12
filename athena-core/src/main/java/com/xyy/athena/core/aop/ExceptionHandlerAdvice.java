@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -85,6 +86,11 @@ public class ExceptionHandlerAdvice {
         return translate(ErrorConstant.BIND_EXCEPTION, args, fieldError.getDefaultMessage(), e);
     }
 
+    @ExceptionHandler(ClassCastException.class)
+    public ResBody catchBindException(ClassCastException e) {
+        return translate(ErrorConstant.CLASS_CAST_EXCEPTION, null, null, e);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResBody catchMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
@@ -109,20 +115,32 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(AthenaRuntimeException.class)
     public ResBody catchAthenaRuntimeException(AthenaRuntimeException e) {
-        log.error(e.getMessage(), e);
-        return new ResBody(e.getMessageKey(), e.getMessage());
+        return translate(e.getMessage(), e.getArgs(), null, e);
     }
 
     @ExceptionHandler(AthenaException.class)
     public ResBody catchAthenaException(AthenaException e) {
-        log.error(e.getMessage(), e);
-        return new ResBody(e.getMessageKey(), e.getMessage());
+        return translate(e.getMessage(), e.getArgs(), null, e);
     }
 
     private ResBody translate(String code, @Nullable Object[] args, @Nullable String msg, @Nullable Throwable e) {
-        var resBody = new ResBody(code).withCode(code).withArgs(args).withMsg(msg).withI18nService(i18nService);
+        ResBody resBody;
+        if (i18nService != null) {
+            String rtnMsg = i18nService.get(code, args, msg);
+            if (StringUtils.isEmpty(rtnMsg)) {
+                // TODO 错误码不知道怎么定义
+                resBody = new ResBody("", code);
+            } else {
+                resBody = new ResBody(code, rtnMsg);
+            }
+        } else {
+            resBody = new ResBody(code, msg);
+        }
+//        var resBody = new ResBody(code).withCode(code).withArgs(args).withMsg(msg).withI18nService(i18nService);
         if (e != null) {
             log.error(resBody.getRtnMsg(), e);
+        } else {
+            log.error(resBody.getRtnMsg());
         }
         return resBody;
     }

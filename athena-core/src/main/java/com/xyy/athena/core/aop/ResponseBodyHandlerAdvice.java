@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestControllerAdvice()
 public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
+    private boolean limitLength = true;
+    private int limit = 300;
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
         return true;
@@ -40,21 +42,26 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
             }
         }
 
-        if (!(returnValue instanceof ResBody)) {
-            ResBody body = new ResBody();
+        ResBody body;
+        if (returnValue == null || !(returnValue instanceof ResBody)) {
+            body = new ResBody();
             body.setRtnData(returnValue);
-            returnValue = body;
+        } else {
+            body = (ResBody) returnValue;
         }
         if (log.isDebugEnabled()) {
-            ObjectMapper mapper = new ObjectMapper();
-            String value = returnValue.toString();
             try {
-                value = mapper.writeValueAsString(returnValue);
+                ObjectMapper mapper = new ObjectMapper();
+                String value = mapper.writeValueAsString(body);
+                String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
+                log.debug("--->RESPONSE: {}", truncatedValue);
             } catch (JsonProcessingException e) {
                 log.error(e.getMessage(), e);
             }
-            log.debug("--->RESPONSE: {}", JSONUtil.toJsonStr(value));
         }
-        return returnValue;
+        if (returnValue instanceof String) {
+            return JSONUtil.toJsonStr(body);
+        }
+        return body;
     }
 }

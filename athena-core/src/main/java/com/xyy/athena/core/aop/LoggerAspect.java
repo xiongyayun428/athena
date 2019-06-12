@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -30,7 +29,6 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class LoggerAspect {
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
     private boolean limitLength = true;
     private int limit = 300;
     ThreadLocal<Long> startTime = new ThreadLocal<>();
@@ -72,7 +70,7 @@ public class LoggerAspect {
                         .collect(Collectors.joining(", "));
                 loggerThreadLocal.get().setReqParams(params);
             }
-            logger.info("===>【{}】请求参数：{}", String.join(",", Arrays.asList(annotation.value())), Arrays.toString(point.getArgs()));
+            log.info("===>【{}】请求参数：{}", String.join(",", Arrays.asList(annotation.value())), Arrays.toString(point.getArgs()));
         }
     }
 
@@ -101,7 +99,7 @@ public class LoggerAspect {
         try {
             value = mapper.writeValueAsString(resultValue);
         } catch (JsonProcessingException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
 
@@ -111,12 +109,7 @@ public class LoggerAspect {
             // TODO 保存
 //            System.out.println(loggerThreadLocal.get());
         }
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("===>返回数据：{}", truncatedValue);
-        } else if (logger.isInfoEnabled()) {
-            logger.info("===>返回数据：{}", truncatedValue);
-        }
+        log.info("===>返回数据：{}", truncatedValue);
     }
 
     /**
@@ -125,7 +118,7 @@ public class LoggerAspect {
      */
     @AfterThrowing(throwing="e", pointcut = "doAspect()")
     public void afterThrowing(Throwable e) {
-        log.error("===>执行异常：" + e.getMessage());
+        log.error("===>执行异常：{}", e.getMessage());
     }
 
 }

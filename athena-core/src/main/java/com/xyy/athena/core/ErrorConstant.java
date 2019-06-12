@@ -18,6 +18,7 @@ public class ErrorConstant implements Constant {
     public static final String ILLEGAL_ARGUMENT_EXCEPTION = "IllegalArgumentException";
     public static final String BAD_SQL_GRAMMAR_EXCEPTION = "BadSqlGrammarException";
     public static final String BIND_EXCEPTION = "BindException";
+    public static final String CLASS_CAST_EXCEPTION = "ClassCastException";
     public static final String METHOD_ARGUMENT_NOT_VALID_EXCEPTION = "MethodArgumentNotValidException";
     public static final String HTTP_MESSAGE_NOT_READABLE_EXCEPTION = "HttpMessageNotReadableException";
     public static final String MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION = "MissingServletRequestParameterException";
