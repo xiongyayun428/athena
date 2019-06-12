@@ -224,7 +224,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.xyy.athena</groupId>
-				<artifactId>athena-service-websocker</artifactId>
+				<artifactId>athena-service-websocket</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 

@@ -31,7 +31,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.xyy.athena</groupId>
-			<artifactId>athena-service-websocker</artifactId>
+			<artifactId>athena-service-websocket</artifactId>
 		</dependency>
 	</dependencies>
 
