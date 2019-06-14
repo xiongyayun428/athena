@@ -1,5 +1,7 @@
 package com.xyy.athena.service.id.support;
 
+import org.springframework.stereotype.Service;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -11,6 +13,7 @@ import java.util.Random;
  * @author Yayun.Xiong
  * @date 2019-04-14
  */
+@Service
 public class SessionIdFactory extends AbstractIdFactory {
 	private static Random _randomNumberGenerator;
 	private static int counter = 0;

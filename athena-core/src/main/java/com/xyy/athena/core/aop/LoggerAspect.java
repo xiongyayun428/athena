@@ -118,7 +118,16 @@ public class LoggerAspect {
      */
     @AfterThrowing(throwing="e", pointcut = "doAspect()")
     public void afterThrowing(Throwable e) {
-        log.error("===>执行异常：{}", e.getMessage());
+        Throwable cause = lastThrowable(e);
+        log.error("===>执行异常：{}", cause.getMessage() );
+    }
+
+    private Throwable lastThrowable(Throwable e) {
+        Throwable cause = e.getCause();
+        if (cause != null) {
+            return lastThrowable(cause);
+        }
+        return e;
     }
 
 }

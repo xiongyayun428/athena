@@ -33,6 +33,10 @@
 			<groupId>com.xyy.athena</groupId>
 			<artifactId>athena-service-websocket</artifactId>
 		</dependency>
+        <dependency>
+			<groupId>com.xyy.athena</groupId>
+			<artifactId>athena-service-id</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -40,4 +40,18 @@ public interface UserService {
      * @return
      */
     User findUserById(String userId);
+
+    /**
+     * 根据用户名查询用户信息
+     * @param userName
+     * @return
+     */
+    User findUserByUserName(String userName);
+
+    /**
+     * 查询用户信息
+     * @param user
+     * @return
+     */
+    User findUser(User user);
 }

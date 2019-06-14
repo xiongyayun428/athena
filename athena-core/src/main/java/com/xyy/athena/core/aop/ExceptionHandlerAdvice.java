@@ -8,6 +8,7 @@ import com.xyy.athena.core.response.ResBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -60,13 +61,17 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResBody catchIllegalArgumentException(IllegalArgumentException e) {
-        return translate(ErrorConstant.ILLEGAL_ARGUMENT_EXCEPTION, null, null, e);
+        return translate(ErrorConstant.ILLEGAL_ARGUMENT_EXCEPTION, new Object[] {e.getMessage()}, null, e);
     }
 
     @ExceptionHandler(BadSqlGrammarException.class)
     public ResBody catchBadSqlGrammarException(BadSqlGrammarException e) {
         SQLException se = e.getSQLException();
         return translate(ErrorConstant.BAD_SQL_GRAMMAR_EXCEPTION, new Object[] {se.getErrorCode(), se.getSQLState()}, null, e);
+    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResBody catchDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return translate(ErrorConstant.DATA_INTEGRITY_VIOLATION_EXCEPTION, new Object[] {e.getMessage()}, null, e);
     }
 
     @ExceptionHandler(SQLException.class)

@@ -24,4 +24,5 @@ public class ErrorConstant implements Constant {
     public static final String MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION = "MissingServletRequestParameterException";
     public static final String TYPE_MISMATCH_EXCEPTION = "TypeMismatchException";
     public static final String HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION = "HttpMediaTypeNotSupportedException";
+    public static final String DATA_INTEGRITY_VIOLATION_EXCEPTION = "DataIntegrityViolationException";
 }

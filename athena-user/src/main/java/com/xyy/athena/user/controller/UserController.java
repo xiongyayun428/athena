@@ -1,5 +1,7 @@
 package com.xyy.athena.user.controller;
 
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
 import com.xyy.athena.core.annotation.Logger;
 import com.xyy.athena.core.exception.AthenaException;
 import com.xyy.athena.core.exception.AthenaRuntimeException;
@@ -10,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 /**
  * User
@@ -30,9 +32,45 @@ public class UserController {
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 
+	/**
+	 * 单独使用RSA
+	 */
+	private boolean separateRSA = false;
+	private static RSA rsa;
+
+	@Logger("根据登录用户名查询公钥")
+	@GetMapping("publicKey")
+	public String publicKey() {
+		if (!separateRSA) {
+			rsa = new RSA();
+			log.info(rsa.getPublicKeyBase64());
+			log.info(rsa.getPrivateKeyBase64());
+		} else {
+			// 查询数据库
+		}
+		return rsa.getPublicKeyBase64();
+	}
+
 	@Logger("用户登录")
 	@GetMapping("login")
-	public void login(@NotBlank String userName, @NotBlank String password) throws AthenaException {
+	public void login(String userName, String password) throws AthenaException {
+	    // 0. 判断登录方式
+	    // 1. 根据用户名查询用户信息
+		User user = userService.findUserByUserName(userName);
+		if (user == null) {
+			throw new AthenaRuntimeException("UserNotExist");
+		}
+		// 2. 判断用户状态是否正常
+		if (user.getStatus() != 0) {
+			throw new AthenaRuntimeException("UserDefinedError", new Object[] {"用户名状态不正常"});
+		}
+        // 2. 密码是否符合规则
+        // 3. 加密密码对比数据已有密码
+		log.info(password);
+		password = rsa.decryptStr(password, KeyType.PrivateKey);
+		log.info(password);
+		Assert.hasText(userName, "用户名不能为空");
+		Assert.hasText(password, "密码不能为空");
 		if ("error".equals(userName) && "error".equals(password)) {
 			throw new AthenaRuntimeException("userNameOrPasswordError");
 		} else if (!("admin".equals(userName) && "admin".equals(password))) {

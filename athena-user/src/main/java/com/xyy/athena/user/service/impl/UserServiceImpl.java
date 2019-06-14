@@ -2,10 +2,13 @@ package com.xyy.athena.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.xyy.athena.db.Pagination;
+import com.xyy.athena.service.id.IdFactory;
 import com.xyy.athena.user.mapper.UserMapper;
 import com.xyy.athena.user.model.User;
 import com.xyy.athena.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +17,14 @@ import org.springframework.stereotype.Service;
  * @author Yayun.Xiong
  * @date 2019-05-19
  */
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    @Qualifier("simpleIdFactory")
+    private IdFactory idFactory;
 
     @Override
     public int delete(String userId) {
@@ -34,6 +41,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserByUserName(String userName) {
+        User user = new User();
+        user.setUserName(userName);
+        User result = userMapper.selectOne(user);
+        if (result != null) {
+            Integer status = result.getStatus();
+            if (status != 0) {
+
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public User findUser(User user) {
+        return userMapper.selectOne(user);
+    }
+
+    @Override
     public Pagination<User> selectAll(User user) {
         PageHelper.startPage(user);
         return new Pagination(userMapper.select(user));
@@ -42,6 +68,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int add(User user) {
 //        user.setUserId();
+        Object id = idFactory.generate();
+        System.out.println(id);
         return userMapper.insert(user);
     }
 
