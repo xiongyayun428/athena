@@ -67,9 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int add(User user) {
-//        user.setUserId();
-        Object id = idFactory.generate();
-        System.out.println(id);
+        user.setUserId(idFactory.generate().toString());
         return userMapper.insert(user);
     }
 
