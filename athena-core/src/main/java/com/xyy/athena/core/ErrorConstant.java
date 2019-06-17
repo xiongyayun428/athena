@@ -15,6 +15,7 @@ public class ErrorConstant implements Constant {
     public static final String HTTP_REQUEST_METHOD_NOT_SUPPORTED = "HttpRequestMethodNotSupportedException";
     public static final String SYSTEM_NO_HANDLER_FOUND = "NoHandlerFoundException";
     public static final String SQL_EXCEPTION = "SQLException";
+    public static final String TOO_MANY_RESULTS_EXCEPTION = "TooManyResultsException";
     public static final String ILLEGAL_ARGUMENT_EXCEPTION = "IllegalArgumentException";
     public static final String BAD_SQL_GRAMMAR_EXCEPTION = "BadSqlGrammarException";
     public static final String BIND_EXCEPTION = "BindException";

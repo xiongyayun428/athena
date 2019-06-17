@@ -6,6 +6,7 @@ import com.xyy.athena.core.exception.AthenaRuntimeException;
 import com.xyy.athena.core.i18n.I18nService;
 import com.xyy.athena.core.response.ResBody;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -77,6 +78,10 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(SQLException.class)
     public ResBody catchSQLException(SQLException e) {
         return translate(ErrorConstant.SQL_EXCEPTION, new Object[] {e.getErrorCode(), e.getSQLState()}, null, e);
+    }
+    @ExceptionHandler(TooManyResultsException.class)
+    public ResBody catchTooManyResultsException(TooManyResultsException e) {
+        return translate(ErrorConstant.TOO_MANY_RESULTS_EXCEPTION, new Object[] {e.getMessage()}, null, e);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)

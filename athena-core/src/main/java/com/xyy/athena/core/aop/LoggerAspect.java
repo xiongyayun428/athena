@@ -53,7 +53,7 @@ public class LoggerAspect {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
 //            SystemUtil.logRequest(request);
-            if (!annotation.save()) {
+            if (annotation.save()) {
                 startTime.set(System.currentTimeMillis());
                 loggerThreadLocal.set(new com.xyy.athena.core.model.support.Logger());
                 loggerThreadLocal.get().setHttpMethod(request.getMethod());

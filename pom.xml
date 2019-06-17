@@ -141,10 +141,10 @@
 				<version>2.1.5</version>
 			</dependency>
 			<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-starter-client</artifactId>
-			<version>2.1.5</version>
-		</dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+				<version>2.1.5</version>
+			</dependency>
 			<dependency>
 				<groupId>com.auth0</groupId>
 				<artifactId>java-jwt</artifactId>
@@ -360,7 +360,7 @@
 <!--		</repository>-->
 		<repository>
 			<id>nexus</id>
-			<url>http://localhost:8081/repository/maven-public/</url>
+			<url>http://10.8.3.201:8081/repository/maven-public/</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>

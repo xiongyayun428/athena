@@ -2,10 +2,14 @@ package com.xyy.athena.user.factory.support;
 
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.digest.MD5;
 import com.xyy.athena.user.factory.AbstractAuthentication;
 import com.xyy.athena.user.factory.AuthenticationFactory;
 import com.xyy.athena.user.model.UserAuthorization;
+import com.xyy.athena.user.service.UserAuthorizationService;
+import com.xyy.athena.user.service.UserRsaService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -18,6 +22,10 @@ import org.springframework.util.Assert;
 @Slf4j
 @Component
 public class UserNameAuthentication extends AbstractAuthentication {
+    @Autowired
+    private UserRsaService userRsaService;
+    @Autowired
+    private UserAuthorizationService userAuthorizationService;
     /**
      * 授权
      *
@@ -30,11 +38,19 @@ public class UserNameAuthentication extends AbstractAuthentication {
         Assert.hasText(identifier, "用户名不能为空");
         Assert.hasText(credential, "密码不能为空");
         // 获取用户的RSA
-        RSA rsa = new RSA();
+        RSA rsa = userRsaService.getRSA("UserName", identifier);
         // 2. 密码是否符合规则
         String password = rsa.decryptStr(credential, KeyType.PrivateKey);
-        log.info(password);
-        return null;
+        // 盐值：for_$n(@RenSheng)_$n+="die"
+        // 解释：人生自古谁无死
+        byte[] salt = "for_$n(@RenSheng)_$n+=\"die\"".getBytes();
+        MD5 md5 = new MD5(salt, 2, 1);
+        UserAuthorization ua = new UserAuthorization();
+        ua.setIdentityType("UserName");
+        ua.setIdentifier(identifier);
+        // 32位小数
+        ua.setCredential(md5.digestHex(identifier + password));
+        return userAuthorizationService.select(ua);
     }
 
     @Override

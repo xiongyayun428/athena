@@ -25,10 +25,15 @@ public class UserAuthorizationServiceImpl implements UserAuthorizationService {
      * @return
      */
     @Override
-    public UserAuthorization authorization(String identityType, String identifier) {
+    public UserAuthorization select(String identityType, String identifier) {
         UserAuthorization ua = new UserAuthorization();
         ua.setIdentityType(identityType);
         ua.setIdentifier(identifier);
         return userAuthorizationMapper.selectOne(ua);
+    }
+
+    @Override
+    public UserAuthorization select(UserAuthorization userAuthorization) {
+        return userAuthorizationMapper.selectOne(userAuthorization);
     }
 }

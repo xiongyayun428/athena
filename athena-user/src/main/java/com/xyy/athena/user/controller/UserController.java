@@ -1,11 +1,15 @@
 package com.xyy.athena.user.controller;
 
-import cn.hutool.crypto.asymmetric.RSA;
+import com.xyy.athena.core.BaseConstant;
 import com.xyy.athena.core.annotation.Logger;
 import com.xyy.athena.core.exception.AthenaException;
 import com.xyy.athena.core.exception.AthenaRuntimeException;
+import com.xyy.athena.core.utils.ConvertUtil;
+import com.xyy.athena.core.utils.JwtUtil;
 import com.xyy.athena.user.factory.AuthenticationFactory;
 import com.xyy.athena.user.model.User;
+import com.xyy.athena.user.service.UserAuthorizationService;
+import com.xyy.athena.user.service.UserRsaService;
 import com.xyy.athena.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -30,30 +35,25 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
+	private UserRsaService userRsaService;
+	@Autowired
+	private UserAuthorizationService userAuthorizationService;
+	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
-
-	/**
-	 * 单独使用RSA
-	 */
-	private boolean separateRSA = false;
-	private static RSA rsa;
+//	@Autowired
+//	private StringRedisTemplate stringRedisTemplate;
+//	@Autowired
+//	private RedisTemplate<String, Object> redisTemplate;
 
 	@Logger("根据登录用户名查询公钥")
 	@GetMapping("publicKey")
-	public String publicKey() {
-		if (!separateRSA) {
-			rsa = new RSA();
-			log.info(rsa.getPublicKeyBase64());
-			log.info(rsa.getPrivateKeyBase64());
-		} else {
-			// 查询数据库
-		}
-		return rsa.getPublicKeyBase64();
+	public String publicKey(String identityType, String identifier) {
+		return userRsaService.getRSA(identityType, identifier).getPublicKeyBase64();
 	}
 
 	@Logger("用户登录")
 	@GetMapping("login")
-	public void login(String identityType, String identifier, String credential) throws AthenaException {
+	public User login(String identityType, String identifier, String credential, HttpServletResponse response) throws AthenaException {
 		Assert.hasText(identityType, "登录类型不能为空");
 		// 0. 判断登录方式
 		var userAuthorization = AuthenticationFactory.get(identityType).authorization(identifier, credential);
@@ -66,6 +66,15 @@ public class UserController {
 		if (user.getStatus() != 0) {
 			throw new AthenaRuntimeException("UserDefinedError", new Object[] {"用户名状态不正常"});
 		}
+		// 3. 查询权限数据
+		// 4. 生成Token
+		try {
+			String token = JwtUtil.signature(ConvertUtil.convertBean(user));
+			response.setHeader(BaseConstant.ACCESS_TOKEN, token);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return user;
 	}
 
 	@Logger("查询所有用户信息")

@@ -15,5 +15,7 @@ public interface UserAuthorizationService {
      * @param identifier    标识
      * @return
      */
-    UserAuthorization authorization(String identityType, String identifier);
+    UserAuthorization select(String identityType, String identifier);
+
+    UserAuthorization select(UserAuthorization userAuthorization);
 }
