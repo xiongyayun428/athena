@@ -17,12 +17,12 @@ debug: true
 trace: false
 info:
   java:
-    version: @java.version@
+    version: ${java.version}
   app:
-    name: @project.name@
-    description: @project.description@
-    encoding: @project.build.sourceEncoding@
-    version: @project.version@
+    name: ${project.name}
+    description: ${project.description}
+    encoding: ${project.build.sourceEncoding}
+    version: ${project.version}
   contact:
     email: xiongyayun428@163.com
 logging:
