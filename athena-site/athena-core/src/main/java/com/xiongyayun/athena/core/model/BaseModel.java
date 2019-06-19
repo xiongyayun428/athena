@@ -14,6 +14,10 @@ import java.util.Date;
 @Data
 public class BaseModel implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1349077476037752462L;
+	/**
      * 创建用户
      */
     private String createUser;

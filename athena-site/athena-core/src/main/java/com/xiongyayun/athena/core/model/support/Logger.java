@@ -11,7 +11,11 @@ import lombok.Data;
  */
 @Data
 public class Logger extends BaseEntity {
-    private long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5604511735164458525L;
+	private long id;
     /**
      * 请求地址
      */

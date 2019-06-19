@@ -17,6 +17,10 @@ import java.util.Date;
 @Data
 public class BaseEntity implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -34175171364126529L;
+	/**
      * 创建用户
      */
     @Column(name = "create_user")

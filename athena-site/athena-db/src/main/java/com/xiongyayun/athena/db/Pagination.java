@@ -18,7 +18,11 @@ import java.util.List;
 @Data
 @JsonPropertyOrder({"pageIndex", "pageSize", "pageCount", "total", "pageData"})
 public class Pagination<T> implements Serializable {
-    public final static int PAGE_INDEX = 1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 420663257642849880L;
+	public final static int PAGE_INDEX = 1;
     public final static int PAGE_SIZE = 10;
 
     /**
