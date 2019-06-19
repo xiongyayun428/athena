@@ -14,6 +14,12 @@
 	<name>athena for spring boot</name>
 	<description>雅典娜</description>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>12</java.version>
+	</properties>
+
 	<modules>
 		<module>athena-project</module>
 		<module>athena-samples</module>

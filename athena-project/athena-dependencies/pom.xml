@@ -46,13 +46,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- AutoConfigure -->
-            <dependency>
-                <groupId>com.xiongyayun</groupId>
-                <artifactId>athena-autoconfigure</artifactId>
-                <version>${athena.version}</version>
-            </dependency>
-
             <!-- SpringBoot Dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -68,6 +61,23 @@
                 <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- athena -->
+            <dependency>
+                <groupId>com.xiongyayun</groupId>
+                <artifactId>athena-autoconfigure</artifactId>
+                <version>${athena.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiongyayun</groupId>
+                <artifactId>athena-plugins</artifactId>
+                <version>${athena.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xiongyayun</groupId>
+                <artifactId>athena-starters</artifactId>
+                <version>${athena.version}</version>
             </dependency>
 
             <!-- druid -->
@@ -211,9 +221,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <configuration>
-                        <executable>true</executable>
-                    </configuration>
+<!--                    <version>2.1.5.RELEASE</version>-->
                     <executions>
                         <execution>
                             <goals>
