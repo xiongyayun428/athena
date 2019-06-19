@@ -22,5 +22,5 @@ public interface Authentication {
      * 授权方式
      * @return
      */
-    String getGrantType();
+//    String getGrantType();
 }

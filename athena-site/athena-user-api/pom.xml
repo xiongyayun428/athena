@@ -9,9 +9,8 @@
 
 	<parent>
 		<groupId>com.xiongyayun</groupId>
-		<artifactId>athena</artifactId>
+		<artifactId>athena-site</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../</relativePath> <!-- lookup parent from repository -->
 	</parent>
 	
 	<properties>
