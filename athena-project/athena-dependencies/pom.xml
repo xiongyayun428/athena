@@ -15,18 +15,18 @@
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
-        <spring.cloud.version>Finchley.SR4</spring.cloud.version>
+        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+        <spring-cloud.version>Finchley.SR4</spring-cloud.version>
         <athena.version>0.0.1-SNAPSHOT</athena.version>
         <druid.version>1.1.17</druid.version>
-        <druid.starter.version>1.1.17</druid.starter.version>
+        <druid-starter.version>1.1.17</druid-starter.version>
 
         <maven-plugin-api.version>3.6.1</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
         <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
 
-        <alibaba.oss.version>3.5.0-beta</alibaba.oss.version>
-        <nacos.config.version>0.2.1</nacos.config.version>
+        <alibaba-oss.version>3.5.0-beta</alibaba-oss.version>
+        <nacos-config.version>0.2.1</nacos-config.version>
 
         <!--Plugin Versions-->
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -48,22 +48,27 @@
         <dependencies>
             <!-- SpringBoot Dependencies -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
             <!-- SpringCloud Dependencies -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
             <!-- athena -->
+            <dependency>
+                <groupId>com.xiongyayun</groupId>
+                <artifactId>athena-actuator</artifactId>
+                <version>${athena.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-autoconfigure</artifactId>
@@ -90,7 +95,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.starter.version}</version>
+                <version>${druid-starter.version}</version>
             </dependency>
 
             <!-- Maven Plugin -->
@@ -109,13 +114,13 @@
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${alibaba.oss.version}</version>
+                <version>${alibaba-oss.version}</version>
             </dependency>
             <!-- Nacos Config -->
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>nacos-config-spring-boot-starter</artifactId>
-                <version>${nacos.config.version}</version>
+                <version>${nacos-config.version}</version>
             </dependency>
 
             <dependency>
@@ -195,6 +200,11 @@
                 <artifactId>alipay-sdk-java</artifactId>
                 <version>3.7.89.ALL</version>
             </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -229,6 +239,17 @@
                         </execution>
                     </executions>
                 </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <goals>-->
+<!--                                <goal>build-info</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>

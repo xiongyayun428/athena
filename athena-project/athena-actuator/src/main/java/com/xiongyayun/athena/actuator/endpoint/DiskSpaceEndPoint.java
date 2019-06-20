@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.actuator.endpoint;
+package com.xiongyayun.athena.actuator.endpoint;
 
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -19,13 +19,14 @@ import java.util.Map;
 @Endpoint(id = "diskspace")
 public class DiskSpaceEndPoint {
     /**
+     * GET
      * 获取自定义端点需要监测的数据 -- 磁盘容量信息
      *
      * @return Map<String, String>
      */
     @ReadOperation
-    public Map<String, String> diskSpaceInfo() {
-        Map<String, String> result = new HashMap<>();
+    public Map<String, Object> diskSpaceInfo() {
+        Map<String, Object> result = new HashMap<>(3);
         // 获取磁盘容量信息
         File[] rootFiles = File.listRoots();
         if (rootFiles != null && rootFiles.length != 0) {
@@ -41,9 +42,9 @@ public class DiskSpaceEndPoint {
             long user = total - free;
             // 利用率
             double userRate = total == 0 ? 0 : ((double) user / total);
-            result.put("diskspaceTotal", String.valueOf(total));
-            result.put("diskspaceFree", String.valueOf(free));
-            result.put("diskspaceUsage", String.valueOf(userRate * 100));
+            result.put("total", String.valueOf(total));
+            result.put("free", String.valueOf(free));
+            result.put("usage", String.valueOf(userRate * 100));
         }
         return result;
     }

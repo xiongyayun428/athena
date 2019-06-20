@@ -1,15 +1,14 @@
-package com.xiongyayun.athena.core.actuator.metrics;
+package com.xiongyayun.athena.actuator.metrics;
 
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.binder.MeterBinder;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.io.File;
 
 /**
- * DiskMetrics
+ * 磁盘指标
  *
  * @author: 熊亚运
  * @date: 2019-06-17
@@ -24,15 +23,17 @@ public class DiskMetrics implements MeterBinder {
     }
 
     @Override
-    public void bindTo(@NotNull MeterRegistry registry) {
+    public void bindTo(MeterRegistry registry) {
         // 磁盘已用容量
-        Gauge.builder("diskSpaceInfo.total", rootFilePath, File::getTotalSpace)
+        Gauge.builder("disk.space.total", rootFilePath, File::getTotalSpace)
+                .description("磁盘已用容量")
                 .register(registry);
         // 磁盘剩余容量
-        Gauge.builder("diskSpaceInfo.free", rootFilePath, File::getFreeSpace)
+        Gauge.builder("disk.space.free", rootFilePath, File::getFreeSpace)
+                .description("磁盘剩余容量")
                 .register(registry);
         // 磁盘使用率
-        Gauge.builder("diskSpaceInfo.usage", rootFilePath, c -> {
+        Gauge.builder("disk.space.usage", rootFilePath, c -> {
             long totalDiskSpace = rootFilePath.getTotalSpace();
             if (totalDiskSpace == 0) {
                 return 0.0;
@@ -40,6 +41,8 @@ public class DiskMetrics implements MeterBinder {
 
             long usedDiskSpace = totalDiskSpace - rootFilePath.getFreeSpace();
             return (double) usedDiskSpace / totalDiskSpace * 100;
-        }).register(registry);
+        })
+                .description("磁盘使用率")
+                .register(registry);
     }
 }

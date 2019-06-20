@@ -22,6 +22,14 @@
     <dependencies>
         <dependency>
             <groupId>com.xiongyayun</groupId>
+            <artifactId>athena-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xiongyayun</groupId>
+            <artifactId>athena-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xiongyayun</groupId>
             <artifactId>athena-core</artifactId>
         </dependency>
         <dependency>

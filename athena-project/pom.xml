@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>athena-actuator</module>
         <module>athena-autoconfigure</module>
         <module>athena-dependencies</module>
         <module>athena-parent</module>
