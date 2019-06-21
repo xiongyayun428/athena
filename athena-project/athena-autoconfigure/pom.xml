@@ -9,8 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>athena-autoconfigure</artifactId>
-
-    <name>athena autoconfigure</name>
     <description>自动配置</description>
 
     <properties>

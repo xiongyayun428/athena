@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>oss-parent</artifactId>
 		<groupId>com.xiongyayun</groupId>
-		<version>0.0.2</version>
+		<version>0.0.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<modelVersion>4.0.0</modelVersion>

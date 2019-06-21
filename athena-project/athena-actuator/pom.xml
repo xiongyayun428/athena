@@ -9,7 +9,6 @@
         <relativePath>../athena-parent</relativePath> <!-- lookup parent from repository -->
     </parent>
     <artifactId>athena-actuator</artifactId>
-    <name>Athena Actuator</name>
     <description>Athena Actuator</description>
 
     <properties>
