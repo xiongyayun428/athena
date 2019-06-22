@@ -3,6 +3,7 @@ package com.xiongyayun.athena.user.factory.support;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.digest.MD5;
+import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.user.factory.AbstractAuthentication;
 import com.xiongyayun.athena.user.factory.AuthenticationFactory;
 import com.xiongyayun.athena.user.model.UserAuthorization;
@@ -44,7 +45,12 @@ public class UserNameAuthentication extends AbstractAuthentication {
         // 获取用户的RSA
         RSA rsa = userRsaService.getRSA("UserName", identifier);
         // 2. 密码是否符合规则
-        String password = rsa.decryptStr(credential, KeyType.PrivateKey);
+        String password = null;
+        try {
+            password = rsa.decryptStr(credential, KeyType.PrivateKey);
+        } catch (Exception e) {
+            throw new AthenaRuntimeException("UserDefinedError", new Object[]{ "RSA解密失败"});
+        }
         // 盐值：for_$n(@RenSheng)_$n+="die"
         // 解释：人生自古谁无死
         byte[] salt = "for_$n(@RenSheng)_$n+=\"die\"".getBytes();

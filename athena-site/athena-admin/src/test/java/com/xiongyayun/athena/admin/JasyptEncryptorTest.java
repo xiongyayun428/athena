@@ -14,7 +14,7 @@ public class JasyptEncryptorTest {
         // 密钥
         textEncryptor.setPassword("xiongyayun428");
         // 被加密字段
-        String password = textEncryptor.encrypt("athena");
+        String password = textEncryptor.encrypt("");
 
         System.out.println(password);
         System.out.println(textEncryptor.decrypt(password));
