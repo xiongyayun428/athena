@@ -84,6 +84,11 @@
                 <artifactId>athena-starters</artifactId>
                 <version>${athena.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.xiongyayun</groupId>
+                <artifactId>athena-starter-mybatis</artifactId>
+                <version>${athena.version}</version>
+            </dependency>
 
             <!-- druid -->
             <dependency>
