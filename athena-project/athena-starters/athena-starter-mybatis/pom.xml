@@ -7,17 +7,28 @@
         <version>0.0.1-SNAPSHOT</version> <!-- lookup parent from repository -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>athena-starter</artifactId>
+    <artifactId>athena-starter-mybatis</artifactId>
     
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
 
     <dependencies>
-        <!--自动化配置-->
         <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-autoconfigure</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
