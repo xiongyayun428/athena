@@ -18,6 +18,7 @@
 
     <modules>
         <module>athena-starter</module>
+        <module>athena-starter-docker</module>
         <module>athena-starter-mybatis</module>
     </modules>
 
