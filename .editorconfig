@@ -1,0 +1,16 @@
+# Editor configuration, see http://editorconfig.org
+root = true
+
+[*.{groovy,java,kt,xml}]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+continuation_indent_size = 8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+
