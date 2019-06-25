@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * 支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git仓库中
- * @author XYY
+ * @author: Yayun.Xiong
  *
  */
 @SpringBootApplication

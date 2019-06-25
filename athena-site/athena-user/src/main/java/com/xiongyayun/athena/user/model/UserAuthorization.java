@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * UserAuthorization
  *
- * @author: XYY
+ * @author: Yayun.Xiong
  * @date: 2019-06-16
  */
 @Data

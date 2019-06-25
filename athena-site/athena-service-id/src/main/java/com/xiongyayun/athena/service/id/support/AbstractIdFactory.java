@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * AbstractIdFactory
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14 18:01
  */
 public abstract class AbstractIdFactory implements IdFactory {

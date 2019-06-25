@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * AuthorizationFactory
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-06-16
  */
 public class AuthenticationFactory {

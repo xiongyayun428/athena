@@ -3,7 +3,7 @@ package com.xiongyayun.athena.service.id.sequence;
 /**
  * <p><b></b></p>
  *
- * @author XYY
+ * @author: Yayun.Xiong
  * @since 2016年4月18日
  * @since JDK 1.8
  *

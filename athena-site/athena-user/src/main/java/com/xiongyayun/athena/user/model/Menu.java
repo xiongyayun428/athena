@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * Menu
  *
- * @author: XYY
+ * @author: Yayun.Xiong
  * @date: 2019-05-30
  */
 @Data

@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * 用户信息
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-26
  */
 @Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.FIELD})

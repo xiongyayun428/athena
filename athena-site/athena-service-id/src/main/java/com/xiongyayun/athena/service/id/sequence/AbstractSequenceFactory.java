@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * <p><b>序列号抽象工厂</b></p>
  *
- * @author XYY
+ * @author: Yayun.Xiong
  * @since 2015年4月26日
  * @since JDK 1.8
  *
@@ -65,7 +65,7 @@ public abstract class AbstractSequenceFactory implements SequenceFactory {
 	
 	/**
 	 * 回收未使用完成的ID
-	 * @author XYY
+	 * @author: Yayun.Xiong
 	 */
 	protected abstract void reverse();
 

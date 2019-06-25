@@ -5,7 +5,7 @@ import com.xiongyayun.athena.user.model.UserAuthorization;
 /**
  * 用户授权服务
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-06-16
  */
 public interface UserAuthorizationService {

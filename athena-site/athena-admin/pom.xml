@@ -52,6 +52,10 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
+		<dependency>
+			<groupId>com.xiongyayun</groupId>
+			<artifactId>athena-plugin-oauth2</artifactId>
+		</dependency>
     </dependencies>
 
     <build>

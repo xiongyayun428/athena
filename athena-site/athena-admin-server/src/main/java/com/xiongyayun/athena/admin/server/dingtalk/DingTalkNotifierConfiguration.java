@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * DingTalkNotifierConfiguration
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-03-07 00:05
  */
 @Configuration

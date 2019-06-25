@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 角色
  * 允许动态刷新配置
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-22
  */
 @RefreshScope

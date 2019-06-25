@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 /**
  * 访问权限自动配置类
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-22
  */
 @Configuration

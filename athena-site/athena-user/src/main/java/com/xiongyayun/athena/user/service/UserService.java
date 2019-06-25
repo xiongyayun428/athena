@@ -6,7 +6,7 @@ import com.xiongyayun.athena.user.model.User;
 /**
  * UserService
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-19
  */
 public interface UserService {

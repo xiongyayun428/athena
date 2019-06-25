@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * <p><b>序列号表</b></p>
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14
  */
 interface SequenceTable {

@@ -3,7 +3,7 @@ package com.xiongyayun.athena.service.id.sequence;
 /**
  * HiLoSequenceFactory
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14
  */
 public class HiLoSequenceFactory extends TableSequenceFactory {

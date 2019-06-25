@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 /**
  * 用户名授权登录
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-06-16
  */
 @Slf4j

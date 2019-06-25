@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * 日志切面
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-26
  */
 @Aspect

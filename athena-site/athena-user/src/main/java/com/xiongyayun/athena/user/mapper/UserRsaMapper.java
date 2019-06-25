@@ -6,7 +6,7 @@ import com.xiongyayun.athena.user.model.UserRsa;
 /**
  * UserRsaMapper
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-06-17
  */
 public interface UserRsaMapper extends TkMapper<UserRsa> {

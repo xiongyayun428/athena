@@ -27,7 +27,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * User
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-03-03 16:29
  */
 @Slf4j

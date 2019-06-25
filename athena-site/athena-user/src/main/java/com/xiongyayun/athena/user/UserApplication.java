@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 /**
  * UserApplication
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-03-03 16:30
  */
 //@SpringBootApplication

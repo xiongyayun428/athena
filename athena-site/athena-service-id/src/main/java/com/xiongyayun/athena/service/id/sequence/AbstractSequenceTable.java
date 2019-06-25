@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * <p><b>抽象序列表</b></p>
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14
  */
 public abstract class AbstractSequenceTable implements SequenceTable, InitializingBean {

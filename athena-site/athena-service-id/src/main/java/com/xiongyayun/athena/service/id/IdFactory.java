@@ -5,7 +5,7 @@ import com.xiongyayun.athena.service.Service;
 /**
  * ID生成工厂服务
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14 16:43
  */
 public interface IdFactory extends Service {

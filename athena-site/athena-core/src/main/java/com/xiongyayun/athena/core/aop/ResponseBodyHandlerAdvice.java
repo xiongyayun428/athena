@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ResponseHandler
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-26
  */
 @Slf4j

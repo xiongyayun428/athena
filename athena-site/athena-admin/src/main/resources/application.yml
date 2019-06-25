@@ -89,6 +89,34 @@ spring:
     user:
       name: admin
       password: admin
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 24aad9b10a966b4fa3ba
+            client-secret: 75c2a4d66f0fd39175ed4e7137394839941bd33a
+            authorizationGrantType: authorization_code
+            redirect_uri_template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            clientName: GitHub Login
+          google:
+            client-id: 212269349981-v8oa5coeuali2tufmh0nm41q9k6geet7.apps.googleusercontent.com
+            client-secret: CqLWmSzFg83Jj-MyAtRVkUH6
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, email, address, phone
+            client-name: Google Login
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-name-attribute: sub
   mvc:
     throw-exception-if-no-handler-found: true
   resources:

@@ -10,7 +10,7 @@ import java.util.Random;
  * <p><b>会话ID工厂</b></p>
  * 不依靠数据库，随机产生(线程安全)
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14
  */
 @Service

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 配置静态资源映射
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-03-04 23:22
  */
 @Configuration

@@ -12,7 +12,7 @@ import javax.validation.ValidatorFactory;
 /**
  * 验证机制配置
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-25
  */
 @Configuration

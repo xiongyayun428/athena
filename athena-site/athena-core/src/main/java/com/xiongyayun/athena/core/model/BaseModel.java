@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Model
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-22
  */
 @Data

@@ -7,19 +7,14 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>athena-plugin-oauth</artifactId>
-    <name>athena-plugin-oauth</name>
-    <description>集成OAuth</description>
+    <artifactId>athena-plugin-wechat</artifactId>
+    <description>集成微信</description>
 
     <properties>
         <main.basedir>${basedir}/../../..</main.basedir>
     </properties>
 
     <dependencies>
-        <!--Spring Security Oauth2-->
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-        </dependency>
     </dependencies>
+
 </project>

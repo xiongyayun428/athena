@@ -6,7 +6,7 @@ import com.xiongyayun.athena.user.model.UserAuthorization;
 /**
  * UserAuthorizationMapper
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-06-16
  */
 public interface UserAuthorizationMapper extends TkMapper<UserAuthorization> {

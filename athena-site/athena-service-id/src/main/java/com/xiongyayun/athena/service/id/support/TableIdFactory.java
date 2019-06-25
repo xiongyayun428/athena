@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * ID生成器的表工厂
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-04-14 16:48
  */
 @Setter

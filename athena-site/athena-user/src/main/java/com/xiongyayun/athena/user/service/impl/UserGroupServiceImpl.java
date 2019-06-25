@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * 用户组服务实现类
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019-05-19
  */
 @Service

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 /**
  * DBApplication
  *
- * @author Yayun.Xiong
+ * @author: Yayun.Xiong
  * @date 2019/03/03
  */
 //@SpringBootApplication

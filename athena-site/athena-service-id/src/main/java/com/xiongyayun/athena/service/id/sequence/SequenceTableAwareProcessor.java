@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * bean 初始化前后进行一些处理工作。
  *
- * @author: XYY
+ * @author: Yayun.Xiong
  * @date: 2019-04-15 08:58
  */
 @Component
