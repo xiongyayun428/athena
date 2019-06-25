@@ -17,10 +17,12 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.util.Assert;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 /**
  * User
@@ -29,6 +31,7 @@ import javax.validation.Valid;
  * @date 2019-03-03 16:29
  */
 @Slf4j
+@Validated
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -47,7 +50,7 @@ public class UserController {
 
 	@Logger("根据登录用户名查询公钥")
 	@GetMapping("publicKey")
-	public String publicKey(String identityType, String identifier) {
+	public String publicKey(@NotBlank(message = "登录类型不能为空") String identityType, @NotBlank(message = "用户凭证不能为空") String identifier) {
 		return userRsaService.getRSA(identityType, identifier).getPublicKeyBase64();
 	}
 

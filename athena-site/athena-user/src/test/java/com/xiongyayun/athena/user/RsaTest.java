@@ -1,9 +1,15 @@
 package com.xiongyayun.athena.user;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.digest.MD5;
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;
+
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 /**
  * RsaTest
@@ -15,9 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 public class RsaTest extends TestCase {
 
     public void testNewRsa() {
+		byte[] salt = "for_$n(@RenSheng)_$n+=\"die\"".getBytes();
         RSA rsa = new RSA("RSA");
-        log.info(rsa.getPublicKeyBase64());
-        log.info(rsa.getPrivateKeyBase64());
+		KeyPair kp = SecureUtil.generateKeyPair("RSA", 2048, salt);
+
+		final PublicKey publicKey = kp.getPublic();
+		final PrivateKey privateKey = kp.getPrivate();
+
+        log.info(Base64.encode(publicKey.getEncoded()));
+        log.info(Base64.encode(privateKey.getEncoded()));
     }
 
     public void testMD5() {

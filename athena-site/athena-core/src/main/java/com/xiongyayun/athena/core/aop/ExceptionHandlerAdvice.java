@@ -27,7 +27,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.validation.ConstraintViolationException;
 import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 /**
  * ExceptionHandlerAdvice
@@ -121,6 +123,15 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(TypeMismatchException.class)
     public ResBody catchTypeMismatchException(TypeMismatchException e) {
         return translate(ErrorConstant.TYPE_MISMATCH_EXCEPTION, new Object[] {e.getPropertyName(), e.getRequiredType()}, null, e);
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResBody catchConstraintViolationException(ConstraintViolationException e) {
+		var constraintViolations = e.getConstraintViolations();
+		String msg = constraintViolations.stream()
+				.map( cv -> cv == null ? "null" : cv.getMessage() )
+//				.map( cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage() )
+				.collect( Collectors.joining( ", " ) );
+        return translate(ErrorConstant.CONSTRAINT_VIOLATION_EXCEPTION, new Object[] {msg}, null, e);
     }
 
     @ExceptionHandler(AthenaRuntimeException.class)

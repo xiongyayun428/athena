@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -31,7 +33,9 @@ public class User extends BaseEntity {
 	/**
 	 * 用户名
 	 */
-	@Column(name = "`user_name`")
+	@NotBlank(message = "用户名不能为空")
+	@Size(min = 2, max = 20, message = "用户名长度必须为2-20个字符")
+	@Column(name = "`user_name`", nullable = false, length = 20, unique = true)
 	private String userName;
 
 	/**
