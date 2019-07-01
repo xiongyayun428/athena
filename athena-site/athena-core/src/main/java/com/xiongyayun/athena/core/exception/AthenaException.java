@@ -3,6 +3,7 @@ package com.xiongyayun.athena.core.exception;
 import com.xiongyayun.athena.core.ErrorConstant;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
+import io.micrometer.core.instrument.util.StringEscapeUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -75,4 +76,18 @@ public class AthenaException extends NestedCheckedException {
         }
         return super.getMessage();
     }
+
+//	public String[] getVariable() {
+//		if (this.variables == null) {
+//			return null;
+//		} else {
+//			String[] escapedVariable = new String[this.variables.length];
+//
+//			for(int i = 0; i < this.variables.length; ++i) {
+//				escapedVariable[i] = StringEscapeUtils.escapeHtml(this.variables[i]);
+//			}
+//
+//			return escapedVariable;
+//		}
+//	}
 }

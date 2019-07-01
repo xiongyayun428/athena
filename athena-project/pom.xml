@@ -17,6 +17,7 @@
         <module>athena-actuator</module>
         <module>athena-autoconfigure</module>
         <module>athena-dependencies</module>
+        <module>athena-framework</module>
         <module>athena-parent</module>
         <module>athena-plugins</module>
         <module>athena-starters</module>

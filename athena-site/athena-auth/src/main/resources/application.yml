@@ -1,0 +1,181 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /
+    session:
+      timeout: 3600
+      cookie:
+        name: OAUTH2SESSION
+        http-only: true
+  undertow:
+#    accesslog:
+#      enabled: true
+#      pattern: '%t %a "%r" %s (%D ms)'
+    worker-threads: 10
+  http2:
+    enabled: true
+debug: true
+trace: false
+info:
+  java:
+    version: ${java.version}
+  app:
+    name: ${project.name}
+    description: ${project.description}
+    encoding: ${project.build.sourceEncoding}
+    version: ${project.version}
+  contact:
+    email: xiongyayun428@163.com
+logging:
+  level:
+    root: DEBUG
+    org:
+      springframework:
+        boot:
+          actuate: INFO
+          actuate.endpoint.web: INFO
+        security: DEBUG
+        web: INFO
+        beans: INFO
+        jdbc: INFO
+      hibernate: ERROR
+      mybatis: INFO
+    com:
+      xiongyayun: DEBUG
+      alibaba:
+        druid: INFO
+    de:
+      codecentric:
+        boot:
+          admin: INFO
+  file: logs/athena.log
+management:
+  endpoints:
+    web:
+      exposure:
+        #加载所有的端点，默认只加载了info、health
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    #可以关闭指定的端点
+    shutdown:
+      enabled: false
+spring:
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    log-request-details: true
+  messages:
+    basename: i18n/messages,i18n/error
+    encoding: UTF-8
+  output:
+    ansi:
+      enabled: ALWAYS
+  devtools:
+    restart:
+      enabled: false
+  jackson:
+    time-zone: GMT+8
+    default-property-inclusion: ALWAYS #如果某一个字段为null，就不再返回这个字段
+    mapper:
+      sort-properties-alphabetically: true
+  application:
+    name: athena-admin
+  security:
+    user:
+      name: admin
+      password: admin
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 24aad9b10a966b4fa3ba
+            client-secret: 75c2a4d66f0fd39175ed4e7137394839941bd33a
+            authorizationGrantType: authorization_code
+            redirect_uri_template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            clientName: GitHub Login
+          google:
+            client-id: 212269349981-v8oa5coeuali2tufmh0nm41q9k6geet7.apps.googleusercontent.com
+            client-secret: CqLWmSzFg83Jj-MyAtRVkUH6
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, email, address, phone
+            client-name: Google Login
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-name-attribute: sub
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  boot:
+    admin:
+      client:
+        instance:
+          service-url: http://localhost:${server.port}${server.servlet.context-path}
+          # 如果pom.xml中加入spring-boot-starter-security这个包，就需要开启下面的用户密码信息
+#          metadata:
+#            user:
+#              name: ${spring.security.user.name}
+#              password: ${spring.security.user.password}
+        # 使用HTTP基本身份验证保护SBA服务器api、用户名、密码。
+        url: http://localhost:20100
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+  redis:
+    #数据库索引
+    database: 0
+    host: 47.107.179.245
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+    #连接超时时间
+    timeout: 10000
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configLocation: classpath:/mybatis-config.xml
+  type-aliases-package: tk.mybatis.springboot.model
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    - com.xiongyayun.athena.db.tk.TkMapper
+  not-empty: true
+  identity: MYSQL
+  safe-delete: true
+  safeUpdate: true
+pagehelper:
+  helperDialect: mysql
+  pageSizeZero: false
+  offsetAsPageNum: false
+  rowBoundsWithCount: false
+  reasonable: true
+  supportMethodsArguments: false
+  params: pageNum=pageIndex
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    # 密钥
+    password: xiongyayun428

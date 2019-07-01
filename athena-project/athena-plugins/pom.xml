@@ -20,7 +20,8 @@
     <modules>
         <module>athena-plugin</module>
         <module>athena-plugin-security</module>
-        <module>athena-plugin-oauth2</module>
+        <module>athena-plugin-oauth2-client</module>
+        <module>athena-plugin-oauth2-server</module>
         <module>athena-plugin-wechat</module>
     </modules>
 

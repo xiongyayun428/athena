@@ -2,10 +2,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>athena-admin</artifactId>
+    <artifactId>athena-auth</artifactId>
     <packaging>jar</packaging>
-    <name>Athena Admin</name>
-    <description>雅典娜后台管理</description>
+    <name>Athena Auth</name>
+    <description>雅典娜认证授权平台</description>
 
     <parent>
         <groupId>com.xiongyayun</groupId>
@@ -28,41 +28,39 @@
             <groupId>com.xiongyayun</groupId>
             <artifactId>athena-autoconfigure</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-user</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-db</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.xiongyayun</groupId>-->
+<!--            <artifactId>athena-core</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.xiongyayun</groupId>-->
+<!--            <artifactId>athena-core</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.xiongyayun</groupId>-->
+<!--            <artifactId>athena-user</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.xiongyayun</groupId>-->
+<!--            <artifactId>athena-db</artifactId>-->
+<!--        </dependency>-->
+
+		<!--声明式接口调用-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--		</dependency>-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-		<dependency>
-			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-plugin-oauth2-client</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.xiongyayun</groupId>-->
+<!--			<artifactId>athena-plugin-oauth2-client</artifactId>-->
+<!--		</dependency>-->
 <!--		<dependency>-->
 <!--			<groupId>com.xiongyayun</groupId>-->
 <!--			<artifactId>athena-plugin-oauth2-server</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>javax.xml.bind</groupId>-->
-<!--			<artifactId>jaxb-api</artifactId>-->
 <!--		</dependency>-->
     </dependencies>
 

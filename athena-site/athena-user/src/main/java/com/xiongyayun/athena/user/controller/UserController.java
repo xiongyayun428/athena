@@ -56,10 +56,9 @@ public class UserController {
 
 	@Logger("用户登录")
 	@GetMapping("login")
-	public User login(String identityType, String identifier, String credential, HttpServletResponse response) throws AthenaException {
-		Assert.hasText(identityType, "登录类型不能为空");
+	public User login(@NotBlank(message = "授权方式不能为空") String grantType, String identifier, String credential, HttpServletResponse response) throws AthenaException {
 		// 0. 判断登录方式
-		var userAuthorization = AuthenticationFactory.get(identityType).authorization(identifier, credential);
+		var userAuthorization = AuthenticationFactory.get(grantType).authorization(identifier, credential);
 		if (userAuthorization == null) {
 			throw new AthenaRuntimeException("UserNotExist");
 		}
