@@ -22,6 +22,6 @@
 	<modules>
 		<module>athena-project</module>
 		<module>athena-samples</module>
-		<module>athena-site</module>
+		<module>athena-platform</module>
 	</modules>
 </project>

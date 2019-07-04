@@ -17,6 +17,15 @@
         <main.basedir>${basedir}/../..</main.basedir>
     </properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
     <modules>
         <module>athena-plugin</module>
         <module>athena-plugin-security</module>
