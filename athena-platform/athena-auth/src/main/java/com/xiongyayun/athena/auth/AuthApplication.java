@@ -15,9 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2019-05-20
  */
 @SpringBootApplication
-// 开启feign RPC远程调用
 @EnableFeignClients(basePackages = { "com.xiongyayun.athena" })
-// 开启服务发现
 @EnableDiscoveryClient
 @ComponentScan(basePackages = { "com.xiongyayun.athena" })
 public class AuthApplication {

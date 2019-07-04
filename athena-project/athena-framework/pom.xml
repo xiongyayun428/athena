@@ -17,7 +17,7 @@
 	</properties>
 
 	<modules>
-<!--		<module>athena-plugin</module>-->
+		<module>athena-framework-core</module>
 	</modules>
 
 </project>
