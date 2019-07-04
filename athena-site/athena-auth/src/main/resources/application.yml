@@ -14,7 +14,7 @@ server:
     worker-threads: 10
   http2:
     enabled: true
-debug: true
+debug: false
 trace: false
 info:
   java:
@@ -25,10 +25,11 @@ info:
     encoding: ${project.build.sourceEncoding}
     version: ${project.version}
   contact:
+    author: Yayun.Xiong
     email: xiongyayun428@163.com
 logging:
   level:
-    root: DEBUG
+    root: INFO
     org:
       springframework:
         boot:
@@ -44,6 +45,7 @@ logging:
       xiongyayun: DEBUG
       alibaba:
         druid: INFO
+        nacos: WARN
     de:
       codecentric:
         boot:
@@ -85,7 +87,7 @@ spring:
     mapper:
       sort-properties-alphabetically: true
   application:
-    name: athena-admin
+    name: athena-auth
   security:
     user:
       name: admin
@@ -125,6 +127,7 @@ spring:
   boot:
     admin:
       client:
+        enabled: true
         instance:
           service-url: http://localhost:${server.port}${server.servlet.context-path}
           # 如果pom.xml中加入spring-boot-starter-security这个包，就需要开启下面的用户密码信息

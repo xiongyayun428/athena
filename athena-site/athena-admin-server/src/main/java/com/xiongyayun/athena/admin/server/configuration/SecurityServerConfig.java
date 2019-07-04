@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.admin.server;
+package com.xiongyayun.athena.admin.server.configuration;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

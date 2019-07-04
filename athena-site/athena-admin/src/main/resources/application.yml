@@ -24,6 +24,7 @@ info:
     encoding: ${project.build.sourceEncoding}
     version: ${project.version}
   contact:
+    author: Yayun.Xiong
     email: xiongyayun428@163.com
 logging:
   level:
@@ -47,6 +48,8 @@ logging:
       codecentric:
         boot:
           admin: INFO
+    io:
+      undertow: WARN
   file: logs/athena.log
 management:
   endpoints:

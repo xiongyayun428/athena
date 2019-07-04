@@ -44,6 +44,7 @@
         <pagehelper.version>5.1.10</pagehelper.version>
         <jasypt-spring-boot.version>2.1.1</jasypt-spring-boot.version>
         <alibaba-fastjson.version>1.2.58</alibaba-fastjson.version>
+		<alibaba-cloud.version>0.9.0.RELEASE</alibaba-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +65,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			<!-- AlibabaCloud Dependencies -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+				<version>${alibaba-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
             <!-- athena -->
             <dependency>

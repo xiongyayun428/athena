@@ -5,4 +5,4 @@ spring:
   boot:
     admin:
       client:
-        enabled: false
+        enabled: true

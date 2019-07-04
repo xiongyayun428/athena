@@ -14,8 +14,6 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @SpringBootApplication
 @EnableAdminServer
 public class AdminServerApplication {
-//	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	public static void main(String[] args) {
 		SpringApplication.run(AdminServerApplication.class, args);
 	}

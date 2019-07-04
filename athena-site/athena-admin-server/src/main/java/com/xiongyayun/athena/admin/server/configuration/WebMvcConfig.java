@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.admin.server;
+package com.xiongyayun.athena.admin.server.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
