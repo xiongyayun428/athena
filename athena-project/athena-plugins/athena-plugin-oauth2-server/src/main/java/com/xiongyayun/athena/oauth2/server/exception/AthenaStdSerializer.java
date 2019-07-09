@@ -3,6 +3,7 @@ package com.xiongyayun.athena.oauth2.server.exception;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -11,19 +12,21 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * AthenaOAuth2ExceptionSerializer
+ * AthenaStdSerializer
  *
  * @author: Yayun.Xiong
  * @date: 2019-07-05
  */
-public class AthenaOAuth2ExceptionSerializer extends StdSerializer<AthenaOAuth2Exception> {
+@Component
+public class AthenaStdSerializer extends StdSerializer<AthenaOAuth2Exception> {
 
-	protected AthenaOAuth2ExceptionSerializer() {
+	protected AthenaStdSerializer() {
 		super(AthenaOAuth2Exception.class);
 	}
 
 	@Override
 	public void serialize(AthenaOAuth2Exception e, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+		System.out.println("++++++++++++++");
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
 		jsonGenerator.writeStartObject();

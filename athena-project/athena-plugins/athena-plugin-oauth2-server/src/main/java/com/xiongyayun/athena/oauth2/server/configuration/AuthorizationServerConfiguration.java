@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -36,6 +37,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	private DataSource dataSource;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Qualifier("tokenStore")
 	@Autowired
 	private TokenStore tokenStore;
 	@Autowired
@@ -81,6 +83,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		System.out.println(clientDetailsService);
 		clients.withClientDetails(clientDetailsService);
 //		super.configure(clients);
 	}
@@ -104,10 +107,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //				.accessTokenConverter(OpenHelper.buildAccessTokenConverter())
 				.authorizationCodeServices(authorizationCodeServices);
 		endpoints.setClientDetailsService(clientDetailsService);
-		// 自定义确认授权页面
-		endpoints.pathMapping("/oauth/confirm_access", "/oauth/confirm_access1");
-		// 自定义错误页
-		endpoints.pathMapping("/oauth/error", "/oauth/error1");
+//		// 自定义确认授权页面
+//		endpoints.pathMapping("/oauth/confirm_access", "/oauth/confirm_access1");
+//		// 自定义错误页
+//		endpoints.pathMapping("/oauth/error", "/oauth/error1");
 		// 自定义异常转换类
 		endpoints.exceptionTranslator(new AthenaWebResponseExceptionTranslator());
 //		endpoints
@@ -119,6 +122,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 //				.userDetailsService(userDetailsService);
 	}
 
+//	/**
+//	 * 声明 ClientDetails实现
+//	 * @return
+//	 */
+//	@Bean
+//	public ClientDetailsService clientDetailsService() {
+//		return new JdbcClientDetailsService(dataSource);
+//	}
 
 	/**
 	 * 授权store

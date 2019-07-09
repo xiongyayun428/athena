@@ -1,4 +1,8 @@
 # 以下属性不能被覆盖
+security:
+  oauth2:
+    resource:
+      id: oauth-server
 spring:
   boot:
     admin:

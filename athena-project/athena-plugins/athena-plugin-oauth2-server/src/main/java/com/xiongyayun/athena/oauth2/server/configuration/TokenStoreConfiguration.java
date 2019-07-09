@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -16,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import java.util.HashMap;
@@ -37,6 +39,7 @@ public class TokenStoreConfiguration {
 
 		@Bean
 		public TokenStore tokenStore() {
+			System.out.println("RedisTokenStore");
 			return new RedisTokenStore(redisConnectionFactory);
 		}
 	}
@@ -57,6 +60,7 @@ public class TokenStoreConfiguration {
 		 */
 		@Bean
 		public TokenStore tokenStore() {
+			System.out.println("JwtTokenStore");
 			return new JwtTokenStore(jwtAccessTokenConverter());
 		}
 
@@ -73,6 +77,18 @@ public class TokenStoreConfiguration {
 			accessTokenConverter.setSigningKey(oAuth2Properties.getJwtSigningKey());//生成签名的key
 			return accessTokenConverter;
 		}
+
+//		/**
+//		 * JWT 密钥非对称加密
+//		 * @return
+//		 */
+//		@Bean
+//		public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//			KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("test-jwt.jks"), "test123".toCharArray());
+//			JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//			converter.setKeyPair(keyStoreKeyFactory.getKeyPair("test-jwt"));
+//			return converter;
+//		}
 
 		/**
 		 * 令牌信息拓展

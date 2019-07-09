@@ -8,8 +8,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * 配置所有请求的安全验证
@@ -22,8 +26,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+//	@Autowired
+//	private UserDetailsService userDetailsService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -36,8 +40,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
 	@Bean
+	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
@@ -48,7 +52,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //			.userDetailsService(userDetailsService)
 //			.passwordEncoder(passwordEncoder());
 //	}
-
-
 
 }

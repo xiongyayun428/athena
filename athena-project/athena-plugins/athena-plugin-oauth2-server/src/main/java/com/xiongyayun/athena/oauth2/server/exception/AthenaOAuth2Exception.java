@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * @author: Yayun.Xiong
  * @date: 2019-07-05
  */
-@JsonSerialize(using = AthenaOAuth2ExceptionSerializer.class)
+@JsonSerialize(using = AthenaStdSerializer.class)
 public class AthenaOAuth2Exception extends OAuth2Exception {
 
 	public AthenaOAuth2Exception(String msg, Throwable t) {

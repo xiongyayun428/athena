@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.oauth2.server.exception;
+package com.xiongyayun.athena.oauth2.server.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * AthenaAccessDeniedHandler
+ * 权限校验异常
  *
  * @author: Yayun.Xiong
  * @date: 2019-07-05
  */
-@Component("athenaAccessDeniedHandler")
+@Component
 public class AthenaAccessDeniedHandler implements AccessDeniedHandler {
 	@Autowired
 	private ObjectMapper objectMapper;
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		System.out.println("=============");
 		response.setContentType("application/json;charset=UTF-8");
 		Map map = new HashMap();
 		map.put("error", "400");

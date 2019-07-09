@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.auth;
+package com.xiongyayun.athena;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableFeignClients(basePackages = { "com.xiongyayun.athena" })
 @EnableDiscoveryClient
-@ComponentScan(basePackages = { "com.xiongyayun.athena" })
+//@ComponentScan(basePackages = { "com.xiongyayun.athena" })
 public class AuthApplication {
 
 	public static void main(String[] args) {
