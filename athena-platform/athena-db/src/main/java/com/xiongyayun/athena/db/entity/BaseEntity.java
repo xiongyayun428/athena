@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.model;
+package com.xiongyayun.athena.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

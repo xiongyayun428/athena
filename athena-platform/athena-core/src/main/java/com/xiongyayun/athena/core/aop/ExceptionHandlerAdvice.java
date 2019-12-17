@@ -6,13 +6,10 @@ import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.response.ResBody;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
@@ -28,7 +25,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
-import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 /**
@@ -65,25 +61,6 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResBody catchIllegalArgumentException(IllegalArgumentException e) {
         return translate(ErrorConstant.ILLEGAL_ARGUMENT_EXCEPTION, new Object[] {e.getMessage()}, null, e);
-    }
-
-    @ExceptionHandler(BadSqlGrammarException.class)
-    public ResBody catchBadSqlGrammarException(BadSqlGrammarException e) {
-        SQLException se = e.getSQLException();
-        return translate(ErrorConstant.BAD_SQL_GRAMMAR_EXCEPTION, new Object[] {se.getErrorCode(), se.getSQLState()}, null, e);
-    }
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResBody catchDataIntegrityViolationException(DataIntegrityViolationException e) {
-        return translate(ErrorConstant.DATA_INTEGRITY_VIOLATION_EXCEPTION, new Object[] {e.getMessage()}, null, e);
-    }
-
-    @ExceptionHandler(SQLException.class)
-    public ResBody catchSQLException(SQLException e) {
-        return translate(ErrorConstant.SQL_EXCEPTION, new Object[] {e.getErrorCode(), e.getSQLState()}, null, e);
-    }
-    @ExceptionHandler(TooManyResultsException.class)
-    public ResBody catchTooManyResultsException(TooManyResultsException e) {
-        return translate(ErrorConstant.TOO_MANY_RESULTS_EXCEPTION, new Object[] {e.getMessage()}, null, e);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
@@ -144,7 +121,7 @@ public class ExceptionHandlerAdvice {
         return translate(e.getMessage(), e.getArgs(), null, e);
     }
 
-    private ResBody translate(String code, @Nullable Object[] args, @Nullable String msg, @Nullable Throwable e) {
+    protected ResBody translate(String code, @Nullable Object[] args, @Nullable String msg, @Nullable Throwable e) {
         ResBody resBody;
         if (i18nService != null) {
             String rtnMsg = i18nService.get(code, args, msg);

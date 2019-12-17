@@ -1,6 +1,5 @@
 package com.xiongyayun.athena.core.model.support;
 
-import com.xiongyayun.athena.core.model.BaseEntity;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @date 2019-05-26
  */
 @Data
-public class Logger extends BaseEntity {
+public class Logger {
     /**
 	 * 
 	 */

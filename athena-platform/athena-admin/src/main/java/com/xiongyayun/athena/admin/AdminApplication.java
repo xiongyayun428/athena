@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = { "com.xiongyayun.athena" })
 @tk.mybatis.spring.annotation.MapperScan("com.xiongyayun.athena.*.mapper")
 @EnableTransactionManagement
+//@EnableOAuth2Sso
+//@EnableOAuth2Client
 public class AdminApplication {
 
 	public static void main(String[] args) {

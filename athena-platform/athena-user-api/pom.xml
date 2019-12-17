@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>athena-user-api</artifactId>
 	<packaging>jar</packaging>
-	<name>athena user api</name>
 	<description>用户服务接口</description>
 
 	<parent>
@@ -12,7 +11,7 @@
 		<artifactId>athena-platform</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -26,5 +25,5 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 </project>

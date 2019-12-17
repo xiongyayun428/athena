@@ -11,6 +11,7 @@
         <groupId>com.xiongyayun</groupId>
         <artifactId>athena-platform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
     </parent>
 
     <properties>
@@ -27,10 +28,6 @@
         <dependency>
             <groupId>com.xiongyayun</groupId>
             <artifactId>athena-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xiongyayun</groupId>
-            <artifactId>athena-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.xiongyayun</groupId>

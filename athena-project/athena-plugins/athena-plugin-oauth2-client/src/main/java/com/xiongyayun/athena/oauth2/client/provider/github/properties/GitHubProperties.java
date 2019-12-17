@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.oauth.github.properties;
+package com.xiongyayun.athena.oauth2.client.provider.github.properties;
 
 /**
  * GitHubProperties

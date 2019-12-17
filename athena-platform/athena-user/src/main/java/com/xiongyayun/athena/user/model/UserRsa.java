@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.user.model;
 
-import com.xiongyayun.athena.core.model.BaseEntity;
+import com.xiongyayun.athena.db.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Column;

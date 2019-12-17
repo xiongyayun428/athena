@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>athena-user</artifactId>
 	<packaging>jar</packaging>
-	<name>athena user</name>
 	<description>雅典娜用户管理</description>
 
 	<parent>
@@ -12,7 +11,7 @@
 		<artifactId>athena-platform</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
