@@ -12,11 +12,6 @@
     <name>Athena Samples</name>
     <description>样例</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
-
 	<modules>
 		<module>athena-samples-oauth2-client</module>
 		<module>athena-samples-oauth2-server</module>

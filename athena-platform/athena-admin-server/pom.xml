@@ -14,8 +14,6 @@
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<docker.image.prefix>registry.cn-shanghai.aliyuncs.com/xiongyayun/athena</docker.image.prefix>
 	</properties>
 

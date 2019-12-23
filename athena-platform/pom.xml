@@ -13,11 +13,6 @@
     <name>Athena Platform</name>
     <description>雅典娜平台</description>
 
-    <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
-
     <!-- 依赖,jar包管理,默认被所有的子项目继承 -->
     <dependencies>
 		<dependency>
