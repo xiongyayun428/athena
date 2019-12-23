@@ -47,8 +47,9 @@ public class UserAuthorization extends BaseEntity {
 
 	/**
 	 * 密码凭证 (站内的保存密码 , 站外的不保存或保存 token)
+	 * transient 不参与序列化
 	 */
 	@Column(name = "`credential`")
-	private String credential;
+	private transient String credential;
 
 }

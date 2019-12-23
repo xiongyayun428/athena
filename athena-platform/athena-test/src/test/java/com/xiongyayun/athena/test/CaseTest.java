@@ -1,10 +1,15 @@
 package com.xiongyayun.athena.test;
 
 import junit.framework.TestCase;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * RsaTest
@@ -14,6 +19,56 @@ import java.util.Map;
  */
 @Slf4j
 public class CaseTest extends TestCase {
+	final static ReentrantLock reentrantLock = new ReentrantLock();
+
+	public void testAQS() {
+		Thread t1 = new Thread(() -> testSync());
+		t1.setName("T1");
+		t1.start();
+	}
+
+	public static void testSync() {
+		reentrantLock.lock();
+		System.out.println(Thread.currentThread().getName());
+		try {
+			TimeUnit.SECONDS.sleep(5);
+			System.out.println("--------------------");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("-------unlock-------------");
+			reentrantLock.unlock();
+		}
+	}
+
+
+
+
+	public void testThread() {
+		Thread t1 = new Thread(new TestThread());
+		t1.setName("T1");
+		Thread t2 = new Thread(new TestThread());
+		t2.setName("T2");
+		System.out.println("t1---1-->" + t1.getState());
+		System.out.println("t2---1-->" + t2.getState());
+		try {
+			t1.start();
+			t2.start();
+
+			Thread.sleep(1000);
+			System.out.println("t1---2-->" + t1.getState());
+			System.out.println("t2---2-->" + t2.getState());
+//			Thread.sleep(500);
+//			t.`wait`();
+//			t.join();
+//			new Lock().tryLock()
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("t1======>" + t1.getState());
+		System.out.println("t2======>" + t2.getState());
+		System.exit(0);
+	}
 
 
     public void testLeetCode() {
@@ -114,5 +169,30 @@ public class CaseTest extends TestCase {
 			leftsum = leftsum + nums[i];//这里一定是先判断结束后再加和左边，因为每次判断的值左边和的值，不包含当前元素的值。
 		}
 		return -1;
+	}
+}
+
+
+class TestThread implements Runnable {
+
+	@Override
+	public void run() {
+		System.out.println("ThreadA "+Thread.currentThread().getName()+" run ->" + Thread.currentThread().getState());
+//			try {
+////				Thread.sleep(10000);
+//				Thread.currentThread().wait();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+		commonResource();
+	}
+
+	public static synchronized void commonResource() {
+		while(true) {
+			// Infinite loop to mimic heavy processing
+			// 't1' won't leave this method
+			// when 't2' try to enters this
+//			System.out.print("1");
+		}
 	}
 }

@@ -16,7 +16,6 @@
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>12</java.version>
 	</properties>
 
     <!-- 依赖,jar包管理,默认被所有的子项目继承 -->

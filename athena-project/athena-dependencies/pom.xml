@@ -13,6 +13,7 @@
     <description>依赖</description>
 
     <properties>
+		<java.version>13</java.version>
         <main.basedir>${basedir}/../..</main.basedir>
         <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
