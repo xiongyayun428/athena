@@ -8,6 +8,7 @@ import com.xiongyayun.athena.service.Service;
  * @author: Yayun.Xiong
  * @date 2019-04-14 16:43
  */
+@FunctionalInterface
 public interface IdFactory extends Service {
 	/**
 	 * 生成单个ID
@@ -20,5 +21,11 @@ public interface IdFactory extends Service {
 	 * @param number		数量
 	 * @return
 	 */
-	Object[] generate(int number);
+	default Object[] generate(int number) {
+		Object[] array = new Object[number];
+		for (int i = 0; i < number; i++) {
+			array[i] = generate();
+		}
+		return array;
+	}
 }

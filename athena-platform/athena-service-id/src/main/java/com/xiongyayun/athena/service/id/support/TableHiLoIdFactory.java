@@ -22,10 +22,10 @@ public class TableHiLoIdFactory extends TableIdFactory {
 	@Override
 	protected synchronized long internalGenerate() {
 		if (this.lo > this.step) {
-			long hival = super.internalGenerate();
+			long hiVal = super.internalGenerate();
 			this.lo = 1;
-			this.hi = (hival * this.step);
-			log.info("new hi[type=" + this.type + ",step=" + this.step + "]: " + hival);
+			this.hi = (hiVal * this.step);
+			log.info("new hi[type=" + this.type + ",step=" + this.step + "]: " + hiVal);
 		}
 		return this.hi + this.lo++;
 	}

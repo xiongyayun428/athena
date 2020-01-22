@@ -12,13 +12,4 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractIdFactory implements IdFactory {
     protected Log log = LogFactory.getLog(this.getClass());
-
-    @Override
-    public Object[] generate(int number) {
-        Object[] array = new Object[number];
-        for (int i = 0; i < number; i++) {
-            array[i] = generate();
-        }
-        return array;
-    }
 }
