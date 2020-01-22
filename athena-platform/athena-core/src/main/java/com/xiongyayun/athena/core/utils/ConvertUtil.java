@@ -20,8 +20,7 @@ public class ConvertUtil {
         BeanInfo beanInfo = Introspector.getBeanInfo(type);
         Object obj = type.newInstance();
 
-        PropertyDescriptor[] propertyDescriptors = beanInfo
-                .getPropertyDescriptors();
+        PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
         for (int i = 0; i < propertyDescriptors.length; i++) {
             PropertyDescriptor descriptor = propertyDescriptors[i];
             String propertyName = descriptor.getName();
@@ -37,24 +36,21 @@ public class ConvertUtil {
 
     public static Map convertBean(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
         Class type = bean.getClass();
-        Map returnMap = new HashMap();
-        BeanInfo beanInfo = Introspector.getBeanInfo(type);
-
-        PropertyDescriptor[] propertyDescriptors = beanInfo
-                .getPropertyDescriptors();
-        for (int i = 0; i < propertyDescriptors.length; i++) {
-            PropertyDescriptor descriptor = propertyDescriptors[i];
-            String propertyName = descriptor.getName();
-            if (!propertyName.equals("class")) {
-                Method readMethod = descriptor.getReadMethod();
-                Object result = readMethod.invoke(bean, new Object[0]);
-                if (result != null) {
-                    returnMap.put(propertyName, result);
-                } else {
-                    returnMap.put(propertyName, "");
-                }
-            }
-        }
+		BeanInfo beanInfo = Introspector.getBeanInfo(type);
+		PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+        Map returnMap = new HashMap<String, Object>(propertyDescriptors.length);
+		for (PropertyDescriptor descriptor : propertyDescriptors) {
+			String propertyName = descriptor.getName();
+			if (!propertyName.equals("class")) {
+				Method readMethod = descriptor.getReadMethod();
+				Object result = readMethod.invoke(bean, new Object[0]);
+				if (result != null) {
+					returnMap.put(propertyName, result);
+				} else {
+					returnMap.put(propertyName, "");
+				}
+			}
+		}
         return returnMap;
     }
 }

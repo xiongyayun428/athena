@@ -23,7 +23,7 @@ import java.util.Locale;
  */
 @Slf4j
 public class SafeDate {
-    private static final ThreadLocal<SimpleDateFormat> sdf = new ThreadLocal<>();
+    private static volatile ThreadLocal<SimpleDateFormat> sdf = new ThreadLocal<>();
     public static final String DATE_ISO_FORMAT = "yyyy-MM-dd";
     public static final String DATE_FORMAT = "000000";
     public static final String TIME_ISO_FORMAT = "HH:mm:ss";
@@ -32,7 +32,12 @@ public class SafeDate {
     public static final String TIME_COMPACT_FORMAT = "HHmmss";
     public static final String DATETIME_COMPACT_FORMAT = "yyyyMMddHHmmss";
 
-    public static SimpleDateFormat getDateFormat(String pattern) {
+	/**
+	 * 使用线程变量保证日期格式模式
+	 * @param pattern		格式化模式
+	 * @return
+	 */
+	public static final SimpleDateFormat getDateFormat(String pattern) {
         if (sdf.get() == null) {
             sdf.set(new SimpleDateFormat());
         }
@@ -41,53 +46,112 @@ public class SafeDate {
         return local;
     }
 
-    public String format(Object obj) {
+	/**
+	 * 格式化日期：yyyy-MM-dd HH:mm:ss
+	 * @param obj    The object to format
+	 * @return       Formatted string.
+	 * @exception IllegalArgumentException if the Format cannot format the given object
+	 */
+	public String format(Object obj) {
         SimpleDateFormat sdf = getDateFormat(DATETIME_ISO_FORMAT);
         return sdf.format(obj);
     }
+
+	/**
+	 * 指定模式格式化日期
+	 * @param pattern the new date and time pattern for this date format
+	 * @param obj    The object to format
+	 * @return       Formatted string.
+	 * @exception IllegalArgumentException if the Format cannot format the given object
+	 */
     public String format(String pattern, Object obj) {
-        SimpleDateFormat sdf = getDateFormat(pattern);
-        return sdf.format(obj);
+        return getDateFormat(pattern).format(obj);
     }
 
+	/**
+	 * 解析时间戳yyyy-MM-dd HH:mm:ss
+	 * @param str
+	 * @return
+	 * @throws AthenaException
+	 */
     public Object parse(String str) throws AthenaException {
-        SimpleDateFormat dec = getDateFormat(DATETIME_ISO_FORMAT);
         try {
-            Date d = dec.parse(str);
+            Date d = getDateFormat(DATETIME_ISO_FORMAT).parse(str);
             return coerceDate(d, Date.class);
         } catch (ParseException pe) {
             throw new AthenaException("Date parse error, value: " + str + "offset: " + pe.getErrorOffset());
         }
     }
-    public static String formatISODate(java.sql.Date date) {
+
+	/**
+	 * 格式化日期yyyy-MM-dd
+	 * @param date
+	 * @return
+	 */
+	public static String formatISODate(java.sql.Date date) {
         return getDateFormat(DATE_ISO_FORMAT).format(date);
     }
 
-    public static String formatISOTime(java.sql.Time time) {
+	/**
+	 * 格式化时间HH:mm:ss
+	 * @param time
+	 * @return
+	 */
+	public static String formatISOTime(java.sql.Time time) {
         return getDateFormat(TIME_ISO_FORMAT).format(time);
     }
 
-    public static String formatISODatetime(java.sql.Timestamp timestamp) {
+	/**
+	 * 格式化时间戳yyyy-MM-dd HH:mm:ss
+	 * @param timestamp
+	 * @return
+	 */
+	public static String formatISODatetime(java.sql.Timestamp timestamp) {
         return getDateFormat(DATETIME_ISO_FORMAT).format(timestamp);
     }
 
-    public static String formatCompactDate(java.sql.Date date) {
+	/**
+	 * 格式化日期：yyyyMMdd
+	 * @param date
+	 * @return
+	 */
+	public static String formatCompactDate(java.sql.Date date) {
         return getDateFormat(DATE_COMPACT_FORMAT).format(date);
     }
 
-    public static String formatCompactDate(java.util.Date date) {
+	/**
+	 * 格式化日期：yyyyMMdd
+	 * @param date
+	 * @return
+	 */
+	public static String formatCompactDate(java.util.Date date) {
         return getDateFormat(DATE_COMPACT_FORMAT).format(date);
     }
 
-    public static String formatCompactTime(java.sql.Time time) {
+	/**
+	 * 格式化日期：yyyyMMdd
+	 * @param time
+	 * @return
+	 */
+	public static String formatCompactTime(java.sql.Time time) {
         return getDateFormat(TIME_COMPACT_FORMAT).format(time);
     }
 
-    public static String formatCompactDatetime(java.sql.Timestamp timestamp) {
+	/**
+	 * 格式化日期：yyyyMMddHHmmss
+	 * @param timestamp
+	 * @return
+	 */
+	public static String formatCompactDatetime(java.sql.Timestamp timestamp) {
         return getDateFormat(DATETIME_COMPACT_FORMAT).format(timestamp);
     }
 
-    public static String formatCompactDatetime(Date date) {
+	/**
+	 * 格式化日期：yyyyMMddHHmmss
+	 * @param date
+	 * @return
+	 */
+	public static String formatCompactDatetime(Date date) {
         return getDateFormat(DATETIME_COMPACT_FORMAT).format(date);
     }
 
@@ -133,7 +197,7 @@ public class SafeDate {
             ret = format.parse(dateStr);
             return newInstance(clazz, ret.getTime());
         } catch (ParseException e) {
-            log.warn("date format error! format:" + ((SimpleDateFormat) format).toPattern() + ",input:" + dateStr, e);
+            log.warn("date format error! format:" + ((SimpleDateFormat) format).toPattern() + ", input:" + dateStr, e);
             // slient skip exception, just return null;
             return null;
         }
@@ -218,16 +282,16 @@ public class SafeDate {
     @SuppressWarnings("unchecked")
     public static Date parse(String dateStr, String pattern, Class clazz) {
         Date ret = null;
-
         try {
             SimpleDateFormat format = getDateFormat(pattern);
             ret = format.parse(dateStr);
         } catch (Exception e) {
-            throw new AthenaRuntimeException("date format error! format:" + pattern + ",input:" + dateStr, e);
+            throw new AthenaRuntimeException("date format error! format:" + pattern + ", input:" + dateStr, e);
         }
 
-        if (clazz == null || clazz == Date.class)
-            return ret;
+        if (clazz == null || clazz == Date.class) {
+			return ret;
+		}
         return newInstance(clazz, ret.getTime());
     }
     public Object parse(String str, Class<Date> clazz) throws AthenaException {
@@ -303,12 +367,11 @@ public class SafeDate {
         if (currentDate != null) {
             calendar.setTime(currentDate);
         }
-        calendar.add(5, prev ? -day : day);
+        calendar.add(Calendar.DATE, prev ? -day : day);
         return new java.util.Date(calendar.getTime().getTime());
     }
 
-    public static java.util.Date rollDateByWeek(java.util.Date currentDate,
-                                                int week, boolean prev) {
+    public static java.util.Date rollDateByWeek(java.util.Date currentDate, int week, boolean prev) {
         Calendar calendar = GregorianCalendar.getInstance(Locale.getDefault());
         if (currentDate != null) {
             calendar.setTime(currentDate);
@@ -317,8 +380,7 @@ public class SafeDate {
         return new java.util.Date(calendar.getTime().getTime());
     }
 
-    public static java.util.Date rollDateByMonth(java.util.Date currentDate,
-                                                 int month, boolean prev) {
+    public static java.util.Date rollDateByMonth(java.util.Date currentDate, int month, boolean prev) {
         Calendar calendar = GregorianCalendar.getInstance(Locale.getDefault());
         if (currentDate != null) {
             calendar.setTime(currentDate);
@@ -352,7 +414,7 @@ public class SafeDate {
             cal.setTime(currentDate);
         }
         String[] dayNames = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-        int dayOfWeek = cal.get(7);
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
         System.out.println(dayNames[(dayOfWeek - 1)]);
         return dayNames[(dayOfWeek - 1)];
     }
@@ -392,7 +454,11 @@ public class SafeDate {
         return result;
     }
 
-    public static final String getCurrentDate() {
+	/**
+	 * 获取当前日期yyyyMMdd
+	 * @return
+	 */
+	public static final String getCurrentDate() {
         Calendar cldNow = Calendar.getInstance();
         int iYear = cldNow.get(1);
         int iMonth = cldNow.get(2) + 1;
@@ -404,7 +470,11 @@ public class SafeDate {
                 .toString());
     }
 
-    public static final String getCurrentDateTime() {
+	/**
+	 * 获取当前日期时间yyyyMMddHHmmss
+	 * @return
+	 */
+	public static final String getCurrentDateTime() {
         Calendar cldNow = Calendar.getInstance();
         int iYear = cldNow.get(1);
         int iMonth = cldNow.get(2) + 1;
@@ -426,33 +496,49 @@ public class SafeDate {
                 iSecond).toString());
     }
 
-    public static final int getCurrentDay() {
+	/**
+	 * 获取当前时间HHmmss
+	 * @return
+	 */
+	public static final String getCurrentTime() {
+		Calendar cldNow = Calendar.getInstance();
+		int iHour = cldNow.get(11);
+		int iMinute = cldNow.get(12);
+		int iSecond = cldNow.get(13);
+
+		return (iHour < 10 ? "0" + iHour : new StringBuilder().append(iHour)
+				.toString())
+				+ (iMinute < 10 ? "0" + iMinute : new StringBuilder().append(
+				iMinute).toString())
+				+ (iSecond < 10 ? "0" + iSecond : new StringBuilder().append(
+				iSecond).toString());
+	}
+
+	/**
+	 * 获取当前日
+	 * @return
+	 */
+	public static final int getCurrentDay() {
         Calendar cldNow = Calendar.getInstance();
-        int iDay = cldNow.get(5);
+        int iDay = cldNow.get(Calendar.DATE);
         return iDay;
     }
 
-    public static final int getCurrentMonth() {
+	/**
+	 * 获取当前月份
+	 * @return
+	 */
+	public static final int getCurrentMonth() {
         Calendar cldNow = Calendar.getInstance();
-        int iMonth = cldNow.get(2) + 1;
+        int iMonth = cldNow.get(Calendar.MONTH) + 1;
         return iMonth;
     }
 
-    public static final String getCurrentTime() {
-        Calendar cldNow = Calendar.getInstance();
-        int iHour = cldNow.get(11);
-        int iMinute = cldNow.get(12);
-        int iSecond = cldNow.get(13);
-
-        return (iHour < 10 ? "0" + iHour : new StringBuilder().append(iHour)
-                .toString())
-                + (iMinute < 10 ? "0" + iMinute : new StringBuilder().append(
-                iMinute).toString())
-                + (iSecond < 10 ? "0" + iSecond : new StringBuilder().append(
-                iSecond).toString());
-    }
-
-    public static final int getCurrentYear() {
+	/**
+	 * 获取当前年份yyyy
+	 * @return
+	 */
+	public static final int getCurrentYear() {
         Calendar cldNow = Calendar.getInstance();
         return cldNow.get(1);
     }

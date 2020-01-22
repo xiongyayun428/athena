@@ -6,6 +6,7 @@ package com.xiongyayun.athena.util.sort;
  * @author: Yayun.Xiong
  * @date: 2019/12/16
  */
+@FunctionalInterface
 public interface IArraySort {
 
 	/**

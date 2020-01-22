@@ -37,11 +37,14 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @ResponseBody
 public class ExceptionHandlerAdvice {
+    private final I18nService i18nService;
 
     @Autowired
-    private I18nService i18nService;
+	public ExceptionHandlerAdvice(I18nService i18nService) {
+		this.i18nService = i18nService;
+	}
 
-    @ExceptionHandler(Throwable.class)
+	@ExceptionHandler(Throwable.class)
     public ResBody catchThrowable(Throwable e) {
         return translate(ErrorConstant.SYSTEM_ERROR_UNCAUGHT, null, null, e);
     }

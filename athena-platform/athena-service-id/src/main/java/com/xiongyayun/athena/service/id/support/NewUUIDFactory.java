@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * <p><b>新的UUID生成器，利用系统<code>java.util.UUID</code>产生</b></p>
+ * <p><b>新的UUID生成器，利用系统{@link UUID#randomUUID}产生</b></p>
  *  线程安全
  *
  * @author: Yayun.Xiong
+ * @see java.util.UUID
  * @date 2019-04-14 17:01
  */
 @Service

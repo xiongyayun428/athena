@@ -42,15 +42,15 @@ public class UUIDFactory extends AbstractIdFactory {
 				.toUpperCase();
 	}
 
-	protected String format(int intval) {
-		String formatted = Integer.toHexString(intval);
+	protected String format(int val) {
+		String formatted = Integer.toHexString(val);
 		StringBuffer buf = new StringBuffer("00000000");
 		buf.replace(8 - formatted.length(), 8, formatted);
 		return buf.toString();
 	}
 
-	protected String format(short shortval) {
-		String formatted = Integer.toHexString(shortval);
+	protected String format(short val) {
+		String formatted = Integer.toHexString(val);
 		StringBuffer buf = new StringBuffer("0000");
 		buf.replace(4 - formatted.length(), 4, formatted);
 		return buf.toString();

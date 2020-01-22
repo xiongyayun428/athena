@@ -12,9 +12,9 @@ public class JasyptEncryptorTest {
     public static void main(String[] args) {
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         // 密钥
-        textEncryptor.setPassword("xiongyayun428");
+        textEncryptor.setPassword("prolinkfund");
         // 被加密字段
-        String password = textEncryptor.encrypt("athena");
+        String password = textEncryptor.encrypt("CXhxAYB92QtvEVP6");
 
         System.out.println(password);
         System.out.println(textEncryptor.decrypt(password));

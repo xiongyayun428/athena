@@ -1,6 +1,7 @@
 package com.xiongyayun.athena.core.utils;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 /**
  * FileUtil
@@ -9,6 +10,18 @@ import java.text.DecimalFormat;
  * @date: 2019-06-17
  */
 public class FileUtil {
+	/**
+	 * Field number for <code>get</code> and <code>set</code> indicating the
+	 * year. This is a calendar-specific value; see subclass documentation.
+	 */
+	public static final int ERA = 0;
+
+	/**
+	 * Field number for <code>get</code> and <code>set</code> indicating the
+	 * year. This is a calendar-specific value; see subclass documentation.
+	 */
+	public static final int YEAR = 1;
+
     public static String getFileSize(Long fileSize) {
         DecimalFormat df = new DecimalFormat("#.00");
         String fileSizeString = "";
@@ -23,4 +36,19 @@ public class FileUtil {
         }
         return fileSizeString;
     }
+
+	/**
+	 * Sets the given calendar field to the given value. The value is not
+	 * interpreted by this method regardless of the leniency mode.
+	 *
+	 * @param field the given calendar field.
+	 * @throws ArrayIndexOutOfBoundsException if the specified field is out of range
+	 *             (<code>field &lt; 0 || field &gt;= FIELD_COUNT</code>).
+	 * in non-lenient mode.
+	 */
+	public void get(int field)
+	{
+		Calendar c = Calendar.getInstance();
+		System.out.println(c.get(field));
+	}
 }

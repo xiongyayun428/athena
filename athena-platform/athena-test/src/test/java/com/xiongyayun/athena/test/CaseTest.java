@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,6 +21,41 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class CaseTest extends TestCase {
 	final static ReentrantLock reentrantLock = new ReentrantLock();
+
+//	private static volatile int restCount = 100;
+	private static AtomicInteger restCount = new AtomicInteger(100);
+
+	public static void main(String[] args) {
+		Runnable r = () -> {
+			while (restCount.get() > 0) {
+				System.out.println(Thread.currentThread().getName() + " 卖出一张票，还剩" + restCount.decrementAndGet() + "张票");
+			}
+		};
+		Thread t1 = new Thread(r, "Thread - 1");
+		Thread t2 = new Thread(r, "Thread - 2");
+		Thread t3 = new Thread(r, "Thread - 3");
+		Thread t4 = new Thread(r, "Thread - 4");
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+	}
+
+//	public void testThread1() {
+//		Runnable r = () -> {
+//			while (CaseTest.restCount > 0) {
+//				System.out.println(Thread.currentThread().getName() + " 卖出一张票，还剩" + CaseTest.restCount + "张票");
+//			}
+//		};
+//		Thread t1 = new Thread(r, "Thread - 1");
+//		Thread t2 = new Thread(r, "Thread - 2");
+//		Thread t3 = new Thread(r, "Thread - 3");
+//		Thread t4 = new Thread(r, "Thread - 4");
+//		t1.start();
+//		t2.start();
+//		t3.start();
+//		t4.start();
+//	}
 
 	public void testAQS() {
 		Thread t1 = new Thread(() -> testSync());

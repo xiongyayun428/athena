@@ -31,7 +31,7 @@ public class JdbcIdFactory implements IdFactory {
 	protected String type = null;
 	@Setter
 	private String prefix;
-	@Setter
+
 	private int length = 8;
 	@Setter
 	private boolean datePrefix;
@@ -64,7 +64,7 @@ public class JdbcIdFactory implements IdFactory {
 	}
 
 	protected String format(long l) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (this.prefix != null) {
 			buf.append(this.prefix);
 		}

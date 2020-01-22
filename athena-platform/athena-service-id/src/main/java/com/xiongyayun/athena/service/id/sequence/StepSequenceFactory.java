@@ -4,8 +4,8 @@ package com.xiongyayun.athena.service.id.sequence;
  * <p><b>根据步长生成序列号</b></p>
  *
  * @author: Yayun.Xiong
- * @since 2015年4月26日
- * @since JDK 1.8
+ * @date 2015年4月26日
+ * @since 1.8
  *
  */
 public class StepSequenceFactory extends TableSequenceFactory {
@@ -40,7 +40,7 @@ public class StepSequenceFactory extends TableSequenceFactory {
 		}
 		return new long[] { this.hi + this.lo++, this.timestamp };
 	}
-	
+
 	@Override
 	public synchronized void reverse() {
 		if (!(this.lo > this.step) || ((isDateCutoff()) && (getTable().getTimeService().isCutoff(5, this.timestamp)))) {

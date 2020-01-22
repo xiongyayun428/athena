@@ -10,8 +10,8 @@ import java.sql.SQLException;
  * <p><b></b></p>
  *
  * @author: Yayun.Xiong
- * @since 2015年4月26日
- * @since JDK 1.8
+ * @date 2015年4月26日
+ * @since 1.8
  *
  */
 public abstract class TableSequenceFactory extends AbstractSequenceFactory implements SequenceTableAware {

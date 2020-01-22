@@ -78,9 +78,9 @@ public class TableIdFactory extends AbstractIdFactory {
 							throw new RuntimeException("Please preset id for type:" + this.type);
 						}
 						rs.close();
-					} catch (SQLException sqle) {
-						log.error("could not read a id value!", sqle);
-						throw sqle;
+					} catch (SQLException e) {
+						log.error("could not read a id value!", e);
+						throw e;
 					} finally {
 						qps.close();
 					}
@@ -88,15 +88,16 @@ public class TableIdFactory extends AbstractIdFactory {
 					PreparedStatement ups = conn.prepareStatement("UPDATE ID_FACTORY SET ID=? WHERE TYPE=? AND ID=?");
 					try {
 						long next = result + 1L;
-						if (next < 0L)
+						if (next < 0L) {
 							next = 0L;
+						}
 						ups.setLong(1, next);
 						ups.setString(2, this.type);
 						ups.setLong(3, result);
 						rows = ups.executeUpdate();
-					} catch (SQLException sqle) {
-						log.error("could not update id value!", sqle);
-						throw sqle;
+					} catch (SQLException e) {
+						log.error("could not update id value!", e);
+						throw e;
 					} finally {
 						ups.close();
 					}

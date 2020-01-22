@@ -16,11 +16,14 @@ import java.util.Locale;
  */
 @Component
 public class I18nService {
+    private final MessageSource messageSource;
 
     @Autowired
-    private MessageSource messageSource;
+	public I18nService(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
 
-    public String get(String code) {
+	public String get(String code) {
         return get(code, null);
     }
 

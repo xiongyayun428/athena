@@ -12,9 +12,7 @@ import java.util.Date;
  * <p><b>序列号抽象工厂</b></p>
  *
  * @author: Yayun.Xiong
- * @since 2015年4月26日
- * @since JDK 1.8
- *
+ * @since 1.8
  */
 public abstract class AbstractSequenceFactory implements SequenceFactory {
 	protected Log log = LogFactory.getLog(this.getClass());
@@ -62,7 +60,7 @@ public abstract class AbstractSequenceFactory implements SequenceFactory {
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * 回收未使用完成的ID
 	 * @author: Yayun.Xiong

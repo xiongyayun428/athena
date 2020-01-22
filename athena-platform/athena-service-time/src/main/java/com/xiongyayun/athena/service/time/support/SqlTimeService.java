@@ -11,7 +11,7 @@ import java.sql.*;
  *
  * @author: Yayun.Xiong
  * @since 2015年4月26日
- * @since JDK 1.8
+ * @since 1.8
  *
  */
 @Setter
