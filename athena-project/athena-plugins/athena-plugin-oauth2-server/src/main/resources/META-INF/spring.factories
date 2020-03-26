@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.xiongyayun.athena.oauth2.server.properties.OAuth2AutoConfiguration

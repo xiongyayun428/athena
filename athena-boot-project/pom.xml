@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>athena</artifactId>
+        <groupId>com.xiongyayun</groupId>
+		<version>${revision}</version>
+    </parent>
+
+    <artifactId>athena-boot-project</artifactId>
+	<packaging>pom</packaging>
+	<name>Athena Boot Project</name>
+    <description>雅典娜项目</description>
+
+	<properties>
+		<main.basedir>${basedir}/..</main.basedir>
+	</properties>
+
+    <modules>
+        <module>athena-boot</module>
+        <module>athena-boot-actuator</module>
+        <module>athena-boot-actuator-autoconfigure</module>
+        <module>athena-boot-autoconfigure</module>
+        <module>athena-boot-dependencies</module>
+        <module>athena-boot-parent</module>
+        <module>athena-boot-plugins</module>
+        <module>athena-boot-starters</module>
+        <module>athena-boot-tools</module>
+    </modules>
+
+</project>
