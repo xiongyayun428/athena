@@ -9,7 +9,7 @@
 		<relativePath>../..</relativePath>
     </parent>
     <packaging>pom</packaging>
-    <artifactId>athena-boot-boot-dependencies</artifactId>
+    <artifactId>athena-boot-dependencies</artifactId>
 	<name>Athena Boot Dependencies</name>
     <description>依赖</description>
 
