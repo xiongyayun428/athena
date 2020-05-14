@@ -106,8 +106,7 @@ public class ExceptionHandlerAdvice {
     }
     @ExceptionHandler(ConstraintViolationException.class)
     public ResBody catchConstraintViolationException(ConstraintViolationException e) {
-		var constraintViolations = e.getConstraintViolations();
-		String msg = constraintViolations.stream()
+		String msg = e.getConstraintViolations().stream()
 				.map( cv -> cv == null ? "null" : cv.getMessage() )
 //				.map( cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage() )
 				.collect( Collectors.joining( ", " ) );

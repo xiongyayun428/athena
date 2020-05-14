@@ -2,10 +2,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-    	<artifactId>athena-parent</artifactId>
+    	<artifactId>athena-spring-boot-parent</artifactId>
         <groupId>com.xiongyayun</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-<!--        <relativePath>../athena-project/athena-parent</relativePath>-->
+		<version>${revision}</version>
+        <relativePath>../athena-spring-boot-project/athena-spring-boot-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>athena-platform</artifactId>
@@ -90,8 +90,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
-                <artifactId>athena-dependencies</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>athena-spring-boot-dependencies</artifactId>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -99,32 +99,32 @@
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-core</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-user</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-db</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-service</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-service-id</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
                 <artifactId>athena-service-websocket</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

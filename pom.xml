@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 	<artifactId>athena</artifactId>
 	<version>${revision}</version>
-	<name>Athena For Spring Boot</name>
+	<name>Athena</name>
 	<description>雅典娜</description>
 
 	<properties>
@@ -22,8 +22,8 @@
 	</properties>
 
 	<modules>
-		<module>athena-boot-project</module>
-		<module>athena-boot-samples</module>
+		<module>athena-spring-boot-project</module>
+		<module>athena-spring-boot-samples</module>
 		<module>athena-platform</module>
 	</modules>
 

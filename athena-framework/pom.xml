@@ -4,12 +4,13 @@
 	<parent>
 		<artifactId>athena-parent</artifactId>
 		<groupId>com.xiongyayun</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../athena-boot-project/athena-parent</relativePath> <!-- lookup parent from repository -->
+		<version>${revision}</version>
+		<relativePath>../athena-spring-boot-project/athena-spring-boot-parent</relativePath> <!-- lookup parent from repository -->
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>athena-framework</artifactId>
 	<packaging>pom</packaging>
+	<name>Athena Framework</name>
 	<description>框架</description>
 
 	<properties>

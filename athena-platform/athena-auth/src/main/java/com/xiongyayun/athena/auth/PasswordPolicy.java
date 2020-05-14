@@ -8,7 +8,8 @@ package com.xiongyayun.athena.auth;
  */
 public class PasswordPolicy {
 	/**
-	 * disable 状态
+	 * disable 状态 （true：禁用, false: 启用）
+	 * enabled
 	 */
 	private boolean disabled;
 	/**
@@ -28,38 +29,42 @@ public class PasswordPolicy {
 	 */
 	private Integer maxLength;
 	/**
-	 * 是否需要包含数字
+	 * 至少要包含多少个数字
 	 */
-	private boolean requireDigit;
+	private Integer minPasswordDigits;
 	/**
-	 * 是否需要包含小写字母
+	 * 至少要包含多少个小写字母
 	 */
-	private boolean requireLowerCase;
+	private Integer minPasswordLower;
 	/**
-	 * 是否需要包含大写字母
+	 * 至少要包含多少个大写字母
 	 */
-	private boolean requireUpperCase;
+	private Integer minPasswordUpper;
 	/**
-	 * 是否需要包含特殊字符
+	 * 至少要包含多少个特殊字符(除空格)
 	 */
-	private boolean requireSpecialCharacter;
+	private Integer minPasswordSpecialCharacters;
 	/**
-	 * 是否需要包含数字/是否需要包含小写字母/是否需要包含大写字母/是否需要包含特殊字母 以上包含几项
+	 * 至少要包含以上四项中的几项
 	 */
-	private Integer requireChooseItem;
+	private Integer minPasswordChooseItem;
+	/**
+	 * 最大连续相同字符数
+	 */
+	private Integer maxConsecutiveSameCharactersNum;
 	/**
 	 * 首次登陆是否需要修改密码
 	 */
 	private boolean firstLoginUpdatePassword;
 
 	/**
-	 * 密码过期时间（天）
+	 * 密码到期天数（天）
 	 * 要求用户在指定的时间间隔内更改其密码。
 	 */
 	private Integer expires;
 
 	/**
-	 * 密码过期提前提醒（天）
+	 * 密码到期提前提醒（天）
 	 */
 	private Integer expiresWarning;
 	/**
@@ -71,9 +76,4 @@ public class PasswordPolicy {
 	 * 密码历史记录
 	 */
 	private Integer history;
-}
-
-
-class RequireCharset {
-
 }

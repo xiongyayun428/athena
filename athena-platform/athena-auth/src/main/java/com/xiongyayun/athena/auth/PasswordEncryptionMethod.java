@@ -1,7 +1,5 @@
 package com.xiongyayun.athena.auth;
 
-import sun.security.provider.MD5;
-
 /**
  * PasswordEncryptionMethod
  *

@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>athena-access</artifactId>
     <packaging>jar</packaging>
-    <name>athena access</name>
+    <name>Athena Access</name>
     <description>雅典娜访问权限</description>
 
     <parent>
         <groupId>com.xiongyayun</groupId>
         <artifactId>athena-platform</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
 </project>

@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>athena-spring-boot-parent</artifactId>
+        <groupId>com.xiongyayun</groupId>
+        <version>${revision}</version>
+        <relativePath>../athena-spring-boot-parent</relativePath> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>athena-spring-boot-autoconfigure</artifactId>
+	<name>Athena Spring Boot Autoconfigure</name>
+    <description>自动配置</description>
+
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+    </properties>
+
+    <dependencies>
+        <!--自动生成配置信息-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+</project>

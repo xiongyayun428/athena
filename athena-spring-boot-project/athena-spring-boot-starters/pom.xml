@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>athena-spring-boot-parent</artifactId>
+        <groupId>com.xiongyayun</groupId>
+		<version>${revision}</version>
+        <relativePath>../athena-spring-boot-parent</relativePath> <!-- lookup parent from repository -->
+    </parent>
+    <artifactId>athena-spring-boot-starters</artifactId>
+    <packaging>pom</packaging>
+    <name>Athena Spring Boot Starters</name>
+
+    <properties>
+        <main.basedir>${basedir}/../..</main.basedir>
+    </properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.xiongyayun</groupId>
+				<artifactId>athena-spring-boot-plugin-security</artifactId>
+				<version>${revision}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+    <modules>
+        <module>athena-spring-boot-starter</module>
+        <module>athena-spring-boot-starter-docker</module>
+        <module>athena-spring-boot-starter-mybatis</module>
+    </modules>
+
+</project>
