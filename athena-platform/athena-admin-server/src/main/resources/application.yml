@@ -1,7 +1,8 @@
 server:
   port: 20100
   undertow:
-    worker-threads: 10
+    threads:
+      worker: 10
 info:
   app:
     name: athena-admin-server

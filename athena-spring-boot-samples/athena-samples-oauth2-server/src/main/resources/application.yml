@@ -6,11 +6,13 @@ server:
       timeout: 3600
       cookie:
         http-only: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   undertow:
-    #    accesslog:
-    #      enabled: true
-    #      pattern: '%t %a "%r" %s (%D ms)'
-    worker-threads: 10
+    threads:
+      worker: 10
   http2:
     enabled: true
 debug: true
@@ -50,7 +52,8 @@ logging:
           admin: INFO
     io:
       undertow: WARN
-  file: logs/oauth2-server.log
+  file:
+    name: logs/oauth2-server.log
 management:
   endpoints:
     web:
@@ -66,12 +69,6 @@ management:
 spring:
   profiles:
     active: dev
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
-    log-request-details: true
   messages:
     basename: i18n/messages,i18n/error
     encoding: UTF-8
@@ -94,6 +91,7 @@ spring:
       password: admin
   mvc:
     throw-exception-if-no-handler-found: true
+    log-request-details: true
   resources:
     add-mappings: false
   datasource:

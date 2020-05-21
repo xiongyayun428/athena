@@ -8,6 +8,7 @@ import com.xiongyayun.athena.core.utils.ConvertUtil;
 import com.xiongyayun.athena.core.utils.JwtUtil;
 import com.xiongyayun.athena.user.factory.AuthenticationFactory;
 import com.xiongyayun.athena.user.model.User;
+import com.xiongyayun.athena.user.model.UserAuthorization;
 import com.xiongyayun.athena.user.service.UserAuthorizationService;
 import com.xiongyayun.athena.user.service.UserRsaService;
 import com.xiongyayun.athena.user.service.UserService;
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,12 +58,12 @@ public class UserController {
 	@GetMapping("login")
 	public User login(@NotBlank(message = "授权方式不能为空") String grantType, String identifier, String credential, HttpServletResponse response) throws AthenaException {
 		// 0. 判断登录方式
-		var userAuthorization = AuthenticationFactory.get(grantType).authorization(identifier, credential);
+		UserAuthorization userAuthorization = AuthenticationFactory.get(grantType).authorization(identifier, credential);
 		if (userAuthorization == null) {
 			throw new AthenaRuntimeException("UserNotExist");
 		}
 		// 1. 查询用户信息
-		var user = userService.findUserById(userAuthorization.getUserId());
+		User user = userService.findUserById(userAuthorization.getUserId());
 		// 2. 判断用户状态是否正常
 		if (user.getStatus() != 0) {
 			throw new AthenaRuntimeException("UserDefinedError", new Object[] {"用户名状态不正常"});

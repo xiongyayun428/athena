@@ -8,9 +8,10 @@
     <description>雅典娜OAuth2示例</description>
 
     <parent>
-        <groupId>com.xiongyayun</groupId>
-        <artifactId>athena-samples</artifactId>
-        <version>${revision}</version>
+		<groupId>com.xiongyayun</groupId>
+		<artifactId>athena-spring-boot-samples</artifactId>
+		<version>${revision}</version>
+		<relativePath>../</relativePath>
     </parent>
 
     <dependencies>
@@ -39,11 +40,11 @@
 
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-actuator</artifactId>
+			<artifactId>athena-spring-boot-actuator</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-autoconfigure</artifactId>
+			<artifactId>athena-spring-boot-autoconfigure</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
@@ -51,7 +52,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-starter</artifactId>
+			<artifactId>athena-db</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun</groupId>
+			<artifactId>athena-spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>

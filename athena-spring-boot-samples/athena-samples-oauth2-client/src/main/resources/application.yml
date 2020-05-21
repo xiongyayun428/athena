@@ -6,10 +6,16 @@ server:
       timeout: 3600
       cookie:
         http-only: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   undertow:
-    worker-threads: 10
+    threads:
+      worker: 10
   http2:
     enabled: true
+  shutdown: GRACEFUL
 debug: true
 trace: false
 info:
@@ -47,14 +53,9 @@ logging:
           admin: INFO
     io:
       undertow: WARN
-  file: logs/athena-oauth2-client.log
+  file:
+    name: logs/athena-oauth2-client.log
 spring:
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
-    log-request-details: true
   messages:
     basename: i18n/messages,i18n/error
     encoding: UTF-8
@@ -88,7 +89,7 @@ spring:
             # 用于向提供者验证客户端的方法。支持的值是basic 和post
             client-authentication-method: post
             # 用于客户端的描述性名称
-            client-name: GitHub Login
+            client-name: GitHub 登录哦
             # 授权请求流程期间客户端请求的范围
             scope: [read:user, user:email]
           google:
@@ -98,7 +99,12 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: openid, profile, email, address, phone
-            client-name: Google Login
+            client-name: Google 登录啦
+          okta:
+            issuer: https://dev-473853.oktapreview.com/oauth2/default
+            client-id: 0oacnunayDT0iziCv4x6
+            client-secret: AoEUOiumznxQf5xGaWe1sFSNJm4_j9tOP2yiilyu
+            client-name: Okta Login
         provider:
           github:
             # 授权服务器的授权端点URI
@@ -118,7 +124,13 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
             user-name-attribute: sub
+          okta:
+            authorization-uri: https://dev-473853.oktapreview.com/oauth2/v1/authorize
+            token-uri: https://dev-473853.oktapreview.com/oauth2/v1/token
+            user-info-uri: https://dev-473853.oktapreview.com/oauth2/v1/userinfo
+            jwk-set-uri: https://dev-473853.oktapreview.com/oauth2/v1/keys
   mvc:
     throw-exception-if-no-handler-found: true
+    log-request-details: true
   resources:
     add-mappings: false

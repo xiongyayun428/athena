@@ -2,6 +2,7 @@ package com.xiongyayun.athena.db.aop;
 
 import com.xiongyayun.athena.core.ErrorConstant;
 import com.xiongyayun.athena.core.aop.ExceptionHandlerAdvice;
+import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.response.ResBody;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.exceptions.TooManyResultsException;
@@ -23,6 +24,10 @@ import java.sql.SQLException;
 @RestControllerAdvice
 @ResponseBody
 public class DbExceptionHandlerAdvice extends ExceptionHandlerAdvice {
+
+	public DbExceptionHandlerAdvice(I18nService i18nService) {
+		super(i18nService);
+	}
 
 	@ExceptionHandler(BadSqlGrammarException.class)
 	public ResBody catchBadSqlGrammarException(BadSqlGrammarException e) {

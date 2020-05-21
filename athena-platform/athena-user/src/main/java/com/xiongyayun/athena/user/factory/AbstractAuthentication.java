@@ -24,9 +24,9 @@ public abstract class AbstractAuthentication implements Authentication, Initiali
      */
     @Override
     public UserAuthorization authorization(String identifier, String credential) {
-        var userAuthorization = auth(identifier, credential);
+		UserAuthorization userAuthorization = auth(identifier, credential);
         if (userAuthorization != null) {
-            var existUserAuthorization = userAuthorizationService.select(userAuthorization.getIdentityType(), userAuthorization.getIdentifier());
+			UserAuthorization existUserAuthorization = userAuthorizationService.select(userAuthorization.getIdentityType(), userAuthorization.getIdentifier());
             if (existUserAuthorization != null && existUserAuthorization.getCredential().equals(userAuthorization.getCredential())) {
                 return existUserAuthorization;
             }

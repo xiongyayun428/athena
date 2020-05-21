@@ -7,11 +7,12 @@
     <name>Athena OAuth2 Client</name>
     <description>雅典娜OAuth2示例</description>
 
-    <parent>
-        <groupId>com.xiongyayun</groupId>
-        <artifactId>athena-samples</artifactId>
-        <version>${revision}</version>
-    </parent>
+	<parent>
+		<groupId>com.xiongyayun</groupId>
+		<artifactId>athena-spring-boot-samples</artifactId>
+		<version>${revision}</version>
+		<relativePath>../</relativePath>
+	</parent>
 
     <dependencies>
 		<dependency>
@@ -36,23 +37,31 @@
 			<!--scope包含如下的取值：compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围） -->
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun</groupId>
+			<artifactId>athena-spring-boot-actuator</artifactId>
+		</dependency>
 
-		<dependency>
-			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-autoconfigure</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
 			<artifactId>athena-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-plugin-oauth2-client</artifactId>
+			<artifactId>athena-spring-boot-autoconfigure</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun</groupId>
+			<artifactId>athena-spring-boot-plugin-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun</groupId>
+			<artifactId>athena-spring-boot-plugin-oauth2-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.okta.spring</groupId>
+			<artifactId>okta-spring-boot-starter</artifactId>
+			<version>1.4.0</version>
 		</dependency>
     </dependencies>
 

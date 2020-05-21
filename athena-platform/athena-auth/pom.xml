@@ -22,22 +22,18 @@
             <groupId>com.xiongyayun</groupId>
             <artifactId>athena-spring-boot-autoconfigure</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.xiongyayun</groupId>-->
-<!--            <artifactId>athena-core</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.xiongyayun</groupId>-->
-<!--            <artifactId>athena-core</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.xiongyayun</groupId>
+            <artifactId>athena-core</artifactId>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.xiongyayun</groupId>-->
 <!--            <artifactId>athena-user</artifactId>-->
 <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.xiongyayun</groupId>-->
-<!--            <artifactId>athena-db</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.xiongyayun</groupId>
+            <artifactId>athena-db</artifactId>
+        </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
