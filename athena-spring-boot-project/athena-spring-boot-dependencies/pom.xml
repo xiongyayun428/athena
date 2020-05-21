@@ -16,7 +16,7 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
 		<!-- Dependency versions -->
-        <spring-boot.version>2.2.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
 		<alibaba-cloud.version>2.2.1.RELEASE</alibaba-cloud.version>
         <druid.version>1.1.22</druid.version>
