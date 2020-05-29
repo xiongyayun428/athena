@@ -103,7 +103,7 @@ public class CaseTest extends TestCase {
 		}
 		System.out.println("t1======>" + t1.getState());
 		System.out.println("t2======>" + t2.getState());
-		System.exit(0);
+//		System.exit(0);
 	}
 
 
