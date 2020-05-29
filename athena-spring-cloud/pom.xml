@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xiongyayun.cloud</groupId>
+    <artifactId>athena-spring-cloud-build</artifactId>
+	<version>${revision}</version>
+	<packaging>pom</packaging>
+	<name>Athena Spring Cloud Project</name>
+    <description>雅典娜项目</description>
+
+	<properties>
+		<main.basedir>${basedir}</main.basedir>
+		<revision>0.0.1-SNAPSHOT</revision>
+
+		<git.url>https://github.com/xiongyayun428/athena</git.url>
+		<git.connection>scm:git:git://github.com/xiongyayun428/athena.git</git.connection>
+		<git.developerConnection>scm:git:ssh://git@github.com/xiongyayun428/athena.git</git.developerConnection>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+	</properties>
+
+	<scm>
+		<url>${git.url}</url>
+		<connection>${git.connection}</connection>
+		<developerConnection>${git.developerConnection}</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/xiongyayun428/athena/issues</url>
+	</issueManagement>
+
+    <modules>
+        <module>athena-spring-cloud-project</module>
+        <module>athena-spring-cloud-samples</module>
+    </modules>
+
+	<build>
+		<resources>
+			<!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<!--Maven Jar Plugin-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+							<Implementation-Version>${revision}</Implementation-Version>
+							<Built-By>Athena</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!--Maven Compiler Plugin-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!--打包跳过测试-->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

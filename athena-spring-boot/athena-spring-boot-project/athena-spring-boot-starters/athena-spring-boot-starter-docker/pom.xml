@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>athena-spring-boot-starters</artifactId>
+        <groupId>com.xiongyayun.boot</groupId>
+        <version>${revision}</version>
+		<relativePath>../</relativePath><!-- lookup parent from repository -->
+    </parent>
+    <artifactId>athena-spring-boot-starter-docker</artifactId>
+	<name>Athena Spring Boot Starter Docker</name>
+
+    <properties>
+        <main.basedir>${basedir}/../../..</main.basedir>
+        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
+        <docker.image.prefix>xiongyayun428</docker.image.prefix>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven-version}</version>
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>default</id>-->
+<!--                            <goals>-->
+<!--                                &lt;!&ndash;如果package时不想用docker打包,就注释掉这个goal&ndash;&gt;-->
+<!--                                <goal>build</goal>-->
+<!--                                <goal>push</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                    <configuration>-->
+<!--                        <repository>${docker.image.prefix}/${project.artifactId}</repository>-->
+<!--                        &lt;!&ndash; 不指定tag默认为latest&ndash;&gt;-->
+<!--                        <tag>${project.version}</tag>-->
+<!--                        <buildArgs>-->
+<!--                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+<!--                        </buildArgs>-->
+<!--                    </configuration>-->
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-extension</artifactId>
+                <version>${dockerfile-maven-version}</version>
+            </extension>
+        </extensions>
+    </build>
+
+</project>

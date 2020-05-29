@@ -1,0 +1,17 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: athena-gateways
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        # spring boot 2.0中actuator默认只公开info和health接口，如果需要获取更多信息，则需增加如下配置
+        include: "*"

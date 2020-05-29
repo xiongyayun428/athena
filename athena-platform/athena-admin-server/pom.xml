@@ -19,7 +19,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.xiongyayun</groupId>
+			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-autoconfigure</artifactId>
 		</dependency>
 		<dependency>

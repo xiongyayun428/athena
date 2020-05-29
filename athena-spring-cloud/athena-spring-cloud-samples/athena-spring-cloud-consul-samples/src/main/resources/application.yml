@@ -1,0 +1,136 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      timeout: 3600
+      cookie:
+        http-only: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  undertow:
+    threads:
+      worker: 10
+  http2:
+    enabled: true
+  shutdown: GRACEFUL
+debug: true
+trace: false
+info:
+  java:
+    version: ${java.version}
+  app:
+    name: ${project.name}
+    description: ${project.description}
+    encoding: ${project.build.sourceEncoding}
+    version: ${project.version}
+  contact:
+    author: Yayun.Xiong
+    email: xiongyayun428@163.com
+logging:
+  level:
+    root: DEBUG
+    org:
+      springframework:
+        boot:
+          actuate: INFO
+          actuate.endpoint.web: INFO
+        security: DEBUG
+        web: INFO
+        beans: INFO
+        jdbc: INFO
+      hibernate: ERROR
+      mybatis: INFO
+    com:
+      xiongyayun: DEBUG
+      alibaba:
+        druid: INFO
+    de:
+      codecentric:
+        boot:
+          admin: INFO
+    io:
+      undertow: WARN
+  file:
+    name: logs/athena-oauth2-client.log
+spring:
+  messages:
+    basename: i18n/messages,i18n/error
+    encoding: UTF-8
+  output:
+    ansi:
+      enabled: ALWAYS
+  devtools:
+    restart:
+      enabled: false
+  jackson:
+    time-zone: GMT+8
+    default-property-inclusion: ALWAYS #如果某一个字段为null，就不再返回这个字段
+    mapper:
+      sort-properties-alphabetically: true
+  application:
+    name: athena-oauth2-client
+  security:
+    user:
+      name: admin
+      password: admin
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 24aad9b10a966b4fa3ba
+            client-secret: 75c2a4d66f0fd39175ed4e7137394839941bd33a
+            provider: github
+            # OAuth 2.0授权框架定义了四种授权授权类型。支持的值是authorization_code和implicit
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            # 用于向提供者验证客户端的方法。支持的值是basic 和post
+            client-authentication-method: post
+            # 用于客户端的描述性名称
+            client-name: GitHub 登录哦
+            # 授权请求流程期间客户端请求的范围
+            scope: [read:user, user:email]
+          google:
+            client-id: 212269349981-v8oa5coeuali2tufmh0nm41q9k6geet7.apps.googleusercontent.com
+            client-secret: CqLWmSzFg83Jj-MyAtRVkUH6
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, email, address, phone
+            client-name: Google 登录啦
+          okta:
+            issuer: https://dev-473853.oktapreview.com/oauth2/default
+            client-id: 0oacnunayDT0iziCv4x6
+            client-secret: AoEUOiumznxQf5xGaWe1sFSNJm4_j9tOP2yiilyu
+            client-name: Okta Login
+        provider:
+          github:
+            # 授权服务器的授权端点URI
+            authorization-uri: https://github.com/login/oauth/authorize
+            # 授权服务器的令牌端点URI
+            token-uri: https://github.com/login/oauth/access_token
+            # UserInfo端点URI，用于访问经过身份验证的最终用户的声明/属性
+            user-info-uri: https://api.github.com/user
+            user-info-authentication-method: post
+            # UserInfo Response中返回的引用最终用户的名称或标识符的属性的名称
+            #user-name-attribute: sub
+            # 用于从授权服务器（包含用于验证ID令牌的JSON Web签名（JWS）和可选的UserInfo响应）的加密密钥中检索JSON Web密钥（JWK）的URI
+            #jwk-set-uri:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-name-attribute: sub
+          okta:
+            authorization-uri: https://dev-473853.oktapreview.com/oauth2/v1/authorize
+            token-uri: https://dev-473853.oktapreview.com/oauth2/v1/token
+            user-info-uri: https://dev-473853.oktapreview.com/oauth2/v1/userinfo
+            jwk-set-uri: https://dev-473853.oktapreview.com/oauth2/v1/keys
+  mvc:
+    throw-exception-if-no-handler-found: true
+    log-request-details: true
+  resources:
+    add-mappings: false

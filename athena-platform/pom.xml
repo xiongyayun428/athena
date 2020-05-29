@@ -89,12 +89,20 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.xiongyayun</groupId>
+				<groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+			<dependency>
+				<groupId>com.xiongyayun.cloud</groupId>
+				<artifactId>athena-spring-cloud-dependencies</artifactId>
+				<version>${revision}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
             <dependency>
                 <groupId>com.xiongyayun</groupId>
@@ -170,7 +178,6 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
 						<source>${java.version}</source>
 						<target>${java.version}</target>

@@ -15,11 +15,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.xiongyayun</groupId>
+			<groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.xiongyayun</groupId>
+            <groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
@@ -43,7 +43,7 @@
 <!--			<artifactId>athena-plugin-oauth2-client</artifactId>-->
 <!--		</dependency>-->
 		<dependency>
-			<groupId>com.xiongyayun</groupId>
+			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-plugin-oauth2-server</artifactId>
 		</dependency>
     </dependencies>

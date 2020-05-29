@@ -22,8 +22,8 @@
 	</properties>
 
 	<modules>
-		<module>athena-spring-boot-project</module>
-		<module>athena-spring-boot-samples</module>
+		<module>athena-spring-boot</module>
+		<module>athena-spring-cloud</module>
 		<module>athena-framework</module>
 		<module>athena-platform</module>
 	</modules>
