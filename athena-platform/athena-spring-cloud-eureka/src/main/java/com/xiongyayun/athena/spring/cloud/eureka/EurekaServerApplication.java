@@ -1,21 +1,21 @@
-package com.xiongyayun.athena.eureka.discovery;
+package com.xiongyayun.athena.spring.cloud.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
- * EurekaDiscoveryApplication
+ * EurekaServerApplication
  *
- * @author: Yayun.Xiong
- * @date 2019-03-03 20:57
+ * @author Yayun.Xiong
+ * @date 2020/5/30
  */
 @SpringBootApplication
 @EnableEurekaServer
-public class EurekaDiscoveryApplication {
+public class EurekaServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EurekaDiscoveryApplication.class, args);
+		SpringApplication.run(EurekaServerApplication.class, args);
 	}
 
 }
