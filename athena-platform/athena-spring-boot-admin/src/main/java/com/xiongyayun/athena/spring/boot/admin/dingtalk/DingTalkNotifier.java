@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.admin.server.dingtalk;
+package com.xiongyayun.athena.spring.boot.admin.dingtalk;
 
 import de.codecentric.boot.admin.server.domain.entities.Instance;
 import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;

@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.admin.server.dingtalk;
+package com.xiongyayun.athena.spring.boot.admin.server.dingtalk;
 
 import de.codecentric.boot.admin.server.config.AdminServerNotifierAutoConfiguration.CompositeNotifierConfiguration;
 import de.codecentric.boot.admin.server.config.AdminServerNotifierAutoConfiguration.NotifierTriggerConfiguration;
