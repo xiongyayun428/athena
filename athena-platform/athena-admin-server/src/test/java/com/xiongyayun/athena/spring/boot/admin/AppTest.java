@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.spring.boot.admin.server;
+package com.xiongyayun.athena.spring.boot.admin;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

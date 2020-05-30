@@ -32,6 +32,7 @@
         <!--Plugin Versions-->
         <build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <jasypt-maven-plugin.version>3.0.2</jasypt-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
 
         <spring-security-oauth2.version>2.4.1.RELEASE</spring-security-oauth2.version>
@@ -238,9 +239,14 @@
 <!--            </dependency>-->
             <dependency>
                 <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <artifactId>jasypt-spring-boot</artifactId>
                 <version>${jasypt-spring-boot.version}</version>
             </dependency>
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot-starter</artifactId>
+				<version>${jasypt-spring-boot.version}</version>
+			</dependency>
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-sdk-java</artifactId>
@@ -289,6 +295,11 @@
         <!--plugin management-->
         <pluginManagement>
             <plugins>
+				<plugin>
+					<groupId>com.github.ulisesbocchio</groupId>
+					<artifactId>jasypt-maven-plugin</artifactId>
+					<version>${jasypt-maven-plugin.version}</version>
+				</plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>

@@ -12,6 +12,18 @@ spring:
       password: admin
       roles:
         - admin
+  boot:
+    admin:
+      client:
+        instance:
+          metadata:
+            user:
+              name: admin
+              password: admin
+#          service-url: http://${eureka.instance.hostname}:${server.port}
+        url: http://localhost:10000
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
 eureka:
   instance:
     hostname: localhost
@@ -24,7 +36,7 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     service-url:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/,http://admin:admin@47.107.179.245:8761/eureka/
 management:
   endpoints:
     web:

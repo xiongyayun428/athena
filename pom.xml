@@ -28,4 +28,14 @@
 		<module>athena-platform</module>
 	</modules>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-maven-plugin</artifactId>
+				<version>3.0.2</version>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

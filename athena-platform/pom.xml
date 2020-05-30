@@ -1,17 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xiongyayun</groupId>
 		<artifactId>athena</artifactId>
 		<version>${revision}</version>
 		<relativePath>../</relativePath>
 	</parent>
-    <modelVersion>4.0.0</modelVersion>
     <artifactId>athena-platform</artifactId>
     <packaging>pom</packaging>
     <name>Athena Platform</name>
     <description>雅典娜平台</description>
+
+	<properties>
+		<main.basedir>${basedir}/../</main.basedir>
+	</properties>
 
     <!-- 依赖,jar包管理,默认被所有的子项目继承 -->
     <dependencies>
@@ -158,6 +162,7 @@
         <module>athena-service-time</module>
         <module>athena-service-websocket</module>
 		<module>athena-spring-cloud-eureka</module>
+		<module>athena-spring-boot-admin</module>
     </modules>
 
     <build>
