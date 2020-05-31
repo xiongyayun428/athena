@@ -1,8 +1,8 @@
 server:
-  port: 8761
+  port: 9000
 spring:
   application:
-    name: athena-eureka
+    name: athena-gateway
   devtools:
     restart:
       enabled: false
@@ -20,7 +20,6 @@ spring:
             user:
               name: ${spring.security.user.name}
               password: ${spring.security.user.password}
-#          service-url: http://${eureka.instance.hostname}:${server.port}
         url: http://localhost:10000
         username: ${spring.security.user.name}
         password: ${spring.security.user.password}

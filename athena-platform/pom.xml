@@ -162,6 +162,7 @@
         <module>athena-service-time</module>
         <module>athena-service-websocket</module>
 		<module>athena-spring-cloud-eureka</module>
+		<module>athena-spring-cloud-gateway</module>
 		<module>athena-spring-boot-admin</module>
     </modules>
 
