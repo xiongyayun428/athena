@@ -9,7 +9,6 @@
 		<relativePath>../</relativePath>
     </parent>
     <artifactId>athena-spring-boot-plugin-security</artifactId>
-    <name>athena security service</name>
     <description>集成SpringSecurity</description>
 
     <properties>

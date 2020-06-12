@@ -161,9 +161,9 @@
         <module>athena-service-id</module>
         <module>athena-service-time</module>
         <module>athena-service-websocket</module>
-		<module>athena-spring-cloud-eureka</module>
-		<module>athena-spring-cloud-gateway</module>
-		<module>athena-spring-boot-admin</module>
+<!--		<module>athena-spring-cloud-eureka</module>-->
+<!--		<module>athena-spring-cloud-gateway</module>-->
+<!--		<module>athena-spring-boot-admin</module>-->
     </modules>
 
     <build>
@@ -191,6 +191,16 @@
 				</plugin>
             </plugins>
         </pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
     </build>
 
 </project>

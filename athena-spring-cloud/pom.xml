@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xiongyayun</groupId>
+		<artifactId>athena</artifactId>
+		<version>${revision}</version>
+	</parent>
 	<groupId>com.xiongyayun.cloud</groupId>
     <artifactId>athena-spring-cloud-build</artifactId>
 	<version>${revision}</version>
@@ -109,4 +114,83 @@
 			</plugin>
 		</plugins>
 	</build>
+
+<!--	<profiles>-->
+<!--		<profile>-->
+<!--			<id>local-repo</id>-->
+<!--			<activation>-->
+<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
+<!--				<activeByDefault>true</activeByDefault>-->
+<!--			</activation>-->
+<!--			&lt;!&ndash; 仓库配置 &ndash;&gt;-->
+<!--			<repositories>-->
+<!--				<repository>-->
+<!--					<id>nexus</id>-->
+<!--					<name>Nexus Repository</name>-->
+<!--					<url>http://localhost:8081/repository/maven-public/</url>-->
+<!--					<releases>-->
+<!--						<enabled>true</enabled>-->
+<!--					</releases>-->
+<!--					<snapshots>-->
+<!--						<enabled>true</enabled>-->
+<!--					</snapshots>-->
+<!--				</repository>-->
+<!--			</repositories>-->
+<!--			&lt;!&ndash; 插件配置 &ndash;&gt;-->
+<!--			<pluginRepositories>-->
+<!--				<pluginRepository>-->
+<!--					<id>nexus</id>-->
+<!--					<name>Nexus Plugin Repository</name>-->
+<!--					<url>http://localhost:8081/repository/maven-public/</url>-->
+<!--					<releases>-->
+<!--						<enabled>true</enabled>-->
+<!--					</releases>-->
+<!--					<snapshots>-->
+<!--						<enabled>true</enabled>-->
+<!--					</snapshots>-->
+<!--				</pluginRepository>-->
+<!--			</pluginRepositories>-->
+<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
+<!--			<distributionManagement>-->
+<!--				<repository>-->
+<!--					<id>nexus-releases</id>-->
+<!--					<name>Nexus Releases Repository</name>-->
+<!--					<url>http://localhost:8081/repository/maven-releases/</url>-->
+<!--				</repository>-->
+<!--				<snapshotRepository>-->
+<!--					<id>nexus-snapshots</id>-->
+<!--					<name>Nexus Snapshots Repository</name>-->
+<!--					<url>http://localhost:8081/repository/maven-snapshots/</url>-->
+<!--				</snapshotRepository>-->
+<!--			</distributionManagement>-->
+<!--		</profile>-->
+<!--		<profile>-->
+<!--			<id>rdc-private-repo</id>-->
+<!--			<activation>-->
+<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
+<!--				<activeByDefault>true</activeByDefault>-->
+<!--			</activation>-->
+<!--			<repositories>-->
+<!--				<repository>-->
+<!--					<id>rdc-releases</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
+<!--				</repository>-->
+<!--				<repository>-->
+<!--					<id>rdc-snapshots</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
+<!--				</repository>-->
+<!--			</repositories>-->
+<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
+<!--			<distributionManagement>-->
+<!--				<repository>-->
+<!--					<id>rdc-releases</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
+<!--				</repository>-->
+<!--				<snapshotRepository>-->
+<!--					<id>rdc-snapshots</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
+<!--				</snapshotRepository>-->
+<!--			</distributionManagement>-->
+<!--		</profile>-->
+<!--	</profiles>-->
 </project>
