@@ -29,12 +29,6 @@
         <aliyun-sdk-oss.version>3.9.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
 
-        <!--Plugin Versions-->
-        <build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
-        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-        <jasypt-maven-plugin.version>3.0.2</jasypt-maven-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-
         <spring-security-oauth2.version>2.4.1.RELEASE</spring-security-oauth2.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <java-jwt.version>3.10.3</java-jwt.version>
@@ -46,6 +40,13 @@
         <pagehelper.version>5.1.11</pagehelper.version>
         <jasypt-spring-boot.version>3.0.2</jasypt-spring-boot.version>
         <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
+
+		<!--Plugin Versions-->
+		<build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
+		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+		<jasypt-maven-plugin.version>3.0.2</jasypt-maven-plugin.version>
+		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -327,57 +328,71 @@
                         </execution>
                     </executions>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-source-plugin</artifactId>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>attach-sources</id>-->
-<!--                            <goals>-->
-<!--                                <goal>jar-no-fork</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>attach-javadocs</id>-->
-<!--                            <goals>-->
-<!--                                <goal>jar</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <doclint>none</doclint>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>${dockerfile-maven-plugin.version}</version>
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>default</id>-->
-<!--                            <goals>-->
-<!--                                &lt;!&ndash;如果package时不想用docker打包,就注释掉这个goal&ndash;&gt;-->
-<!--                                <goal>build</goal>-->
-<!--                                <goal>push</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                    <configuration>-->
-<!--                        <repository>${docker.image.prefix}/${project.artifactId}</repository>-->
-<!--                        &lt;!&ndash; 不指定tag默认为latest&ndash;&gt;-->
-<!--                        <tag>${project.version}</tag>-->
-<!--                        <buildArgs>-->
-<!--                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
-<!--                        </buildArgs>-->
-<!--                    </configuration>-->
                 </plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>${flatten-maven-plugin.version}</version>
+				</plugin>
             </plugins>
         </pluginManagement>
-    </build>
+    	<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<!-- Create an effective POM (with versions expanded) for the CLI and
+							documentation -->
+						<id>flatten-effective-pom</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+						<configuration>
+							<updatePomFile>false</updatePomFile>
+							<outputDirectory>${project.build.directory}/effective-pom</outputDirectory>
+							<flattenedPomFilename>spring-boot-dependencies.xml</flattenedPomFilename>
+							<flattenMode>oss</flattenMode>
+							<pomElements>
+								<dependencyManagement>expand</dependencyManagement>
+								<pluginManagement>expand</pluginManagement>
+								<properties>remove</properties>
+								<repositories>remove</repositories>
+							</pomElements>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- Flatten and simplify our own POM for install/deploy -->
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+						<configuration>
+							<updatePomFile>true</updatePomFile>
+							<flattenMode>bom</flattenMode>
+							<pomElements>
+								<pluginManagement>keep</pluginManagement>
+								<properties>keep</properties>
+								<repositories>remove</repositories>
+							</pomElements>
+						</configuration>
+					</execution>
+					<execution>
+						<id>flatten-clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -21,6 +21,7 @@
 		<!--Plugin Versions-->
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +125,11 @@
 <!--                        </buildArgs>-->
 <!--                    </configuration>-->
                 </plugin>
+<!--				<plugin>-->
+<!--					<groupId>org.codehaus.mojo</groupId>-->
+<!--					<artifactId>flatten-maven-plugin</artifactId>-->
+<!--					<version>${flatten-maven-plugin.version}</version>-->
+<!--				</plugin>-->
             </plugins>
         </pluginManagement>
     </build>

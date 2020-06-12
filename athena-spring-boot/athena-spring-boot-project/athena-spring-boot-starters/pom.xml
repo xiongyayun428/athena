@@ -16,6 +16,15 @@
         <main.basedir>${basedir}/../..</main.basedir>
     </properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -30,6 +39,7 @@
         <module>athena-spring-boot-starter</module>
         <module>athena-spring-boot-starter-docker</module>
         <module>athena-spring-boot-starter-mybatis</module>
+        <module>athena-spring-boot-starter-parent</module>
     </modules>
 
 </project>

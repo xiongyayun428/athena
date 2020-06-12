@@ -1,4 +1,8 @@
+HELP.md
+target/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -16,14 +20,15 @@
 *.ipr
 
 ### NetBeans ###
-**/nbproject/private/
-**/build/
-**/nbbuild/
-**/dist/
-**/nbdist/
-**/.nb-gradle/
-**/target/
-**/logs/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+logs/
 
 ### VS Code ###
 .vscode/
+
+.flattened-pom.xml
