@@ -15,13 +15,15 @@
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
 		<alibaba-cloud.version>2.2.1.RELEASE</alibaba-cloud.version>
 
 		<!--Plugin Versions-->
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
+		<xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -54,15 +56,6 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.codehaus.mojo</groupId>-->
-<!--                    <artifactId>build-helper-maven-plugin</artifactId>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-plugin-plugin</artifactId>-->
-<!--                    <version>${maven-plugin-plugin.version}</version>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -75,62 +68,90 @@
                         </execution>
                     </executions>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-source-plugin</artifactId>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>attach-sources</id>-->
-<!--                            <goals>-->
-<!--                                <goal>jar-no-fork</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>attach-javadocs</id>-->
-<!--                            <goals>-->
-<!--                                <goal>jar</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <doclint>none</doclint>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>${dockerfile-maven-plugin.version}</version>
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>default</id>-->
-<!--                            <goals>-->
-<!--                                &lt;!&ndash;如果package时不想用docker打包,就注释掉这个goal&ndash;&gt;-->
-<!--                                <goal>build</goal>-->
-<!--                                <goal>push</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                    <configuration>-->
-<!--                        <repository>${docker.image.prefix}/${project.artifactId}</repository>-->
-<!--                        &lt;!&ndash; 不指定tag默认为latest&ndash;&gt;-->
-<!--                        <tag>${project.version}</tag>-->
-<!--                        <buildArgs>-->
-<!--                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
-<!--                        </buildArgs>-->
-<!--                    </configuration>-->
                 </plugin>
-<!--				<plugin>-->
-<!--					<groupId>org.codehaus.mojo</groupId>-->
-<!--					<artifactId>flatten-maven-plugin</artifactId>-->
-<!--					<version>${flatten-maven-plugin.version}</version>-->
-<!--				</plugin>-->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>${flatten-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>xml-maven-plugin</artifactId>
+					<version>${xml-maven-plugin.version}</version>
+				</plugin>
             </plugins>
         </pluginManagement>
+		<plugins>
+			<!-- 编译 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+			<!-- 打包 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.name}</Implementation-Title>
+							<Automatic-Module-Name>${project.artifactId}</Automatic-Module-Name>
+							<Implementation-Version>${revision}</Implementation-Version>
+							<Built-By>Athena</Built-By>
+							<Email>xiongyayun428@163.com</Email>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!--打包跳过测试-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!-- 添加flatten-maven-plugin用于替换${revision} -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
     </build>
 </project>

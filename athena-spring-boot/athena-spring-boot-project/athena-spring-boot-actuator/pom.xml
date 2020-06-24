@@ -10,7 +10,6 @@
 	</parent>
     <artifactId>athena-spring-boot-actuator</artifactId>
 	<name>Athena Spring Boot Actuator</name>
-    <description>Athena Spring Boot Actuator</description>
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>

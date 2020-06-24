@@ -16,9 +16,7 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
 		<!-- Dependency versions -->
-        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
-		<alibaba-cloud.version>2.2.1.RELEASE</alibaba-cloud.version>
+        <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
         <druid.version>1.1.22</druid.version>
         <druid-starter.version>1.1.22</druid-starter.version>
 
@@ -38,15 +36,16 @@
         <tk.mybatis.mapper.version>4.1.5</tk.mybatis.mapper.version>
         <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
         <pagehelper.version>5.1.11</pagehelper.version>
-        <jasypt-spring-boot.version>3.0.2</jasypt-spring-boot.version>
+        <jasypt-spring-boot.version>3.0.3</jasypt-spring-boot.version>
         <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
 
-		<!--Plugin Versions-->
-		<build-helper-maven-plugin.version>3.1.0</build-helper-maven-plugin.version>
+		<!-- Plugin versions -->
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<jasypt-maven-plugin.version>3.0.2</jasypt-maven-plugin.version>
 		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
 		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
+		<xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -59,22 +58,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- SpringCloud Dependencies -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-			<!-- AlibabaCloud Dependencies -->
-			<dependency>
-				<groupId>com.alibaba.cloud</groupId>
-				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
-				<version>${alibaba-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 
             <!-- athena -->
             <dependency>
@@ -306,15 +289,6 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.codehaus.mojo</groupId>-->
-<!--                    <artifactId>build-helper-maven-plugin</artifactId>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-plugin-plugin</artifactId>-->
-<!--                    <version>${maven-plugin-plugin.version}</version>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -335,8 +309,18 @@
                 </plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>flatten-maven-plugin</artifactId>
 					<version>${flatten-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>xml-maven-plugin</artifactId>
+					<version>${xml-maven-plugin.version}</version>
 				</plugin>
             </plugins>
         </pluginManagement>
@@ -347,8 +331,7 @@
 				<inherited>false</inherited>
 				<executions>
 					<execution>
-						<!-- Create an effective POM (with versions expanded) for the CLI and
-							documentation -->
+						<!-- Create an effective POM (with versions expanded) for the CLI and documentation -->
 						<id>flatten-effective-pom</id>
 						<phase>process-resources</phase>
 						<goals>
@@ -357,7 +340,7 @@
 						<configuration>
 							<updatePomFile>false</updatePomFile>
 							<outputDirectory>${project.build.directory}/effective-pom</outputDirectory>
-							<flattenedPomFilename>spring-boot-dependencies.xml</flattenedPomFilename>
+							<flattenedPomFilename>athena-spring-boot-dependencies.xml</flattenedPomFilename>
 							<flattenMode>oss</flattenMode>
 							<pomElements>
 								<dependencyManagement>expand</dependencyManagement>
@@ -390,6 +373,83 @@
 						<goals>
 							<goal>clean</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xml-maven-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<!-- Cleanup the effective POM -->
+						<id>post-process-effective-pom</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.build.directory}/effective-pom</dir>
+									<outputDir>${project.build.directory}/effective-pom</outputDir>
+									<stylesheet>src/main/xslt/post-process-flattened-pom.xsl</stylesheet>
+									<outputProperties>
+										<outputProperty>
+											<name>indent</name>
+											<value>yes</value>
+										</outputProperty>
+									</outputProperties>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- Cleanup the flattened project POM -->
+						<id>post-process-flattened-pom</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.basedir}</dir>
+									<outputDir>${project.basedir}</outputDir>
+									<includes>.flattened-pom.xml</includes>
+									<stylesheet>src/main/xslt/post-process-flattened-pom.xsl</stylesheet>
+									<outputProperties>
+										<outputProperty>
+											<name>indent</name>
+											<value>yes</value>
+										</outputProperty>
+									</outputProperties>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<!-- Attach effective POM -->
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${project.build.directory}/effective-pom/athena-spring-boot-dependencies.xml</file>
+									<type>effective-pom</type>
+								</artifact>
+							</artifacts>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

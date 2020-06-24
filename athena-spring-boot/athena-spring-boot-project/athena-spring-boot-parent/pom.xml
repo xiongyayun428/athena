@@ -17,31 +17,69 @@
         <main.basedir>${basedir}/../..</main.basedir>
     </properties>
 
-
 	<build>
 		<plugins>
+			<!-- 编译 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+			<!-- 打包 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>Athena</Built-By>
+							<Email>xiongyayun428@163.com</Email>
+<!--							<Automatic-Module-Name>${project.groupId}.${project.artifactId}</Automatic-Module-Name>-->
+							<Implementation-Title>${project.name}</Implementation-Title>
+							<Implementation-Version>${revision}</Implementation-Version>
+							<Specification-Title>${project.artifactId}</Specification-Title>
+							<Specification-Vendor>Athena</Specification-Vendor>
+							<Specification-Version>${project.version}</Specification-Version>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<!--打包跳过测试-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
 			<!-- 添加flatten-maven-plugin用于替换${revision} -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>flatten-maven-plugin</artifactId>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-				</configuration>
+				<inherited>true</inherited>
 				<executions>
 					<execution>
+						<!-- Tidy up all POMs before they are published -->
 						<id>flatten</id>
 						<phase>process-resources</phase>
 						<goals>
 							<goal>flatten</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
+						<configuration>
+							<updatePomFile>true</updatePomFile>
+							<flattenMode>oss</flattenMode>
+							<pomElements>
+								<parent>expand</parent>
+								<distributionManagement>remove</distributionManagement>
+								<repositories>remove</repositories>
+							</pomElements>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

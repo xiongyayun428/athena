@@ -13,7 +13,7 @@
 	<version>${revision}</version>
     <packaging>pom</packaging>
     <name>Athena Spring Boot</name>
-	<description>Athena Spring Boot</description>
+	<description>Athena Spring Boot Build</description>
 
 	<properties>
 		<main.basedir>${basedir}</main.basedir>
@@ -41,7 +41,7 @@
 
 	<modules>
 		<module>athena-spring-boot-project</module>
-		<module>athena-spring-boot-samples</module>
+<!--		<module>athena-spring-boot-samples</module>-->
 	</modules>
 
 	<build>
@@ -55,118 +55,5 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<plugins>
-			<!--Maven Jar Plugin-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Implementation-Title>${project.name}</Implementation-Title>
-							<Implementation-Version>${revision}</Implementation-Version>
-							<Built-By>Athena</Built-By>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			<!--Maven Compiler Plugin-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<!--打包跳过测试-->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
-
-<!--	<profiles>-->
-<!--		<profile>-->
-<!--			<id>local-repo</id>-->
-<!--			<activation>-->
-<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
-<!--				<activeByDefault>true</activeByDefault>-->
-<!--			</activation>-->
-<!--			&lt;!&ndash; 仓库配置 &ndash;&gt;-->
-<!--			<repositories>-->
-<!--				<repository>-->
-<!--					<id>nexus</id>-->
-<!--					<name>Nexus Repository</name>-->
-<!--					<url>http://localhost:8081/repository/maven-public/</url>-->
-<!--					<releases>-->
-<!--						<enabled>true</enabled>-->
-<!--					</releases>-->
-<!--					<snapshots>-->
-<!--						<enabled>true</enabled>-->
-<!--					</snapshots>-->
-<!--				</repository>-->
-<!--			</repositories>-->
-<!--			&lt;!&ndash; 插件配置 &ndash;&gt;-->
-<!--			<pluginRepositories>-->
-<!--				<pluginRepository>-->
-<!--					<id>nexus</id>-->
-<!--					<name>Nexus Plugin Repository</name>-->
-<!--					<url>http://localhost:8081/repository/maven-public/</url>-->
-<!--					<releases>-->
-<!--						<enabled>true</enabled>-->
-<!--					</releases>-->
-<!--					<snapshots>-->
-<!--						<enabled>true</enabled>-->
-<!--					</snapshots>-->
-<!--				</pluginRepository>-->
-<!--			</pluginRepositories>-->
-<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
-<!--			<distributionManagement>-->
-<!--				<repository>-->
-<!--					<id>nexus-releases</id>-->
-<!--					<name>Nexus Releases Repository</name>-->
-<!--					<url>http://localhost:8081/repository/maven-releases/</url>-->
-<!--				</repository>-->
-<!--				<snapshotRepository>-->
-<!--					<id>nexus-snapshots</id>-->
-<!--					<name>Nexus Snapshots Repository</name>-->
-<!--					<url>http://localhost:8081/repository/maven-snapshots/</url>-->
-<!--				</snapshotRepository>-->
-<!--			</distributionManagement>-->
-<!--		</profile>-->
-<!--		<profile>-->
-<!--			<id>rdc-private-repo</id>-->
-<!--			<activation>-->
-<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
-<!--				<activeByDefault>true</activeByDefault>-->
-<!--			</activation>-->
-<!--			<repositories>-->
-<!--				<repository>-->
-<!--					<id>rdc-releases</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
-<!--				</repository>-->
-<!--				<repository>-->
-<!--					<id>rdc-snapshots</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
-<!--				</repository>-->
-<!--			</repositories>-->
-<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
-<!--			<distributionManagement>-->
-<!--				<repository>-->
-<!--					<id>rdc-releases</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
-<!--				</repository>-->
-<!--				<snapshotRepository>-->
-<!--					<id>rdc-snapshots</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
-<!--				</snapshotRepository>-->
-<!--			</distributionManagement>-->
-<!--		</profile>-->
-<!--	</profiles>-->
 </project>
