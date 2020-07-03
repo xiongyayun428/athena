@@ -78,6 +78,7 @@
 								<parent>expand</parent>
 								<distributionManagement>remove</distributionManagement>
 								<repositories>remove</repositories>
+								<profiles>remove</profiles>
 							</pomElements>
 						</configuration>
 					</execution>

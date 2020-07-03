@@ -40,25 +40,25 @@
 				<artifactId>jasypt-maven-plugin</artifactId>
 				<version>3.0.3</version>
 			</plugin>
-<!--			<plugin>-->
-<!--				<artifactId>maven-clean-plugin</artifactId>-->
-<!--				<version>3.1.0</version>-->
-<!--				<configuration>-->
-<!--					<failOnError>false</failOnError>-->
-<!--					<filesets>-->
-<!--						<fileset>-->
-<!--							<directory>${basedir}/</directory> // 目标文件夹-->
-<!--							<includes>-->
-<!--								<include>**/.flattened-pom.xml</include> // 按文件名筛选要清理的文件-->
-<!--							</includes>-->
-<!--&lt;!&ndash;							<excludes>&ndash;&gt;-->
-<!--&lt;!&ndash;								<exclude>user*.proto</exclude> // target文件夹中对应的要清理的文件&ndash;&gt;-->
-<!--&lt;!&ndash;							</excludes>&ndash;&gt;-->
-<!--							<followSymlinks>false</followSymlinks>-->
-<!--						</fileset>-->
-<!--					</filesets>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<failOnError>false</failOnError>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/</directory> // 目标文件夹
+							<includes>
+								<include>**/.flattened-pom.xml</include> // 按文件名筛选要清理的文件
+							</includes>
+<!--							<excludes>-->
+<!--								<exclude>user*.proto</exclude> // target文件夹中对应的要清理的文件-->
+<!--							</excludes>-->
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
