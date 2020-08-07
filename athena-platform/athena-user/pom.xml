@@ -21,10 +21,10 @@
 			<groupId>com.xiongyayun</groupId>
 			<artifactId>athena-db</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.xiongyayun</groupId>
-			<artifactId>athena-service-websocket</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.xiongyayun</groupId>-->
+<!--			<artifactId>athena-service-websocket</artifactId>-->
+<!--		</dependency>-->
         <dependency>
 			<groupId>com.xiongyayun</groupId>
 			<artifactId>athena-service-id</artifactId>

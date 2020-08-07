@@ -1,6 +1,7 @@
 package com.xiongyayun.athena.core.aop;
 
-import cn.hutool.json.JSONUtil;
+import cn.hutool.core.util.IdUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiongyayun.athena.core.annotation.Logger;
@@ -14,10 +15,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 日志切面
@@ -29,10 +32,20 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class LoggerAspect {
-    private boolean limitLength = true;
-    private int limit = 300;
-    ThreadLocal<Long> startTime = new ThreadLocal<>();
-    ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> loggerThreadLocal = new ThreadLocal<>();
+	private ObjectMapper mapper = new ObjectMapper();
+    private boolean limitLength = false;
+    private int limit = 1024;
+
+    private static ThreadLocal<Long> startTimeThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> uuidThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> loggerThreadLocal = new ThreadLocal<>();
+
+	@Resource
+	private ObjectMapper defaultObjectMapper;
+
+    public LoggerAspect() {
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+	}
 
     /**
      * 切入点
@@ -48,40 +61,53 @@ public class LoggerAspect {
     public void before(JoinPoint point) {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
+		String[] parameterNames = signature.getParameterNames();
+		Object[] parameterValues = point.getArgs();
         Logger annotation = method.getAnnotation(Logger.class);
-        if (annotation != null) {
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            HttpServletRequest request = attributes.getRequest();
+        if (annotation == null) {
+        	return;
+		}
+		startTimeThreadLocal.set(System.currentTimeMillis());
+		String uuid = IdUtil.simpleUUID();
+		uuidThreadLocal.set(uuid);
+		Map<String, Object> args = new HashMap<>(parameterNames.length);
+		if (parameterNames != null && parameterNames.length > 0) {
+			for (int i = 0; i < parameterNames.length; i++) {
+				args.put(parameterNames[i], parameterValues[i]);
+			}
+		}
+		String params;
+		try {
+			params = mapper.writeValueAsString(args);
+		} catch (JsonProcessingException e) {
+			params = Arrays.toString(point.getArgs());
+			log.error("序列化请求参数异常", e);
+		}
+		if (annotation.save()) {
+			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+			HttpServletRequest request = attributes.getRequest();
 //            SystemUtil.logRequest(request);
-            if (annotation.save()) {
-                startTime.set(System.currentTimeMillis());
-                loggerThreadLocal.set(new com.xiongyayun.athena.core.model.support.Logger());
-                loggerThreadLocal.get().setHttpMethod(request.getMethod());
-                loggerThreadLocal.get().setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
-                String queryString = request.getQueryString();
-                String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
 
-                loggerThreadLocal.get().setUrl(request.getRequestURL().toString() + queryClause);
-                loggerThreadLocal.get().setIp(SystemUtil.getClientIP(request));
-                loggerThreadLocal.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
+			com.xiongyayun.athena.core.model.support.Logger logger = new com.xiongyayun.athena.core.model.support.Logger();
+//			logger.setId(IdUtil.);
+			logger.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
+			logger.setHttpMethod(request.getMethod());
+			logger.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
+			String queryString = request.getQueryString();
+			String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
+			logger.setUrl(request.getRequestURL().toString() + queryClause);
+			logger.setIp(SystemUtil.getClientIP(request));
+//			loggerThreadLocal.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
+			logger.setRequestBody(params);
 //        loggerThreadLocal.get().setLogType(AppConstants.LOG_TYPE_HTTP);
-                String params = request.getParameterMap().entrySet().stream()
-                        .map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
-                        .collect(Collectors.joining(", "));
-                loggerThreadLocal.get().setReqParams(params);
-            }
-            log.info("===>【{}】请求参数：{}", String.join(",", Arrays.asList(annotation.value())), Arrays.toString(point.getArgs()));
-        }
-    }
-
-    /**
-     * 当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）
-     * @param joinPoint
-     */
-    @After("doAspect()")
-    public void after(JoinPoint joinPoint) {
-        log.info("已经记录下操作日志@After 方法执行后-->" + joinPoint.getSignature().getName());
-
+//			String params = request.getParameterMap().entrySet().stream()
+//					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
+//					.collect(Collectors.joining(", "));
+//			System.out.println(params);
+//			loggerThreadLocal.get().setReqParams(params);
+			loggerThreadLocal.set(logger);
+		}
+		log.info("[{}] {} 请求参数：{}", String.join(",", Arrays.asList(annotation.value())), uuid, params);
     }
 
     /**
@@ -89,28 +115,48 @@ public class LoggerAspect {
      * @param resultValue
      */
     @AfterReturning(returning = "resultValue", pointcut = "doAspect()")
-    public void afterReturning(Object resultValue) {
+    public void afterReturning(JoinPoint point, Object resultValue) {
+		long spendTime = System.currentTimeMillis() - startTimeThreadLocal.get();
+		String uuid = uuidThreadLocal.get();
+		MethodSignature signature = (MethodSignature) point.getSignature();
+		Method method = signature.getMethod();
+		Logger annotation = method.getAnnotation(Logger.class);
+		String annotationValue = String.join(",", Arrays.asList(annotation.value()));
         if (null == resultValue) {
-            log.info("未返回数据");
+			log.trace("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
             return;
         }
-        ObjectMapper mapper = new ObjectMapper();
         String value = resultValue.toString();
         try {
-            value = mapper.writeValueAsString(resultValue);
+            value = defaultObjectMapper.writeValueAsString(resultValue);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
         }
         String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
 
-        if (null != loggerThreadLocal.get()) {
-            loggerThreadLocal.get().setSpendTime(System.currentTimeMillis() - startTime.get());
-            loggerThreadLocal.get().setRespParams(truncatedValue);
+        if (annotation.save()) {
+            loggerThreadLocal.get().setSpendTime(spendTime);
+			loggerThreadLocal.get().setResponseBody(truncatedValue);
             // TODO 保存
 //            System.out.println(loggerThreadLocal.get());
         }
-        log.info("===>返回数据：{}", truncatedValue);
+        log.info("[{}] {} 耗时: {}ms", annotationValue, uuid, spendTime);
+        if (log.isDebugEnabled()) {
+			System.err.println(uuid + "=====>" + annotationValue + "<=====" + System.lineSeparator() +
+					truncatedValue + System.lineSeparator() + uuid + "=====>" + annotationValue + "<=====");
+		}
     }
+
+	/**
+	 * 当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）
+	 * @param joinPoint
+	 */
+	@After("doAspect()")
+	public void after(JoinPoint joinPoint) {
+		log.info("已经记录下操作日志@After 方法执行后-->" + joinPoint.getSignature().getName());
+
+		clear();
+	}
 
     /**
      * 抛出异常后通知（After throwing advice） ： 在方法抛出异常退出时执行的通知。
@@ -129,5 +175,11 @@ public class LoggerAspect {
         }
         return e;
     }
+
+    private void clear() {
+		loggerThreadLocal.remove();
+		uuidThreadLocal.remove();
+		startTimeThreadLocal.remove();
+	}
 
 }

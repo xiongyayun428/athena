@@ -5,6 +5,8 @@ import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.response.ResBody;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * ExceptionHandlerAdvice
@@ -38,6 +42,7 @@ import java.util.stream.Collectors;
 @ResponseBody
 public class ExceptionHandlerAdvice {
     private final I18nService i18nService;
+    private static Map<String, KeyValue> ERROR_CACHE = new HashMap<>();
 
     @Autowired
 	public ExceptionHandlerAdvice(I18nService i18nService) {
@@ -115,27 +120,64 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(AthenaRuntimeException.class)
     public ResBody catchAthenaRuntimeException(AthenaRuntimeException e) {
+		if (!StringUtils.isEmpty(e.getCode())) {
+			return new ResBody(e.getCode(), e.getMessageKey());
+		}
         return translate(e.getMessage(), e.getArgs(), null, e);
     }
 
     @ExceptionHandler(AthenaException.class)
     public ResBody catchAthenaException(AthenaException e) {
+		if (!StringUtils.isEmpty(e.getCode())) {
+			return new ResBody(e.getCode(), e.getMessageKey());
+		}
         return translate(e.getMessage(), e.getArgs(), null, e);
     }
 
-    protected ResBody translate(String code, @Nullable Object[] args, @Nullable String msg, @Nullable Throwable e) {
-        ResBody resBody;
-        if (i18nService != null) {
-            String rtnMsg = i18nService.get(code, args, msg);
-            if (StringUtils.isEmpty(rtnMsg)) {
-                // TODO 错误码不知道怎么定义
-                resBody = new ResBody("", code);
-            } else {
-                resBody = new ResBody(code, rtnMsg);
-            }
-        } else {
-            resBody = new ResBody(code, msg);
-        }
+    protected ResBody translate(String code, @Nullable Object[] args, @Nullable String defaultMsg, @Nullable Throwable e) {
+        final ResBody resBody = new ResBody();
+        if (i18nService == null) {
+        	throw new RuntimeException("请配置i18nService");
+		}
+		KeyValue cache = ERROR_CACHE.get(code);
+        if (cache != null) {
+			resBody.setRtnCode(cache.getKey());
+			resBody.setRtnMsg(cache.getValue());
+		} else {
+			String i18nValue = i18nService.get(code, args, defaultMsg);
+			Object val = null;
+			if (!StringUtils.isEmpty(i18nValue)) {
+				String[] separator = {" ", ",", "|", ":", "^", ";", "/"};
+				String[] i18nValueArray = i18nValue.split("");
+				val = Arrays.asList(i18nValueArray).stream()
+						.filter(v -> Arrays.asList(separator).stream().anyMatch(v::equals))
+						.findFirst()
+						.orElse(null)
+						;
+			}
+			if (val != null) {
+				int s = i18nValue.indexOf(String.valueOf(val));
+				resBody.setRtnCode(i18nValue.substring(0, s));
+				resBody.setRtnMsg(i18nValue.substring(s + 1));
+			} else {
+				// 没找到翻译
+				if (StringUtils.isEmpty(i18nValue)) {
+					log.warn("错误信息配置错误: {}", code);
+					resBody.setRtnMsg(code);
+				} else {
+					resBody.setRtnMsg(i18nValue);
+				}
+				resBody.setRtnCode("999999");
+			}
+			ERROR_CACHE.put(code, new KeyValue(resBody.getRtnCode(), resBody.getRtnMsg()));
+		}
+
+//		if (StringUtils.isEmpty(i18nValue)) {
+//			// TODO 错误码不知道怎么定义
+//			resBody = new ResBody("", code);
+//		} else {
+//			resBody = new ResBody(code, rtnMsg);
+//		}
 //        var resBody = new ResBody(code).withCode(code).withArgs(args).withMsg(msg).withI18nService(i18nService);
         if (e != null) {
             log.error(resBody.getRtnMsg(), e);
@@ -145,4 +187,10 @@ public class ExceptionHandlerAdvice {
         return resBody;
     }
 
+    @Data
+	@AllArgsConstructor
+    class KeyValue {
+    	private String key;
+    	private String value;
+	}
 }

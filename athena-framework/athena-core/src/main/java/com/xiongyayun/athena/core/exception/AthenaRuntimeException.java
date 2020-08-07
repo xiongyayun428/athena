@@ -25,6 +25,9 @@ public class AthenaRuntimeException extends NestedRuntimeException {
     @Setter
     @Getter
     private Object[] args = new Object[0];
+	@Setter
+	@Getter
+	private String code;
 
     private ConcurrentMap<String, String> cache = new ConcurrentHashMap(1);
 
@@ -39,6 +42,11 @@ public class AthenaRuntimeException extends NestedRuntimeException {
     public AthenaRuntimeException(@Nullable String messageKey) {
         super(messageKey);
     }
+
+	public AthenaRuntimeException(@Nullable String code, @Nullable String msg) {
+		super(msg);
+		this.code = code;
+	}
 
     public AthenaRuntimeException(@Nullable String messageKey, @Nullable Object[] args) {
         this(messageKey);

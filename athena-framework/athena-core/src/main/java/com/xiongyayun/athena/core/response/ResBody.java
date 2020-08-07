@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * ResponseBody
+ * 返回体
  *
  * @author: 熊亚运
  * @date: 2019-05-21

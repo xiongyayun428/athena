@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice()
 public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
     private boolean limitLength = true;
-    private int limit = 300;
+    private int limit = 1024;
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
         return true;
@@ -54,7 +54,7 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
                 ObjectMapper mapper = new ObjectMapper();
                 String value = mapper.writeValueAsString(body);
                 String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
-                log.debug("--->RESPONSE: {}", truncatedValue);
+                log.info("[RESPONSE]: {}", truncatedValue);
             } catch (JsonProcessingException e) {
                 log.error(e.getMessage(), e);
             }

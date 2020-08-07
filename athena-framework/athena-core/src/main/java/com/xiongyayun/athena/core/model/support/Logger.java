@@ -11,10 +11,15 @@ import lombok.Data;
 @Data
 public class Logger {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5604511735164458525L;
 	private long id;
+
+	/**
+	 * 注释
+	 */
+	private String annotation;
     /**
      * 请求地址
      */
@@ -34,17 +39,17 @@ public class Logger {
     /**
      * 方法参数
      */
-    private String args;
+    private String head;
     /**
-     * 请求参数
+     * 请求体
      */
-    private String reqParams;
+    private String requestBody;
     /**
-     * 响应参数
+     * 响应体
      */
-    private String respParams;
+    private String responseBody;
     /**
-     * 响应时间
+     * 响应时间（毫秒）
      */
     private long spendTime;
 //    /**

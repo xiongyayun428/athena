@@ -82,19 +82,19 @@
 <!--        <module>athena-auth</module>-->
 <!--        <module>athena-config-server</module>-->
 <!--        <module>athena-consul-discovery</module>-->
-        <module>athena-core</module>
+<!--        <module>athena-core</module>-->
 <!--        <module>athena-journal</module>-->
 <!--        <module>athena-role</module>-->
 <!--        <module>athena-role-api</module>-->
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
-<!--        <module>athena-user</module>-->
+        <module>athena-user</module>
 <!--        <module>athena-user-api</module>-->
         <module>athena-util</module>
         <module>athena-db</module>
-        <module>athena-service</module>
+<!--        <module>athena-service</module>-->
         <module>athena-service-id</module>
-        <module>athena-service-time</module>
+<!--        <module>athena-service-time</module>-->
 <!--        <module>athena-service-websocket</module>-->
     </modules>
 

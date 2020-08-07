@@ -3,7 +3,6 @@ package com.xiongyayun.athena.core.exception;
 import com.xiongyayun.athena.core.ErrorConstant;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
-import io.micrometer.core.instrument.util.StringEscapeUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +25,9 @@ public class AthenaException extends NestedCheckedException {
     @Setter
     @Getter
     private Object[] args = new Object[0];
+	@Setter
+	@Getter
+    private String code;
 
     private ConcurrentMap<String, String> cache = new ConcurrentHashMap(1);
 
@@ -40,6 +42,11 @@ public class AthenaException extends NestedCheckedException {
     public AthenaException(@Nullable String messageKey) {
         super(messageKey);
     }
+
+	public AthenaException(@Nullable String code, @Nullable String msg) {
+		super(msg);
+		this.code = code;
+	}
 
     public AthenaException(@Nullable String messageKey, @Nullable Object[] args) {
         this(messageKey);

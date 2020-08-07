@@ -15,7 +15,7 @@
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
 		<alibaba-cloud.version>2.2.1.RELEASE</alibaba-cloud.version>
 
 		<!--Plugin Versions-->
