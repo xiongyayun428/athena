@@ -1,25 +1,35 @@
 package com.xiongyayun.athena.user.service;
 
-import com.xiongyayun.athena.db.Pagination;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiongyayun.athena.user.model.User;
+
+import java.util.List;
 
 /**
  * UserService
  *
- * @author: Yayun.Xiong
- * @date 2019-05-19
+ * @author Yayun.Xiong
+ * @date 2020/6/14
  */
 public interface UserService {
-
-    Pagination<User> selectAll(User user);
 
     /**
      * 新增用户
      * @param user
      * @return
      */
-    int add(User user);
+    int insert(User user);
 
+    int updateByPrimaryKey(User user);
+
+    int updateByPrimaryKeySelective(User user);
+
+    /**
+     * 根据用户ID修改用户
+     * @param user
+     * @return
+     */
+    int updateById(User user);
     /**
      * 修改用户
      * @param user
@@ -28,30 +38,43 @@ public interface UserService {
     int update(User user);
 
     /**
-     * 删除用户
+     * 根据用户ID删除用户
      * @param userId
      * @return
      */
-    int delete(String userId);
+    int deleteById(Long userId);
 
     /**
-     * 根据主键ID查询用户信息
-     * @param userId
-     * @return
-     */
-    User findUserById(String userId);
-
-    /**
-     * 根据用户名查询用户信息
-     * @param userName
-     * @return
-     */
-    User findUserByUserName(String userName);
-
-    /**
-     * 查询用户信息
+     * 根据用户所有字段匹配删除用户
      * @param user
      * @return
      */
-    User findUser(User user);
+    int delete(User user);
+
+    User selectByPrimaryKey(Long userId);
+
+    List<User> selectUser(User user, int pageNum, int pageSize);
+
+    /**
+     * 根据用户ID查询用户
+     * @param userId
+     * @return
+     */
+    User selectById(Long userId);
+
+    /**
+     * 查询全部用户信息
+     * @param user
+     * @return
+     */
+    List<User> selectList(User user);
+
+    /**
+     * 分页查询用户信息
+     * @param user
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    IPage<User> selectPage(User user, int pageNum, int pageSize);
 }

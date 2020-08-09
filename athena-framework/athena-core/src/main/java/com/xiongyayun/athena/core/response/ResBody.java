@@ -1,9 +1,8 @@
 package com.xiongyayun.athena.core.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.xiongyayun.athena.core.i18n.I18nService;
+import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,7 @@ import lombok.Setter;
  */
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody implements ResponseEntity {
+	private final I18nService i18nService;
     private static final String SUCCESS_CODE = "000000";
     private static final String SUCCESS_MSG = "SUCCESS";
 
@@ -37,26 +37,31 @@ public class ResBody implements ResponseEntity {
     private Object rtnData;
 
     @JsonIgnore
-    private I18nService i18nService;
-
-    @JsonIgnore
     private Object[] args;
 
+	@Setter
+	@JsonIgnore
+    private long timestamp;
+
     public ResBody() {
+		this.i18nService = SpringContextUtil.getBean("i18nService");
         this.rtnCode = SUCCESS_CODE;
         this.rtnMsg = SUCCESS_MSG;
     }
 
     public ResBody(String rtnCode) {
+		this.i18nService = SpringContextUtil.getBean("i18nService");
         this.rtnCode = rtnCode;
     }
 
     public ResBody(String rtnCode, String rtnMsg) {
+		this.i18nService = SpringContextUtil.getBean("i18nService");
         this.rtnCode = rtnCode;
         this.rtnMsg = rtnMsg;
     }
 
     public ResBody(String rtnCode, Object[] args) {
+		this.i18nService = SpringContextUtil.getBean("i18nService");
         this.rtnCode = rtnCode;
         this.args = args;
     }
@@ -68,10 +73,9 @@ public class ResBody implements ResponseEntity {
         return this.rtnMsg;
     }
 
-    public ResBody withI18nService(I18nService i18nService) {
-        this.i18nService = i18nService;
-        return this;
-    }
+    public long getTimestamp() {
+    	return System.currentTimeMillis();
+	}
 
     public ResBody withCode(String rtnCode) {
         this.rtnCode = rtnCode;

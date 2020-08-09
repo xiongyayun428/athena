@@ -21,18 +21,13 @@ public class I18nService {
 
     @Autowired
 	public I18nService(MessageSource messageSource) {
-		if (messageSource instanceof ResourceBundleMessageSource) {
-			ResourceBundleMessageSource rbms = (ResourceBundleMessageSource) messageSource;
-			rbms.addBasenames("i18n/error");
-			this.messageSource = rbms;
-		} else {
-			ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-			source.setParentMessageSource(messageSource);
-			source.setBasenames("i18n/error");
-			source.setUseCodeAsDefaultMessage(true);
-			source.setDefaultEncoding("UTF-8");
-			this.messageSource = source;
-		}
+		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		source.setParentMessageSource(messageSource);
+		source.setBasenames("i18n/inner-error");
+		source.setUseCodeAsDefaultMessage(true);
+		source.setFallbackToSystemLocale(false);
+		source.setDefaultEncoding("UTF-8");
+		this.messageSource = source;
 	}
 
 	public String get(String code) {

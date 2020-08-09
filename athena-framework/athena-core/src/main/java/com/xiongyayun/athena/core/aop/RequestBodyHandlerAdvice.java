@@ -1,6 +1,7 @@
 package com.xiongyayun.athena.core.aop;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,14 +13,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 /**
- * RequestBodyHandlerAdvice
+ * 允许在将请求的主体读取和转换成一个对象之前对请求进行自定义，
+ * 并允许在将其传递到控制器方法作为一个@RequestBody或HttpEntity方法参数之前处理结果对象。
  *
  * @author: 熊亚运
  * @date: 2019-05-30
  */
-@Slf4j
 @RestControllerAdvice
 public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
+	private static final Logger log = LoggerFactory.getLogger(RequestBodyHandlerAdvice.class);
     @Override
     public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         return true;

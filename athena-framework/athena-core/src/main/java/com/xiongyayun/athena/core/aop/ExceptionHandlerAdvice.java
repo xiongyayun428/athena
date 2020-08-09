@@ -5,9 +5,8 @@ import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.response.ResBody;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,9 +26,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * ExceptionHandlerAdvice
@@ -37,10 +37,9 @@ import java.util.stream.Stream;
  * @author: 熊亚运
  * @date: 2019-05-21
  */
-@Slf4j
 @RestControllerAdvice
-@ResponseBody
 public class ExceptionHandlerAdvice {
+	protected static final Logger log = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
     private final I18nService i18nService;
     private static Map<String, KeyValue> ERROR_CACHE = new HashMap<>();
 
@@ -141,13 +140,13 @@ public class ExceptionHandlerAdvice {
 		}
 		KeyValue cache = ERROR_CACHE.get(code);
         if (cache != null) {
-			resBody.setRtnCode(cache.getKey());
-			resBody.setRtnMsg(cache.getValue());
+			resBody.withCode(cache.getKey()).withMsg(cache.getValue());
 		} else {
+        	// 翻译后
 			String i18nValue = i18nService.get(code, args, defaultMsg);
 			Object val = null;
 			if (!StringUtils.isEmpty(i18nValue)) {
-				String[] separator = {" ", ",", "|", ":", "^", ";", "/"};
+				String[] separator = {" ", ",", "，", "|", ":", "：", "^", ";", "；", "/"};
 				String[] i18nValueArray = i18nValue.split("");
 				val = Arrays.asList(i18nValueArray).stream()
 						.filter(v -> Arrays.asList(separator).stream().anyMatch(v::equals))
@@ -155,30 +154,23 @@ public class ExceptionHandlerAdvice {
 						.orElse(null)
 						;
 			}
+			// 翻译后存在错误码和错误消息
 			if (val != null) {
 				int s = i18nValue.indexOf(String.valueOf(val));
-				resBody.setRtnCode(i18nValue.substring(0, s));
-				resBody.setRtnMsg(i18nValue.substring(s + 1));
+				resBody.withCode(i18nValue.substring(0, s)).withMsg(i18nValue.substring(s + 1));
 			} else {
 				// 没找到翻译
 				if (StringUtils.isEmpty(i18nValue)) {
-					log.warn("错误信息配置错误: {}", code);
+					log.warn("请配置错误码和错误信息: {}", code);
 					resBody.setRtnMsg(code);
 				} else {
+					log.warn("错误码和错误信息配置错误: {}", code);
 					resBody.setRtnMsg(i18nValue);
 				}
 				resBody.setRtnCode("999999");
 			}
 			ERROR_CACHE.put(code, new KeyValue(resBody.getRtnCode(), resBody.getRtnMsg()));
 		}
-
-//		if (StringUtils.isEmpty(i18nValue)) {
-//			// TODO 错误码不知道怎么定义
-//			resBody = new ResBody("", code);
-//		} else {
-//			resBody = new ResBody(code, rtnMsg);
-//		}
-//        var resBody = new ResBody(code).withCode(code).withArgs(args).withMsg(msg).withI18nService(i18nService);
         if (e != null) {
             log.error(resBody.getRtnMsg(), e);
         } else {
@@ -187,10 +179,20 @@ public class ExceptionHandlerAdvice {
         return resBody;
     }
 
-    @Data
-	@AllArgsConstructor
     class KeyValue {
     	private String key;
     	private String value;
+    	public KeyValue(String key, String value) {
+    		this.key = key;
+    		this.value = value;
+		}
+
+		public String getKey() {
+    		return this.key;
+		}
+
+		public String getValue() {
+			return value;
+		}
 	}
 }

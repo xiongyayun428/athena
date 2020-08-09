@@ -6,10 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiongyayun.athena.core.annotation.Logger;
 import com.xiongyayun.athena.core.utils.SystemUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -30,8 +31,8 @@ import java.util.Map;
  */
 @Aspect
 @Component
-@Slf4j
 public class LoggerAspect {
+	private static final org.slf4j.Logger log = LoggerFactory.getLogger(LoggerAspect.class);
 	private ObjectMapper mapper = new ObjectMapper();
     private boolean limitLength = false;
     private int limit = 1024;
@@ -153,7 +154,8 @@ public class LoggerAspect {
 	 */
 	@After("doAspect()")
 	public void after(JoinPoint joinPoint) {
-		log.info("已经记录下操作日志@After 方法执行后-->" + joinPoint.getSignature().getName());
+		Signature signature = joinPoint.getSignature();
+		log.info("已经记录下操作日志@After 方法执行后-->" + signature.getDeclaringTypeName() + "." + signature.getName());
 
 		clear();
 	}

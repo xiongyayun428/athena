@@ -4,7 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiongyayun.athena.core.response.ResBody;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,14 +19,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ResponseHandler
+ * ResponseBodyHandlerAdvice
  *
  * @author: Yayun.Xiong
  * @date 2019-05-26
  */
-@Slf4j
-@RestControllerAdvice()
+@RestControllerAdvice
 public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
+	private static final Logger log = LoggerFactory.getLogger(ResponseBodyHandlerAdvice.class);
     private boolean limitLength = true;
     private int limit = 1024;
     @Override

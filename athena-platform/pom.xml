@@ -7,6 +7,7 @@
 		<artifactId>athena</artifactId>
 		<version>${revision}</version>
 	</parent>
+	<groupId>com.xiongyayun.platform</groupId>
     <artifactId>athena-platform</artifactId>
     <packaging>pom</packaging>
     <name>Athena Platform</name>
@@ -17,12 +18,22 @@
 	</properties>
 
 	<dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -60,17 +71,7 @@
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun</groupId>
-                <artifactId>athena-service</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xiongyayun</groupId>
-                <artifactId>athena-service-id</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xiongyayun</groupId>
-                <artifactId>athena-service-websocket</artifactId>
+                <artifactId>athena-util</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
@@ -90,10 +91,8 @@
 <!--        <module>athena-test</module>-->
         <module>athena-user</module>
 <!--        <module>athena-user-api</module>-->
-        <module>athena-util</module>
-        <module>athena-db</module>
 <!--        <module>athena-service</module>-->
-        <module>athena-service-id</module>
+<!--        <module>athena-service-id</module>-->
 <!--        <module>athena-service-time</module>-->
 <!--        <module>athena-service-websocket</module>-->
     </modules>

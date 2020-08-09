@@ -1,78 +1,96 @@
 package com.xiongyayun.athena.user.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.xiongyayun.athena.db.Pagination;
-import com.xiongyayun.athena.service.id.IdFactory;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.user.mapper.UserMapper;
 import com.xiongyayun.athena.user.model.User;
 import com.xiongyayun.athena.user.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
- * 用户服务实现类
+ * UserServiceImpl
  *
- * @author: Yayun.Xiong
- * @date 2019-05-19
+ * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date: 2020/6/24
  */
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+    @Resource
     private UserMapper userMapper;
-    @Autowired
-    @Qualifier("simpleIdFactory")
-    private IdFactory idFactory;
 
     @Override
-    public int delete(String userId) {
-        User user = new User();
-        user.setUserId(userId);
-        return userMapper.delete(user);
-    }
-
-    @Override
-    public User findUserById(String userId) {
-        User user = new User();
-        user.setUserId(userId);
-        return userMapper.selectOne(user);
-    }
-
-    @Override
-    public User findUserByUserName(String userName) {
-        User user = new User();
-        user.setUserName(userName);
-        User result = userMapper.selectOne(user);
-        if (result != null) {
-            Integer status = result.getStatus();
-            if (status != 0) {
-
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public User findUser(User user) {
-        return userMapper.selectOne(user);
-    }
-
-    @Override
-    public Pagination<User> selectAll(User user) {
-        PageHelper.startPage(user);
-        return new Pagination(userMapper.select(user));
-    }
-
-    @Override
-    public int add(User user) {
-        user.setUserId(idFactory.generate().toString());
+    public int insert(User user) {
         return userMapper.insert(user);
     }
 
     @Override
+    public int updateById(User user) {
+        return userMapper.updateById(user);
+    }
+
+    @Override
     public int update(User user) {
-        return userMapper.updateByPrimaryKeySelective(user);
+        return userMapper.update(user, Wrappers.<User>lambdaUpdate()
+                .eq(User::getUserId, user.getUserId())
+        );
+    }
+
+    @Override
+    public int updateByPrimaryKey(User user) {
+        return userMapper.updateById(user);
+//        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(User user) {
+        return 0;
+//        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int deleteById(Long userId) {
+        return userMapper.deleteById(userId);
+    }
+
+    @Override
+    public int delete(User user) {
+        return userMapper.delete(Wrappers.lambdaQuery(user));
+    }
+
+    @Override
+    public User selectByPrimaryKey(Long userId) {
+        return null;
+//        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<User> selectUser(User user, int pageNum, int pageSize) {
+        return null;
+//        PageHelper.startPage(pageNum, pageSize);
+//        return userMapper.select(user);
+    }
+
+    @Override
+    public List<User> selectList(User user) {
+        return userMapper.selectList(Wrappers.lambdaQuery(user).orderByAsc(User::getLastUpdateTime));
+    }
+
+    @Override
+    public IPage<User> selectPage(User user, int pageNum, int pageSize) {
+        Page<User> page = new Page(pageNum, pageSize);
+        return userMapper.selectPage(page, Wrappers.lambdaQuery(user)
+//                .or()
+//                .likeLeft(User::getUserName, user.getUserName())
+                .orderByAsc(User::getLastUpdateTime)
+        );
+    }
+
+    @Override
+    public User selectById(Long userId) {
+        return userMapper.selectById(userId);
     }
 }
