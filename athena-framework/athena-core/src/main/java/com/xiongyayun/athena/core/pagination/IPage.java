@@ -1,58 +1,73 @@
 package com.xiongyayun.athena.core.pagination;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
- * IPage
+ * 分页
  *
  * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date: 2020/8/6
  */
+@ApiModel("分页")
 public interface IPage<T> {
 
 	/**
-	 * 当前页
+	 * 当前页数
 	 * @return
 	 */
-	long getPageNum();
+	@ApiModelProperty("当前页数")
+	long getPageIndex();
 
 	/**
-	 * 每页显示条数
+	 * 每页条数
 	 * @return
 	 */
+	@ApiModelProperty("每页条数")
 	long getPageSize();
 
 	/**
-	 * 当前分页总页数
+	 * 总页数
 	 * @return
 	 */
+	@ApiModelProperty("总页数")
 	long getPageCount();
 
 	/**
-	 * 当前分页总记录数
+	 * 总记录数
 	 * @return
 	 */
+	@ApiModelProperty("数据总数")
 	long getTotal();
 
 	/**
 	 * 当前分页查询数据列表
 	 * @return
 	 */
+	@ApiModelProperty("数据列表")
 	List<T> getRecords();
 
 	/**
 	 * 是否存在上一页
 	 * @return true / false
 	 */
+	@ApiModelProperty("是否存在上一页")
 	default boolean isHasPrevious() {
-		return getPageNum() > 1;
+		return getPageIndex() > 1;
 	}
 
 	/**
 	 * 是否存在下一页
 	 * @return true / false
 	 */
+	@ApiModelProperty("是否存在下一页")
 	default boolean isHasNext() {
-		return getPageNum() < getPageCount();
+		return getPageIndex() < getPageCount();
 	}
+
+
+//	List<OrderItem> getSort();
 }

@@ -8,6 +8,6 @@ import com.xiongyayun.athena.user.dto.UserDto;
  * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date: 2020/7/6
  */
-public class UserVo extends UserDto {
+public class UserVO extends UserDto {
 
 }

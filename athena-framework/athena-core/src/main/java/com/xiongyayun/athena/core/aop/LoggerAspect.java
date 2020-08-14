@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.xiongyayun.athena.core.annotation.Logger;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import org.aspectj.lang.JoinPoint;
@@ -33,7 +34,6 @@ import java.util.Map;
 @Component
 public class LoggerAspect {
 	private static final org.slf4j.Logger log = LoggerFactory.getLogger(LoggerAspect.class);
-	private ObjectMapper mapper = new ObjectMapper();
     private boolean limitLength = false;
     private int limit = 1024;
 
@@ -41,11 +41,22 @@ public class LoggerAspect {
     private static ThreadLocal<String> uuidThreadLocal = new ThreadLocal<>();
     private static ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> loggerThreadLocal = new ThreadLocal<>();
 
-	@Resource
-	private ObjectMapper defaultObjectMapper;
 
-    public LoggerAspect() {
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+	private ObjectMapper indentOutputObjectMapper;
+	private ObjectMapper objectMapper;
+
+	@Resource
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper.copy();
+		this.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		// without 禁用
+//		this.objectMapper.setConfig(objectMapper.getSerializationConfig().without(SerializationFeature.INDENT_OUTPUT));
+		this.objectMapper.configure(SerializationFeature.INDENT_OUTPUT, false);
+
+		this.indentOutputObjectMapper = objectMapper.copy();
+		this.indentOutputObjectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+		// with 启用
+//		this.indentOutputObjectMapper.setConfig(objectMapper.getSerializationConfig().with(SerializationFeature.INDENT_OUTPUT));
 	}
 
     /**
@@ -79,7 +90,7 @@ public class LoggerAspect {
 		}
 		String params;
 		try {
-			params = mapper.writeValueAsString(args);
+			params = objectMapper.writeValueAsString(args);
 		} catch (JsonProcessingException e) {
 			params = Arrays.toString(point.getArgs());
 			log.error("序列化请求参数异常", e);
@@ -129,7 +140,7 @@ public class LoggerAspect {
         }
         String value = resultValue.toString();
         try {
-            value = defaultObjectMapper.writeValueAsString(resultValue);
+            value = indentOutputObjectMapper.writeValueAsString(resultValue);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
         }
@@ -142,7 +153,7 @@ public class LoggerAspect {
 //            System.out.println(loggerThreadLocal.get());
         }
         log.info("[{}] {} 耗时: {}ms", annotationValue, uuid, spendTime);
-        if (log.isDebugEnabled()) {
+        if (log.isTraceEnabled()) {
 			System.err.println(uuid + "=====>" + annotationValue + "<=====" + System.lineSeparator() +
 					truncatedValue + System.lineSeparator() + uuid + "=====>" + annotationValue + "<=====");
 		}

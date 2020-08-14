@@ -4,6 +4,7 @@ spring:
     encoding: UTF-8
   application:
     name: athena-user
+    description: 用户服务API
 #  cloud:
 #    stream:
 #      binders:
@@ -61,4 +62,8 @@ mybatis:
 #mybatis-plus:
 #  configuration:
 #    # 是否将sql打印到控制面板(该配置会将sql语句和查询的结果都打印到控制台)
+management:
+  endpoint:
+    shutdown:
+      enabled:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

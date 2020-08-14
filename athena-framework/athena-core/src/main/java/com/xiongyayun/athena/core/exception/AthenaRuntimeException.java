@@ -1,16 +1,10 @@
 package com.xiongyayun.athena.core.exception;
 
 import com.xiongyayun.athena.core.ErrorConstant;
-import com.xiongyayun.athena.core.i18n.I18nService;
-import com.xiongyayun.athena.core.utils.SpringContextUtil;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.lang.Nullable;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * AthenaRuntimeException
@@ -18,20 +12,23 @@ import java.util.concurrent.ConcurrentMap;
  * @author: 熊亚运
  * @date: 2019-05-21
  */
-@Slf4j
-@SuppressWarnings("all")
-public class AthenaRuntimeException extends NestedRuntimeException {
-    private static final long serialVersionUID = 672694596335429564L;
-    @Setter
-    @Getter
-    private Object[] args = new Object[0];
-	@Setter
-	@Getter
+public class AthenaRuntimeException extends NestedRuntimeException implements AthenaInnerException {
+	private static final long serialVersionUID = 672694596335429564L;
+	protected static final Logger log = LoggerFactory.getLogger(AthenaRuntimeException.class);
+
+    private Object[] args;
 	private String code;
 
-    private ConcurrentMap<String, String> cache = new ConcurrentHashMap(1);
+	@Override
+	public Object[] getArgs() {
+		return args;
+	}
 
-    public AthenaRuntimeException() {
+	public String getCode() {
+		return code;
+	}
+
+	public AthenaRuntimeException() {
         super(ErrorConstant.SYSTEM_ERROR_UNDEFINED);
     }
 
@@ -39,48 +36,32 @@ public class AthenaRuntimeException extends NestedRuntimeException {
         super(ErrorConstant.SYSTEM_ERROR_UNDEFINED, throwable);
     }
 
-    public AthenaRuntimeException(@Nullable String messageKey) {
-        super(messageKey);
+    public AthenaRuntimeException(@Nullable String message) {
+        super(message);
     }
 
-	public AthenaRuntimeException(@Nullable String code, @Nullable String msg) {
-		super(msg);
+	public AthenaRuntimeException(@Nullable String message, @Nullable Throwable cause) {
+		super(message, cause);
+	}
+
+	public AthenaRuntimeException(@Nullable String message, @Nullable String code) {
+		super(message);
 		this.code = code;
 	}
 
-    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Object[] args) {
-        this(messageKey);
+    public AthenaRuntimeException(@Nullable String message, @Nullable Object[] args) {
+        this(message);
         this.args = args;
     }
 
-    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Throwable cause) {
-        super(messageKey, cause);
-    }
-
-    public AthenaRuntimeException(@Nullable String messageKey, @Nullable Object[] args, @Nullable Throwable cause) {
-        super(messageKey, cause);
+    public AthenaRuntimeException(@Nullable String message, @Nullable Object[] args, @Nullable Throwable cause) {
+        super(message, cause);
         this.args = args;
     }
 
-    public String getMessageKey() {
-        return super.getMessage();
-    }
+	public AthenaRuntimeException(@Nullable String message, @Nullable String code, @Nullable Throwable cause) {
+		super(message, cause);
+		this.code = code;
+	}
 
-    public String getDefaultMessage() {
-        String message;
-        if (this.cache != null && (message = this.cache.get(this.getMessageKey())) != null) {
-            return message;
-        }
-        try {
-            I18nService i18nService = SpringContextUtil.getBean(I18nService.class);
-            if (i18nService != null) {
-                message = i18nService.get(this.getMessageKey(), this.args, this.getMessageKey());
-                this.cache.put(this.getMessageKey(), message);
-                return message;
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-        return super.getMessage();
-    }
 }

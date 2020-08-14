@@ -19,14 +19,14 @@ public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         this.fill(metaObject, "createUser", "admin");
-        this.fill(metaObject, "status", "1");
-        this.fill(metaObject, "createTime", () -> metaObject.getSetterType("createTime"));
+        this.fill(metaObject, "status", 1);
+        this.fill(metaObject, "createTime", () -> getDateValue(metaObject.getSetterType("createTime")));
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         this.fill(metaObject, "lastUpdateUser", "admin");
-        this.fill(metaObject, "lastUpdateTime", () -> metaObject.getSetterType("lastUpdateTime"));
+        this.fill(metaObject, "lastUpdateTime", () -> getDateValue(metaObject.getSetterType("lastUpdateTime")));
     }
 
     private void fill(MetaObject metaObject, String fieldName, Object fieldVal) {
@@ -49,6 +49,6 @@ public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
         } else if (LocalDateTime.class.equals(setterType)) {
             return LocalDateTime.now();
         }
-        return null;
+        return new Date();
     }
 }

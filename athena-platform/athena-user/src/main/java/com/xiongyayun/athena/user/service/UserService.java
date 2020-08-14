@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.user.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xiongyayun.athena.core.pagination.IPage;
 import com.xiongyayun.athena.user.model.User;
 
 import java.util.List;
@@ -72,9 +72,9 @@ public interface UserService {
     /**
      * 分页查询用户信息
      * @param user
-     * @param pageNum
+     * @param pageIndex
      * @param pageSize
      * @return
      */
-    IPage<User> selectPage(User user, int pageNum, int pageSize);
+    IPage<User> selectPage(User user, int pageIndex, int pageSize);
 }

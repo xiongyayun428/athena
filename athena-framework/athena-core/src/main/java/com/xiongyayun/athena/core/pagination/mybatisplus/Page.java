@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * {
  *     "total": 0,
  *     "pageCount": 0,
- *     "pageNum": 1,
+ *     "PageIndex": 1,
  *     "pageSize": 10,
  *     "hasPrevious": false,
  *     "hasNext": false,
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonInclude()
 @JsonIgnoreProperties({ "pages", "current", "size", "optimizeCountSql", "searchCount", "hitCount", "orders" })
-@JsonPropertyOrder({"total", "pageCount", "pageNum", "pageSize", "hasPrevious", "hasNext", "records"})
+@JsonPropertyOrder({"total", "pageCount", "pageIndex", "pageSize", "hasPrevious", "hasNext", "records"})
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements com.xiongyayun.athena.core.pagination.IPage<T> {
 
 	public Page() {
@@ -30,23 +30,23 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 	/**
 	 * 分页构造函数
 	 *
-	 * @param pageNum     当前页
+	 * @param pageIndex   当前页数
 	 * @param pageSize    每页显示条数
 	 */
-	public Page(long pageNum, long pageSize) {
-		this(pageNum, pageSize, 0);
+	public Page(long pageIndex, long pageSize) {
+		this(pageIndex, pageSize, 0);
 	}
 
-	public Page(long pageNum, long pageSize, long total) {
-		this(pageNum, pageSize, total, true);
+	public Page(long pageIndex, long pageSize, long total) {
+		this(pageIndex, pageSize, total, true);
 	}
 
-	public Page(long pageNum, long pageSize, boolean searchCount) {
-		this(pageNum, pageSize, 0, searchCount);
+	public Page(long pageIndex, long pageSize, boolean searchCount) {
+		this(pageIndex, pageSize, 0, searchCount);
 	}
 
-	public Page(long pageNum, long pageSize, long total, boolean searchCount) {
-		super(pageNum, pageSize, total, searchCount);
+	public Page(long pageIndex, long pageSize, long total, boolean searchCount) {
+		super(pageIndex, pageSize, total, searchCount);
 	}
 
 	/**
@@ -54,12 +54,12 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 	 * @return
 	 */
 	@Override
-	public long getPageNum() {
+	public long getPageIndex() {
 		return getCurrent();
 	}
 
-	public Page<T> setPageNum(long pageNum) {
-		setCurrent(pageNum);
+	public Page<T> setPageIndex(long pageIndex) {
+		setCurrent(pageIndex);
 		return this;
 	}
 

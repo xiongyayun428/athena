@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel("用户基础信息表")
+@ApiModel("用户基础信息")
 @TableName(value = "`user`")
 public class User implements Serializable {
     /**

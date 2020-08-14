@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xiongyayun.athena.core.pagination.IPage;
 import com.xiongyayun.athena.user.feign.FileService;
 import com.xiongyayun.athena.user.model.User;
 import com.xiongyayun.athena.user.service.Message;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(tags = {"UserController", "用户"})
+@Api(value = "所有用户相关服务", tags = {"用户服务"})
 @RequestMapping("/user")
 @RefreshScope
 public class UserController {
@@ -44,7 +44,11 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_XML_VALUE)
+	/**
+	 * get返回
+	 * @return User
+	 */
+	@GetMapping(value = "/get", produces = MediaType.APPLICATION_XML_VALUE)
     @SentinelResource("get")
     public User get() {
         User user = new User();
@@ -69,10 +73,10 @@ public class UserController {
         return message.send();
     }
 
+	@Logger("新增用户")
     @ApiOperation("新增用户")
     @RequestMapping("/add")
-    public void addUser() {
-        User user = new User();
+    public void addUser(@RequestBody User user) {
         userService.insert(user);
     }
 
@@ -80,7 +84,7 @@ public class UserController {
     @Logger("修改用户")
     @PostMapping("/update")
     public void updateUser() {
-        throw new AthenaRuntimeException("UserNotExist");
+        throw new AthenaRuntimeException("UserNotExist", new Object[]{"测试", "test"});
     }
 
     @ApiOperation("删除单个用户")

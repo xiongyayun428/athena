@@ -1,6 +1,7 @@
 package com.xiongyayun.athena.user.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.xiongyayun.athena.core.pagination.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.user.mapper.UserMapper;
 import com.xiongyayun.athena.user.model.User;
@@ -80,8 +81,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public IPage<User> selectPage(User user, int pageNum, int pageSize) {
-        Page<User> page = new Page(pageNum, pageSize);
+    public IPage<User> selectPage(User user, int pageIndex, int pageSize) {
+        Page<User> page = new Page(pageIndex, pageSize);
+		page.addOrder(OrderItem.asc("user_id"));
         return userMapper.selectPage(page, Wrappers.lambdaQuery(user)
 //                .or()
 //                .likeLeft(User::getUserName, user.getUserName())

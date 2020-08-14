@@ -27,4 +27,5 @@ public class ErrorConstant implements Constant {
     public static final String TYPE_MISMATCH_EXCEPTION = "TypeMismatchException";
     public static final String HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION = "HttpMediaTypeNotSupportedException";
     public static final String DATA_INTEGRITY_VIOLATION_EXCEPTION = "DataIntegrityViolationException";
+    public static final String MY_BATIS_SYSTEM_EXCEPTION = "MyBatisSystemException";
 }

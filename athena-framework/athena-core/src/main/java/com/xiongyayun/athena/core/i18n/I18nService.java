@@ -7,8 +7,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import java.util.Locale;
-
 /**
  * I18nService
  *
@@ -23,8 +21,8 @@ public class I18nService {
 	public I18nService(MessageSource messageSource) {
 		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
 		source.setParentMessageSource(messageSource);
-		source.setBasenames("i18n/inner-error");
-		source.setUseCodeAsDefaultMessage(true);
+		source.setBasenames("i18n/core-error", "i18n/db-error");
+//		source.setUseCodeAsDefaultMessage(true);
 		source.setFallbackToSystemLocale(false);
 		source.setDefaultEncoding("UTF-8");
 		this.messageSource = source;
@@ -35,12 +33,10 @@ public class I18nService {
     }
 
     public String get(String code, @Nullable Object[] args) {
-        return get(code, args, "");
+        return get(code, args, null);
     }
 
     public String get(String code, @Nullable Object[] args, @Nullable String defaultMsg) {
-        //这里使用比较方便的方法，不依赖request.
-        Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(code, args, defaultMsg, locale);
+        return messageSource.getMessage(code, args, defaultMsg, LocaleContextHolder.getLocale());
     }
 }

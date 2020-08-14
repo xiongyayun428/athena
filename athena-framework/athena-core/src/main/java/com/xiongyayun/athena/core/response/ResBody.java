@@ -3,6 +3,8 @@ package com.xiongyayun.athena.core.response;
 import com.fasterxml.jackson.annotation.*;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +14,7 @@ import lombok.Setter;
  * @author: 熊亚运
  * @date: 2019-05-21
  */
+@ApiModel("返回数据")
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody implements ResponseEntity {
 	private final I18nService i18nService;
@@ -21,6 +24,7 @@ public class ResBody implements ResponseEntity {
     /**
      * 返回码
      */
+	@ApiModelProperty("返回码")
     @Setter
     @Getter
     private String rtnCode;
@@ -28,9 +32,11 @@ public class ResBody implements ResponseEntity {
     /**
      * 返回信息
      */
+	@ApiModelProperty("返回信息")
     @Setter
     private String rtnMsg;
 
+	@ApiModelProperty("返回数据")
     @Setter
     @Getter
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -50,26 +56,26 @@ public class ResBody implements ResponseEntity {
     }
 
     public ResBody(String rtnCode) {
-		this.i18nService = SpringContextUtil.getBean("i18nService");
+		this.i18nService = SpringContextUtil.getBean(I18nService.class);
         this.rtnCode = rtnCode;
     }
 
     public ResBody(String rtnCode, String rtnMsg) {
-		this.i18nService = SpringContextUtil.getBean("i18nService");
+		this.i18nService = SpringContextUtil.getBean(I18nService.class);
         this.rtnCode = rtnCode;
         this.rtnMsg = rtnMsg;
     }
 
     public ResBody(String rtnCode, Object[] args) {
-		this.i18nService = SpringContextUtil.getBean("i18nService");
+		this.i18nService = SpringContextUtil.getBean(I18nService.class);
         this.rtnCode = rtnCode;
         this.args = args;
     }
 
     public String getRtnMsg() {
-        if (this.rtnMsg == null && i18nService != null) {
-            this.rtnMsg = i18nService.get(rtnCode, args);
-        }
+//        if (this.rtnMsg == null && i18nService != null) {
+//            this.rtnMsg = i18nService.get(rtnCode, args);
+//        }
         return this.rtnMsg;
     }
 
@@ -91,5 +97,10 @@ public class ResBody implements ResponseEntity {
         this.args = args;
         return this;
     }
+
+	public ResBody withData(Object data) {
+		this.rtnData = data;
+		return this;
+	}
 
 }
