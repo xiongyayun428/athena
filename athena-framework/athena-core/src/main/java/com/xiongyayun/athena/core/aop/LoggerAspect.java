@@ -135,7 +135,7 @@ public class LoggerAspect {
 		Logger annotation = method.getAnnotation(Logger.class);
 		String annotationValue = String.join(",", Arrays.asList(annotation.value()));
         if (null == resultValue) {
-			log.trace("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
+			log.info("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
             return;
         }
         String value = resultValue.toString();

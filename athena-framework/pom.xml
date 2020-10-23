@@ -6,7 +6,7 @@
 		<groupId>com.xiongyayun</groupId>
 		<artifactId>athena</artifactId>
 		<version>${revision}</version>
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>athena-framework</artifactId>
 	<packaging>pom</packaging>
