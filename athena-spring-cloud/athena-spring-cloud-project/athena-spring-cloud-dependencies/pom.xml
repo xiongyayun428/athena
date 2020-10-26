@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
         <groupId>com.xiongyayun.cloud</groupId>
-        <artifactId>athena-spring-cloud-build</artifactId>
+        <artifactId>athena-spring-cloud</artifactId>
 		<version>${revision}</version>
-		<relativePath>../..</relativePath>
+		<relativePath>../../pom.xml</relativePath>
     </parent>
 	<artifactId>athena-spring-cloud-dependencies</artifactId>
     <packaging>pom</packaging>
@@ -15,15 +15,15 @@
 
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
-        <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
-		<alibaba-cloud.version>2.2.1.RELEASE</alibaba-cloud.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+		<alibaba-cloud.version>2.2.3.RELEASE</alibaba-cloud.version>
 
 		<!--Plugin Versions-->
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-		<flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
+		<flatten-maven-plugin.version>1.2.5</flatten-maven-plugin.version>
 		<xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
-		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -127,31 +127,31 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			<!-- 添加flatten-maven-plugin用于替换${revision} -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			&lt;!&ndash; 添加flatten-maven-plugin用于替换${revision} &ndash;&gt;-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>flatten-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<updatePomFile>true</updatePomFile>-->
+<!--					<flattenMode>resolveCiFriendliesOnly</flattenMode>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>flatten</id>-->
+<!--						<phase>process-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>flatten</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>flatten.clean</id>-->
+<!--						<phase>clean</phase>-->
+<!--						<goals>-->
+<!--							<goal>clean</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
     </build>
 </project>

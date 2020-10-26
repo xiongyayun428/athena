@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xiongyayun.cloud</groupId>
-        <artifactId>athena-spring-cloud-build</artifactId>
+        <artifactId>athena-spring-cloud</artifactId>
 		<version>${revision}</version>
     </parent>
     <artifactId>athena-spring-cloud-samples</artifactId>

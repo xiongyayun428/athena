@@ -14,8 +14,11 @@
 	<description>框架</description>
 
 	<properties>
-		<main.basedir>${basedir}/../</main.basedir>
+<!--		<revision>1.0.0-SNAPSHOT</revision>-->
+<!--		<main.basedir>${basedir}/../</main.basedir>-->
 		<spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+		<athena-boot.version>0.0.1-SNAPSHOT</athena-boot.version>
+		<athena-cloud.version>0.0.1-SNAPSHOT</athena-cloud.version>
 		<hutool-all.version>5.3.10</hutool-all.version>
 	</properties>
 
@@ -24,6 +27,37 @@
 		<module>athena-db</module>
 		<module>athena-util</module>
 	</modules>
+
+	<repositories>
+		<repository>
+			<id>pentaho-public</id>
+			<name>Pentaho Public</name>
+			<url>http://nexus.pentaho.org/content/groups/omni/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>plugins</id>
+			<name>Maven Central</name>
+			<url>http://nexus.pentaho.org/content/groups/omni</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -40,15 +74,14 @@
 			<dependency>
 				<groupId>com.xiongyayun.boot</groupId>
 				<artifactId>athena-spring-boot-dependencies</artifactId>
-				<version>${revision}</version>
+				<version>${athena-boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>com.xiongyayun.cloud</groupId>
 				<artifactId>athena-spring-cloud-dependencies</artifactId>
-				<version>${revision}</version>
+				<version>${athena-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

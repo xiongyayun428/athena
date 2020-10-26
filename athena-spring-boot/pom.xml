@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 	<groupId>com.xiongyayun.boot</groupId>
-    <artifactId>athena-spring-boot-build</artifactId>
+    <artifactId>athena-spring-boot</artifactId>
 	<version>${revision}</version>
     <packaging>pom</packaging>
     <name>Athena Spring Boot</name>

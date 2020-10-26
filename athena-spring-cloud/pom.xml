@@ -9,7 +9,7 @@
 		<version>${revision}</version>
 	</parent>
 	<groupId>com.xiongyayun.cloud</groupId>
-    <artifactId>athena-spring-cloud-build</artifactId>
+    <artifactId>athena-spring-cloud</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 	<name>Athena Spring Cloud Build</name>
@@ -87,31 +87,31 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			<!-- 添加flatten-maven-plugin用于替换${revision} -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			&lt;!&ndash; 添加flatten-maven-plugin用于替换${revision} &ndash;&gt;-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>flatten-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<updatePomFile>true</updatePomFile>-->
+<!--					<flattenMode>resolveCiFriendliesOnly</flattenMode>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>flatten</id>-->
+<!--						<phase>process-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>flatten</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>flatten.clean</id>-->
+<!--						<phase>clean</phase>-->
+<!--						<goals>-->
+<!--							<goal>clean</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
