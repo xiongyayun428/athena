@@ -22,8 +22,8 @@
 	</properties>
 
 	<modules>
-<!--		<module>athena-spring-boot</module>-->
-<!--		<module>athena-spring-cloud</module>-->
+		<module>athena-spring-boot</module>
+		<module>athena-spring-cloud</module>
 		<module>athena-framework</module>
 <!--		<module>athena-platform</module>-->
 	</modules>
@@ -51,53 +51,10 @@
 							<includes>
 								<include>**/.flattened-pom.xml</include> // 按文件名筛选要清理的文件
 							</includes>
-<!--							<excludes>-->
-<!--								<exclude>user*.proto</exclude> // target文件夹中对应的要清理的文件-->
-<!--							</excludes>-->
 							<followSymlinks>false</followSymlinks>
 						</fileset>
 					</filesets>
 				</configuration>
-			</plugin>
-			<!-- 添加flatten-maven-plugin用于替换${revision} -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<inherited>true</inherited>
-				<executions>
-					<execution>
-						<!-- Tidy up all POMs before they are published -->
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-						<configuration>
-							<updatePomFile>true</updatePomFile>
-							<flattenMode>bom</flattenMode>
-							<pomElements>
-								<!-- 这里必须是expand，至于为什么，暂时不知道 -->
-								<parent>expand</parent>
-								<dependencyManagement>flatten</dependencyManagement>
-								<distributionManagement>remove</distributionManagement>
-								<url>remove</url>
-								<scm>remove</scm>
-								<dependencies>keep</dependencies>
-<!--								<pluginManagement>keep</pluginManagement>-->
-								<properties>keep</properties>
-								<repositories>remove</repositories>
-<!--								<profiles>remove</profiles>-->
-							</pomElements>
-						</configuration>
-					</execution>
-					<execution>
-						<id>flatten-clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -16,32 +16,31 @@ import java.util.Map;
  * @date: 2019-06-17
  */
 public class ConvertUtil {
-    public static Object convertMap(Class type, Map map) throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public static Object convertMap(Class type, Map<String, Object> map) throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         BeanInfo beanInfo = Introspector.getBeanInfo(type);
-        Object obj = type.newInstance();
+        Object obj = type.getDeclaredConstructor().newInstance();
 
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-        for (int i = 0; i < propertyDescriptors.length; i++) {
-            PropertyDescriptor descriptor = propertyDescriptors[i];
-            String propertyName = descriptor.getName();
-            if (map.containsKey(propertyName)) {
-                Object value = map.get(propertyName);
-                Object[] args = new Object[1];
-                args[0] = value;
-                descriptor.getWriteMethod().invoke(obj, args);
-            }
-        }
+		for (PropertyDescriptor descriptor : propertyDescriptors) {
+			String propertyName = descriptor.getName();
+			if (map.containsKey(propertyName)) {
+				Object value = map.get(propertyName);
+				Object[] args = new Object[1];
+				args[0] = value;
+				descriptor.getWriteMethod().invoke(obj, args);
+			}
+		}
         return obj;
     }
 
-    public static Map convertBean(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
+    public static Map<String, Object> convertBean(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
         Class type = bean.getClass();
 		BeanInfo beanInfo = Introspector.getBeanInfo(type);
 		PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-        Map returnMap = new HashMap<String, Object>(propertyDescriptors.length);
+        Map<String, Object> returnMap = new HashMap<>(propertyDescriptors.length);
 		for (PropertyDescriptor descriptor : propertyDescriptors) {
 			String propertyName = descriptor.getName();
-			if (!propertyName.equals("class")) {
+			if (!"class".equals(propertyName)) {
 				Method readMethod = descriptor.getReadMethod();
 				Object result = readMethod.invoke(bean, new Object[0]);
 				if (result != null) {

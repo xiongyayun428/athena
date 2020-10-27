@@ -14,7 +14,6 @@
     <description>依赖</description>
 
     <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 		<alibaba-cloud.version>2.2.3.RELEASE</alibaba-cloud.version>
 
@@ -24,6 +23,7 @@
 		<build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
 		<flatten-maven-plugin.version>1.2.5</flatten-maven-plugin.version>
 		<xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -52,7 +52,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                 </plugin>
@@ -93,7 +92,6 @@
 		<plugins>
 			<!-- 编译 -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<inherited>true</inherited>
 				<configuration>
@@ -104,7 +102,6 @@
 			</plugin>
 			<!-- 打包 -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
@@ -120,38 +117,12 @@
 			</plugin>
 			<!--打包跳过测试-->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-<!--			&lt;!&ndash; 添加flatten-maven-plugin用于替换${revision} &ndash;&gt;-->
-<!--			<plugin>-->
-<!--				<groupId>org.codehaus.mojo</groupId>-->
-<!--				<artifactId>flatten-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<updatePomFile>true</updatePomFile>-->
-<!--					<flattenMode>resolveCiFriendliesOnly</flattenMode>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>flatten</id>-->
-<!--						<phase>process-resources</phase>-->
-<!--						<goals>-->
-<!--							<goal>flatten</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--					<execution>-->
-<!--						<id>flatten.clean</id>-->
-<!--						<phase>clean</phase>-->
-<!--						<goals>-->
-<!--							<goal>clean</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 		</plugins>
     </build>
 </project>

@@ -2,21 +2,22 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.xiongyayun</groupId>
-		<artifactId>athena</artifactId>
-		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+	<groupId>com.xiongyayun.framework</groupId>
 	<artifactId>athena-framework</artifactId>
+	<version>${revision}</version>
 	<packaging>pom</packaging>
 	<name>Athena Framework</name>
 	<description>框架</description>
 
 	<properties>
-<!--		<revision>1.0.0-SNAPSHOT</revision>-->
-<!--		<main.basedir>${basedir}/../</main.basedir>-->
-		<spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+		<revision>1.0.0-SNAPSHOT</revision>
+		<main.basedir>${basedir}/..</main.basedir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
 		<athena-boot.version>0.0.1-SNAPSHOT</athena-boot.version>
 		<athena-cloud.version>0.0.1-SNAPSHOT</athena-cloud.version>
 		<hutool-all.version>5.3.10</hutool-all.version>
@@ -87,13 +88,18 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.xiongyayun</groupId>
+				<groupId>com.xiongyayun.framework</groupId>
 				<artifactId>athena-core</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.xiongyayun</groupId>
+				<groupId>com.xiongyayun.framework</groupId>
 				<artifactId>athena-db</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun</groupId>
+				<artifactId>athena-util</artifactId>
 				<version>${revision}</version>
 			</dependency>
 
@@ -163,18 +169,35 @@
 	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<!-- 添加flatten-maven-plugin用于替换${revision} -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.2.5</version>
+				<configuration>
+					<!-- 是否更新pom文件 -->
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>

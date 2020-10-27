@@ -3,11 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.xiongyayun</groupId>
-		<artifactId>athena</artifactId>
-		<version>${revision}</version>
-	</parent>
 	<groupId>com.xiongyayun.cloud</groupId>
     <artifactId>athena-spring-cloud</artifactId>
 	<version>${revision}</version>
@@ -16,7 +11,7 @@
     <description>雅典娜项目</description>
 
 	<properties>
-		<main.basedir>${basedir}</main.basedir>
+		<main.basedir>${basedir}/..</main.basedir>
 		<revision>0.0.1-SNAPSHOT</revision>
 
 		<git.url>https://github.com/xiongyayun428/athena</git.url>
@@ -25,8 +20,6 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 	</properties>
 
 	<scm>
@@ -58,7 +51,6 @@
 		<plugins>
 			<!--Maven Jar Plugin-->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
@@ -72,7 +64,6 @@
 			</plugin>
 			<!--Maven Compiler Plugin-->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>${java.version}</source>
@@ -81,37 +72,38 @@
 			</plugin>
 			<plugin>
 				<!--打包跳过测试-->
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-<!--			&lt;!&ndash; 添加flatten-maven-plugin用于替换${revision} &ndash;&gt;-->
-<!--			<plugin>-->
-<!--				<groupId>org.codehaus.mojo</groupId>-->
-<!--				<artifactId>flatten-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<updatePomFile>true</updatePomFile>-->
-<!--					<flattenMode>resolveCiFriendliesOnly</flattenMode>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>flatten</id>-->
-<!--						<phase>process-resources</phase>-->
-<!--						<goals>-->
-<!--							<goal>flatten</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--					<execution>-->
-<!--						<id>flatten.clean</id>-->
-<!--						<phase>clean</phase>-->
-<!--						<goals>-->
-<!--							<goal>clean</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<!-- 添加flatten-maven-plugin用于替换${revision} -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.2.5</version>
+				<configuration>
+					<!-- 是否更新pom文件 -->
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

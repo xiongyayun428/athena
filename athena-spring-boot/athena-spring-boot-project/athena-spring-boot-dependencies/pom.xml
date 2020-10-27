@@ -14,15 +14,9 @@
     <description>依赖</description>
 
     <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-        <!-- Dependency versions -->
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
         <druid.version>1.1.23</druid.version>
         <druid-starter.version>1.1.23</druid-starter.version>
-
-        <maven-plugin-api.version>3.6.3</maven-plugin-api.version>
-        <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
-        <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
@@ -45,12 +39,16 @@
         <xxl-job.version>2.2.0</xxl-job.version>
 
         <!-- Plugin versions -->
+		<maven-plugin-api.version>3.6.3</maven-plugin-api.version>
+		<maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
+		<maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <jasypt-maven-plugin.version>3.0.2</jasypt-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
         <flatten-maven-plugin.version>1.2.5</flatten-maven-plugin.version>
         <xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -379,7 +377,6 @@
                 	<version>${jasypt-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
                 </plugin>
