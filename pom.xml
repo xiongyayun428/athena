@@ -59,6 +59,17 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+			<id>rdc-releases</id>
+			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
+		</repository>
+		<snapshotRepository>
+			<id>rdc-snapshots</id>
+			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<profiles>
 		<profile>
 			<id>local-repo</id>
@@ -108,12 +119,12 @@
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
-		<profile>
-			<id>rdc-private-repo</id>
-			<activation>
-				<!--默认激活配置-->
-				<activeByDefault>true</activeByDefault>
-			</activation>
+<!--		<profile>-->
+<!--			<id>rdc-private-repo</id>-->
+<!--			<activation>-->
+<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
+<!--				<activeByDefault>true</activeByDefault>-->
+<!--			</activation>-->
 <!--			<repositories>-->
 <!--				<repository>-->
 <!--					<id>rdc-releases</id>-->
@@ -124,18 +135,18 @@
 <!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
 <!--				</repository>-->
 <!--			</repositories>-->
-			<!-- 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests -->
-			<distributionManagement>
-				<repository>
-					<id>rdc-releases</id>
-					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
-				</repository>
-				<snapshotRepository>
-					<id>rdc-snapshots</id>
-					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
-				</snapshotRepository>
-			</distributionManagement>
-		</profile>
+<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
+<!--			<distributionManagement>-->
+<!--				<repository>-->
+<!--					<id>rdc-releases</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
+<!--				</repository>-->
+<!--				<snapshotRepository>-->
+<!--					<id>rdc-snapshots</id>-->
+<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
+<!--				</snapshotRepository>-->
+<!--			</distributionManagement>-->
+<!--		</profile>-->
 		<profile>
 			<id>pentaho-repo</id>
 			<activation>
