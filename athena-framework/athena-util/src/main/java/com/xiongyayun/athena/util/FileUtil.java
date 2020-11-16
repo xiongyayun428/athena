@@ -3,10 +3,14 @@ package com.xiongyayun.athena.util;
 import org.apache.tika.Tika;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * FileUtil
@@ -43,6 +47,46 @@ public class FileUtil {
 	 */
 	public static void download(File file, HttpServletResponse response) {
 		previewOrDownload(file, response, true);
+	}
+
+	/**
+	 * 文件上传
+	 * @param multipartFile		待上传文件
+	 * @param destFilePath		目标上传目录
+	 * @param destFileName		目标上传文件名，为空时取上传的文件名
+	 * @return					上传的文件名
+	 * @throws Exception
+	 */
+	public static String upload(MultipartFile multipartFile, String destFilePath, String destFileName) throws Exception {
+		if (multipartFile == null || multipartFile.isEmpty()) {
+			throw new Exception("未选择上传的文件");
+		}
+		File f = new File(destFilePath);
+		if (!f.exists()) {
+			logger.info("目录[{}]创建{}", f.getAbsolutePath(), f.mkdirs() ? "成功" : "失败");
+		}
+		Path path;
+		String fileName = multipartFile.getOriginalFilename();
+		//判断是否为IE浏览器的文件名，IE浏览器下文件名会带有盘符信息
+		int unixSep = fileName.lastIndexOf('/');
+		int winSep = fileName.lastIndexOf('\\');
+		int pos = (winSep > unixSep ? winSep : unixSep);
+		if (pos != -1)  {
+			fileName = fileName.substring(pos + 1);
+		}
+		if (StringUtils.isEmpty(destFileName)) {
+			path = Paths.get(f.getAbsolutePath() + File.separator + fileName);
+		} else {
+			path = Paths.get(f.getAbsolutePath() + File.separator + destFileName);
+		}
+		try {
+			logger.debug("文件准备上传[{}]", path.toString());
+			multipartFile.transferTo(path);
+			logger.info("文件[{}]上传成功", fileName);
+			return fileName;
+		} catch (Exception e) {
+			throw new Exception("文件[" + fileName + "]上传失败", e);
+		}
 	}
 
 	/**

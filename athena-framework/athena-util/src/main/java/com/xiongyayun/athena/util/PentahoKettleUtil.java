@@ -92,7 +92,9 @@ public class PentahoKettleUtil {
 	public static Job runJob(String kjbFilePath, Map<String, String> variables, String[] arguments) throws Exception {
 		logger.info("execute kjb, kjbFilePath={}, variables={}, arguments={}", kjbFilePath, variables, arguments);
 		try {
+			// 初始化
 			KettleEnvironment.init();
+			EnvUtil.environmentInit();
 			JobMeta jobMeta = new JobMeta(kjbFilePath, null);
 			Job job = new Job(null, jobMeta);
 			if (variables != null) {

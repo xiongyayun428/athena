@@ -14,9 +14,9 @@
     <description>依赖</description>
 
     <properties>
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
-        <druid.version>1.1.23</druid.version>
-        <druid-starter.version>1.1.23</druid-starter.version>
+        <spring-boot.version>2.4.0</spring-boot.version>
+        <druid.version>1.2.3</druid.version>
+        <druid-starter.version>1.2.3</druid-starter.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
@@ -25,8 +25,8 @@
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <java-jwt.version>3.10.3</java-jwt.version>
         <hutool-all.version>5.3.5</hutool-all.version>
-        <mybatis-plus-boot.version>3.3.2</mybatis-plus-boot.version>
-        <mybatis-spring-boot.version>2.1.3</mybatis-spring-boot.version>
+        <mybatis-plus-boot.version>3.4.1</mybatis-plus-boot.version>
+        <mybatis-spring-boot.version>2.1.4</mybatis-spring-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
         <tk.mybatis.mapper.version>4.1.5</tk.mybatis.mapper.version>
@@ -34,7 +34,7 @@
         <pagehelper.version>5.2.0</pagehelper.version>
         <jasypt-spring-boot.version>3.0.3</jasypt-spring-boot.version>
         <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
-        <flywaydb.version>7.0.4</flywaydb.version>
+        <flywaydb.version>7.2.0</flywaydb.version>
         <pentaho-kettle.version>9.2.0.0-93</pentaho-kettle.version>
         <xxl-job.version>2.2.0</xxl-job.version>
 
@@ -50,6 +50,9 @@
         <xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
+
+	<dependencies>
+	</dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -273,7 +276,7 @@
             <dependency>
                 <groupId>com.alipay.sdk</groupId>
                 <artifactId>alipay-sdk-java</artifactId>
-                <version>4.10.167.ALL</version>
+                <version>4.10.182.ALL</version>
             </dependency>
             <dependency>
                 <groupId>javax.persistence</groupId>

@@ -107,15 +107,15 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<repository>
-			<id>rdc-releases</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
-		</repository>
-		<snapshotRepository>
-			<id>rdc-snapshots</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
-		</snapshotRepository>
-	</distributionManagement>
+<!--	<distributionManagement>-->
+<!--		<repository>-->
+<!--			<id>rdc-releases</id>-->
+<!--			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
+<!--		</repository>-->
+<!--		<snapshotRepository>-->
+<!--			<id>rdc-snapshots</id>-->
+<!--			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
+<!--		</snapshotRepository>-->
+<!--	</distributionManagement>-->
 
 </project>

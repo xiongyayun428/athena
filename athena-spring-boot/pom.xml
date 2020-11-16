@@ -84,11 +84,11 @@
 	<distributionManagement>
 		<repository>
 			<id>rdc-releases</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
+			<url>https://packages.aliyun.com/maven/repository/2005482-release-C2AxH3/</url>
 		</repository>
 		<snapshotRepository>
 			<id>rdc-snapshots</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
+			<url>https://packages.aliyun.com/maven/repository/2005482-snapshot-BPgNvv/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>

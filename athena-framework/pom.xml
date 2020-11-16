@@ -29,36 +29,36 @@
 		<module>athena-util</module>
 	</modules>
 
-	<repositories>
-		<repository>
-			<id>pentaho-public</id>
-			<name>Pentaho Public</name>
-			<url>http://nexus.pentaho.org/content/groups/omni/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>plugins</id>
-			<name>Maven Central</name>
-			<url>http://nexus.pentaho.org/content/groups/omni</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>pentaho-public</id>-->
+<!--			<name>Pentaho Public</name>-->
+<!--			<url>http://nexus.pentaho.org/content/groups/omni/</url>-->
+<!--			<releases>-->
+<!--				<enabled>true</enabled>-->
+<!--				<updatePolicy>daily</updatePolicy>-->
+<!--			</releases>-->
+<!--			<snapshots>-->
+<!--				<enabled>true</enabled>-->
+<!--				<updatePolicy>always</updatePolicy>-->
+<!--			</snapshots>-->
+<!--		</repository>-->
+<!--	</repositories>-->
+<!--	<pluginRepositories>-->
+<!--		<pluginRepository>-->
+<!--			<id>plugins</id>-->
+<!--			<name>Maven Central</name>-->
+<!--			<url>http://nexus.pentaho.org/content/groups/omni</url>-->
+<!--			<releases>-->
+<!--				<enabled>true</enabled>-->
+<!--				<updatePolicy>always</updatePolicy>-->
+<!--			</releases>-->
+<!--			<snapshots>-->
+<!--				<enabled>true</enabled>-->
+<!--				<updatePolicy>always</updatePolicy>-->
+<!--			</snapshots>-->
+<!--		</pluginRepository>-->
+<!--	</pluginRepositories>-->
 
 	<dependencies>
 		<dependency>
@@ -109,20 +109,20 @@
 				<version>${hutool-all.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-core</artifactId>
-				<version>3.3.2</version>
-				<scope>compile</scope>
-				<optional>true</optional>
-			</dependency>
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-extension</artifactId>
-				<version>3.3.2</version>
-				<scope>compile</scope>
-				<optional>true</optional>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.baomidou</groupId>-->
+<!--				<artifactId>mybatis-plus-core</artifactId>-->
+<!--				<version>3.4.1</version>-->
+<!--				<scope>compile</scope>-->
+<!--				<optional>true</optional>-->
+<!--			</dependency>-->
+<!--			<dependency>-->
+<!--				<groupId>com.baomidou</groupId>-->
+<!--				<artifactId>mybatis-plus-extension</artifactId>-->
+<!--				<version>3.4.1</version>-->
+<!--				<scope>compile</scope>-->
+<!--				<optional>true</optional>-->
+<!--			</dependency>-->
 			<dependency>
 				<groupId>com.auth0</groupId>
 				<artifactId>java-jwt</artifactId>
@@ -203,11 +203,11 @@
 	<distributionManagement>
 		<repository>
 			<id>rdc-releases</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
+			<url>https://packages.aliyun.com/maven/repository/2005482-release-C2AxH3/</url>
 		</repository>
 		<snapshotRepository>
 			<id>rdc-snapshots</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
+			<url>https://packages.aliyun.com/maven/repository/2005482-snapshot-BPgNvv/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
