@@ -24,6 +24,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
@@ -108,6 +109,11 @@ public class ExceptionHandlerAdvice {
     public ResBody catchMissingServletRequestParameterException(MissingServletRequestParameterException e) {
         return translate(ErrorConstant.MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION, new Object[] {e.getParameterName(), e.getParameterType()}, e.getLocalizedMessage(), e);
     }
+
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResBody catchMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+		return translate(ErrorConstant.METHOD_ARGUMENT_TYPE_MISMATCH_EXCEPTION, new Object[] {e.getParameter().getMethod(), e.getName(), e.getValue(), e.getMessage()}, e.getLocalizedMessage(), e);
+	}
 
     @ExceptionHandler(TypeMismatchException.class)
     public ResBody catchTypeMismatchException(TypeMismatchException e) {
