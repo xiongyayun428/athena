@@ -63,7 +63,7 @@ public class PentahoKettleUtil {
 			trans.waitUntilFinished();
 			// 抛出异常
 			if (trans.getErrors() > 0) {
-				throw new Exception("Pentaho Kettle Transfer [" + ktrFilePath + "]: 执行Transfer发生异常!");
+				throw new Exception("执行转换发生异常，异常个数[" + trans.getErrors() + "]");
 			}
 			logger.info("Pentaho Kettle Transfer [{}]: Successful", ktrFilePath);
 			return trans;
@@ -108,7 +108,7 @@ public class PentahoKettleUtil {
 			job.start();
 			job.waitUntilFinished();
 			if (job.getErrors() > 0) {
-				throw new Exception("Pentaho Kettle Transfer [" + kjbFilePath + "]: 执行job发生异常!");
+				throw new Exception("执行job发生异常，异常个数[" + job.getErrors() + "]");
 			}
 			logger.info("Pentaho Kettle Job [{}]: Successful", kjbFilePath);
 			return job;

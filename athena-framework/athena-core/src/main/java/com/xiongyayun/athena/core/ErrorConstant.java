@@ -24,6 +24,7 @@ public class ErrorConstant implements Constant {
     public static final String METHOD_ARGUMENT_NOT_VALID_EXCEPTION = "MethodArgumentNotValidException";
     public static final String HTTP_MESSAGE_NOT_READABLE_EXCEPTION = "HttpMessageNotReadableException";
     public static final String MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION = "MissingServletRequestParameterException";
+    public static final String METHOD_ARGUMENT_TYPE_MISMATCH_EXCEPTION = "MethodArgumentTypeMismatchException";
     public static final String TYPE_MISMATCH_EXCEPTION = "TypeMismatchException";
     public static final String HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION = "HttpMediaTypeNotSupportedException";
     public static final String DATA_INTEGRITY_VIOLATION_EXCEPTION = "DataIntegrityViolationException";

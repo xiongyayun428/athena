@@ -59,30 +59,19 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<repository>
-			<id>rdc-releases</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
-		</repository>
-		<snapshotRepository>
-			<id>rdc-snapshots</id>
-			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<profiles>
 		<profile>
-			<id>local-repo</id>
+			<id>xiongyayun-repo</id>
 			<activation>
 				<!--默认激活配置-->
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<!-- 仓库配置 -->
 			<repositories>
 				<repository>
 					<id>nexus</id>
 					<name>Nexus Repository</name>
-					<url>http://localhost:8081/repository/maven-public/</url>
+					<url>http://nexus.xiongyayun.com/repository/maven-public/</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -96,7 +85,7 @@
 				<pluginRepository>
 					<id>nexus</id>
 					<name>Nexus Plugin Repository</name>
-					<url>http://localhost:8081/repository/maven-public/</url>
+					<url>http://nexus.xiongyayun.com/repository/maven-public/</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -107,81 +96,25 @@
 			</pluginRepositories>
 			<!-- 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests -->
 			<distributionManagement>
+<!--				<repository>-->
+<!--					<id>nexus-releases</id>-->
+<!--					<name>Nexus Releases Repository</name>-->
+<!--					<url>http://nexus.xiongyayun.com/repository/maven-releases/</url>-->
+<!--				</repository>-->
+<!--				<snapshotRepository>-->
+<!--					<id>nexus-snapshots</id>-->
+<!--					<name>Nexus Snapshots Repository</name>-->
+<!--					<url>http://nexus.xiongyayun.com/repository/maven-snapshots/</url>-->
+<!--				</snapshotRepository>-->
 				<repository>
-					<id>nexus-releases</id>
-					<name>Nexus Releases Repository</name>
-					<url>http://localhost:8081/repository/maven-releases/</url>
+					<id>rdc-releases</id>
+					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
 				</repository>
 				<snapshotRepository>
-					<id>nexus-snapshots</id>
-					<name>Nexus Snapshots Repository</name>
-					<url>http://localhost:8081/repository/maven-snapshots/</url>
+					<id>rdc-snapshots</id>
+					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
-<!--		<profile>-->
-<!--			<id>rdc-private-repo</id>-->
-<!--			<activation>-->
-<!--				&lt;!&ndash;默认激活配置&ndash;&gt;-->
-<!--				<activeByDefault>true</activeByDefault>-->
-<!--			</activation>-->
-<!--			<repositories>-->
-<!--				<repository>-->
-<!--					<id>rdc-releases</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
-<!--				</repository>-->
-<!--				<repository>-->
-<!--					<id>rdc-snapshots</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
-<!--				</repository>-->
-<!--			</repositories>-->
-<!--			&lt;!&ndash; 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests &ndash;&gt;-->
-<!--			<distributionManagement>-->
-<!--				<repository>-->
-<!--					<id>rdc-releases</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
-<!--				</repository>-->
-<!--				<snapshotRepository>-->
-<!--					<id>rdc-snapshots</id>-->
-<!--					<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
-<!--				</snapshotRepository>-->
-<!--			</distributionManagement>-->
-<!--		</profile>-->
-<!--		<profile>-->
-<!--			<id>pentaho-repo</id>-->
-<!--			<activation>-->
-<!--				<activeByDefault>true</activeByDefault>-->
-<!--			</activation>-->
-<!--			<repositories>-->
-<!--				<repository>-->
-<!--					<id>pentaho-public</id>-->
-<!--					<name>Pentaho Public</name>-->
-<!--					<url>http://nexus.pentaho.org/content/groups/omni/</url>-->
-<!--					<releases>-->
-<!--						<enabled>true</enabled>-->
-<!--						<updatePolicy>daily</updatePolicy>-->
-<!--					</releases>-->
-<!--					<snapshots>-->
-<!--						<enabled>true</enabled>-->
-<!--						<updatePolicy>always</updatePolicy>-->
-<!--					</snapshots>-->
-<!--				</repository>-->
-<!--			</repositories>-->
-<!--			<pluginRepositories>-->
-<!--				<pluginRepository>-->
-<!--					<id>plugins</id>-->
-<!--					<name>Maven Central</name>-->
-<!--					<url>http://nexus.pentaho.org/content/groups/omni</url>-->
-<!--					<releases>-->
-<!--						<enabled>true</enabled>-->
-<!--						<updatePolicy>always</updatePolicy>-->
-<!--					</releases>-->
-<!--					<snapshots>-->
-<!--						<enabled>true</enabled>-->
-<!--						<updatePolicy>always</updatePolicy>-->
-<!--					</snapshots>-->
-<!--				</pluginRepository>-->
-<!--			</pluginRepositories>-->
-<!--		</profile>-->
 	</profiles>
 </project>
