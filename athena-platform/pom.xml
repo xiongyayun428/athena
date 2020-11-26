@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>com.xiongyayun</groupId>
 		<artifactId>athena</artifactId>
-		<version>${revision}</version>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.xiongyayun.platform</groupId>
     <artifactId>athena-platform</artifactId>
@@ -15,6 +16,7 @@
 
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
+		<revision>1.0.0-SNAPSHOT</revision>
 	</properties>
 
 	<dependencies>
@@ -63,17 +65,17 @@
             <dependency>
                 <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-user</artifactId>
-                <version>${revision}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-db</artifactId>
-                <version>${revision}</version>
+				<version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-util</artifactId>
-                <version>${revision}</version>
+				<version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

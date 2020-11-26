@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>athena</artifactId>
+		<groupId>com.xiongyayun</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 	<groupId>com.xiongyayun.cloud</groupId>
-    <artifactId>athena-spring-cloud</artifactId>
+	<artifactId>athena-spring-cloud</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 	<name>Athena Spring Cloud Build</name>
-    <description>雅典娜项目</description>
+	<description>雅典娜项目</description>
 
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
@@ -32,10 +38,10 @@
 		<url>https://github.com/xiongyayun428/athena/issues</url>
 	</issueManagement>
 
-    <modules>
-        <module>athena-spring-cloud-project</module>
-<!--        <module>athena-spring-cloud-samples</module>-->
-    </modules>
+	<modules>
+		<module>athena-spring-cloud-project</module>
+		<!--        <module>athena-spring-cloud-samples</module>-->
+	</modules>
 
 	<build>
 		<resources>
@@ -106,16 +112,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-<!--	<distributionManagement>-->
-<!--		<repository>-->
-<!--			<id>rdc-releases</id>-->
-<!--			<url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>-->
-<!--		</repository>-->
-<!--		<snapshotRepository>-->
-<!--			<id>rdc-snapshots</id>-->
-<!--			<url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>-->
-<!--		</snapshotRepository>-->
-<!--	</distributionManagement>-->
 
 </project>
