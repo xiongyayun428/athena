@@ -41,7 +41,8 @@
             <dependency>
 				<groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-dependencies</artifactId>
-                <version>${revision}</version>
+                <version>0.0.1-SNAPSHOT</version>
+<!--                <version>${revision}</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -49,28 +50,28 @@
 			<dependency>
 				<groupId>com.xiongyayun.cloud</groupId>
 				<artifactId>athena-spring-cloud-dependencies</artifactId>
-				<version>${revision}</version>
+				<version>0.0.1-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 
             <dependency>
-                <groupId>com.xiongyayun</groupId>
+                <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-core</artifactId>
-                <version>${revision}</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.xiongyayun</groupId>
+                <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-user</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.xiongyayun</groupId>
+                <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-db</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.xiongyayun</groupId>
+                <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-util</artifactId>
                 <version>${revision}</version>
             </dependency>

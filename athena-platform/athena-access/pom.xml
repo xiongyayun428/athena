@@ -8,7 +8,7 @@
     <description>雅典娜访问权限</description>
 
     <parent>
-        <groupId>com.xiongyayun</groupId>
+        <groupId>com.xiongyayun.framework</groupId>
         <artifactId>athena-platform</artifactId>
         <version>${revision}</version>
     </parent>

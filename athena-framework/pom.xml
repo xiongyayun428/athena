@@ -98,7 +98,7 @@
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.xiongyayun</groupId>
+				<groupId>com.xiongyayun.framework</groupId>
 				<artifactId>athena-util</artifactId>
 				<version>${revision}</version>
 			</dependency>

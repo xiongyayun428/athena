@@ -182,11 +182,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.xiongyayun</groupId>
+			<groupId>com.xiongyayun.framework</groupId>
 			<artifactId>athena-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.xiongyayun</groupId>
+			<groupId>com.xiongyayun.framework</groupId>
 			<artifactId>athena-db</artifactId>
 		</dependency>
 

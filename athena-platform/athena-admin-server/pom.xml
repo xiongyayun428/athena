@@ -8,7 +8,7 @@
 	<description>应用健康检查后台管理</description>
 
 	<parent>
-		<groupId>com.xiongyayun</groupId>
+		<groupId>com.xiongyayun.framework</groupId>
 		<artifactId>athena-platform</artifactId>
 		<version>${revision}</version>
 	</parent>
