@@ -90,6 +90,11 @@
 			<version>1.5.20</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
