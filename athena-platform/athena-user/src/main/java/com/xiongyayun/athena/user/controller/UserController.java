@@ -1,140 +1,177 @@
 package com.xiongyayun.athena.user.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.xiongyayun.athena.core.pagination.IPage;
-import com.xiongyayun.athena.user.feign.FileService;
-import com.xiongyayun.athena.user.model.User;
-import com.xiongyayun.athena.user.service.Message;
-import com.xiongyayun.athena.user.service.UserService;
 import com.xiongyayun.athena.core.annotation.Logger;
-import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import com.xiongyayun.athena.user.model.User;
+import com.xiongyayun.athena.user.service.UserService;
+import com.xiongyayun.athena.user.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.http.MediaType;
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
- * UserController
+ * User
  *
- * @author Yayun.Xiong
- * @date 2020/6/14
+ * @author: Yayun.Xiong
+ * @date 2019-03-03 16:29
  */
 @Slf4j
+@Validated
 @RestController
-@Api(value = "所有用户相关服务", tags = {"用户服务"})
 @RequestMapping("/user")
-@RefreshScope
 public class UserController {
-    @Resource
-    private FileService fileService;
+	@Resource
+	private UserService userService;
 
-    @Resource
-    private Message message;
+	@Logger("创建用户")
+	@PostMapping("create")
+	public Long create(@RequestBody UserVO vo) {
+		// TODO vo校验
+		User user = new User();
+		BeanUtils.copyProperties(vo, user);
+		this.userService.create(user);
+		return user.getUserId();
+	}
 
-    @Value("${server.port}")
-    private String serverPort;
-    @Resource
-    private UserService userService;
+	@Logger("删除用户")
+	@GetMapping("delete")
+	public void delete(@RequestParam("userid") Long userId) {
+		this.userService.deleteById(userId);
+	}
+
+	@Logger("获取用户详情")
+	@GetMapping("get")
+	public void get(@RequestParam("userid") Long userId) {
+		this.userService.selectById(userId);
+	}
 
 
-	/**
-	 * get返回
-	 * @return User
-	 */
-	@GetMapping(value = "/get", produces = MediaType.APPLICATION_XML_VALUE)
-    @SentinelResource("get")
-    public User get() {
-        User user = new User();
-        user.setUserId(2L);
-        user.setUserName("熊大大");
-        return user;
-    }
+	@Logger("更新用户详情")
+	@PostMapping("update")
+	public void update(@RequestBody UserVO vo) {
+		// TODO vo校验
+		User user = new User();
+		BeanUtils.copyProperties(vo, user);
+		this.userService.updateById(user);
+	}
 
-    @GetMapping("/download")
-//    @SentinelResource("download")
-    public String download() {
-        return fileService.download("a");
-    }
-
-    @GetMapping("/")
-    public List<User> home(User user) {
-        return userService.selectList(user);
-    }
-
-    @GetMapping("/send")
-    public String send() {
-        return message.send();
-    }
-
-	@Logger("新增用户")
-    @ApiOperation("新增用户")
-    @RequestMapping("/add")
-    public void addUser(@RequestBody User user) {
-        userService.insert(user);
-    }
-
-    @ApiOperation("修改用户")
-    @Logger("修改用户")
-    @PostMapping("/update")
-    public void updateUser() {
-        throw new AthenaRuntimeException("UserNotExist", new Object[]{"测试", "test"});
-    }
-
-    @ApiOperation("删除单个用户")
-    @GetMapping(value = "/delete/{userId}")
-    public void deleteUserById(@ApiParam("用户ID") @PathVariable Long userId) {
-        // TODO 判断userId不为空
-        User user = new User();
-        user.setUserId(userId);
-        if (userService.delete(user) > 0) {
-            System.out.println("删除成功");
-        } else {
-            System.out.println("删除失败");
-        }
-    }
-
-    @ApiOperation("删除多个用户")
-    @PostMapping(value = "/delete/batch")
-    public void deleteBatch(@RequestParam("userIds") List<Long> userIds) {
-
-    }
-
-//    @ApiOperation("查询用户明细")
-//    @GetMapping(value = "/{userId}")
-//    public UserVo getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
-//        User user = userService.selectById(userId);
-//        UserVo userVo = new UserVo();
-//        if (user != null) {
-//            BeanUtils.copyProperties(user, userVo);
-//        }
-//        return userVo;
-//    }
-
-    @Logger(value = "根据用户ID查询用户明细", save = true)
-    @ApiOperation("根据用户ID查询用户明细")
-    @RequestMapping(value = "/id/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
-        return userService.selectById(userId);
-    }
-
-    @Logger(value = "查询所有用户明细", save = true)
-    @ApiOperation("查询所有用户明细")
-    @GetMapping(value = "/list")
-    public List<User> list(User user) {
-        return userService.selectList(user);
-    }
-
-    @Logger(value = "分页查询用户明细", save = true)
-    @ApiOperation("分页查询用户明细")
-    @GetMapping(value = "/page")
-    public IPage<User> page(User user) {
-        return userService.selectPage(user, 1, 10);
-    }
+//	@Autowired
+//	private UserRsaService userRsaService;
+//	@Autowired
+//	private UserAuthorizationService userAuthorizationService;
+//	@Autowired
+//	private SimpMessagingTemplate messagingTemplate;
+////	@Autowired
+////	private StringRedisTemplate stringRedisTemplate;
+////	@Autowired
+////	private RedisTemplate<String, Object> redisTemplate;
+//
+//	@Logger("根据登录用户名查询公钥")
+//	@GetMapping("publicKey")
+//	public String publicKey(@NotBlank(message = "登录类型不能为空") String identityType, @NotBlank(message = "用户凭证不能为空") String identifier) {
+//		return userRsaService.getRSA(identityType, identifier).getPublicKeyBase64();
+//	}
+//
+//	@Logger("用户登录")
+//	@GetMapping("login")
+//	public User login(@NotBlank(message = "授权方式不能为空") String grantType, String identifier, String credential, HttpServletResponse response) throws AthenaException {
+//		// 0. 判断登录方式
+//		UserAuthorization userAuthorization = AuthenticationFactory.get(grantType).authorization(identifier, credential);
+//		if (userAuthorization == null) {
+//			throw new AthenaRuntimeException("UserNotExist");
+//		}
+//		// 1. 查询用户信息
+//		User user = userService.findUserById(userAuthorization.getUserId());
+//		// 2. 判断用户状态是否正常
+//		if (user.getStatus() != 0) {
+//			throw new AthenaRuntimeException("UserDefinedError", new Object[] {"用户名状态不正常"});
+//		}
+//		// 3. 查询权限数据
+//		// 4. 生成Token
+//		try {
+//			String token = JwtUtil.signature(ConvertUtil.convertBean(user));
+//			response.setHeader(BaseConstant.ACCESS_TOKEN, token);
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//		}
+//		return user;
+//	}
+//
+//	@Logger("查询所有用户信息")
+//	@GetMapping("select")
+//	public Object select(@Valid User user) {
+//		return userService.selectAll(user);
+//	}
+//
+//	/**
+//	 * 根据userId查询用户信息
+//	 * @param userId
+//	 */
+//	@GetMapping("select/{userId}")
+//	public User findUserById(@PathVariable("userId") String userId) {
+//	    return userService.findUserById(userId);
+//	}
+//
+//	@Logger("新增用户信息")
+//	@PostMapping("add")
+//	public int add(@Valid User user) {
+//		return userService.add(user);
+//	}
+//
+//	@Logger("修改用户信息")
+//	@PutMapping("update")
+//	public int update(@Valid User user) {
+//		return userService.update(user);
+//	}
+//
+//	@Logger("删除用户信息")
+//	@DeleteMapping("delete/{userId}")
+//	public int delete(@PathVariable("userId") String userId) {
+//		return userService.delete(userId);
+//	}
+//
+////	@GetMapping("test")
+////	@MessageMapping("/sendTest")
+////	@SendTo("/topic")
+////	public Object test() {
+//////		log.info("接收到了信息" + message.getName());
+////		return "XYY 测试";
+////	}
+//	// 接收客户端发送的订阅
+////	@SubscribeMapping("/subscribeTest")
+//	@MessageMapping("subscribeTest")
+//	public Object subscribeTest() {
+//		log.info("XXX用户订阅了我。。。");
+//		return "XYY 测试";
+//	}
+//
+//	@GetMapping("/subscribeTest")
+//	public void greet(String greeting) {
+//		String text = "[" + System.currentTimeMillis() + "]:" + greeting;
+//		this.messagingTemplate.convertAndSend("/topicTest/subscribeTest", text);
+//	}
+//
+//	@GetMapping("/subscribeTest1")
+//	@SendTo("/topicTest/subscribeTest")
+//	public String greet1(String greeting) {
+//		String text = "[" + System.currentTimeMillis() + "]:" + greeting;
+//		return text;
+//	}
+//
+////	@SendTo("/subscribeTest")
+////	@GetMapping("push")
+////	public void push() {
+////		log.info("主动推送数据。。。");
+////		messagingTemplate.convertAndSend("/subscribeTest", "主动推送");
+////	}
+//
+//	@MessageMapping("hello")
+////	@SendToUser(value = "/topicTest/subscribeTest", broadcast = false)
+//	@SendTo("/topicTest/subscribeTest")
+//	public String push(String message) {
+//		log.info("主动推送数据。。。" + message);
+//		return "主动推送数据" + message;
+//	}
 }

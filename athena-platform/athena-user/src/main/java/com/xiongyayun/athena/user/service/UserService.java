@@ -1,80 +1,62 @@
 package com.xiongyayun.athena.user.service;
 
 import com.xiongyayun.athena.core.pagination.IPage;
+import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
 import com.xiongyayun.athena.user.model.User;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * UserService
  *
- * @author Yayun.Xiong
- * @date 2020/6/14
+ * @author: Yayun.Xiong
+ * @date 2019-05-19
  */
 public interface UserService {
 
     /**
-     * 新增用户
+     * 创建用户
      * @param user
      * @return
      */
-    int insert(User user);
+    int create(User user);
 
-    int updateByPrimaryKey(User user);
-
-    int updateByPrimaryKeySelective(User user);
-
-    /**
-     * 根据用户ID修改用户
-     * @param user
-     * @return
-     */
+	/**
+	 * 根据 UserId 更新用户
+	 * @param user
+	 * @return
+	 */
     int updateById(User user);
-    /**
-     * 修改用户
-     * @param user
-     * @return
-     */
-    int update(User user);
 
-    /**
-     * 根据用户ID删除用户
-     * @param userId
-     * @return
-     */
-    int deleteById(Long userId);
+	/**
+	 * 根据 ID 删除
+	 * @param id
+	 * @return
+	 */
+	int deleteById(Serializable id);
 
-    /**
-     * 根据用户所有字段匹配删除用户
-     * @param user
-     * @return
-     */
-    int delete(User user);
+	/**
+	 * 根据 User 条件，查询全部记录（并翻页）
+	 * @param page         分页查询条件
+	 * @param user         User实体对象（可以为 null）
+	 * @return
+	 */
+	IPage<User> selectPage(Page page, User user);
 
-    User selectByPrimaryKey(Long userId);
+	/**
+	 * 根据 User 条件，查询全部记录（并翻页）
+	 * @param pageIndex		当前页
+	 * @param pageSize		每页显示条数
+	 * @param user			User实体对象（可以为 null）
+	 * @return
+	 */
+	IPage<User> selectPage(long pageIndex, long pageSize, User user);
 
-    List<User> selectUser(User user, int pageNum, int pageSize);
+	/**
+	 * 根据 UserId 查询
+	 * @param userId		主键ID
+	 * @return
+	 */
+	User selectById(Serializable userId);
 
-    /**
-     * 根据用户ID查询用户
-     * @param userId
-     * @return
-     */
-    User selectById(Long userId);
-
-    /**
-     * 查询全部用户信息
-     * @param user
-     * @return
-     */
-    List<User> selectList(User user);
-
-    /**
-     * 分页查询用户信息
-     * @param user
-     * @param pageIndex
-     * @param pageSize
-     * @return
-     */
-    IPage<User> selectPage(User user, int pageIndex, int pageSize);
 }
