@@ -15,13 +15,13 @@
 
     <properties>
         <spring-boot.version>2.4.0</spring-boot.version>
-        <druid.version>1.2.3</druid.version>
+		<spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+		<druid.version>1.2.3</druid.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
 
         <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
-        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <java-jwt.version>3.11.0</java-jwt.version>
         <hutool-all.version>5.5.1</hutool-all.version>
         <mybatis-plus-boot.version>3.4.1</mybatis-plus-boot.version>
@@ -63,6 +63,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
             <!-- athena -->
             <dependency>
@@ -171,21 +178,14 @@
                 <version>${spring-security-oauth2.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-server</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-server</artifactId>
+			</dependency>
 
             <dependency>
                 <groupId>com.auth0</groupId>

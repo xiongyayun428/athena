@@ -8,7 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>athena-user</artifactId>
+    <artifactId>athena-user-bak</artifactId>
     <packaging>jar</packaging>
     <name>Athena Service User</name>
     <description>用户服务</description>

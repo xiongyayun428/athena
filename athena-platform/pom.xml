@@ -94,7 +94,7 @@
 <!--        <module>athena-role-api</module>-->
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
-        <module>athena-user</module>
+        <module>athena-system</module>
 <!--        <module>athena-user-api</module>-->
 <!--        <module>athena-service</module>-->
 <!--        <module>athena-service-id</module>-->
