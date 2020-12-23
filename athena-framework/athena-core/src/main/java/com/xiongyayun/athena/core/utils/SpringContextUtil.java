@@ -3,6 +3,7 @@ package com.xiongyayun.athena.core.utils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -34,4 +35,15 @@ public class SpringContextUtil implements ApplicationContextAware {
     public static <T> T getBean(Class<?> clz) throws BeansException {
         return (T) applicationContext.getBean(clz);
     }
+
+	public static String getProperty(String key) {
+		return getProperty(key, String.class);
+	}
+	public static <T> T getProperty(String key, Class<T> targetType) {
+		return getProperty(key, targetType, null);
+	}
+	public static <T> T getProperty(String key, Class<T> targetType, T defaultValue) {
+		Environment environment = getBean(Environment.class);
+		return environment.getProperty(key, targetType, defaultValue);
+	}
 }

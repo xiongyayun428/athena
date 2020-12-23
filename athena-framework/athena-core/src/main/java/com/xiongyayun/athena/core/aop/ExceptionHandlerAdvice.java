@@ -55,29 +55,29 @@ public class ExceptionHandlerAdvice {
 	}
 
 	@ExceptionHandler(Throwable.class)
-    public ResBody catchThrowable(Throwable e) {
+    public ResBody handleException(Throwable e) {
         return translate(ErrorConstant.SYSTEM_ERROR_UNCAUGHT, null, e.getLocalizedMessage(), e);
     }
 
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResBody catchHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    public ResBody handleException(HttpRequestMethodNotSupportedException e) {
         return translate(ErrorConstant.HTTP_REQUEST_METHOD_NOT_SUPPORTED, new Object[] {e.getMethod()}, e.getLocalizedMessage(), e);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResBody catchNoHandlerFoundException(NoHandlerFoundException e) {
+    public ResBody handleException(NoHandlerFoundException e) {
         return translate(ErrorConstant.SYSTEM_NO_HANDLER_FOUND, new Object[] {e.getHttpMethod(), e.getRequestURL()}, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResBody catchIllegalArgumentException(IllegalArgumentException e) {
+    public ResBody handleException(IllegalArgumentException e) {
         return translate(ErrorConstant.ILLEGAL_ARGUMENT_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResBody catchHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
+    public ResBody handleException(HttpMediaTypeNotSupportedException e) {
         return translate(ErrorConstant.HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION, new Object[] {e.getContentType()}, e.getLocalizedMessage(), e);
     }
 
@@ -89,7 +89,7 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(ClassCastException.class)
-    public ResBody catchBindException(ClassCastException e) {
+    public ResBody handleException(ClassCastException e) {
         return translate(ErrorConstant.CLASS_CAST_EXCEPTION, null, e.getLocalizedMessage(), e);
     }
 
@@ -101,12 +101,12 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResBody catchHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+    public ResBody handleException(HttpMessageNotReadableException e) {
         return translate(ErrorConstant.HTTP_MESSAGE_NOT_READABLE_EXCEPTION, null, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResBody catchMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+    public ResBody handleException(MissingServletRequestParameterException e) {
         return translate(ErrorConstant.MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION, new Object[] {e.getParameterName(), e.getParameterType()}, e.getLocalizedMessage(), e);
     }
 
@@ -116,15 +116,15 @@ public class ExceptionHandlerAdvice {
 	}
 
     @ExceptionHandler(TypeMismatchException.class)
-    public ResBody catchTypeMismatchException(TypeMismatchException e) {
+    public ResBody handleException(TypeMismatchException e) {
         return translate(ErrorConstant.TYPE_MISMATCH_EXCEPTION, new Object[] {e.getPropertyName(), e.getRequiredType()}, e.getLocalizedMessage(), e);
     }
     @ExceptionHandler(MyBatisSystemException.class)
-    public ResBody catchMyBatisSystemException(MyBatisSystemException e) {
+    public ResBody handleException(MyBatisSystemException e) {
         return translate(e.getClass().getName(), null, e.getMessage(), e);
     }
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResBody catchConstraintViolationException(ConstraintViolationException e) {
+    public ResBody handleException(ConstraintViolationException e) {
 		String msg = e.getConstraintViolations().stream()
 				.map( cv -> cv == null ? "null" : cv.getMessage() )
 //				.map( cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage() )
@@ -141,7 +141,7 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(AthenaException.class)
-    public ResBody catchAthenaException(AthenaException e) {
+    public ResBody handleException(AthenaException e) {
 		if (!StringUtils.isEmpty(e.getCode())) {
 			return new ResBody(e.getCode(), e.getMessage());
 		}
