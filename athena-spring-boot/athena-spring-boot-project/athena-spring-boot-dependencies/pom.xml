@@ -14,9 +14,9 @@
     <description>依赖</description>
 
     <properties>
-        <spring-boot.version>2.4.0</spring-boot.version>
+        <spring-boot.version>2.4.1</spring-boot.version>
 		<spring-boot-admin.version>2.3.1</spring-boot-admin.version>
-		<druid.version>1.2.3</druid.version>
+		<druid.version>1.2.4</druid.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
