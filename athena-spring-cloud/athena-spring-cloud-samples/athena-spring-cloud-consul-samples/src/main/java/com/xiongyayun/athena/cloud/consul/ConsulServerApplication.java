@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * OAuth2ClientApplication
  *cloud
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-20
  */
 @SpringBootApplication

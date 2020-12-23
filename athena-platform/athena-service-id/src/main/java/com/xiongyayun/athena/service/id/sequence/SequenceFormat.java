@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * <p><b>序列号格式化</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 18:07
  */
 public class SequenceFormat {

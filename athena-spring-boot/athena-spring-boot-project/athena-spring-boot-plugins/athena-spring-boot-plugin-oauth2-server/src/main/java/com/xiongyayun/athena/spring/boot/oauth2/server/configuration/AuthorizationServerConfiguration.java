@@ -27,8 +27,8 @@
 ///**
 // * 认证授权服务器配置类
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-06-27
+// * @author Yayun.Xiong
+// * @date 2019-06-27
 // */
 //@Configuration
 //@EnableAuthorizationServer

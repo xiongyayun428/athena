@@ -19,8 +19,8 @@ import java.util.Set;
 /**
  * AthenaCorsFilter
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/11/16
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/11/16
  */
 @Order
 @Component
@@ -33,7 +33,7 @@ public class AthenaCorsFilter extends HttpFilter {
 		String originHeader = req.getHeader(HttpHeaders.ORIGIN);
 		// 设置访问源地址，不能使用*
 		if (StringUtils.hasLength(allowOrigin)) {
-			Set<String> allowOriginSet = new HashSet(Arrays.asList(allowOrigin.split(",")));
+			Set<String> allowOriginSet = new HashSet<>(Arrays.asList(allowOrigin.split(",")));
 			if (allowOriginSet.contains(originHeader)) {
 				res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, allowOrigin);
 			}

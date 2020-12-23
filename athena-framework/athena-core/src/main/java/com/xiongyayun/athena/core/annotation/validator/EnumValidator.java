@@ -7,8 +7,8 @@ import java.lang.reflect.Method;
 /**
  * 枚举验证注解
  *
- * @author: 熊亚运
- * @date: 2019-06-25
+ * @author 熊亚运
+ * @date 2019-06-25
  */
 public class EnumValidator implements ConstraintValidator<Enum, Object> {
 

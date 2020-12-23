@@ -22,12 +22,18 @@ import java.util.Set;
 /**
  * JWT帮助类
  *
- * @author: 熊亚运
- * @date: 2019-06-17
+ * @author 熊亚运
+ * @date 2019-06-17
  */
 @Slf4j
 public class JwtUtil {
-    private static final String SECRET = "XX#$%()(#*!()!KL<><MQLMNQNQJQK sdfkjsdrow32234545fdf>?N<:{LWPW";
+	/**
+	 * 秘钥
+	 * csbt34.ydhl12s（池上碧苔三四点，叶底黄鹂一两声）
+	 * for_$n(@RenSheng)_$n+="die"（人生自古谁无死）
+	 * ppnn13%dkstFeb.1st。中文解析：娉娉袅袅十三余，豆蔻梢头二月初。
+	 */
+    private static final String SECRET = "csbt34.ydhl12s for_$n(@RenSheng)_$n+=\"die\" ppnn13%dkstFeb.1st。>?N<:{LWPW";
     private static final long EXP = 60 * 60 * 1000;
     private static final String ISSUER = "athena";
 
@@ -57,9 +63,7 @@ public class JwtUtil {
                 Set<String> keys = data.keySet();
                 for (String key : keys) {
                     Object value = data.get(key);
-                    if (value == null) {
-                        continue;
-                    } else if (value instanceof String) {
+                    if (value instanceof String) {
                         builder.withClaim(key, value.toString());
                     } else if (value instanceof Long) {
                         builder.withClaim(key, Long.parseLong(value.toString()) + "");
@@ -105,20 +109,20 @@ public class JwtUtil {
         return algorithm;
     }
 
-    private static Algorithm RS256() {
-        // Get the key instance
-        RSAPublicKey publicKey = null;
-        // Get the key instance
-        RSAPrivateKey privateKey = null;
-        Algorithm algorithm = null;
-        try {// UTF-8 encoding not supported
-            algorithm = Algorithm.RSA256(privateKey);
-            // algorithm = Algorithm.RSA256(publicKey, privateKey);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        return algorithm;
-    }
+//    private static Algorithm RS256() {
+//        // Get the key instance
+//        RSAPublicKey publicKey = null;
+//        // Get the key instance
+//        RSAPrivateKey privateKey = null;
+//        Algorithm algorithm = null;
+//        try {// UTF-8 encoding not supported
+//            algorithm = Algorithm.RSA256(privateKey);
+//            // algorithm = Algorithm.RSA256(publicKey, privateKey);
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//        }
+//        return algorithm;
+//    }
 
     /**
      * 获取有效数据
@@ -159,11 +163,8 @@ public class JwtUtil {
             }
             JWTVerifier verifier = JWT.require(HS256()).withIssuer(ISSUER).build();
             Date date = verifier.verify(token).getExpiresAt();
-            if (date.after(new Date())) {
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
+			return date.after(new Date());
+		} catch (Exception e) {
             return true;
         }
     }
@@ -181,11 +182,8 @@ public class JwtUtil {
             }
             JWTVerifier verifier = JWT.require(HS256()).withIssuer(ISSUER).build();
             Date date = verifier.verify(token).getExpiresAt();
-            if (date.getTime() > SafeDate.rollTime(new Date(), 0, 5, 0).getTime()) {
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
+			return date.getTime() > SafeDate.rollTime(new Date(), 0, 5, 0).getTime();
+		} catch (Exception e) {
             return true;
         }
     }

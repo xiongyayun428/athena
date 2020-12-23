@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * TestTask
  *
- * @author: Yayun.Xiong
- * @date: 2019/9/17
+ * @author Yayun.Xiong
+ * @date 2019/9/17
  */
 @Slf4j
 @RunWith(SpringRunner.class)

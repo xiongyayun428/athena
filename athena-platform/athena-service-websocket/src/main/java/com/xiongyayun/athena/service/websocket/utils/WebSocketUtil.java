@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 /**
  * WebSocketUtil
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 public class WebSocketUtil {
 

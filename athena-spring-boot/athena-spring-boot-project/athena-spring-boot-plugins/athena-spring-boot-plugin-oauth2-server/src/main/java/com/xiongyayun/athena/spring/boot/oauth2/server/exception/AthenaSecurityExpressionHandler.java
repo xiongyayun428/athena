@@ -8,8 +8,8 @@
 ///**
 // * AthenaSecurityExpressionHandler
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-08
+// * @author Yayun.Xiong
+// * @date 2019-07-08
 // */
 //@Configuration
 //public class AthenaSecurityExpressionHandler extends OAuth2WebSecurityExpressionHandler {

@@ -11,7 +11,7 @@ import java.util.UUID;
  * <p><b>新的UUID生成器，利用系统{@link UUID#randomUUID}产生</b></p>
  *  线程安全
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @see java.util.UUID
  * @date 2019-04-14 17:01
  */

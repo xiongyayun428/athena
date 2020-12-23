@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * UserService
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-19
  */
 public interface UserService {

@@ -13,7 +13,7 @@ import java.util.Date;
  * <p><b>简单的ID生成工厂</b></p>
  * 不依靠数据库(线程安全)
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 17:10
  */
 @Service

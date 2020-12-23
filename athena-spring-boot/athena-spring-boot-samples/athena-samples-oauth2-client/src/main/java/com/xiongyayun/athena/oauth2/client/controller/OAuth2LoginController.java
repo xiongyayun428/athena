@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * OAuth2LoginController
  *
- * @author: Yayun.Xiong
- * @date: 2019-08-08
+ * @author Yayun.Xiong
+ * @date 2019-08-08
  */
 @RestController
 public class OAuth2LoginController {

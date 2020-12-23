@@ -11,7 +11,7 @@ import java.util.TimeZone;
 /**
  * <p><b></b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @since 2015年4月26日
  * @since 1.8
  *

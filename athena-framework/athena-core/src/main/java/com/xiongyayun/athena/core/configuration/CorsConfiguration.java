@@ -9,8 +9,8 @@
 ///**
 // * CORS跨域访问
 // *
-// * @author: 熊亚运
-// * @date: 2019-05-22
+// * @author 熊亚运
+// * @date 2019-05-22
 // */
 //@Configuration
 //public class CorsConfiguration {

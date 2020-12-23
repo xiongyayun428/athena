@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * IndexController
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/6/18
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/6/18
  */
 @Slf4j
 @Api(value = "所有首页相关服务", tags = {"首页服务"})

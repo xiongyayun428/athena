@@ -11,8 +11,8 @@
 ///**
 // * JwtTokenEnhancer
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //public class JwtTokenEnhancer implements TokenEnhancer {
 //	@Override

@@ -3,7 +3,7 @@ package com.xiongyayun.athena.service.id.sequence;
 /**
  * <p><b>根据步长生成序列号</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2015年4月26日
  * @since 1.8
  *

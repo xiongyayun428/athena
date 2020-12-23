@@ -11,8 +11,8 @@
 ///**
 // * 配置所有请求的安全验证
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@Slf4j
 //@Configuration

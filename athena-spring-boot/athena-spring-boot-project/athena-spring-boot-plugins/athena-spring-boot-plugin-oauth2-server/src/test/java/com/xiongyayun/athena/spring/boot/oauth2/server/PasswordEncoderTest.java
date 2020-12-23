@@ -6,8 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  * PasswordEncoder
  *
- * @author: Yayun.Xiong
- * @date: 2019-07-09
+ * @author Yayun.Xiong
+ * @date 2019-07-09
  */
 @Slf4j
 public class PasswordEncoderTest {

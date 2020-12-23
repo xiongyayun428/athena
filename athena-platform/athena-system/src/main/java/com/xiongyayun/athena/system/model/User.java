@@ -14,8 +14,8 @@ import java.util.Date;
 /**
  * User
  *
- * @author: Yayun.Xiong
- * @date: 2019-06-05
+ * @author Yayun.Xiong
+ * @date 2019-06-05
  */
 @Data
 @TableName("`user`")

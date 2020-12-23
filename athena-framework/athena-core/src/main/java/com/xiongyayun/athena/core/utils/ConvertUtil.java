@@ -12,11 +12,11 @@ import java.util.Map;
 /**
  * ConvertUtil
  *
- * @author: 熊亚运
- * @date: 2019-06-17
+ * @author 熊亚运
+ * @date 2019-06-17
  */
 public class ConvertUtil {
-    public static Object convertMap(Class type, Map<String, Object> map) throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+    public static Object convertMap(Class<Object> type, Map<String, Object> map) throws IntrospectionException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         BeanInfo beanInfo = Introspector.getBeanInfo(type);
         Object obj = type.getDeclaredConstructor().newInstance();
 
@@ -42,7 +42,7 @@ public class ConvertUtil {
 			String propertyName = descriptor.getName();
 			if (!"class".equals(propertyName)) {
 				Method readMethod = descriptor.getReadMethod();
-				Object result = readMethod.invoke(bean, new Object[0]);
+				Object result = readMethod.invoke(bean);
 				if (result != null) {
 					returnMap.put(propertyName, result);
 				} else {

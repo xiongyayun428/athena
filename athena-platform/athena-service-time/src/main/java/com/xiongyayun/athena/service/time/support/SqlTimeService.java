@@ -9,7 +9,7 @@ import java.sql.*;
 /**
  * <p><b>数据库时间戳服务</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @since 2015年4月26日
  * @since 1.8
  *

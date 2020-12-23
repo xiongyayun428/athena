@@ -6,8 +6,8 @@ import java.util.Arrays;
  * 基数排序
  * 考虑负数的情况还可以参考： https://code.i-harness.com/zh-CN/q/e98fa9
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/17
+ * @author Yayun.Xiong
+ * @date 2019/12/17
  */
 public class RadixSort implements IArraySort {
 
@@ -57,9 +57,9 @@ public class RadixSort implements IArraySort {
 			// 考虑负数的情况，这里扩展一倍队列数，其中 [0-9]对应负数，[10-19]对应正数 (bucket + 10)
 			int[][] counter = new int[mod * 2][0];
 
-			for (int j = 0; j < arr.length; j++) {
-				int bucket = ((arr[j] % mod) / dev) + mod;
-				counter[bucket] = arrayAppend(counter[bucket], arr[j]);
+			for (int k : arr) {
+				int bucket = ((k % mod) / dev) + mod;
+				counter[bucket] = arrayAppend(counter[bucket], k);
 			}
 
 			int pos = 0;

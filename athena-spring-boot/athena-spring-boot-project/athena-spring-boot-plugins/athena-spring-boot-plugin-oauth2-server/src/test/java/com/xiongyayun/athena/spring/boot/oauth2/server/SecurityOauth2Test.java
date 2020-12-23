@@ -5,8 +5,8 @@
 ///**
 // * SecurityOauth2Test
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-04
+// * @author Yayun.Xiong
+// * @date 2019-07-04
 // */
 //@RunWith(SpringRunner.class)
 //@SpringBootTest

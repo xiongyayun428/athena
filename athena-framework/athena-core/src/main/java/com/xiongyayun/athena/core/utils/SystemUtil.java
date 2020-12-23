@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class SystemUtil {
 	private final static Log log = LogFactory.getLog(SystemUtil.class);
-	private static Set<String> _localAddress;
+	private static Set<String> localAddress;
 
 	/**
 	 * 获取来访者的浏览器版本
@@ -33,7 +33,7 @@ public class SystemUtil {
 	public static String getRequestBrowserInfo(HttpServletRequest request) {
 		String browserVersion = null;
 		String header = request.getHeader("user-agent");
-		if (header == null || header.equals("")) {
+		if (header == null || "".equals(header)) {
 			return "";
 		}
 		if (header.indexOf("MSIE") > 0) {
@@ -61,7 +61,7 @@ public class SystemUtil {
 	public static String getRequestSystemInfo(HttpServletRequest request) {
 		String systenInfo = null;
 		String header = request.getHeader("user-agent");
-		if (header == null || header.equals("")) {
+		if (header == null || "".equals(header)) {
 			return "";
 		}
 		// 得到用户的操作系统
@@ -129,7 +129,8 @@ public class SystemUtil {
 		if ("127.0.0.1".equals(s) || "0:0:0:0:0:0:0:1".equals(s)) {
 			try {
 				s = InetAddress.getLocalHost().getHostAddress();
-			} catch (UnknownHostException unknownhostexception) {
+			} catch (UnknownHostException e) {
+				log.error(e.getMessage(), e);
 			}
 		}
 		return s;
@@ -144,7 +145,7 @@ public class SystemUtil {
 		if (getLocalAddress().contains(ip)) {
 			return getLocalMac();
 		}
-		String macAddress = "";
+		String macAddress;
 		macAddress = getMacInWindows(ip).trim();
 		if (StrUtil.isBlank(macAddress)) {
 			macAddress = getMacInLinux(ip).trim();
@@ -175,17 +176,19 @@ public class SystemUtil {
 	 * @return
 	 */
 	private static String callCmd(String[] cmd) {
-		String result = "";
-		String line = "";
+		StringBuilder result = new StringBuilder();
+		String line;
 		try {
 			Process proc = Runtime.getRuntime().exec(cmd);
 			InputStreamReader is = new InputStreamReader(proc.getInputStream(), Charset.forName("GBK"));
 			BufferedReader br = new BufferedReader(is);
 			while ((line = br.readLine()) != null) {
-				result += line + "\r\n";
+				result.append(line).append("\r\n");
 			}
-		} catch (Exception e) {}
-		return result;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return result.toString();
 	}
 
 	/**
@@ -195,8 +198,8 @@ public class SystemUtil {
 	 * @return			第二个命令的执行结果
 	 */
 	private static String callCmd(String[] cmd, String[] another) {
-		String result = "";
-		String line = "";
+		StringBuilder result = new StringBuilder();
+		String line;
 		try {
 			Runtime rt = Runtime.getRuntime();
 			Process proc = rt.exec(cmd);
@@ -205,10 +208,12 @@ public class SystemUtil {
 			InputStreamReader is = new InputStreamReader(proc.getInputStream(), Charset.forName("GBK"));
 			BufferedReader br = new BufferedReader(is);
 			while ((line = br.readLine()) != null) {
-				result += line + "\r\n";
+				result.append(line).append("\r\n");
 			}
-		} catch (Exception e) {}
-		return result;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return result.toString();
 	}
 
 	/**
@@ -220,7 +225,7 @@ public class SystemUtil {
 	 */
 	private static String filterMacAddress(String ip, String sourceString, String macSeparator) {
 		String result = "";
-		String regExp = "((([0-9,A-F,a-f]{1,2}" + macSeparator + "){1,5})[0-9,A-F,a-f]{1,2})";
+		String regExp = "((([0-9,A-Fa-f]{1,2}" + macSeparator + "){1,5})[0-9,A-Fa-f]{1,2})";
 		Pattern pattern = Pattern.compile(regExp);
 		Matcher matcher = pattern.matcher(sourceString);
 		int index = sourceString.indexOf(ip);
@@ -236,27 +241,29 @@ public class SystemUtil {
 		}
 		return result;
 	}
-	
+
 	private static Set<String> getLocalAddress() {
-		if (_localAddress == null) {
+		if (localAddress == null) {
 			try {
-				_localAddress = new HashSet<>();
+				localAddress = new HashSet<>();
 				synchronized (SystemUtil.class) {
-					if (_localAddress == null) {
+					if (localAddress == null) {
 						// 获取本地IP对象
 						InetAddress ia = InetAddress.getLocalHost();
-						_localAddress.add("127.0.0.1");
-						_localAddress.add("0:0:0:0:0:0:0:1");
-						_localAddress.add("localhost");
-						_localAddress.add(ia.getHostAddress());
-						_localAddress.add(ia.getHostName());
+						localAddress.add("127.0.0.1");
+						localAddress.add("0:0:0:0:0:0:0:1");
+						localAddress.add("localhost");
+						localAddress.add(ia.getHostAddress());
+						localAddress.add(ia.getHostName());
 					}
 				}
-			} catch (UnknownHostException e) {}
+			} catch (UnknownHostException e) {
+				log.error(e.getMessage(), e);
+			}
 		}
-		return _localAddress;
+		return localAddress;
 	}
-	
+
 	/**
 	 * 获取本机Mac地址
 	 * @return
@@ -267,9 +274,9 @@ public class SystemUtil {
 			InetAddress ia = InetAddress.getLocalHost();
 			// 获得网络接口对象（即网卡），并得到mac地址，mac地址存在于一个byte数组中。
 			byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
-			StringBuffer sb = new StringBuffer("");
+			StringBuilder sb = new StringBuilder();
 	        for (int i = 0; i < mac.length; i++) {
-	            sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));        
+	            sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
 	        }
 	        return sb.toString();
 		} catch (Exception e) {
@@ -283,7 +290,7 @@ public class SystemUtil {
 	 * @return
 	 */
 	private static String getMacInWindows(final String ip) {
-		String result = "";
+		String result;
 		String[] cmd = { "cmd", "/c", "ping " + ip };
 		String[] another = { "cmd", "/c", "arp -a" };
 		String cmdResult = callCmd(cmd, another);
@@ -297,7 +304,7 @@ public class SystemUtil {
 	 * @return
 	 */
 	private static String getMacInLinux(final String ip) {
-		String result = "";
+		String result;
 		String[] cmd = { "/bin/sh", "-c", "ping " + ip + " -c 2 && arp -a" };
 		String cmdResult = callCmd(cmd);
 		result = filterMacAddress(ip, cmdResult, ":");
@@ -325,7 +332,7 @@ public class SystemUtil {
 
 			if (traceOn) {
 				List<String> values = Collections.list(request.getHeaderNames());
-				String headers = values.size() > 0 ? "masked" : "";
+				String headers;
 //                if (isEnableLoggingRequestDetails()) {
 				headers = values.stream().map(name -> name + ":" + Collections.list(request.getHeaders(name)))
 						.collect(Collectors.joining(", "));
@@ -345,7 +352,7 @@ public class SystemUtil {
 		}
 		return uri;
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(SystemUtil.getClientMac("127.0.0.1"));
 		System.out.println(SystemUtil.getClientMac("0:0:0:0:0:0:0:1"));

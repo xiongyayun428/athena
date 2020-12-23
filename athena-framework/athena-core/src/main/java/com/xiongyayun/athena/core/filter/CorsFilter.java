@@ -15,8 +15,8 @@
 ///**
 // * CorsFilter
 // *
-// * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
-// * @date: 2020/11/16
+// * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+// * @date 2020/11/16
 // */
 //@Order(-9999)
 //public class CorsFilter extends HttpFilter {

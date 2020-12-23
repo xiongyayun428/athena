@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 /**
  * <p><b>序列号表</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14
  */
 public class SequenceTableImpl extends AbstractSequenceTable {

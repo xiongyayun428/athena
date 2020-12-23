@@ -15,8 +15,8 @@
 ///**
 // * 用于tokan校验失败返回信息
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Component
 //public class AthenaAuthenticationEntryPoint implements AuthenticationEntryPoint {

@@ -9,8 +9,8 @@ import javax.annotation.security.PermitAll;
 /**
  * 中国地理信息
  *
- * @author: Yayun.Xiong
- * @date: 2019-06-27
+ * @author Yayun.Xiong
+ * @date 2019-06-27
  */
 public class ChinaRegionController {
 //	/**

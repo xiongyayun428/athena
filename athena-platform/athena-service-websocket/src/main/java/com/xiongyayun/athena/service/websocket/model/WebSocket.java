@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * WebSocket对象
  * 用于存储secket连接信息
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 public class WebSocket {
     /**

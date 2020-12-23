@@ -6,8 +6,8 @@ import java.net.InetAddress;
 /**
  * IPv4Util
  *
- * @author: Yayun.Xiong
- * @date: 2019/11/15
+ * @author Yayun.Xiong
+ * @date 2019/11/15
  */
 public class IPv4Util {
 	private final static int INADDRSZ = 4;
@@ -28,9 +28,8 @@ public class IPv4Util {
 
 	/**
 	 * 把IP地址转化为int
-	 *
 	 * @param ipAddr
-	 * @return int
+	 * @return ip的int地址
 	 */
 	public static byte[] ipToBytesByReg(String ipAddr) {
 		byte[] ret = new byte[4];
@@ -162,7 +161,7 @@ public class IPv4Util {
 	public static int[] getIPIntScope(String ipAddr, String mask) {
 
 		int ipInt;
-		int netMaskInt = 0, ipcount = 0;
+		int netMaskInt, ipcount;
 		try {
 			ipInt = IPv4Util.ipToInt(ipAddr);
 			if (null == mask || "".equals(mask)) {

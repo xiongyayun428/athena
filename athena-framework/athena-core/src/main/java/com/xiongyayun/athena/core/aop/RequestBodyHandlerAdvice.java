@@ -24,8 +24,8 @@ import java.lang.reflect.Type;
  * 允许在将请求的主体读取和转换成一个对象之前对请求进行自定义，
  * 并允许在将其传递到控制器方法作为一个@RequestBody或HttpEntity方法参数之前处理结果对象。
  *
- * @author: 熊亚运
- * @date: 2019-05-30
+ * @author 熊亚运
+ * @date 2019-05-30
  */
 @RestControllerAdvice
 public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
@@ -50,8 +50,8 @@ public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
      * @param parameter
      * @param targetType
      * @param converterType
-     * @return
-     * @throws IOException
+     * @return	HttpInputMessage
+     * @throws IOException	异常
      */
     @Override
     public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
@@ -63,7 +63,11 @@ public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
     @Override
     public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         Method method = parameter.getMethod();
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		ServletRequestAttributes servletRequestAttributes = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
+		if (method == null || servletRequestAttributes == null) {
+			return body;
+		}
+		HttpServletRequest request = servletRequestAttributes.getRequest();
 		try {
 			log.info(">>> [{}]: {}.{}({})", request.getServletPath(), method.getDeclaringClass().getName(), method.getName(), objectMapper.writeValueAsString(body));
 		} catch (JsonProcessingException e) {

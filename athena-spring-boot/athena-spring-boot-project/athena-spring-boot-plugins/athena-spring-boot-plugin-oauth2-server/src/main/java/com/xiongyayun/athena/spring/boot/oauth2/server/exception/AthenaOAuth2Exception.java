@@ -6,8 +6,8 @@
 ///**
 // * AthenaOAuth2Exception
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@JsonSerialize(using = AthenaStdSerializer.class)
 //public class AthenaOAuth2Exception extends OAuth2Exception {

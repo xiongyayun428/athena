@@ -14,8 +14,8 @@
 ///**
 // * AthenaStdSerializer
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Component
 //public class AthenaStdSerializer extends StdSerializer<AthenaOAuth2Exception> {

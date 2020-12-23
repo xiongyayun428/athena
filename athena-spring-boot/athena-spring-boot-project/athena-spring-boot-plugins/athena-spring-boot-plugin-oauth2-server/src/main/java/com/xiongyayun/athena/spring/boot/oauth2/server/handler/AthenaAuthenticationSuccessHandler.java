@@ -13,8 +13,8 @@
 ///**
 // * 认证成功跳转
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-08
+// * @author Yayun.Xiong
+// * @date 2019-07-08
 // */
 //@Slf4j
 //@Component

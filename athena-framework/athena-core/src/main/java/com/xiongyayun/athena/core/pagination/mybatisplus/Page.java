@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  *     "records": []
  * }
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/8/6
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/8/6
  */
 @JsonInclude()
 @JsonIgnoreProperties({ "pages", "current", "size", "optimizeCountSql", "searchCount", "hitCount", "orders" })
@@ -51,7 +51,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 
 	/**
 	 * 当前页
-	 * @return
+	 * @return	当前页
 	 */
 	@Override
 	public long getPageIndex() {
@@ -65,7 +65,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 
 	/**
 	 * 每页显示条数，默认 10
-	 * @return
+	 * @return	每页显示条数，默认 10
 	 */
 	@Override
 	public long getPageSize() {
@@ -79,7 +79,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 
 	/**
 	 * 当前分页总页数
-	 * @return
+	 * @return	当前分页总页数
 	 */
 	@Override
 	public long getPageCount() {

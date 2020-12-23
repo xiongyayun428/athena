@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 角色
  * 允许动态刷新配置
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-22
  */
 @RefreshScope
@@ -22,7 +22,7 @@ public class RoleController implements RoleApi {
 	// 获取resources目录下面的yml文件内容
 	@Value("${server.port}")
 	private String port;
-	
+
 	@Value("${user.password}")
 	private String name;
 
@@ -47,5 +47,5 @@ public class RoleController implements RoleApi {
 		}
 		return port + " get (" + userId + ")" + name;
 	}
-	
+
 }

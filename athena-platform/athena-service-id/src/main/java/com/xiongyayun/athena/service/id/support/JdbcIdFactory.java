@@ -19,7 +19,7 @@ import java.util.Date;
 /**
  * <p><b>ID生成工厂的数据库操作</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 16:52
  */
 @Service

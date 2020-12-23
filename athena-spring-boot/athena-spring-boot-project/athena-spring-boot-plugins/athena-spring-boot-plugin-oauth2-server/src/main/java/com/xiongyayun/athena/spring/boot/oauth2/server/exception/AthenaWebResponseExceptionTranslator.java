@@ -8,8 +8,8 @@
 ///**
 // * 自定义OAuth2异常提示
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@Component
 //public class AthenaWebResponseExceptionTranslator implements WebResponseExceptionTranslator{

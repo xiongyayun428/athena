@@ -9,7 +9,7 @@
 ///**
 // * AbstractAuthorization
 // *
-// * @author: Yayun.Xiong
+// * @author Yayun.Xiong
 // * @date 2019-06-16
 // */
 //public abstract class AbstractAuthentication implements Authentication, InitializingBean {

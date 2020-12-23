@@ -13,8 +13,8 @@
 ///**
 // * AthenaFilterInvocationSecurityMetadataSource
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-08-15
+// * @author Yayun.Xiong
+// * @date 2019-08-15
 // */
 //public class AthenaFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 //

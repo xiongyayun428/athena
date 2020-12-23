@@ -14,8 +14,8 @@
 ///**
 // * AthenaAbstractSecurityInterceptor
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-08-15
+// * @author Yayun.Xiong
+// * @date 2019-08-15
 // */
 //@Component
 //public class AthenaAbstractSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * HTTP2支持
  *
- * @author: 熊亚运
- * @date: 2019-05-22
+ * @author 熊亚运
+ * @date 2019-05-22
  */
 @Configuration
 public class Http2Configuration {

@@ -13,8 +13,8 @@
 ///**
 // * 自定义客户端信息
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@org.codehaus.jackson.map.annotate.JsonSerialize(include = org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_DEFAULT)
 //@org.codehaus.jackson.annotate.JsonIgnoreProperties(ignoreUnknown = true)

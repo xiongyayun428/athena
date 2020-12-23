@@ -13,8 +13,8 @@
 // * WebSocket
 // * ws://localhost:9090/admin/websocket
 // *
-// * @author: 熊亚运
-// * @date: 2019-06-06
+// * @author 熊亚运
+// * @date 2019-06-06
 // */
 //@Slf4j
 //@ServerEndpoint(value = "/websocket")

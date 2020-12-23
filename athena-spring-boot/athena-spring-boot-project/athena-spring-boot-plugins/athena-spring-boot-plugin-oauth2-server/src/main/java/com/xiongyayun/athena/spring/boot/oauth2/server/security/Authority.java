@@ -10,8 +10,8 @@
 ///**
 // * Authority
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@JsonIgnoreProperties(ignoreUnknown = true)
 //public final class Authority implements GrantedAuthority {

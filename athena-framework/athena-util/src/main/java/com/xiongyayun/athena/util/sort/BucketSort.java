@@ -6,21 +6,21 @@ import java.util.Arrays;
  * 桶排序
  *
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/16
+ * @author Yayun.Xiong
+ * @date 2019/12/16
  */
 public class BucketSort implements IArraySort {
-	private static final InsertSort insertSort = new InsertSort();
+	private static final InsertSort INSERT_SORT = new InsertSort();
 
 	@Override
 	public int[] sort(int[] sourceArray) throws Exception {
 		// 对 arr 进行拷贝，不改变参数内容
 		int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
 		// 设置桶的默认数量为5
-		return bucketSort(arr, 5);
+		return bucketSort(arr);
 	}
 
-	private int[] bucketSort(int[] arr, int bucketSize) throws Exception {
+	private int[] bucketSort(int[] arr) throws Exception {
 		if (arr.length == 0) {
 			return arr;
 		}
@@ -36,13 +36,13 @@ public class BucketSort implements IArraySort {
 			}
 		}
 
-		int bucketCount = (int) Math.floor((maxValue - minValue) / bucketSize) + 1;
+		int bucketCount = (int) Math.floor((maxValue - minValue) / 5) + 1;
 		int[][] buckets = new int[bucketCount][0];
 
 		// 利用映射函数将数据分配到各个桶中
-		for (int i = 0; i < arr.length; i++) {
-			int index = (int) Math.floor((arr[i] - minValue) / bucketSize);
-			buckets[index] = arrAppend(buckets[index], arr[i]);
+		for (int j : arr) {
+			int index = (int) Math.floor((j - minValue) / 5);
+			buckets[index] = arrAppend(buckets[index], j);
 		}
 
 		int arrIndex = 0;
@@ -51,12 +51,11 @@ public class BucketSort implements IArraySort {
 				continue;
 			}
 			// 对每个桶进行排序，这里使用了插入排序
-			bucket = insertSort.sort(bucket);
+			bucket = INSERT_SORT.sort(bucket);
 			for (int value : bucket) {
 				arr[arrIndex++] = value;
 			}
 		}
-
 		return arr;
 	}
 

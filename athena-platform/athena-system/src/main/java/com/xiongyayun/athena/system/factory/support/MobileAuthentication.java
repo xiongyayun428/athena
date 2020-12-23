@@ -8,7 +8,7 @@
 ///**
 // * 手机号授权登录
 // *
-// * @author: Yayun.Xiong
+// * @author Yayun.Xiong
 // * @date 2019-06-16
 // */
 //@Component

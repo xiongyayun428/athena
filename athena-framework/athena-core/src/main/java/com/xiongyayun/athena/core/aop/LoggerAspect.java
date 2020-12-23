@@ -27,19 +27,19 @@ import java.util.Map;
 /**
  * 日志切面
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-26
  */
 @Aspect
 @Component
 public class LoggerAspect {
-	private static final org.slf4j.Logger log = LoggerFactory.getLogger(LoggerAspect.class);
-    private boolean limitLength = false;
-    private int limit = 1024;
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(LoggerAspect.class);
+    private static final boolean LIMIT_LENGTH = false;
+    private static final int LIMIT = 1024;
 
-    private static ThreadLocal<Long> startTimeThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<String> uuidThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> loggerThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Long> START_TIME_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<String> UUID_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> LOGGER_THREAD_LOCAL = new ThreadLocal<>();
 
 
 	private ObjectMapper indentOutputObjectMapper;
@@ -67,7 +67,7 @@ public class LoggerAspect {
 
     /**
      * 前置通知（Before advice） ：在某连接点（JoinPoint）——核心代码（类或者方法）之前执行的通知，但这个通知不能阻止连接点前的执行。
-     * @param point
+     * @param point 连接点
      */
     @Before("doAspect()")
     public void before(JoinPoint point) {
@@ -79,11 +79,11 @@ public class LoggerAspect {
         if (annotation == null) {
         	return;
 		}
-		startTimeThreadLocal.set(System.currentTimeMillis());
+		START_TIME_THREAD_LOCAL.set(System.currentTimeMillis());
 		String uuid = IdUtil.simpleUUID();
-		uuidThreadLocal.set(uuid);
+		UUID_THREAD_LOCAL.set(uuid);
 		Map<String, Object> args = new HashMap<>(parameterNames.length);
-		if (parameterNames != null && parameterNames.length > 0) {
+		if (parameterNames.length > 0) {
 			for (int i = 0; i < parameterNames.length; i++) {
 				args.put(parameterNames[i], parameterValues[i]);
 			}
@@ -93,67 +93,69 @@ public class LoggerAspect {
 			params = objectMapper.writeValueAsString(args);
 		} catch (JsonProcessingException e) {
 			params = Arrays.toString(point.getArgs());
-			log.error("序列化请求参数异常", e);
+			LOG.error("序列化请求参数异常", e);
 		}
 		if (annotation.save()) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-			HttpServletRequest request = attributes.getRequest();
+			if (attributes != null) {
+				HttpServletRequest request = attributes.getRequest();
 //            SystemUtil.logRequest(request);
 
-			com.xiongyayun.athena.core.model.support.Logger logger = new com.xiongyayun.athena.core.model.support.Logger();
+				com.xiongyayun.athena.core.model.support.Logger logger = new com.xiongyayun.athena.core.model.support.Logger();
 //			logger.setId(IdUtil.);
-			logger.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
-			logger.setHttpMethod(request.getMethod());
-			logger.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
-			String queryString = request.getQueryString();
-			String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
-			logger.setUrl(request.getRequestURL().toString() + queryClause);
-			logger.setIp(SystemUtil.getClientIP(request));
-//			loggerThreadLocal.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
-			logger.setRequestBody(params);
-//        loggerThreadLocal.get().setLogType(AppConstants.LOG_TYPE_HTTP);
+				logger.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
+				logger.setHttpMethod(request.getMethod());
+				logger.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
+				String queryString = request.getQueryString();
+				String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
+				logger.setUrl(request.getRequestURL().toString() + queryClause);
+				logger.setIp(SystemUtil.getClientIP(request));
+//			LOGGER_THREAD_LOCAL.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
+				logger.setRequestBody(params);
+//        LOGGER_THREAD_LOCAL.get().setLogType(AppConstants.LOG_TYPE_HTTP);
 //			String params = request.getParameterMap().entrySet().stream()
 //					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
 //					.collect(Collectors.joining(", "));
 //			System.out.println(params);
-//			loggerThreadLocal.get().setReqParams(params);
-			loggerThreadLocal.set(logger);
+//			LOGGER_THREAD_LOCAL.get().setReqParams(params);
+				LOGGER_THREAD_LOCAL.set(logger);
+			}
 		}
-		log.info("[{}] {} 请求参数：{}", String.join(",", Arrays.asList(annotation.value())), uuid, params);
+		LOG.info("[{}] {} 请求参数：{}", String.join(",", Arrays.asList(annotation.value())), uuid, params);
     }
 
     /**
      * 返回后通知（After return advice） ：在某连接点正常完成后执行的通知，不包括抛出异常的情况。
-     * @param resultValue
+     * @param resultValue	值
      */
     @AfterReturning(returning = "resultValue", pointcut = "doAspect()")
     public void afterReturning(JoinPoint point, Object resultValue) {
-		long spendTime = System.currentTimeMillis() - startTimeThreadLocal.get();
-		String uuid = uuidThreadLocal.get();
+		long spendTime = System.currentTimeMillis() - START_TIME_THREAD_LOCAL.get();
+		String uuid = UUID_THREAD_LOCAL.get();
 		MethodSignature signature = (MethodSignature) point.getSignature();
 		Method method = signature.getMethod();
 		Logger annotation = method.getAnnotation(Logger.class);
 		String annotationValue = String.join(",", Arrays.asList(annotation.value()));
         if (null == resultValue) {
-			log.info("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
+			LOG.info("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
             return;
         }
         String value = resultValue.toString();
         try {
             value = indentOutputObjectMapper.writeValueAsString(resultValue);
         } catch (JsonProcessingException e) {
-            log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
         }
-        String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
+        String truncatedValue = (LIMIT_LENGTH && value.length() > LIMIT ? value.substring(0, LIMIT) + " (truncated)..." : value);
 
         if (annotation.save()) {
-            loggerThreadLocal.get().setSpendTime(spendTime);
-			loggerThreadLocal.get().setResponseBody(truncatedValue);
+            LOGGER_THREAD_LOCAL.get().setSpendTime(spendTime);
+			LOGGER_THREAD_LOCAL.get().setResponseBody(truncatedValue);
             // TODO 保存
-//            System.out.println(loggerThreadLocal.get());
+//            System.out.println(LOGGER_THREAD_LOCAL.get());
         }
-        log.info("[{}] {} 耗时: {}ms", annotationValue, uuid, spendTime);
-        if (log.isTraceEnabled()) {
+		LOG.info("[{}] {} 耗时: {}ms", annotationValue, uuid, spendTime);
+        if (LOG.isTraceEnabled()) {
 			System.err.println(uuid + "=====>" + annotationValue + "<=====" + System.lineSeparator() +
 					truncatedValue + System.lineSeparator() + uuid + "=====>" + annotationValue + "<=====");
 		}
@@ -161,24 +163,24 @@ public class LoggerAspect {
 
 	/**
 	 * 当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）
-	 * @param joinPoint
+	 * @param joinPoint	连接点
 	 */
 	@After("doAspect()")
 	public void after(JoinPoint joinPoint) {
 		Signature signature = joinPoint.getSignature();
-		log.info("已经记录下操作日志@After 方法执行后-->" + signature.getDeclaringTypeName() + "." + signature.getName());
+		LOG.info("已经记录下操作日志@After 方法执行后-->" + signature.getDeclaringTypeName() + "." + signature.getName());
 
 		clear();
 	}
 
     /**
      * 抛出异常后通知（After throwing advice） ： 在方法抛出异常退出时执行的通知。
-     * @param e
+     * @param e	异常
      */
     @AfterThrowing(throwing="e", pointcut = "doAspect()")
     public void afterThrowing(Throwable e) {
         Throwable cause = lastThrowable(e);
-        log.error("===>执行异常：{}", cause.getMessage() );
+		LOG.error("===>执行异常：{}", cause.getMessage() );
     }
 
     private Throwable lastThrowable(Throwable e) {
@@ -190,9 +192,9 @@ public class LoggerAspect {
     }
 
     private void clear() {
-		loggerThreadLocal.remove();
-		uuidThreadLocal.remove();
-		startTimeThreadLocal.remove();
+		LOGGER_THREAD_LOCAL.remove();
+		UUID_THREAD_LOCAL.remove();
+		START_TIME_THREAD_LOCAL.remove();
 	}
 
 }

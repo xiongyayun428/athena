@@ -15,16 +15,16 @@ import java.nio.file.Paths;
 /**
  * FileUtil
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/10/23
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/10/23
  */
 public class FileUtil {
 	private static final Logger logger = LoggerFactory.getLogger(PentahoKettleUtil.class);
-	private static final Tika tika = new Tika();
+	private static final Tika TIKA = new Tika();
 
 	public static String getFileMimeType(File file) {
 		try {
-			return tika.detect(file);
+			return TIKA.detect(file);
 		} catch (IOException e) {
 			logger.warn("get file MimeType error: " + e.getMessage(), e);
 			return "application/octet-stream";
@@ -55,7 +55,7 @@ public class FileUtil {
 	 * @param destFilePath		目标上传目录
 	 * @param destFileName		目标上传文件名，为空时取上传的文件名
 	 * @return					上传的文件名
-	 * @throws Exception
+	 * @throws Exception		上传异常
 	 */
 	public static String upload(MultipartFile multipartFile, String destFilePath, String destFileName) throws Exception {
 		if (multipartFile == null || multipartFile.isEmpty()) {
@@ -67,14 +67,17 @@ public class FileUtil {
 		}
 		Path path;
 		String fileName = multipartFile.getOriginalFilename();
+		if (fileName == null) {
+			throw new Exception("上传的文件名为空");
+		}
 		//判断是否为IE浏览器的文件名，IE浏览器下文件名会带有盘符信息
 		int unixSep = fileName.lastIndexOf('/');
 		int winSep = fileName.lastIndexOf('\\');
-		int pos = (winSep > unixSep ? winSep : unixSep);
+		int pos = (Math.max(winSep, unixSep));
 		if (pos != -1)  {
 			fileName = fileName.substring(pos + 1);
 		}
-		if (StringUtils.isEmpty(destFileName)) {
+		if (!StringUtils.hasLength(destFileName)) {
 			path = Paths.get(f.getAbsolutePath() + File.separator + fileName);
 		} else {
 			path = Paths.get(f.getAbsolutePath() + File.separator + destFileName);
@@ -107,10 +110,10 @@ public class FileUtil {
 			 BufferedInputStream bis = new BufferedInputStream(fis)) {
 			if (download != null && download) {
 				// 下载
-				response.addHeader("Content-Disposition", "attachment; filename=" + new StringBuffer().append(URLEncoder.encode(file.getName(), "UTF-8")));
+				response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
 			} else {
 				// 预览
-				response.addHeader("Content-Disposition", "inline; filename=" + new StringBuffer().append(URLEncoder.encode(file.getName(), "UTF-8")));
+				response.addHeader("Content-Disposition", "inline; filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
 			}
 			OutputStream os = response.getOutputStream();
 			int len;

@@ -13,8 +13,8 @@ import java.security.interfaces.RSAPublicKey;
 /**
  * SecurityConfig
  *
- * @author: Yayun.Xiong
- * @date: 2019-08-08
+ * @author Yayun.Xiong
+ * @date 2019-08-08
  */
 @EnableWebSecurity
 public class OAuth2ResourceServerSecurityConfiguration extends WebSecurityConfigurerAdapter {

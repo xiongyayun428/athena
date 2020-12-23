@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 配置基于STOMP的WebSocket
  *
- * @author: 熊亚运
- * @date: 2019-06-06
+ * @author 熊亚运
+ * @date 2019-06-06
  */
 @Configuration
 @EnableWebSocketMessageBroker

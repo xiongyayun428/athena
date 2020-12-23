@@ -8,7 +8,7 @@ import java.net.InetAddress;
 /**
  * UUID生成器
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 16:41
  */
 @Service

@@ -8,8 +8,8 @@
 ///**
 // * FileServiceFallbackFactory
 // *
-// * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
-// * @date: 2020/6/24
+// * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+// * @date 2020/6/24
 // */
 //@Component
 //public class FileServiceFallbackFactory implements FallbackFactory<FileService> {

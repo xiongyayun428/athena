@@ -23,8 +23,8 @@
 ///**
 // * TODO 这里有问题，没有加载
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Configuration
 //public class TokenStoreConfiguration {
@@ -103,8 +103,8 @@
 //		/**
 //		 * 对JwtAccessTokenConverter 的 enhance进行重写，加入自定义的信息
 //		 *
-//		 * @author: Yayun.Xiong
-//		 * @date: 2019-07-05
+//		 * @author Yayun.Xiong
+//		 * @date 2019-07-05
 //		 */
 //		class CustomJwtAccessTokenConverter extends JwtAccessTokenConverter {
 //			private static final String BEARER_PRIFIX = "bearer ";

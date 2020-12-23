@@ -12,26 +12,23 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
  * ResponseBodyHandlerAdvice
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-26
  */
 @RestControllerAdvice
 public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
 	private static final Logger log = LoggerFactory.getLogger(ResponseBodyHandlerAdvice.class);
-    private boolean limitLength = true;
-    private int limit = 1024;
-    private static String[] ignore = {"/error", "/actuator", "/swagger", "/v2/api-docs", "/v3/api-docs"};
+    private static final boolean LIMIT_LENGTH = true;
+    private static final int LIMIT = 1024;
+    private static final String[] IGNORE = {"/error", "/actuator", "/swagger", "/v2/api-docs", "/v3/api-docs"};
 
 	@Resource
 	private ObjectMapper objectMapper;
@@ -45,39 +42,35 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType,
 								  Class<? extends HttpMessageConverter<?>> selectedConverterType,
 								  ServerHttpRequest request, ServerHttpResponse response) {
-        if (body != null) {
-            HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-//			httpServletRequest.getServletPath()
-			String uri = httpServletRequest.getRequestURI();
-            if ((body.getClass().getPackage().getName().startsWith("org.springframework.boot.actuate") || Arrays.asList(ignore).stream().anyMatch(v -> uri.indexOf(v) > -1))) {
+		String uri = request.getURI().getPath();
+		System.out.println(uri);
+		if (body != null) {
+            if ((body.getClass().getPackage().getName().startsWith("org.springframework.boot.actuate") || Arrays.stream(IGNORE).anyMatch(uri::contains))) {
                 return body;
             }
         }
-		System.out.println(request.getURI().getPath());
 		if (body instanceof ResBody) {
-			print(body);
+			print(body, response);
 			return body;
 		}
 
 		ResBody resBody = new ResBody().withData(body);
-		if (returnType.getGenericParameterType().equals(String.class)) {
-			((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse().setHeader("Content-Type", "application/json");
-			return print(resBody);
-		}
-		print(resBody);
+//		if (returnType.getGenericParameterType().equals(String.class)) {
+//			response.getHeaders().setContentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE));
+//			return print(resBody, response);
+//		}
+		print(resBody, response);
 		return resBody;
     }
 
-    private Object print(Object body) {
+    private void print(Object body, ServerHttpResponse response) {
 		try {
-			((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse().setHeader("Content-Type", "application/json");
+			response.getHeaders().setContentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE));
 			String value = objectMapper.writeValueAsString(body);
-			String truncatedValue = (limitLength && value.length() > limit ? value.substring(0, limit) + " (truncated)..." : value);
+			String truncatedValue = (LIMIT_LENGTH && value.length() > LIMIT ? value.substring(0, LIMIT) + " (truncated)..." : value);
 			log.info("<<< [RESPONSE]: {}", truncatedValue);
-			return value;
 		} catch (JsonProcessingException e) {
 			log.error("<<< 返回String类型错误: " + e.getMessage(), e);
-			return body;
 		}
 	}
 }

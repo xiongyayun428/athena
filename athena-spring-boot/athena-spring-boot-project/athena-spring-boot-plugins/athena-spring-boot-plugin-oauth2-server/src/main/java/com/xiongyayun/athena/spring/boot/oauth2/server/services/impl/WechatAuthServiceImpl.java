@@ -13,8 +13,8 @@
 ///**
 // * 微信oauth2认证实现类
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@Service("wechatAuthService")
 //@Slf4j

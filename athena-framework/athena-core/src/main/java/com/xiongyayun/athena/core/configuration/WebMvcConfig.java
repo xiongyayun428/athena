@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * WebMvcConfig
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/11/27
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/11/27
  */
 @Configuration
 //@EnableWebMvc

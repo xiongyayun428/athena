@@ -11,8 +11,8 @@ import lombok.Setter;
 /**
  * 返回体
  *
- * @author: 熊亚运
- * @date: 2019-05-21
+ * @author 熊亚运
+ * @date 2019-05-21
  */
 @ApiModel("返回数据")
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})

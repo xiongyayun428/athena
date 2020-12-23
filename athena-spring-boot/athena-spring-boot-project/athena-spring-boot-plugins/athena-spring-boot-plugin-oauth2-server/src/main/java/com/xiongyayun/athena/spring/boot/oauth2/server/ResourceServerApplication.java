@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * ResourceServerApplication
  *
- * @author: Yayun.Xiong
- * @date: 2020/5/15
+ * @author Yayun.Xiong
+ * @date 2020/5/15
  */
 @SpringBootApplication
 public class ResourceServerApplication {

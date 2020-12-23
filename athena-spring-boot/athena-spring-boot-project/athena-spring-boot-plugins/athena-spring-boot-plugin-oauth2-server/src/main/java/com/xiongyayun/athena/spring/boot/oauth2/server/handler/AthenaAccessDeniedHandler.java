@@ -16,8 +16,8 @@
 ///**
 // * 权限校验异常
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Component
 //public class AthenaAccessDeniedHandler implements AccessDeniedHandler {

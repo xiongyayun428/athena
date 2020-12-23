@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * MessageController
  *
- * @author: Yayun.Xiong
- * @date: 2020/5/15
+ * @author Yayun.Xiong
+ * @date 2020/5/15
  */
 @RestController
 public class MessageController {

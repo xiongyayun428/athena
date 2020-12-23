@@ -6,8 +6,8 @@ import java.security.Principal;
  * <websocket登录连接对象>
  * <用于保存websocket连接过程中需要存储的业务参数>
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 public class WebSocketUserAuthentication implements Principal {
 

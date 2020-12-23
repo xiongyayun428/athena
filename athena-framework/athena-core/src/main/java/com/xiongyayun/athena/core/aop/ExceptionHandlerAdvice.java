@@ -34,20 +34,14 @@ import java.util.stream.Collectors;
 /**
  * ExceptionHandlerAdvice
  *
- * @author: 熊亚运
- * @date: 2019-05-21
+ * @author 熊亚运
+ * @date 2019-05-21
  */
 @Order()
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 	protected static final Logger log = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
     private final I18nService i18nService;
-//    private static final Map<String, KeyValue> ERROR_CACHE = new ConcurrentHashMap<>();
-
-//	@PostConstruct
-//	public void init() {
-//		ERROR_CACHE.clear();
-//	}
 
     @Autowired
 	public ExceptionHandlerAdvice(I18nService i18nService) {
@@ -84,6 +78,9 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(BindException.class)
     public ResBody catchBindException(BindException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
+        if (fieldError == null) {
+			return translate(ErrorConstant.BIND_EXCEPTION, null, e.getMessage(), e);
+		}
         Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
         return translate(ErrorConstant.BIND_EXCEPTION, args, fieldError.getDefaultMessage(), e);
     }
@@ -94,8 +91,11 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResBody catchMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public ResBody handleException(MethodArgumentNotValidException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
+		if (fieldError == null) {
+			return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, null, e.getMessage(), e);
+		}
         Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
         return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, args, fieldError.getDefaultMessage(), e);
     }
@@ -134,7 +134,7 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(AthenaRuntimeException.class)
     public ResBody catchAthenaRuntimeException(AthenaRuntimeException e) {
-		if (!StringUtils.isEmpty(e.getCode())) {
+		if (StringUtils.hasLength(e.getCode())) {
 			return new ResBody(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
@@ -142,7 +142,7 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(AthenaException.class)
     public ResBody handleException(AthenaException e) {
-		if (!StringUtils.isEmpty(e.getCode())) {
+		if (StringUtils.hasLength(e.getCode())) {
 			return new ResBody(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
@@ -153,43 +153,37 @@ public class ExceptionHandlerAdvice {
         if (i18nService == null) {
         	throw new RuntimeException("请配置i18nService");
 		}
-//		KeyValue cache = ERROR_CACHE.get(code);
-//        if (cache != null) {
-//			resBody.withCode(cache.getKey()).withMsg(cache.getValue());
-//		} else {
-        	// 翻译后
-			String i18nValue = i18nService.get(key, args);
-			Object val = null;
-			if (!StringUtils.isEmpty(i18nValue)) {
-				String[] separator = {" ", ",", "，", "|", ":", "：", "^", ";", "；", "/"};
-				String[] i18nValueArray = i18nValue.split("");
-				val = Arrays.asList(i18nValueArray).stream()
-						.filter(v -> Arrays.asList(separator).stream().anyMatch(v::equals))
-						.findFirst()
-						.orElse(null)
-						;
-			}
-			// 翻译后存在错误码和错误消息
-			if (val != null) {
-				int s = i18nValue.indexOf(String.valueOf(val));
-				resBody.withCode(i18nValue.substring(0, s)).withMsg(i18nValue.substring(s + 1));
-			} else {
-				// 没找到翻译
-				if (StringUtils.isEmpty(i18nValue)) {
-					log.warn("请配置错误码和错误信息: {}", key);
-					if (!StringUtils.isEmpty(defaultMsg)) {
-						resBody.setRtnMsg(defaultMsg);
-					} else {
-						resBody.setRtnMsg(key);
-					}
+		// 翻译后
+		String i18nValue = i18nService.get(key, args);
+		Object val = null;
+		if (StringUtils.hasLength(i18nValue)) {
+			String[] separator = {" ", ",", "，", "|", ":", "：", "^", ";", "；", "/"};
+			String[] i18nValueArray = i18nValue.split("");
+			val = Arrays.stream(i18nValueArray)
+					.filter(v -> Arrays.asList(separator).contains(v))
+					.findFirst()
+					.orElse(null)
+					;
+		}
+		// 翻译后存在错误码和错误消息
+		if (val != null) {
+			int s = i18nValue.indexOf(String.valueOf(val));
+			resBody.withCode(i18nValue.substring(0, s)).withMsg(i18nValue.substring(s + 1));
+		} else {
+			// 没找到翻译
+			if (!StringUtils.hasLength(i18nValue)) {
+				log.warn("请配置错误码和错误信息: {}", key);
+				if (StringUtils.hasLength(defaultMsg)) {
+					resBody.setRtnMsg(defaultMsg);
 				} else {
-					log.warn("错误码和错误信息配置错误: {}", key);
-					resBody.setRtnMsg(i18nValue);
+					resBody.setRtnMsg(key);
 				}
-				resBody.setRtnCode("999999");
+			} else {
+				log.warn("错误码和错误信息配置错误: {}", key);
+				resBody.setRtnMsg(i18nValue);
 			}
-//			ERROR_CACHE.put(code, new KeyValue(resBody.getRtnCode(), resBody.getRtnMsg()));
-//		}
+			resBody.setRtnCode("999999");
+		}
         if (e != null) {
             log.error(resBody.getRtnMsg(), e);
         } else {

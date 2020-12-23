@@ -11,8 +11,8 @@
 ///**
 // * OAuthController
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-06-26
+// * @author Yayun.Xiong
+// * @date 2019-06-26
 // */
 //@Slf4j
 //@Validated

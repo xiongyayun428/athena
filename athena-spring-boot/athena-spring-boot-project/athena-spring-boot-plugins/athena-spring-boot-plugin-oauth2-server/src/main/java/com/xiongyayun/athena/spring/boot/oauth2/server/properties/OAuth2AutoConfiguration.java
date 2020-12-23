@@ -6,8 +6,8 @@
 ///**
 // * OAuth2CoreConfig
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Configuration
 //@EnableConfigurationProperties(OAuth2Properties.class)

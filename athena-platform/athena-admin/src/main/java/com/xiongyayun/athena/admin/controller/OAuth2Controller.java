@@ -8,8 +8,8 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 /**
  * OAuth2Controller
  *
- * @author: Yayun.Xiong
- * @date: 2019-08-06
+ * @author Yayun.Xiong
+ * @date 2019-08-06
  */
 public class OAuth2Controller {
 	@Autowired

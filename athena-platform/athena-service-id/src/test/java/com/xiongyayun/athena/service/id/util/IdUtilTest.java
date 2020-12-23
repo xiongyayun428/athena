@@ -7,8 +7,8 @@ import java.util.Set;
 /**
  * IdUtilTest
  *
- * @author: Yayun.Xiong
- * @date: 2020/1/22
+ * @author Yayun.Xiong
+ * @date 2020/1/22
  */
 public class IdUtilTest {
 	public static void main(String[] args) throws InterruptedException {

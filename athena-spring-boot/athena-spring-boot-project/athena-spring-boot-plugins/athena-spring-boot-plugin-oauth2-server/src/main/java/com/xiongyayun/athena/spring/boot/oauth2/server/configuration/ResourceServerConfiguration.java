@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * 资源服务器配置类
  *
- * @author: Yayun.Xiong
- * @date: 2019-06-27
+ * @author Yayun.Xiong
+ * @date 2019-06-27
  */
 @Slf4j
 @EnableWebSecurity

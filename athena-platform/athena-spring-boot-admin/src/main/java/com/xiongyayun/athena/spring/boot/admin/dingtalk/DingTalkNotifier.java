@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * DingTalkNotifier
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-03-07 00:04
  */
 public class DingTalkNotifier extends AbstractStatusChangeNotifier {

@@ -9,8 +9,8 @@ import org.springframework.lang.Nullable;
 /**
  * AthenaRuntimeException
  *
- * @author: 熊亚运
- * @date: 2019-05-21
+ * @author 熊亚运
+ * @date 2019-05-21
  */
 public class AthenaRuntimeException extends NestedRuntimeException implements AthenaInnerException {
 	private static final long serialVersionUID = 672694596335429564L;

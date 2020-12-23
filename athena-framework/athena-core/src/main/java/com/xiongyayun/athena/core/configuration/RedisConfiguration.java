@@ -11,8 +11,8 @@
 ///**
 // * RedisConfiguration
 // *
-// * @author: 熊亚运
-// * @date: 2019-06-17
+// * @author 熊亚运
+// * @date 2019-06-17
 // */
 //@Configuration
 //@EnableCaching

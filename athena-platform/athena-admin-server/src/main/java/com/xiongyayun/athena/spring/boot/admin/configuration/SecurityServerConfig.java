@@ -11,7 +11,7 @@ import de.codecentric.boot.admin.server.config.AdminServerProperties;
 /**
  * SecurityServerConfig
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019/03/03
  */
 @EnableWebSecurity

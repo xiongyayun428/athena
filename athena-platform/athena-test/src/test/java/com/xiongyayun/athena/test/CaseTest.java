@@ -15,8 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * RsaTest
  *
- * @author: 熊亚运
- * @date: 2019-06-17
+ * @author 熊亚运
+ * @date 2019-06-17
  */
 @Slf4j
 public class CaseTest extends TestCase {

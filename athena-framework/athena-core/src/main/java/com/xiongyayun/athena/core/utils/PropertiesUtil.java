@@ -7,6 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.*;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -15,8 +16,8 @@ import java.util.jar.JarFile;
  * properties解析工具类
  * 解析properties文件，支持中文,获取classpath下的文件
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 @Slf4j
 public class PropertiesUtil {
@@ -25,9 +26,9 @@ public class PropertiesUtil {
      * 路径会转换为jar:file:/xxxx/xxx
      * 根据配置判断项目打包方式
      */
-    private static String PACKAGE_JAR = "0";
+    private static final String PACKAGE_JAR = "0";
 
-    private static String PACKAGE_WAR = "1";
+    private static final String PACKAGE_WAR = "1";
 
     /**
      * 需要解析的文件后缀
@@ -47,22 +48,16 @@ public class PropertiesUtil {
      * @return properties对象
      */
     public static Properties readProperties(String filePath, String fileName) {
-
         Properties prop = new Properties();
         try {
-
             //使用spring中的方法获取classes路径下的文件,这里这么做是因为用的springboot,如果打成jar包常用的方法获取不文件
             ClassPathResource classPathResource = new ClassPathResource(filePath + File.separator + fileName);
             InputStream in = classPathResource.getInputStream();
-
             // 设置UTF-8 支持中文
-            Reader reader = new InputStreamReader(in, "UTF-8");
+            Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
             prop.load(reader);
-            if (null != in) {
-                in.close();
-            }
-
-        } catch (Exception e) {
+			in.close();
+		} catch (Exception e) {
             log.error("获取配置文件" + filePath + "失败 " + e.getMessage(), e);
         }
         return prop;
@@ -81,9 +76,9 @@ public class PropertiesUtil {
 
         try {
             // 获取解析的路径
-            ClassPathResource classPathResource = new ClassPathResource(filePath);
-            URL url = classPathResource.getURL();
-            String packagePath = url.toString();
+//            ClassPathResource classPathResource = new ClassPathResource(filePath);
+//            URL url = classPathResource.getURL();
+//            String packagePath = url.toString();
 
             Properties configProp = readProperties("config/properties", "framework.properties");
             String packageType = configProp.getProperty("config.packge.type");
@@ -91,17 +86,15 @@ public class PropertiesUtil {
             if (PACKAGE_JAR.equals(packageType)) {
                 // 获取文件
                 getAllFileByFolder(prop, filePath, FILE_SUFFIX);
-
             }
             // war 打包方式及本地测试
             if (PACKAGE_WAR.equals(packageType)) {
                 // 获取文件夹下所有文件对象
-                List<File> fileList = new ArrayList<File>();
+                List<File> fileList = new ArrayList<>();
                 getAllFileByFolder(filePath, fileList);
 
                 if (!fileList.isEmpty()) {
                     //转为file为properties对象
-                    boolean flag = false;
                     for (File file : fileList) {
                         // file对象转换为properties对象
                         InputStream in = new FileInputStream(file);
@@ -109,22 +102,15 @@ public class PropertiesUtil {
                         Reader reader = new InputStreamReader(in, "UTF-8");
                         Properties tempProp = new Properties();
                         tempProp.load(reader);
-                        if (null != in) {
-                            in.close();
-                        }
-
-                        // 组装对象
+						in.close();
+						// 组装对象
                         loadProperties(prop, tempProp, filePath);
                     }
-
                 }
-
             }
-
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-
         return prop;
     }
 
@@ -148,27 +134,21 @@ public class PropertiesUtil {
             if (files == null || files.length == 0) {
                 log.warn("文件夹为空：" + filePath);
                 return fileList;
-
             } else {
-
                 for (File temp : files) {
                     if (temp.isFile()) {
                         fileList.add(temp);
                         log.info("获取文件：" + temp.getName());
                     } else {
-
                         String newPath = filePath + File.separator + temp.getName();
                         //递归调用
                         getAllFileByFolder(newPath, fileList);
                     }
                 }
             }
-
         } else {
             throw new Exception("文件夹不存在：" + filePath);
         }
-
-
         return fileList;
     }
 
@@ -203,7 +183,6 @@ public class PropertiesUtil {
 
         // 迭代
         while (jarEntrys.hasMoreElements()) {
-
             // 文件索引对象
             JarEntry jarEntry = jarEntrys.nextElement();
             String fileName = jarEntry.getName();
@@ -211,27 +190,21 @@ public class PropertiesUtil {
 
             String checkPatch = FILE_LOADER + File.separator + filePath;
             // 只获取指定的文件夹下的指定类型的文件
-            if (fileName.toUpperCase().indexOf(checkPatch.toUpperCase()) != -1
+            if (fileName.toUpperCase().contains(checkPatch.toUpperCase())
                     && fileName.toUpperCase().endsWith(fileType)) {
                 //使用spring中的方法获取classes路径下的文件,这里这么做是因为用的springboot,如果打成jar包常用的方法获取不文件
                 ClassPathResource resource = new ClassPathResource(fileName);
                 InputStream in = resource.getInputStream();
 
                 // 设置UTF-8 支持中文
-                Reader reader = new InputStreamReader(in, "UTF-8");
+                Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
                 Properties tempProp = new Properties();
                 tempProp.load(reader);
-
-                if (null != in) {
-                    in.close();
-                }
-
-                // 组装对象
+				in.close();
+				// 组装对象
                 loadProperties(prop, tempProp, fileName);
-
             }
         }
-
         return prop;
     }
 
@@ -243,7 +216,6 @@ public class PropertiesUtil {
      * @param filePath 文件路径
      */
     private static void loadProperties(Properties prop, Properties tempProp, String filePath) throws Exception {
-
         //遍历properties
         Set<Map.Entry<Object, Object>> entrys = tempProp.entrySet();
         for (Map.Entry<Object, Object> entry : entrys) {
@@ -252,7 +224,6 @@ public class PropertiesUtil {
             if (StringUtils.isBlank(prop.getProperty(key))) {
                 prop.put(entry.getKey(), entry.getValue());
                 log.info("成功加载配置文件：" + filePath);
-
             } else {
                 throw new Exception("文件夹" + filePath + "下properties key：" + key + " 重复，请核对");
             }

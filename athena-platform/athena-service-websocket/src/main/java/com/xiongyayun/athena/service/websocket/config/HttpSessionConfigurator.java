@@ -10,8 +10,8 @@ import javax.websocket.server.ServerEndpointConfig;
 /**
  * websocket获取HttpSession
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 @Slf4j
 public class HttpSessionConfigurator extends ServerEndpointConfig.Configurator {

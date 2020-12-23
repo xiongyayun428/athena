@@ -5,8 +5,8 @@ import java.util.Arrays;
 /**
  * 快速排序
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/17
+ * @author Yayun.Xiong
+ * @date 2019/12/17
  */
 public class QuickSort implements IArraySort {
 
@@ -29,15 +29,14 @@ public class QuickSort implements IArraySort {
 
 	private int partition(int[] arr, int left, int right) {
 		// 设定基准值（pivot）
-		int pivot = left;
-		int index = pivot + 1;
+		int index = left + 1;
 		for (int i = index; i <= right; i++) {
-			if (arr[i] < arr[pivot]) {
+			if (arr[i] < arr[left]) {
 				swap(arr, i, index);
 				index++;
 			}
 		}
-		swap(arr, pivot, index - 1);
+		swap(arr, left, index - 1);
 		return index - 1;
 	}
 

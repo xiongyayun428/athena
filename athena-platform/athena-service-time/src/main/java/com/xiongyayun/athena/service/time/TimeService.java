@@ -5,7 +5,7 @@ import com.xiongyayun.athena.service.Service;
 /**
  * <p><b>时间服务</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @since 2015年4月26日
  * @since 1.8
  *

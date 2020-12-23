@@ -18,12 +18,12 @@ import java.util.Locale;
 /**
  * 安全的日期格式
  *
- * @author: 熊亚运
- * @date: 2019-06-17
+ * @author 熊亚运
+ * @date 2019-06-17
  */
 @Slf4j
 public class SafeDate {
-    private static volatile ThreadLocal<SimpleDateFormat> sdf = new ThreadLocal<>();
+    private static final ThreadLocal<SimpleDateFormat> SDF = new ThreadLocal<>();
     public static final String DATE_ISO_FORMAT = "yyyy-MM-dd";
     public static final String DATE_FORMAT = "000000";
     public static final String TIME_ISO_FORMAT = "HH:mm:ss";
@@ -37,11 +37,11 @@ public class SafeDate {
 	 * @param pattern		格式化模式
 	 * @return
 	 */
-	public static final SimpleDateFormat getDateFormat(String pattern) {
-        if (sdf.get() == null) {
-            sdf.set(new SimpleDateFormat());
+	public static SimpleDateFormat getDateFormat(String pattern) {
+        if (SDF.get() == null) {
+			SDF.set(new SimpleDateFormat());
         }
-        SimpleDateFormat local = sdf.get();
+        SimpleDateFormat local = SDF.get();
         local.applyPattern(pattern);
         return local;
     }
@@ -189,10 +189,8 @@ public class SafeDate {
                 java.sql.Timestamp.class);
     }
 
-    @SuppressWarnings("unchecked")
     private static Date parse(String dateStr, DateFormat format, Class clazz) {
-        Date ret = null;
-
+        Date ret;
         try {
             ret = format.parse(dateStr);
             return newInstance(clazz, ret.getTime());
@@ -201,7 +199,6 @@ public class SafeDate {
             // slient skip exception, just return null;
             return null;
         }
-
     }
 
     private static Calendar getCalendar(Date date) {
@@ -222,7 +219,7 @@ public class SafeDate {
         return getCalendar(date).get(Calendar.DAY_OF_MONTH);
     }
 
-    public static final Calendar date2Calendar(Date date) {
+    public static Calendar date2Calendar(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         return c;
@@ -279,9 +276,8 @@ public class SafeDate {
         int day = c.get(Calendar.DATE);
         return (month == 12 && day == 31);
     }
-    @SuppressWarnings("unchecked")
     public static Date parse(String dateStr, String pattern, Class clazz) {
-        Date ret = null;
+        Date ret;
         try {
             SimpleDateFormat format = getDateFormat(pattern);
             ret = format.parse(dateStr);
@@ -345,9 +341,8 @@ public class SafeDate {
 
     private static Date newInstance(Class clazz, long newMillis) {
         try {
-            Constructor c = clazz.getConstructor(new Class[] { long.class });
-            Date d = (Date) c.newInstance(new Object[] { Long.valueOf(newMillis) });
-            return d;
+            Constructor c = clazz.getConstructor(long.class);
+			return (Date) c.newInstance(new Object[] {newMillis});
         } catch (Exception e) {
             return null;
         }
@@ -376,7 +371,7 @@ public class SafeDate {
         if (currentDate != null) {
             calendar.setTime(currentDate);
         }
-        calendar.add(4, prev ? -week : week);
+        calendar.add(Calendar.WEEK_OF_MONTH, prev ? -week : week);
         return new java.util.Date(calendar.getTime().getTime());
     }
 
@@ -404,7 +399,7 @@ public class SafeDate {
         if (currentDate != null) {
             calendar.setTime(currentDate);
         }
-        calendar.set(5, 1);
+        calendar.set(Calendar.DATE, 1);
         return new java.util.Date(calendar.getTime().getTime());
     }
 
@@ -424,18 +419,18 @@ public class SafeDate {
         if (currentDate != null) {
             cal.setTime(currentDate);
         }
-        Calendar result = null;
+        Calendar result;
         result = cal;
         do {
             result = (Calendar) result.clone();
-            result.add(5, 1);
-        } while (result.get(7) != 2);
+            result.add(Calendar.DATE, 1);
+        } while (result.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY);
         return result;
     }
 
     public Calendar getNextSundayToFriday(java.util.Date currentDate, int date) {
         Calendar cal = GregorianCalendar.getInstance(Locale.getDefault());
-        int d = -1;
+        int d;
         if (currentDate != null) {
             cal.setTime(currentDate);
         }
@@ -445,12 +440,12 @@ public class SafeDate {
             log.error("获得当前日期计算出下一个星期的任何一天的日期,该方法指定的下个星期几输入错误!");
             return cal;
         }
-        Calendar result = null;
+        Calendar result;
         result = cal;
         do {
             result = (Calendar) result.clone();
-            result.add(5, 1);
-        } while (result.get(7) != d + 1);
+            result.add(Calendar.DATE, 1);
+        } while (result.get(Calendar.DAY_OF_WEEK) != d + 1);
         return result;
     }
 
@@ -458,97 +453,84 @@ public class SafeDate {
 	 * 获取当前日期yyyyMMdd
 	 * @return
 	 */
-	public static final String getCurrentDate() {
+	public static String getCurrentDate() {
         Calendar cldNow = Calendar.getInstance();
-        int iYear = cldNow.get(1);
-        int iMonth = cldNow.get(2) + 1;
-        int iDay = cldNow.get(5);
+        int iYear = cldNow.get(Calendar.YEAR);
+        int iMonth = cldNow.get(Calendar.MONTH) + 1;
+        int iDay = cldNow.get(Calendar.DATE);
         return iYear
-                + (iMonth < 10 ? "0" + iMonth : new StringBuilder().append(
-                iMonth).toString())
-                + (iDay < 10 ? "0" + iDay : new StringBuilder().append(iDay)
-                .toString());
+                + (iMonth < 10 ? "0" + iMonth : String.valueOf(iMonth))
+                + (iDay < 10 ? "0" + iDay : String.valueOf(iDay));
     }
 
 	/**
 	 * 获取当前日期时间yyyyMMddHHmmss
 	 * @return
 	 */
-	public static final String getCurrentDateTime() {
+	public static String getCurrentDateTime() {
         Calendar cldNow = Calendar.getInstance();
-        int iYear = cldNow.get(1);
-        int iMonth = cldNow.get(2) + 1;
-        int iDay = cldNow.get(5);
-        int iHour = cldNow.get(11);
-        int iMinute = cldNow.get(12);
-        int iSecond = cldNow.get(13);
+        int iYear = cldNow.get(Calendar.YEAR);
+        int iMonth = cldNow.get(Calendar.MONTH) + 1;
+        int iDay = cldNow.get(Calendar.DATE);
+        int iHour = cldNow.get(Calendar.HOUR_OF_DAY);
+        int iMinute = cldNow.get(Calendar.MINUTE);
+        int iSecond = cldNow.get(Calendar.SECOND);
 
         return iYear
-                + (iMonth < 10 ? "0" + iMonth : new StringBuilder().append(
-                iMonth).toString())
-                + (iDay < 10 ? "0" + iDay : new StringBuilder().append(iDay)
-                .toString())
-                + (iHour < 10 ? "0" + iHour : new StringBuilder().append(iHour)
-                .toString())
-                + (iMinute < 10 ? "0" + iMinute : new StringBuilder().append(
-                iMinute).toString())
-                + (iSecond < 10 ? "0" + iSecond : new StringBuilder().append(
-                iSecond).toString());
+                + (iMonth < 10 ? "0" + iMonth : String.valueOf(iMonth))
+                + (iDay < 10 ? "0" + iDay : String.valueOf(iDay))
+                + (iHour < 10 ? "0" + iHour : String.valueOf(iHour))
+                + (iMinute < 10 ? "0" + iMinute : String.valueOf(iMinute))
+                + (iSecond < 10 ? "0" + iSecond : String.valueOf(iSecond));
     }
 
 	/**
 	 * 获取当前时间HHmmss
 	 * @return
 	 */
-	public static final String getCurrentTime() {
+	public static String getCurrentTime() {
 		Calendar cldNow = Calendar.getInstance();
-		int iHour = cldNow.get(11);
-		int iMinute = cldNow.get(12);
-		int iSecond = cldNow.get(13);
+		int iHour = cldNow.get(Calendar.HOUR_OF_DAY);
+		int iMinute = cldNow.get(Calendar.MINUTE);
+		int iSecond = cldNow.get(Calendar.SECOND);
 
-		return (iHour < 10 ? "0" + iHour : new StringBuilder().append(iHour)
-				.toString())
-				+ (iMinute < 10 ? "0" + iMinute : new StringBuilder().append(
-				iMinute).toString())
-				+ (iSecond < 10 ? "0" + iSecond : new StringBuilder().append(
-				iSecond).toString());
+		return (iHour < 10 ? "0" + iHour : String.valueOf(iHour))
+				+ (iMinute < 10 ? "0" + iMinute : String.valueOf(iMinute))
+				+ (iSecond < 10 ? "0" + iSecond : String.valueOf(iSecond));
 	}
 
 	/**
 	 * 获取当前日
 	 * @return
 	 */
-	public static final int getCurrentDay() {
+	public static int getCurrentDay() {
         Calendar cldNow = Calendar.getInstance();
-        int iDay = cldNow.get(Calendar.DATE);
-        return iDay;
+		return cldNow.get(Calendar.DATE);
     }
 
 	/**
 	 * 获取当前月份
 	 * @return
 	 */
-	public static final int getCurrentMonth() {
+	public static int getCurrentMonth() {
         Calendar cldNow = Calendar.getInstance();
-        int iMonth = cldNow.get(Calendar.MONTH) + 1;
-        return iMonth;
+		return cldNow.get(Calendar.MONTH) + 1;
     }
 
 	/**
 	 * 获取当前年份yyyy
 	 * @return
 	 */
-	public static final int getCurrentYear() {
+	public static int getCurrentYear() {
         Calendar cldNow = Calendar.getInstance();
-        return cldNow.get(1);
+        return cldNow.get(Calendar.YEAR);
     }
 
-    public static final String getPrevMonth1stDay(String sDate) {
+    public static String getPrevMonth1stDay(String sDate) {
         int iMonth = Integer.parseInt(sDate.substring(4, 6)) - 1;
         if (iMonth > 0) {
             return sDate.substring(0, 4)
-                    + (iMonth < 10 ? "0" + iMonth : new StringBuilder().append(
-                    iMonth).toString()) + "01";
+                    + (iMonth < 10 ? "0" + iMonth : String.valueOf(iMonth)) + "01";
         }
         int iYear = Integer.parseInt(sDate.substring(0, 4)) - 1;
         return iYear + "1201";
@@ -580,24 +562,22 @@ public class SafeDate {
         long ms = finished - started;
         if (ms < 1000) {
             return ms + " ms.";
-        } else if (ms >= 1000 && ms < 60 * 1000) {
+        } else if (ms < 60 * 1000) {
             // 一分钟内
             return (ms / 1000 + "." + ms % 1000) + " s.";
-        } else if (ms >= 60 * 1000 && ms < 60 * 60 * 1000) {
+        } else if (ms < 60 * 60 * 1000) {
             // 一小时内
             // 分钟
             long minute = ms / (60 * 1000);
             // 秒钟
             long second = (ms - minute * 60 * 1000) / 1000 % 1000;
             return (minute + "." + second) + " m.";
-        } else if (ms >= 3600000) {
+        } else {
             // 一小时以上
             long hour = ms / (60 * 60 * 1000);
             long minute = (ms - hour * 60 * 60 * 1000) / (60 * 1000);
             long second = (ms - hour * 60 * 60 * 1000 - minute * 60 * 1000) / 1000;
             return (hour + ":" + minute + "." + second) + " h.";
-        } else {
-            return ms + " ms.";
         }
     }
 }

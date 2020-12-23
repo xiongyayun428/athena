@@ -17,8 +17,8 @@ import java.sql.SQLException;
 /**
  * ExceptionHandlerAdvice
  *
- * @author: 熊亚运
- * @date: 2019-05-21
+ * @author 熊亚运
+ * @date 2019-05-21
  */
 @Order(Ordered.LOWEST_PRECEDENCE - 1)
 @RestControllerAdvice
@@ -29,21 +29,21 @@ public class DbExceptionHandlerAdvice extends ExceptionHandlerAdvice {
 	}
 
 	@ExceptionHandler(BadSqlGrammarException.class)
-	public ResBody catchBadSqlGrammarException(BadSqlGrammarException e) {
+	public ResBody handleException(BadSqlGrammarException e) {
 		SQLException se = e.getSQLException();
 		return translate(ErrorConstant.BAD_SQL_GRAMMAR_EXCEPTION, new Object[] {se.getMessage(), se.getErrorCode(), se.getSQLState()}, se.getLocalizedMessage(), e);
 	}
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResBody catchDataIntegrityViolationException(DataIntegrityViolationException e) {
+	public ResBody handleException(DataIntegrityViolationException e) {
 		return translate(ErrorConstant.DATA_INTEGRITY_VIOLATION_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
 	}
 
 	@ExceptionHandler(SQLException.class)
-	public ResBody catchSQLException(SQLException e) {
+	public ResBody handleException(SQLException e) {
 		return translate(ErrorConstant.SQL_EXCEPTION, new Object[] {e.getErrorCode(), e.getSQLState()}, e.getLocalizedMessage(), e);
 	}
 	@ExceptionHandler(TooManyResultsException.class)
-	public ResBody catchTooManyResultsException(TooManyResultsException e) {
+	public ResBody handleException(TooManyResultsException e) {
 		return translate(ErrorConstant.TOO_MANY_RESULTS_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
 	}
 

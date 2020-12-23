@@ -14,8 +14,8 @@ import java.util.Map;
 /**
  * WebSocketHandshakeInterceptor
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 @Slf4j
 public class WebSocketHandshakeInterceptor extends HttpSessionHandshakeInterceptor {

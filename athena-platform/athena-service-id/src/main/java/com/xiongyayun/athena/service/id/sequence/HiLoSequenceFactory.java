@@ -3,7 +3,7 @@ package com.xiongyayun.athena.service.id.sequence;
 /**
  * HiLoSequenceFactory
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14
  */
 public class HiLoSequenceFactory extends TableSequenceFactory {
@@ -38,7 +38,7 @@ public class HiLoSequenceFactory extends TableSequenceFactory {
 		}
 		return new long[] { this.hi + this.lo++, this.timestamp };
 	}
-	
+
 	@Override
 	public synchronized void reverse() {
 		if (!(this.lo > this.step) || ((isDateCutoff()) && (getTable().getTimeService().isCutoff(5, this.timestamp)))) {

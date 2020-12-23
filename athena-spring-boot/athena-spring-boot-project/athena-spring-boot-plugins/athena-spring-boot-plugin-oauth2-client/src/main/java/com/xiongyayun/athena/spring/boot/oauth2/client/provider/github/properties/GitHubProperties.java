@@ -3,8 +3,8 @@ package com.xiongyayun.athena.spring.boot.oauth2.client.provider.github.properti
 /**
  * GitHubProperties
  *
- * @author: Yayun.Xiong
- * @date: 2019-06-25
+ * @author Yayun.Xiong
+ * @date 2019-06-25
  */
 public class GitHubProperties {
 }

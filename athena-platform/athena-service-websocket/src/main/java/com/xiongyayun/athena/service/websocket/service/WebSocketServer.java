@@ -6,8 +6,8 @@ import javax.websocket.Session;
 /**
  * 基于javax websocket通讯
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 public interface WebSocketServer {
     /**

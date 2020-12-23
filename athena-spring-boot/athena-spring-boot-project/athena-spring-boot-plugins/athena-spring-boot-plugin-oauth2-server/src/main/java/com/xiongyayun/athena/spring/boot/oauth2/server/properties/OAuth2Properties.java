@@ -6,8 +6,8 @@
 ///**
 // * OAuth2Properties
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-05
+// * @author Yayun.Xiong
+// * @date 2019-07-05
 // */
 //@Data
 //@ConfigurationProperties(prefix = "athena.security.oauth2")

@@ -12,8 +12,8 @@ import java.util.Map;
  * 自定义一个端点 id = diskspace 获取磁盘容量信息
  * @EndPoint中的id不能使用驼峰法，需要以-分割
  *
- * @author: 熊亚运
- * @date: 2019-06-17
+ * @author 熊亚运
+ * @date 2019-06-17
  */
 @Configuration
 @Endpoint(id = "diskspace")

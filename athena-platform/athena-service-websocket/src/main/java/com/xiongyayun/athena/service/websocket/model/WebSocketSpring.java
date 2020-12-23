@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * WebSocketSpring
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 public class WebSocketSpring {
     private WebSocketSession session;

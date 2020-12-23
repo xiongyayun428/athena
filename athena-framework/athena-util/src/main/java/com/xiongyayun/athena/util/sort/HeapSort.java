@@ -15,8 +15,8 @@ import java.util.Arrays;
  * <p>排序的总比较次数为 O(nlog2n)
  * @see <a href="https://sort.hust.cc/7.heapsort">其他语言实现方式</a>
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/16
+ * @author Yayun.Xiong
+ * @date 2019/12/16
  */
 public class HeapSort implements IArraySort {
 	@Override

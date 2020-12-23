@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 /**
  * MyBatiaPlusMetaObjectHandler
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/8/5
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/8/5
  */
 @Component
 public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {

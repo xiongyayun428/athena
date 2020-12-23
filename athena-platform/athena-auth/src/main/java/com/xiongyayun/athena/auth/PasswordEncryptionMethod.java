@@ -3,8 +3,8 @@ package com.xiongyayun.athena.auth;
 /**
  * PasswordEncryptionMethod
  *
- * @author: Yayun.Xiong
- * @date: 2020/5/11
+ * @author Yayun.Xiong
+ * @date 2020/5/11
  */
 public enum PasswordEncryptionMethod {
 	/**

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * <p><b>通过数据语句查询序列号ID</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 17:03
  */
 @Service

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * MainController
  *
- * @author: Yayun.Xiong
- * @date: 2019-08-08
+ * @author Yayun.Xiong
+ * @date 2019-08-08
  */
 @RestController
 public class MainController {

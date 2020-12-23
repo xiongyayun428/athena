@@ -10,8 +10,8 @@
 ///**
 // * Security用户信息获取实现类
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-07-01
+// * @author Yayun.Xiong
+// * @date 2019-07-01
 // */
 //@Service("userDetailsService")
 //public class UserDetailsServiceImpl implements UserDetailsService {

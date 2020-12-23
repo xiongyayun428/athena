@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * fallback是当程序错误的时候来回调的方法
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  *
  */
 @FeignClient(value = "athena-role", fallback=RoleApi.HystrixRoleApi.class)
 public interface RoleApi {
-	
+
 	@RequestMapping("/role/roles")
 	String roles(@RequestParam(value = "userId") String userId);
-	
+
 	@RequestMapping(value = "/role/get", method = RequestMethod.GET)
 	String get(@RequestParam(value = "userId") String userId);
-	
+
     @Component
     class HystrixRoleApi implements RoleApi {
     	@Override

@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * Logger
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-26
  */
 @Target(ElementType.METHOD)
@@ -14,19 +14,19 @@ import java.lang.annotation.*;
 public @interface Logger {
     /**
      *
-     * @return
+     * @return	说明
      */
     String[] value() default "";
 
     /**
      * 启用
-     * @return
+     * @return	是否启用？
      */
     boolean enabled() default true;
 
     /**
      * 保存
-     * @return
+     * @return	是否保存
      */
     boolean save() default false;
 }

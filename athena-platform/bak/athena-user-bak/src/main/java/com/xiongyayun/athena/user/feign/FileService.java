@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * FileService
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/6/17
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/6/17
  */
 @FeignClient(name = "aladdin-service-file",
         fallback = FileServiceFallback.class,

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * AdminApplication
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-05-20
  */
 @SpringBootApplication

@@ -5,8 +5,8 @@ import java.util.Arrays;
 /**
  * 归并排序
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/17
+ * @author Yayun.Xiong
+ * @date 2019/12/17
  */
 public class MergeSort implements IArraySort {
 

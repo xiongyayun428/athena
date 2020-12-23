@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * <p><b></b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2015年4月26日
  * @since 1.8
  *

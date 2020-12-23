@@ -5,7 +5,7 @@ import com.xiongyayun.athena.service.id.sequence.SequenceFormat;
 /**
  * 序号工厂
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @date 2019-04-14 17:51
  */
 public interface SequenceFactory extends IdFactory {

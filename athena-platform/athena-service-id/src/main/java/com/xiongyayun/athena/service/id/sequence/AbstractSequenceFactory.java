@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * <p><b>序列号抽象工厂</b></p>
  *
- * @author: Yayun.Xiong
+ * @author Yayun.Xiong
  * @since 1.8
  */
 public abstract class AbstractSequenceFactory implements SequenceFactory {
@@ -63,7 +63,7 @@ public abstract class AbstractSequenceFactory implements SequenceFactory {
 
 	/**
 	 * 回收未使用完成的ID
-	 * @author: Yayun.Xiong
+	 * @author Yayun.Xiong
 	 */
 	protected abstract void reverse();
 

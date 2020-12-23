@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * SafeDateTest
  *
- * @author: Yayun.Xiong
- * @date: 2020/1/19
+ * @author Yayun.Xiong
+ * @date 2020/1/19
  */
 public class SafeDateTest extends TestCase {
 	@Autowired private SafeDate safeDate;

@@ -5,9 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -23,12 +20,12 @@ import java.util.Map;
 /**
  * RequestJsonHandlerMethodArgumentResolver
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/11/27
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/11/27
  */
 public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolver {
 	private static final String KEY = "TEST_JSON_BODY_KEY";
-	private static ObjectMapper objectMapper = new ObjectMapper();
+	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	@Override
 	public boolean supportsParameter(MethodParameter methodParameter) {
@@ -39,25 +36,26 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		RequestJson requestJson = parameter.getParameterAnnotation(RequestJson.class);
 		parameter = parameter.nestedIfOptional();
-		HttpServletRequest servletRequest = (HttpServletRequest)webRequest.getNativeRequest(HttpServletRequest.class);
+		HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
 		Assert.state(servletRequest != null, "No HttpServletRequest");
-		ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(servletRequest);
-		// 当前请求方式
-		HttpMethod httpMethod = (inputMessage instanceof HttpRequest ? ((HttpRequest) inputMessage).getMethod() : null);
+//		ServletServerHttpRequest inputMessage = new ServletServerHttpRequest(servletRequest);
+//		// 当前请求方式
+//		HttpMethod httpMethod = (inputMessage instanceof HttpRequest ? ((HttpRequest) inputMessage).getMethod() : null);
 		JSONObject jsonObject = getJsonObject(webRequest);
 		String value = getParamName(parameter, requestJson);
 		Object paramValue = getParamValue(jsonObject,value);
 
-		if (paramValue == null && requestJson.required() && !parameter.isOptional()) {
-			throw new Exception("参数[" + value + "]不能为空。");
-		}
+
 		if (paramValue == null) {
+			if (requestJson != null && requestJson.required() && !parameter.isOptional()) {
+				throw new Exception("参数[" + value + "]不能为空。");
+			}
 			return null;
 		}
 
 		Class<?> classType = parameter.getParameterType();
 		if (paramValue.getClass().equals(JSONObject.class)){
-			paramValue = objectMapper.readValue(paramValue.toString(), classType);
+			paramValue = OBJECT_MAPPER.readValue(paramValue.toString(), classType);
 		}
 		return paramValue;
 	}
@@ -89,6 +87,9 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 		String jsonBody = (String) webRequest.getAttribute(KEY, NativeWebRequest.SCOPE_REQUEST);
 		if(!StringUtils.hasLength(jsonBody)){
 			HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+			if (request == null) {
+				return null;
+			}
 			BufferedReader reader = request.getReader();
 			StringBuilder sb = new StringBuilder();
 			char[] buf = new char[1024];

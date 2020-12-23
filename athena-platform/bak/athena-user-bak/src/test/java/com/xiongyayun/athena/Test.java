@@ -7,8 +7,8 @@ import java.util.Arrays;
 /**
  * Test
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/8/7
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/8/7
  */
 public class Test extends TestCase {
     public void testJdk8() {

@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 /**
  * websocke消息监听，用于监听websocket用户连接情况
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 @Slf4j
 public class WebSocketChannelInterceptor implements ChannelInterceptor {

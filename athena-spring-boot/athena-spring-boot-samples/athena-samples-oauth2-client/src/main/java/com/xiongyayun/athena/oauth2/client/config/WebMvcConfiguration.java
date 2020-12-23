@@ -9,8 +9,8 @@
 ///**
 // * WebMvcConfiguration
 // *
-// * @author: Yayun.Xiong
-// * @date: 2019-08-08
+// * @author Yayun.Xiong
+// * @date 2019-08-08
 // */
 //@EnableWebMvc
 //@ComponentScan("org.springframework.security.samples.mvc")

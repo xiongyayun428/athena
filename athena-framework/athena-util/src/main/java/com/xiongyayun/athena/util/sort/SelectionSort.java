@@ -13,8 +13,8 @@ import java.util.Arrays;
  *     <li>重复第二步，直到所有元素均排序完毕。</li>
  * </ol>
  *
- * @author: Yayun.Xiong
- * @date: 2019/12/17
+ * @author Yayun.Xiong
+ * @date 2019/12/17
  */
 public class SelectionSort implements IArraySort {
 

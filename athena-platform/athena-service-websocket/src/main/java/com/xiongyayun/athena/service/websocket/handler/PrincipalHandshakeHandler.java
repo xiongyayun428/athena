@@ -15,8 +15,8 @@ import java.util.Map;
 /**
  * 设置认证用户信息
  *
- * @author: 熊亚运
- * @date: 2019-06-12
+ * @author 熊亚运
+ * @date 2019-06-12
  */
 @Slf4j
 public class PrincipalHandshakeHandler extends DefaultHandshakeHandler {

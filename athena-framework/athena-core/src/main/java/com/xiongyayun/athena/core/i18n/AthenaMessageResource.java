@@ -8,14 +8,14 @@ import org.springframework.core.io.ResourceLoader;
 /**
  * AthenaMessageResource
  *
- * @author: <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
- * @date: 2020/8/11
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2020/8/11
  */
 public class AthenaMessageResource extends ResourceBundleMessageSource implements ResourceLoaderAware {
-	private ResourceLoader resourceLoader;
+	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	@Override
-	public void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader == null ? new DefaultResourceLoader() : resourceLoader);
+	public void setResourceLoader(ResourceLoader rl) {
+		this.resourceLoader = rl;
 	}
 }
