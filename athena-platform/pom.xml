@@ -84,7 +84,7 @@
 
     <modules>
 <!--        <module>athena-admin</module>-->
-        <module>athena-admin-server</module>
+<!--        <module>athena-admin-server</module>-->
 <!--        <module>athena-auth</module>-->
 <!--        <module>athena-config-server</module>-->
 <!--        <module>athena-consul-discovery</module>-->
@@ -94,6 +94,7 @@
 <!--        <module>athena-role-api</module>-->
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
+        <module>athena-spring-boot-admin</module>
         <module>athena-system</module>
 <!--        <module>athena-user-api</module>-->
 <!--        <module>athena-service</module>-->

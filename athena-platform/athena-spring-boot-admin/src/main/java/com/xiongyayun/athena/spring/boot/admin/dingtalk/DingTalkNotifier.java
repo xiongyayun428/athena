@@ -31,7 +31,7 @@ public class DingTalkNotifier extends AbstractStatusChangeNotifier {
     private RestTemplate restTemplate = new RestTemplate();
     private String webhookToken;
     private String atMobiles;
-    private String msgtype = "markdown";
+    private String msgType = "markdown";
     private String title = "服务告警";
     private Expression message;
 
@@ -52,10 +52,10 @@ public class DingTalkNotifier extends AbstractStatusChangeNotifier {
         params.put("text", this.getMessage(event, instance));
         params.put("title", this.title);
         messageJson.put("atMobiles", this.atMobiles);
-        messageJson.put("msgtype", this.msgtype);
-        messageJson.put(this.msgtype, params);
+        messageJson.put("msgtype", this.msgType);
+        messageJson.put(this.msgType, params);
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         return new HttpEntity<>(messageJson, headers);
     }
 
@@ -98,12 +98,12 @@ public class DingTalkNotifier extends AbstractStatusChangeNotifier {
         this.atMobiles = atMobiles;
     }
 
-    public String getMsgtype() {
-        return msgtype;
+    public String getMsgType() {
+        return msgType;
     }
 
-    public void setMsgtype(String msgtype) {
-        this.msgtype = msgtype;
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
     }
 
     public Expression getMessage() {

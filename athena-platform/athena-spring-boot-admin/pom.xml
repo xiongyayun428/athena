@@ -3,9 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.xiongyayun</groupId>
+		<groupId>com.xiongyayun.platform</groupId>
 		<artifactId>athena-platform</artifactId>
-		<version>${revision}</version>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>athena-spring-boot-admin</artifactId>
 	<packaging>jar</packaging>
@@ -13,6 +14,25 @@
 	<description>应用健康检查后台管理</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-autoconfigure</artifactId>
