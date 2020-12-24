@@ -18,9 +18,9 @@ import java.io.Serializable;
  * @author Yayun.Xiong
  * @date 2019-05-19
  */
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
     @Resource
     private UserMapper userMapper;
 

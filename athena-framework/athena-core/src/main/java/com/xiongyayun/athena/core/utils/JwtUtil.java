@@ -10,10 +10,9 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.impl.PublicClaims;
 import com.auth0.jwt.interfaces.Claim;
 import com.xiongyayun.athena.core.exception.AthenaException;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +24,8 @@ import java.util.Set;
  * @author 熊亚运
  * @date 2019-06-17
  */
-@Slf4j
 public class JwtUtil {
+	private static final Logger log = LoggerFactory.getLogger(JwtUtil.class);
 	/**
 	 * 秘钥
 	 * csbt34.ydhl12s（池上碧苔三四点，叶底黄鹂一两声）

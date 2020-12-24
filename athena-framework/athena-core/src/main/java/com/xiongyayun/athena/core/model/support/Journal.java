@@ -3,13 +3,13 @@ package com.xiongyayun.athena.core.model.support;
 import lombok.Data;
 
 /**
- * Logger
+ * Journal
  *
  * @author Yayun.Xiong
  * @date 2019-05-26
  */
 @Data
-public class Logger {
+public class Journal {
     /**
 	 *
 	 */

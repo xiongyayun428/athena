@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.8.3.100:8848
+        username: nacos
+        password: nacos
+        file-extension: "yaml"
+        group: "DEV_GROUP"
+        namespace: "42e0ca4e-cbce-4700-ba38-131c0d242ce9"
+        # 共享配置集
+        shared-configs:
+          - data-id: common.yml
+            group: "DEFAULT_GROUP"
+            refresh: true
+          - data-id: log.yml
+            group: "DEV_GROUP"
+            refresh: true
+          - data-id: datasource.yml
+            group: "DEV_GROUP"
+            refresh: true
+          - data-id: jasypt.yml
+            group: "DEV_GROUP"
+            refresh: false
+          - data-id: sentinel.yml
+            group: "DEFAULT_GROUP"
+            refresh: true
+          - data-id: springboot-admin-client.yaml
+            group: "DEFAULT_GROUP"
+            refresh: true

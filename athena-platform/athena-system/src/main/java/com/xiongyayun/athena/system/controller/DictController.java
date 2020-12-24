@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.system.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.xiongyayun.athena.core.annotation.Logger;
+import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.pagination.IPage;
 import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
@@ -11,7 +11,8 @@ import com.xiongyayun.athena.system.model.Dict;
 import com.xiongyayun.athena.system.model.DictItem;
 import com.xiongyayun.athena.system.vo.DictItemVO;
 import com.xiongyayun.athena.system.vo.DictVO;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -26,17 +27,17 @@ import java.util.List;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2020/12/24
  */
-@Slf4j
 @Validated
 @RestController
 @RequestMapping("/dict")
 public class DictController {
+	private static final Logger log = LoggerFactory.getLogger(DictController.class);
 	@Resource
 	private DictMapper dictMapper;
 	@Resource
 	private DictItemMapper dictItemMapper;
 
-	@Logger("数据字典分页查询")
+	@Log("数据字典分页查询")
 	@PostMapping("/selectPage")
 	public IPage<Dict> selectPage(@RequestBody DictVO vo) {
 		Dict dict = new Dict();
@@ -46,13 +47,13 @@ public class DictController {
 		return dictMapper.selectPage(page, Wrappers.lambdaQuery(dict));
 	}
 
-	@Logger("根据主键查询数据字典")
+	@Log("根据主键查询数据字典")
 	@GetMapping("/getDictById/{id}")
 	public Dict selectById(@PathVariable("id") String id) {
 		return dictMapper.selectById(id);
 	}
 
-	@Logger("数据字典新增")
+	@Log("数据字典新增")
 	@PostMapping("/add")
 	public void add(@RequestBody DictVO vo) {
 		Dict dict = new Dict();
@@ -71,7 +72,7 @@ public class DictController {
 		return dictMapper.selectOne(Wrappers.<Dict>lambdaQuery().eq(Dict::getDictCode, dictCode));
 	}
 
-	@Logger("数据字典项查询")
+	@Log("数据字典项查询")
 	@GetMapping("/item/{id}")
 	public List<DictItem> item(@PathVariable("id") String id) {
 		if (StringUtils.hasLength(id)) {
@@ -83,7 +84,7 @@ public class DictController {
 		return null;
 	}
 
-	@Logger("数据字典项新增")
+	@Log("数据字典项新增")
 	@PostMapping("/item/add")
 	public void itemAdd(@RequestBody DictItemVO vo) {
 		if (!StringUtils.hasLength(vo.getDictId())) {

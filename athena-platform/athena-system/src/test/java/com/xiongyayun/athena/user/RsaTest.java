@@ -5,7 +5,6 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.digest.MD5;
 import junit.framework.TestCase;
-import lombok.extern.slf4j.Slf4j;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -17,8 +16,8 @@ import java.security.PublicKey;
  * @author 熊亚运
  * @date 2019-06-17
  */
-@Slf4j
 public class RsaTest extends TestCase {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RsaTest.class);
 
     public void testNewRsa() {
 		byte[] salt = "for_$n(@RenSheng)_$n+=\"die\"".getBytes();

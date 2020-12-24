@@ -1,7 +1,8 @@
 package com.xiongyayun.athena.core.utils;
 
 import io.micrometer.core.instrument.util.StringUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
@@ -19,8 +20,8 @@ import java.util.jar.JarFile;
  * @author 熊亚运
  * @date 2019-06-12
  */
-@Slf4j
 public class PropertiesUtil {
+	private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
     /**
      * Spring boot 项目如果直接读取jar包打包方式中的文件
      * 路径会转换为jar:file:/xxxx/xxx

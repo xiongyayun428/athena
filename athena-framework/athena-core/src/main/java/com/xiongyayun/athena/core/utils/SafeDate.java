@@ -3,6 +3,8 @@ package com.xiongyayun.athena.core.utils;
 import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.sql.Time;
@@ -21,8 +23,8 @@ import java.util.Locale;
  * @author 熊亚运
  * @date 2019-06-17
  */
-@Slf4j
 public class SafeDate {
+	private static final Logger log = LoggerFactory.getLogger(SafeDate.class);
     private static final ThreadLocal<SimpleDateFormat> SDF = new ThreadLocal<>();
     public static final String DATE_ISO_FORMAT = "yyyy-MM-dd";
     public static final String DATE_FORMAT = "000000";

@@ -1,10 +1,9 @@
 package com.xiongyayun.athena.system.controller;
 
-import com.xiongyayun.athena.core.annotation.Logger;
+import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.system.model.User;
 import com.xiongyayun.athena.system.service.UserService;
 import com.xiongyayun.athena.system.vo.UserVO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +16,15 @@ import javax.annotation.Resource;
  * @author Yayun.Xiong
  * @date 2019-03-03 16:29
  */
-@Slf4j
 @Validated
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
 	@Resource
 	private UserService userService;
 
-	@Logger("创建用户")
+	@Log("创建用户")
 	@PostMapping("create")
 	public Long create(@RequestBody UserVO vo) {
 		// TODO vo校验
@@ -35,20 +34,20 @@ public class UserController {
 		return user.getUserId();
 	}
 
-	@Logger("删除用户")
+	@Log("删除用户")
 	@GetMapping("delete")
 	public void delete(@RequestParam("userid") Long userId) {
 		this.userService.deleteById(userId);
 	}
 
-	@Logger("获取用户详情")
+	@Log("获取用户详情")
 	@GetMapping("get")
 	public void get(@RequestParam("userid") Long userId) {
 		this.userService.selectById(userId);
 	}
 
 
-	@Logger("更新用户详情")
+	@Log("更新用户详情")
 	@PostMapping("update")
 	public void update(@RequestBody UserVO vo) {
 		// TODO vo校验

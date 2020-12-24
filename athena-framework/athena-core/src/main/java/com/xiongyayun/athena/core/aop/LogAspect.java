@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.xiongyayun.athena.core.annotation.Logger;
+import com.xiongyayun.athena.core.annotation.Log;
+import com.xiongyayun.athena.core.model.support.Journal;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -32,14 +34,14 @@ import java.util.Map;
  */
 @Aspect
 @Component
-public class LoggerAspect {
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(LoggerAspect.class);
+public class LogAspect {
+	private static final Logger LOG = LoggerFactory.getLogger(LogAspect.class);
     private static final boolean LIMIT_LENGTH = false;
     private static final int LIMIT = 1024;
 
     private static final ThreadLocal<Long> START_TIME_THREAD_LOCAL = new ThreadLocal<>();
     private static final ThreadLocal<String> UUID_THREAD_LOCAL = new ThreadLocal<>();
-    private static final ThreadLocal<com.xiongyayun.athena.core.model.support.Logger> LOGGER_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<Journal> LOGGER_THREAD_LOCAL = new ThreadLocal<>();
 
 
 	private ObjectMapper indentOutputObjectMapper;
@@ -62,7 +64,7 @@ public class LoggerAspect {
     /**
      * 切入点
      */
-    @Pointcut("@annotation(com.xiongyayun.athena.core.annotation.Logger)")
+    @Pointcut("@annotation(com.xiongyayun.athena.core.annotation.Log)")
     public void doAspect() {}
 
     /**
@@ -75,7 +77,7 @@ public class LoggerAspect {
         Method method = signature.getMethod();
 		String[] parameterNames = signature.getParameterNames();
 		Object[] parameterValues = point.getArgs();
-        Logger annotation = method.getAnnotation(Logger.class);
+        Log annotation = method.getAnnotation(Log.class);
         if (annotation == null) {
         	return;
 		}
@@ -101,24 +103,24 @@ public class LoggerAspect {
 				HttpServletRequest request = attributes.getRequest();
 //            SystemUtil.logRequest(request);
 
-				com.xiongyayun.athena.core.model.support.Logger logger = new com.xiongyayun.athena.core.model.support.Logger();
+				Journal journal = new Journal();
 //			logger.setId(IdUtil.);
-				logger.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
-				logger.setHttpMethod(request.getMethod());
-				logger.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
+				journal.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
+				journal.setHttpMethod(request.getMethod());
+				journal.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
 				String queryString = request.getQueryString();
 				String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
-				logger.setUrl(request.getRequestURL().toString() + queryClause);
-				logger.setIp(SystemUtil.getClientIP(request));
+				journal.setUrl(request.getRequestURL().toString() + queryClause);
+				journal.setIp(SystemUtil.getClientIP(request));
 //			LOGGER_THREAD_LOCAL.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
-				logger.setRequestBody(params);
+				journal.setRequestBody(params);
 //        LOGGER_THREAD_LOCAL.get().setLogType(AppConstants.LOG_TYPE_HTTP);
 //			String params = request.getParameterMap().entrySet().stream()
 //					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
 //					.collect(Collectors.joining(", "));
 //			System.out.println(params);
 //			LOGGER_THREAD_LOCAL.get().setReqParams(params);
-				LOGGER_THREAD_LOCAL.set(logger);
+				LOGGER_THREAD_LOCAL.set(journal);
 			}
 		}
 		LOG.info("[{}] {} 请求参数：{}", String.join(",", Arrays.asList(annotation.value())), uuid, params);
@@ -134,7 +136,7 @@ public class LoggerAspect {
 		String uuid = UUID_THREAD_LOCAL.get();
 		MethodSignature signature = (MethodSignature) point.getSignature();
 		Method method = signature.getMethod();
-		Logger annotation = method.getAnnotation(Logger.class);
+		Log annotation = method.getAnnotation(Log.class);
 		String annotationValue = String.join(",", Arrays.asList(annotation.value()));
         if (null == resultValue) {
 			LOG.info("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
