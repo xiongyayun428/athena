@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.xiongyayun.athena.db.model.BaseModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,6 +19,7 @@ import java.util.Date;
  * @date 2019-06-05
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("`user`")
 public class User extends BaseModel {
 	private static final long serialVersionUID = 8047275337956610971L;
