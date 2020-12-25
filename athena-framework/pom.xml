@@ -6,7 +6,6 @@
 		<artifactId>athena</artifactId>
 		<groupId>com.xiongyayun</groupId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xiongyayun.framework</groupId>
 	<artifactId>athena-framework</artifactId>

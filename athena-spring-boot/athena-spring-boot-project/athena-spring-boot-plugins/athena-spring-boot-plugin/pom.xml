@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <artifactId>athena-spring-boot-plugins</artifactId>
 		<groupId>com.xiongyayun.boot</groupId>
+		<artifactId>athena-spring-boot-plugins</artifactId>
 		<version>${revision}</version>
 		<relativePath /> <!-- lookup parent from repository -->
-    </parent>
+	</parent>
     <artifactId>athena-spring-boot-plugin</artifactId>
     <name>Athena Spring Boot Plugin</name>
     <description>插件基础</description>
@@ -17,7 +17,6 @@
     </properties>
 
     <dependencies>
-        <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
