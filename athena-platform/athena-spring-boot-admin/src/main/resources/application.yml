@@ -1,13 +1,8 @@
 server:
   port: 10000
-  undertow:
-    threads:
-      # 指定工作者线程个数，默认为 I/O 线程个数的 8 倍
-      worker: 10
-      io:
 spring:
   application:
-    name: athena-admin-server
+    name: athena-spring-boot-admin
   output:
     ansi:
       enabled: ALWAYS

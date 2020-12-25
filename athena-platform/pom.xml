@@ -84,7 +84,6 @@
 
     <modules>
 <!--        <module>athena-admin</module>-->
-<!--        <module>athena-admin-server</module>-->
 <!--        <module>athena-auth</module>-->
 <!--        <module>athena-config-server</module>-->
 <!--        <module>athena-consul-discovery</module>-->
