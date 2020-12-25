@@ -6,7 +6,7 @@
 		<groupId>com.xiongyayun.boot</groupId>
 		<artifactId>athena-spring-boot-samples</artifactId>
 		<version>${revision}</version>
-		<relativePath>../</relativePath>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
     <artifactId>athena-samples-oauth2-client</artifactId>
     <packaging>jar</packaging>

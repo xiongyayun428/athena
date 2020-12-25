@@ -11,7 +11,7 @@
         <groupId>com.xiongyayun</groupId>
         <artifactId>athena-platform</artifactId>
         <version>${revision}</version>
-<!--		<relativePath>../</relativePath>-->
+		<relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>

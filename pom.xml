@@ -21,14 +21,6 @@
 <!--		<revision>1.0.0-SNAPSHOT</revision>-->
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-maven-plugin</artifactId>
-			<version>2.4.1</version>
-		</dependency>
-	</dependencies>
-
 	<modules>
 		<module>athena-spring-boot</module>
 		<module>athena-spring-cloud</module>

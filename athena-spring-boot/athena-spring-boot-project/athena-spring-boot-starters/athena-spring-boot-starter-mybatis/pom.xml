@@ -6,7 +6,7 @@
         <artifactId>athena-spring-boot-starters</artifactId>
         <groupId>com.xiongyayun.boot</groupId>
         <version>${revision}</version>
-		<relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository --><!-- lookup parent from repository -->
     </parent>
     <artifactId>athena-spring-boot-starter-mybatis</artifactId>
 	<name>Athena Spring Boot Starter MyBatis</name>

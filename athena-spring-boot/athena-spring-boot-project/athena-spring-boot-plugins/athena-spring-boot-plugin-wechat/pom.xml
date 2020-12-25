@@ -5,7 +5,7 @@
         <artifactId>athena-spring-boot-plugins</artifactId>
         <groupId>com.xiongyayun.boot</groupId>
         <version>${revision}</version>
-		<relativePath>../</relativePath>
+		<relativePath /> <!-- lookup parent from repository -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>athena-spring-boot-plugin-wechat</artifactId>

@@ -1,8 +1,10 @@
 spring:
+  application:
+    name: athena-system
   cloud:
     nacos:
       config:
-        server-addr: 10.8.3.100:8848
+        server-addr: 10.17.81.149:8848
         username: nacos
         password: nacos
         file-extension: "yaml"

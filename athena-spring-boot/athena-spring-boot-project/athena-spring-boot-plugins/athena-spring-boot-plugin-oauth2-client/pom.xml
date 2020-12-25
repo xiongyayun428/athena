@@ -6,7 +6,7 @@
         <artifactId>athena-spring-boot-plugins</artifactId>
         <groupId>com.xiongyayun.boot</groupId>
         <version>${revision}</version>
-		<relativePath>../</relativePath>
+		<relativePath /> <!-- lookup parent from repository -->
     </parent>
     <artifactId>athena-spring-boot-plugin-oauth2-client</artifactId>
     <description>集成OAuth客户端</description>
