@@ -1,5 +1,19 @@
 package com.xiongyayun.athena.system.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
@@ -11,15 +25,6 @@ import com.xiongyayun.athena.system.model.Dict;
 import com.xiongyayun.athena.system.model.DictItem;
 import com.xiongyayun.athena.system.vo.DictItemVO;
 import com.xiongyayun.athena.system.vo.DictVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * DictController
@@ -31,7 +36,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/dict")
 public class DictController {
-	private static final Logger log = LoggerFactory.getLogger(DictController.class);
 	@Resource
 	private DictMapper dictMapper;
 	@Resource

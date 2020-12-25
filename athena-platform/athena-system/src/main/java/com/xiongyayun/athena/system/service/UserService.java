@@ -41,7 +41,7 @@ public interface UserService {
 	 * @param user         User实体对象（可以为 null）
 	 * @return
 	 */
-	IPage<User> selectPage(Page page, User user);
+	IPage<User> selectPage(Page<User> page, User user);
 
 	/**
 	 * 根据 User 条件，查询全部记录（并翻页）

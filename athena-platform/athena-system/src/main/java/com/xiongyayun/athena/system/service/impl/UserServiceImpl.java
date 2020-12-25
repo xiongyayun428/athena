@@ -1,16 +1,17 @@
 package com.xiongyayun.athena.system.service.impl;
 
+import java.io.Serializable;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.core.pagination.IPage;
 import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
 import com.xiongyayun.athena.system.mapper.UserMapper;
 import com.xiongyayun.athena.system.model.User;
 import com.xiongyayun.athena.system.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.io.Serializable;
 
 /**
  * 用户服务实现类
@@ -20,7 +21,6 @@ import java.io.Serializable;
  */
 @Service
 public class UserServiceImpl implements UserService {
-	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
     @Resource
     private UserMapper userMapper;
 
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	 * @return
 	 */
 	@Override
-	public IPage<User> selectPage(Page page, User user) {
+	public IPage<User> selectPage(Page<User> page, User user) {
 		return userMapper.selectPage(page, Wrappers.lambdaQuery(user));
 	}
 
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public IPage<User> selectPage(long pageIndex, long pageSize, User user) {
-		return this.selectPage(new Page(pageIndex, pageSize), user);
+		return this.selectPage(new Page<User>(pageIndex, pageSize), user);
 	}
 
 	/**

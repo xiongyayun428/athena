@@ -12,6 +12,10 @@ import java.util.Date;
  * @date 2020/11/28
  */
 public abstract class AbstractModel implements Model {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6041192812226723245L;
 	/** 创建人，在这个实体被insert的时候，会设置值 */
 	@TableField("create_by")
 	private Long createBy;

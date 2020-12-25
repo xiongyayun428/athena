@@ -1,4 +1,3 @@
 spring:
   application:
     name: athena-system
-    description: 系统服务
