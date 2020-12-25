@@ -6,6 +6,7 @@
 		<groupId>com.xiongyayun.framework</groupId>
 		<artifactId>athena-framework</artifactId>
 		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>athena-util</artifactId>
 	<packaging>jar</packaging>
