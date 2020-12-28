@@ -1,8 +1,10 @@
 package com.xiongyayun.athena.core.pagination.mybatisplus;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 分页模型
@@ -20,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @date 2020/8/6
  */
 @JsonInclude()
-@JsonIgnoreProperties({ "pages", "current", "size", "optimizeCountSql", "searchCount", "hitCount", "orders" })
+@JsonIgnoreProperties({ "pages", "current", "size", "optimizeCountSql", "searchCount", "hitCount", "orders", "countId", "maxLimit" })
 @JsonPropertyOrder({"total", "pageCount", "pageIndex", "pageSize", "hasPrevious", "hasNext", "records"})
-public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements com.xiongyayun.athena.core.pagination.IPage<T> {
+public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T>, com.xiongyayun.athena.core.pagination.IPage<T> {
 
 	public Page() {
 	}
@@ -33,20 +35,29 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
 	 * @param pageIndex   当前页数
 	 * @param pageSize    每页显示条数
 	 */
-	public Page(long pageIndex, long pageSize) {
-		this(pageIndex, pageSize, 0);
+	public Page(Long pageIndex, Long pageSize) {
+		this(pageIndex, pageSize, 0L);
 	}
 
-	public Page(long pageIndex, long pageSize, long total) {
+	public Page(Long pageIndex, Long pageSize, long total) {
 		this(pageIndex, pageSize, total, true);
 	}
 
-	public Page(long pageIndex, long pageSize, boolean searchCount) {
-		this(pageIndex, pageSize, 0, searchCount);
+	public Page(Long pageIndex, Long pageSize, boolean searchCount) {
+		this(pageIndex, pageSize, 0L, searchCount);
 	}
 
-	public Page(long pageIndex, long pageSize, long total, boolean searchCount) {
-		super(pageIndex, pageSize, total, searchCount);
+//	public Page(long pageIndex, long pageSize, long total, boolean searchCount) {
+//		super(pageIndex, pageSize, total, searchCount);
+//	}
+	public Page(Long pageIndex, Long pageSize, Long total, boolean searchCount) {
+		if (!ObjectUtils.isEmpty(pageIndex) && pageIndex > 1) {
+			setCurrent(pageIndex);
+		}
+		if (!ObjectUtils.isEmpty(pageSize) && pageSize > 1) {
+			setSize(pageSize);
+		}
+		setTotal(total).setSearchCount(searchCount);
 	}
 
 	/**

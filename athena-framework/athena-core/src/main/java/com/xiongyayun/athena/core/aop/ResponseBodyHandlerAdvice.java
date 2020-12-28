@@ -43,7 +43,6 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
 								  Class<? extends HttpMessageConverter<?>> selectedConverterType,
 								  ServerHttpRequest request, ServerHttpResponse response) {
 		String uri = request.getURI().getPath();
-		System.out.println(uri);
 		if (body != null) {
             if ((body.getClass().getPackage().getName().startsWith("org.springframework.boot.actuate") || Arrays.stream(IGNORE).anyMatch(uri::contains))) {
                 return body;

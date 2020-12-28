@@ -1,9 +1,6 @@
 ${AnsiColor.BLUE}     ___   .___________. __    __   _______ .__   __.      ___
     /   \  |           ||  |  |  | |   ____||  \ |  |     /   \
-   /  ^  \ `---|  |----`|  |__|  | |  |__   |   \|  |    /  ^  \
-  /  /_\  \    |  |     |   __   | |   __|  |  . `  |   /  /_\  \
+   /  ^  \ `---|  |----`|  |__|  | |  |__   |   \|  |    /  ^  \             :: Spring Boot :: ${spring-boot.formatted-version} ::
+  /  /_\  \    |  |     |   __   | |   __|  |  . `  |   /  /_\  \            :: Athena :: ${application.formatted-version} ::
  /  _____  \   |  |     |  |  |  | |  |____ |  |\   |  /  _____  \
-/__/     \__\  |__|     |__|  |__| |_______||__| \__| /__/     \__\
-
-:: Spring Boot :: ${spring-boot.formatted-version} ::
-:: Athena :: ${application.formatted-version} ::
+/__/     \__\  |__|     |__|  |__| |_______||__| \__| /__/     \__\${AnsiColor.DEFAULT}

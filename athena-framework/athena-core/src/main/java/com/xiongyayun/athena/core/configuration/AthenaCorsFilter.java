@@ -38,7 +38,9 @@ public class AthenaCorsFilter extends HttpFilter {
 				res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, allowOrigin);
 			}
 		} else {
-			res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, originHeader);
+			if (StringUtils.hasLength(originHeader)) {
+				res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, originHeader);
+			}
 		}
 		// 设置访问源请求头
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, x-requested-with, Content-Type, Accept, Authorization");

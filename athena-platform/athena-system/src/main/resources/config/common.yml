@@ -1,0 +1,72 @@
+server:
+  # 开启优雅停机，默认是立即停机IMMEDIATE
+  # 执行kill -2或者Ctrl + C 而不是kill -9
+  shutdown: graceful
+spring:
+  lifecycle:
+    # 缓冲器即最大等待时间，在这时间后无论线程任务是否执行完毕都会停机处理
+    timeout-per-shutdown-phase: 20s
+  jackson:
+    # 日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 指定日期格式化时区
+    time-zone: GMT+8
+    serialization:
+      # 格式化输出
+      indent_output: false
+      # 忽略无法转换的对象
+      fail_on_empty_beans: false
+    # ALWAYS #如果某一个字段为null，就不再返回这个字段
+    # NON_EMPTY  属性为 空（""） 或者为 NULL 都不序列化
+    default-property-inclusion: NON_EMPTY
+    mapper:
+      # 按字典表排序
+      sort-properties-alphabetically: true
+    parser:
+      # 允许出现特殊字符和转义符
+      allow_unquoted_control_chars: true
+      # 允许出现单引号
+      allow_single_quotes: true
+  zipkin:
+    base-url: http://localhost:9411/
+    locator:
+      discovery:
+        # 支持通过服务发现定位主机名
+        enabled: true
+  sleuth:
+    web:
+      client:
+        # web开启sleuth功能
+        enabled: true
+      # TODO 跳过的URI Gateway还存在问题
+      additional-skip-pattern: "/instances"
+      #ignore-auto-configured-skip-patterns: false
+    stream:
+      enabled: true
+    integration:
+      #Spring Cloud Sleuth本身就整合了Spring Integration。它发布/订阅事件都是会创建span。可以设置spring.sleuth.
+      enabled: false
+    sampler:
+      # 采样率：(取值范围：0.1-1.0) 如配置为1.0，则采样率为100%，采集服务的全部追踪数据，若不配置默认采样率是0.1(即10%)
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.17.81.149:8848
+        username: nacos
+        password: nacos
+        group: "DEV_GROUP"
+        namespace: "42e0ca4e-cbce-4700-ba38-131c0d242ce9"
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开放所有页面节点  默认只开启了health、info两个节点
+        include: "*"
+  endpoint:
+    health:
+      # 显示健康具体信息  默认不会显示详细信息
+      show-details: ALWAYS
+    # 开启shutdown
+    shutdown:
+      enabled: false

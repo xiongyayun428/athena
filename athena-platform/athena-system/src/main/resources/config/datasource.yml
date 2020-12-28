@@ -1,0 +1,65 @@
+spring:
+  datasource:
+    name: Athena
+    url: jdbc:mysql://47.107.179.245:3306/athena?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: athena
+    password: ENC(Vv3Jxdauygab7kRUVxVQj8fbvZUaQEKtdiyBTFrVw4Sw2AXxVkat1BiQU4ry7rgG)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化连接大小，连接池建立时创建的初始化连接数
+      initial-size: 10
+      # 最小空闲连接数，连接池中最小的活跃连接数
+      min-idle: 10
+      # 最大连接数，连接池中最大的活跃连接数
+      max-active: 100
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      pool-prepared-statements: false
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
+      # 在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      #max-evictable-idle-time-millis: 30000000
+      # 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
+      validation-query: SELECT 'X'
+      # 单位：秒，检测连接是否有效的超时时间。底层调用jdbc Statement对象的void setQueryTimeout(int seconds)方法
+      validation-query-timeout: 3000
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。默认: false
+      test-while-idle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。默认: true
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。默认: false
+      test-on-return: false
+      # 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+      # 监控统计用的filter:stat
+      # 日志用的filter:log4j
+      # 防御sql注入的filter:wall
+      filters: "stat,wall,config"
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          # 慢SQL记录
+          merge-sql: true
+          slow-sql-millis: 1000
+          log-slow-sql: true
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=false
+      # 监控过滤器配置
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-enable: false
+        session-stat-max-count: 1000
+      # 监控页面
+      stat-view-servlet:
+        enabled: true
+        url-pattern: "/druid/*"
+        login-username: admin
+        login-password: admin
+      # Spring监控配置，Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      aop-patterns: com.xiongyayun.*.mapper.*

@@ -53,6 +53,11 @@ public class ExceptionHandlerAdvice {
         return translate(ErrorConstant.SYSTEM_ERROR_UNCAUGHT, null, e.getLocalizedMessage(), e);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResBody handleException(NullPointerException e) {
+        return translate(ErrorConstant.NULL_POINTER_EXCEPTION, null, e.getLocalizedMessage(), e);
+    }
+
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResBody handleException(HttpRequestMethodNotSupportedException e) {

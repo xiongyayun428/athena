@@ -10,6 +10,7 @@
 	</parent>
 	<artifactId>athena-system</artifactId>
 	<packaging>jar</packaging>
+	<name>Athena System</name>
 	<description>雅典娜系统服务</description>
 
 	<dependencies>
@@ -112,6 +113,11 @@
 		<dependency>
 			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-autoconfigure</artifactId>
+		</dependency>
+		<!-- 2.4版本配置方式-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
 	</dependencies>
 

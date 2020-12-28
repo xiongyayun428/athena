@@ -12,6 +12,8 @@ public class ErrorConstant implements Constant {
     /** 系统繁忙，未捕获异常 */
     public static final String SYSTEM_ERROR_UNCAUGHT = "system.error_uncaught";
 
+    public static final String NULL_POINTER_EXCEPTION = "NullPointerException";
+
     public static final String HTTP_REQUEST_METHOD_NOT_SUPPORTED = "HttpRequestMethodNotSupportedException";
     public static final String SYSTEM_NO_HANDLER_FOUND = "NoHandlerFoundException";
     public static final String SQL_EXCEPTION = "SQLException";

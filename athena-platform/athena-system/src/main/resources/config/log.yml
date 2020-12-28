@@ -1,0 +1,50 @@
+logging:
+  level:
+    root: DEBUG
+    org:
+      apache.http: INFO
+      springframework:
+        boot:
+          actuate: INFO
+          actuate.endpoint.web: INFO
+        cloud:
+          gateway: trace
+          sleuth:
+            zipkin2: INFO
+        http:
+          server:
+            reactive: DEBUG
+        security: DEBUG
+        web: INFO
+        beans: INFO
+        jdbc: INFO
+      hibernate: ERROR
+      mybatis: DEBUG
+    com:
+      xiongyayun: TRACE
+      alibaba:
+        druid: INFO
+        nacos: INFO
+    de:
+      codecentric:
+        boot:
+          admin: INFO
+    io:
+      undertow: WARN
+    sun.net.www.protocol.http: INFO
+    com.alibaba.nacos.client.config.impl.ClientWorker: ERROR
+    unknown.jul.logger: INFO
+  file:
+    name: ${logging.file.path}/${spring.application.name}.log
+    path: logs
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(->){faint} %m%n%wEx"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } --- [%t] %-40.40logger{39} : %m%n%wEx"
+    dateformat: "HH:mm:ss.SSS"
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
+      max-history: 30
+      max-file-size: 10MB
+      total-size-cap: 20GB
+      file-name-pattern: "${logging.file.path}/%d{yyyy-MM-dd}/${spring.application.name}.%i.gz"

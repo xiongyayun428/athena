@@ -1,0 +1,5 @@
+#jasypt加密的密匙
+jasypt:
+  encryptor:
+    # 密钥
+    password: xiongyayun428

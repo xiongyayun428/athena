@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @TableName("`sys_dict_item`")
 public class DictItem extends BaseModel {
-	@TableId(type = IdType.INPUT)
+	@TableId(type = IdType.ASSIGN_ID)
 	private String id;
 	private String dictId;
 	private String itemLabel;

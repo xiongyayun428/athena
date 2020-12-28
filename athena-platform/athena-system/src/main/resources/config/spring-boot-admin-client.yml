@@ -1,0 +1,16 @@
+spring:
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          prefer-ip: true
+#          service-base-url: ${your client url}
+#          metadata:
+#            user:
+#              name: admin
+#              password: admin
+#        url: http://10.0.1.23:10000/
+        url: http://localhost:10000/
+        username: admin
+        password: admin

@@ -1,0 +1,12 @@
+#server:
+#  port: 8000
+spring:
+  application:
+    name: athena-system
+#  config:
+#    import:
+#      - classpath:config/common.yml
+#      - classpath:config/log.yml
+#      - classpath:config/datasource.yml
+#      - classpath:config/jasypt.yml
+#      - classpath:config/springboot-admin-client.yml

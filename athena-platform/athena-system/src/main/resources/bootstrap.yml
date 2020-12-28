@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: athena-system
   cloud:
     nacos:
       config:
@@ -27,6 +25,6 @@ spring:
           - data-id: sentinel.yml
             group: "DEFAULT_GROUP"
             refresh: true
-          - data-id: springboot-admin-client.yaml
+          - data-id: spring-boot-admin-client.yaml
             group: "DEFAULT_GROUP"
             refresh: true

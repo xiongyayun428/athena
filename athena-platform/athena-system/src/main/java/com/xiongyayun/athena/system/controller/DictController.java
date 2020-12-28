@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +43,13 @@ public class DictController {
 	private DictItemMapper dictItemMapper;
 
 	@Log("数据字典分页查询")
-	@PostMapping("/selectPage")
-	public IPage<Dict> selectPage(@RequestBody DictVO vo) {
+	@GetMapping("/selectPage")
+	public IPage<Dict> selectPage(@RequestBody(required = false) DictVO vo) {
 		Dict dict = new Dict();
-		BeanUtils.copyProperties(vo, dict);
-
+		if (ObjectUtils.isEmpty(vo)) {
+			vo = new DictVO();
+			BeanUtils.copyProperties(vo, dict);
+		}
 		Page<Dict> page = new Page<>(vo.getPageIndex(), vo.getPageSize());
 		return dictMapper.selectPage(page, Wrappers.lambdaQuery(dict));
 	}
@@ -79,13 +82,10 @@ public class DictController {
 	@Log("数据字典项查询")
 	@GetMapping("/item/{id}")
 	public List<DictItem> item(@PathVariable("id") String id) {
-		if (StringUtils.hasLength(id)) {
-			return dictItemMapper.selectList(Wrappers.<DictItem>lambdaQuery()
-					.eq(DictItem::getDictId, id)
-					.orderByAsc(DictItem::getSortOrder, DictItem::getCreateTime)
-			);
-		}
-		return null;
+		return dictItemMapper.selectList(Wrappers.<DictItem>lambdaQuery()
+				.eq(DictItem::getDictId, id)
+				.orderByAsc(DictItem::getSortOrder, DictItem::getCreateTime)
+		);
 	}
 
 	@Log("数据字典项新增")
