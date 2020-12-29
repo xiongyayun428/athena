@@ -3,6 +3,7 @@ package com.xiongyayun.athena.core.configuration;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -12,9 +13,8 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * AthenaCorsFilter
@@ -43,17 +43,42 @@ public class AthenaCorsFilter extends HttpFilter {
 			}
 		}
 		// 设置访问源请求头
-		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, x-requested-with, Content-Type, Accept, Authorization");
+		List<String> allowHeaders = new ArrayList<>();
+		allowHeaders.add(HttpHeaders.ORIGIN);
+		allowHeaders.add("X-Requested-With");
+		allowHeaders.add(HttpHeaders.CONTENT_TYPE);
+		allowHeaders.add(HttpHeaders.ACCEPT);
+		allowHeaders.add(HttpHeaders.AUTHORIZATION);
+		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, String.join(",", allowHeaders));
 		// 跨域session共享
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 		// 设置访问源请求方法
-		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, OPTIONS, DELETE");
+		List<String> allowMethods = new ArrayList<>();
+		allowMethods.add("GET");
+		allowMethods.add("HEAD");
+		allowMethods.add("POST");
+		allowMethods.add("PUT");
+		allowMethods.add("PATCH");
+		allowMethods.add("DELETE");
+		allowMethods.add("OPTIONS");
+		allowMethods.add("TRACE");
+		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, String.join(",", allowMethods));
 		// 设置返回请求头
-		res.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma");
+		List<String> exposeHeaders = new ArrayList<>();
+		exposeHeaders.add(HttpHeaders.CACHE_CONTROL);
+		exposeHeaders.add(HttpHeaders.CONTENT_LANGUAGE);
+		exposeHeaders.add(HttpHeaders.CONTENT_TYPE);
+		exposeHeaders.add(HttpHeaders.CONTENT_RANGE);
+		exposeHeaders.add(HttpHeaders.CONTENT_LENGTH);
+		exposeHeaders.add(HttpHeaders.CONTENT_ENCODING);
+		exposeHeaders.add(HttpHeaders.CONTENT_DISPOSITION);
+		exposeHeaders.add(HttpHeaders.LAST_MODIFIED);
+		exposeHeaders.add(HttpHeaders.PRAGMA);
+		res.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, exposeHeaders.stream().collect(Collectors.joining(",")));
 		// 授权的时间
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
 		if ("OPTIONS".equals(req.getMethod())) {
-			res.getWriter().println("ok");
+			res.getWriter().println(HttpStatus.OK.value());
 			return;
 		}
 		super.doFilter(req, res, chain);
