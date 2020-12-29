@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @ApiModel("返回数据")
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
-public class ResBody implements ResponseEntity {
+public class ResBody<T> implements ResponseEntity {
 	private final I18nService i18nService;
     private static final String SUCCESS_CODE = "000000";
     private static final String SUCCESS_MSG = "SUCCESS";
@@ -40,7 +40,7 @@ public class ResBody implements ResponseEntity {
     @Setter
     @Getter
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object rtnData;
+    private T rtnData;
 
     @JsonIgnore
     private Object[] args;
@@ -98,7 +98,7 @@ public class ResBody implements ResponseEntity {
         return this;
     }
 
-	public ResBody withData(Object data) {
+	public ResBody withData(T data) {
 		this.rtnData = data;
 		return this;
 	}

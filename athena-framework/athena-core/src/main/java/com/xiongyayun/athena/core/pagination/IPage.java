@@ -46,7 +46,7 @@ public interface IPage<T> {
 	 * 当前分页查询数据列表
 	 * @return	当前分页查询数据列表
 	 */
-	@ApiModelProperty("数据列表")
+	@ApiModelProperty("分页数据")
 	List<T> getRecords();
 
 	/**

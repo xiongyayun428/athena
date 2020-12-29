@@ -3,6 +3,7 @@
 spring:
   application:
     name: athena-system
+    description: 系统管理
 #  config:
 #    import:
 #      - classpath:config/common.yml

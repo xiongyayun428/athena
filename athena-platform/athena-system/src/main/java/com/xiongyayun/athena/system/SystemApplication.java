@@ -38,16 +38,17 @@ public class SystemApplication {
 		String pid = name.split("@")[0];
 		Environment env = context.getEnvironment();
 		String port = env.getProperty("server.port", "8080"), contextPath = env.getProperty("server.servlet.context-path", "");
+		String origin = "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + port + contextPath;
 		log.info("\n--------------------------------------------------------------------------------------------------------------------\n\t" +
 						"Application '{}' is running! Pid: {}, Access URLs:\n\t" +
-						"Local: \t\thttp://localhost:{}{}\n\t" +
-						"External: \thttp://{}:{}{}" +
+						"Local: \t\t\thttp://localhost:{}{}\n\t" +
+						"External: \t\t" + origin + "\n\t" +
+						"Druid Monitor: \t" + origin + "/druid/\n\t" +
+						"Api Docs: \t\t" + origin + "/swagger-ui/\n\t" +
+						"Api Docs: \t\t" + origin + "/doc.html" +
 						"\n--------------------------------------------------------------------------------------------------------------------",
 				env.getProperty("spring.application.name", context.getId()),
 				pid,
-				port,
-				contextPath,
-				InetAddress.getLocalHost().getHostAddress(),
 				port,
 				contextPath
 		);

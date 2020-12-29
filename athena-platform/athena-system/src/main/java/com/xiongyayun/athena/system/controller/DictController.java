@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -36,13 +39,13 @@ import com.xiongyayun.athena.system.vo.DictVO;
 @Validated
 @RestController
 @RequestMapping("/dict")
+@Api(tags = {"数据字典服务"})
 public class DictController {
 	@Resource
 	private DictMapper dictMapper;
-	@Resource
-	private DictItemMapper dictItemMapper;
 
 	@Log("数据字典分页查询")
+	@ApiOperation("数据字典分页查询")
 	@GetMapping("/selectPage")
 	public IPage<Dict> selectPage(@RequestBody(required = false) DictVO vo) {
 		Dict dict = new Dict();
@@ -54,13 +57,18 @@ public class DictController {
 		return dictMapper.selectPage(page, Wrappers.lambdaQuery(dict));
 	}
 
+	@Resource
+	private DictItemMapper dictItemMapper;
+
 	@Log("根据主键查询数据字典")
+	@ApiOperation("根据主键查询数据字典")
 	@GetMapping("/getDictById/{id}")
-	public Dict selectById(@PathVariable("id") String id) {
+	public Dict selectById(@ApiParam("主键ID") @PathVariable("id") String id) {
 		return dictMapper.selectById(id);
 	}
 
 	@Log("数据字典新增")
+	@ApiOperation("数据字典新增")
 	@PostMapping("/add")
 	public void add(@RequestBody DictVO vo) {
 		Dict dict = new Dict();
@@ -80,8 +88,9 @@ public class DictController {
 	}
 
 	@Log("数据字典项查询")
+	@ApiOperation("数据字典项查询")
 	@GetMapping("/item/{id}")
-	public List<DictItem> item(@PathVariable("id") String id) {
+	public List<DictItem> item(@ApiParam("主键ID") @PathVariable("id") String id) {
 		return dictItemMapper.selectList(Wrappers.<DictItem>lambdaQuery()
 				.eq(DictItem::getDictId, id)
 				.orderByAsc(DictItem::getSortOrder, DictItem::getCreateTime)
@@ -89,6 +98,7 @@ public class DictController {
 	}
 
 	@Log("数据字典项新增")
+	@ApiOperation("数据字典项新增")
 	@PostMapping("/item/add")
 	public void itemAdd(@RequestBody DictItemVO vo) {
 		if (!StringUtils.hasLength(vo.getDictId())) {

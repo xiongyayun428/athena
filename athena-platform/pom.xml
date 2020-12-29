@@ -32,11 +32,6 @@
 			<optional>true</optional>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -78,6 +73,17 @@
 				<groupId>com.xiongyayun.platform</groupId>
 				<artifactId>athena-user</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-boot-starter</artifactId>
+				<version>3.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-spring-boot-starter</artifactId>
+				<version>3.0.2</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
