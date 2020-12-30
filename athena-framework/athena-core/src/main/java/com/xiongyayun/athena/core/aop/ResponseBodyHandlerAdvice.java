@@ -43,17 +43,15 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
 								  Class<? extends HttpMessageConverter<?>> selectedConverterType,
 								  ServerHttpRequest request, ServerHttpResponse response) {
 		String uri = request.getURI().getPath();
-		if (body != null) {
-            if ((body.getClass().getPackage().getName().startsWith("org.springframework.boot.actuate") || Arrays.stream(IGNORE).anyMatch(uri::contains))) {
-                return body;
-            }
+		if ((body != null && body.getClass().getPackage().getName().startsWith("org.springframework.boot.actuate")) || Arrays.stream(IGNORE).anyMatch(uri::contains)) {
+			return body;
         }
 		if (body instanceof ResBody) {
 			print(body, response);
 			return body;
 		}
 
-		ResBody resBody = new ResBody().withData(body);
+		ResBody resBody = new ResBody<>().withData(body);
 //		if (returnType.getGenericParameterType().equals(String.class)) {
 //			response.getHeaders().setContentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE));
 //			return print(resBody, response);

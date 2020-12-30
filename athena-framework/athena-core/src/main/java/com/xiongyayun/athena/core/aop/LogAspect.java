@@ -170,7 +170,7 @@ public class LogAspect {
 	@After("doAspect()")
 	public void after(JoinPoint joinPoint) {
 		Signature signature = joinPoint.getSignature();
-		LOG.info("已经记录下操作日志@After 方法执行后-->" + signature.getDeclaringTypeName() + "." + signature.getName());
+//		LOG.info("已经记录下操作日志@After 方法执行后-->" + signature.getDeclaringTypeName() + "." + signature.getName());
 
 		clear();
 	}

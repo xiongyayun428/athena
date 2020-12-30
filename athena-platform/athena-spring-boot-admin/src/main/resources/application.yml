@@ -13,7 +13,8 @@ spring:
   mail:
     host: smtp.163.com
     username: xiongyayun428@163.com
-    password: ENC(nXUdi3kEc7Yg1aap7Q4/l3s+Ah035P+Qtd0SxFBr9rp6JC4qYkRqXfSJIGW7BBis)
+#    password: ENC(nXUdi3kEc7Yg1aap7Q4/l3s+Ah035P+Qtd0SxFBr9rp6JC4qYkRqXfSJIGW7BBis)
+    password: ENC(kxjwttKhumd4qnp5AsSq7jqiDhsFSgdbjilgN0gvYq3AKfKCjKujTBrERKB/yDltBZ2XyYrWic5EavgzVkrqYA==)
     protocol: smtp
     default-encoding: UTF-8
     test-connection: false
@@ -41,12 +42,17 @@ spring:
 #        dingtalk:
 #          enabled: true
 #          webhook-token: https://oapi.dingtalk.com/robot/send?access_token=5f588ab27b1f7c1f0b2bd82cbe3ee609554141bbf51fad8f133ef2a747945c2f
+logging:
+  file:
+    path: logs/${spring.application.name}
 management:
   endpoints:
     web:
       exposure:
         include: '*'
   endpoint:
+    logfile:
+      external-file: logs/spring-boot-admin/
     health:
       show-details: ALWAYS
     #可以关闭指定的端点

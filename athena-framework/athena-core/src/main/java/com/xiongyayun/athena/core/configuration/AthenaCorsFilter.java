@@ -70,7 +70,7 @@ public class AthenaCorsFilter extends HttpFilter {
 		// 授权的时间
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
 		if (HttpMethod.OPTIONS.matches(req.getMethod())) {
-			res.getWriter().println(HttpStatus.OK.value());
+			res.getWriter().println(HttpStatus.OK.name());
 			return;
 		}
 		super.doFilter(req, res, chain);
