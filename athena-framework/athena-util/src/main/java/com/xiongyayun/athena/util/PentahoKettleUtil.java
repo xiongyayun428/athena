@@ -12,6 +12,8 @@ import org.pentaho.di.trans.TransMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
@@ -31,25 +33,35 @@ public class PentahoKettleUtil {
 	 * @throws Exception    转换报错
 	 */
 	public static Trans runTransfer(String ktrFilePath, Map<String, String> variables) throws Exception {
-		return runTransfer(ktrFilePath, variables, null);
+		return runTransfer(new File(ktrFilePath), variables);
+	}
+
+	public static Trans runTransfer(File ktrFile, Map<String, String> variables) throws Exception {
+		return runTransfer(ktrFile, variables, null);
+	}
+
+	public static Trans runTransfer(String ktrFile, Map<String, String> variables, String[] arguments) throws Exception {
+		return runTransfer(new File(ktrFile), variables, arguments);
 	}
 
 	/**
-	 *
 	 * 通过文件方式执行转换
-	 * @param ktrFilePath   ktr转换文件
+	 * @param ktrFile		ktr转换文件
 	 * @param variables     变量
 	 * @param arguments     参数
 	 * @throws Exception    转换报错
 	 */
-	public static Trans runTransfer(String ktrFilePath, Map<String, String> variables, String[] arguments) throws Exception {
-		logger.info("execute krt, ktrFilePath={}, variables={}", ktrFilePath, variables);
+	public static Trans runTransfer(File ktrFile, Map<String, String> variables, String[] arguments) throws Exception {
+		logger.info("execute krt, ktrFilePath={}, variables={}", ktrFile.getAbsolutePath(), variables);
+		if (!ktrFile.exists()) {
+			throw new FileNotFoundException("Pentaho Kettle Transfer [" + ktrFile.getAbsolutePath() + "]: File Not Found");
+		}
 		try {
 			// 初始化
 			KettleEnvironment.init();
 			EnvUtil.environmentInit();
 			// 转换元对象
-			TransMeta transMeta = new TransMeta(ktrFilePath);
+			TransMeta transMeta = new TransMeta(ktrFile.getAbsolutePath());
 			// 转换
 			Trans trans = new Trans(transMeta);
 			if (variables != null) {
@@ -72,10 +84,10 @@ public class PentahoKettleUtil {
 			if (trans.getErrors() > 0) {
 				throw new Exception("执行转换发生异常，异常个数[" + trans.getErrors() + "]");
 			}
-			logger.info("Pentaho Kettle Transfer [{}]: Successful", ktrFilePath);
+			logger.info("Pentaho Kettle Transfer [{}]: Successful", ktrFile.getAbsolutePath());
 			return trans;
 		} catch (Exception e) {
-			throw new Exception("Pentaho Kettle Transfer [" + ktrFilePath + "]: " + e.getMessage(), e);
+			throw new Exception("Pentaho Kettle Transfer [" + ktrFile.getAbsolutePath() + "]: " + e.getMessage(), e);
 		}
 	}
 
@@ -86,23 +98,34 @@ public class PentahoKettleUtil {
 	 * @throws Exception    转换报错
 	 */
 	public static Job runJob(String kjbFilePath, Map<String, String> variables) throws Exception {
-		return runJob(kjbFilePath, variables, null);
+		return runJob(new File(kjbFilePath), variables);
+	}
+
+	public static Job runJob(File kjbFile, Map<String, String> variables) throws Exception {
+		return runJob(kjbFile, variables, null);
+	}
+
+	public static Job runJob(String kjbFilePath, Map<String, String> variables, String[] arguments) throws Exception {
+		return runJob(new File(kjbFilePath), variables, arguments);
 	}
 
 	/**
 	 * 通过文件方式执行job
-	 * @param kjbFilePath   job作业文件
+	 * @param kjbFile		job作业文件
 	 * @param variables     变量
 	 * @param arguments		参数
 	 * @throws Exception    转换报错
 	 */
-	public static Job runJob(String kjbFilePath, Map<String, String> variables, String[] arguments) throws Exception {
-		logger.info("execute kjb, kjbFilePath={}, variables={}, arguments={}", kjbFilePath, variables, arguments);
+	public static Job runJob(File kjbFile, Map<String, String> variables, String[] arguments) throws Exception {
+		logger.info("execute kjb, kjbFilePath={}, variables={}, arguments={}", kjbFile.getAbsolutePath(), variables, arguments);
+		if (!kjbFile.exists()) {
+			throw new FileNotFoundException("Pentaho Kettle Job [" + kjbFile.getAbsolutePath() + "]: File Not Found");
+		}
 		try {
 			// 初始化
 			KettleEnvironment.init();
 			EnvUtil.environmentInit();
-			JobMeta jobMeta = new JobMeta(kjbFilePath, null);
+			JobMeta jobMeta = new JobMeta(kjbFile.getAbsolutePath(), null);
 			Job job = new Job(null, jobMeta);
 			if (variables != null) {
 				for (String variableName : variables.keySet()) {
@@ -120,10 +143,10 @@ public class PentahoKettleUtil {
 			if (job.getErrors() > 0) {
 				throw new Exception("执行job发生异常，异常个数[" + job.getErrors() + "]");
 			}
-			logger.info("Pentaho Kettle Job [{}]: Successful", kjbFilePath);
+			logger.info("Pentaho Kettle Job [{}]: Successful", kjbFile.getAbsolutePath());
 			return job;
 		} catch (Exception e) {
-			throw new Exception("Pentaho Kettle Transfer [" + kjbFilePath + "]: " + e.getMessage(), e);
+			throw new Exception("Pentaho Kettle Job [" + kjbFile.getAbsolutePath() + "]: " + e.getMessage(), e);
 		}
 	}
 

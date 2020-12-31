@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolationException;
@@ -124,10 +125,17 @@ public class ExceptionHandlerAdvice {
     public ResBody handleException(TypeMismatchException e) {
         return translate(ErrorConstant.TYPE_MISMATCH_EXCEPTION, new Object[] {e.getPropertyName(), e.getRequiredType()}, e.getLocalizedMessage(), e);
     }
+
+	@ExceptionHandler(MissingServletRequestPartException.class)
+	public ResBody handleException(MissingServletRequestPartException e) {
+		return translate(ErrorConstant.MISSING_SERVLET_REQUEST_PART_EXCEPTION, new Object[] {e.getRequestPartName()}, e.getMessage(), e);
+	}
+
     @ExceptionHandler(MyBatisSystemException.class)
     public ResBody handleException(MyBatisSystemException e) {
         return translate(e.getClass().getName(), null, e.getMessage(), e);
     }
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResBody handleException(ConstraintViolationException e) {
 		String msg = e.getConstraintViolations().stream()

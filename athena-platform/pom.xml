@@ -100,6 +100,7 @@
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
         <module>athena-spring-boot-admin</module>
+        <module>athena-sso</module>
         <module>athena-system</module>
 <!--        <module>athena-user-api</module>-->
 <!--        <module>athena-service</module>-->
