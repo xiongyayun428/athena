@@ -29,6 +29,37 @@
 	</modules>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- 添加flatten-maven-plugin用于替换${revision} -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.2.5</version>
+					<configuration>
+						<!-- 是否更新pom文件 -->
+						<updatePomFile>true</updatePomFile>
+						<flattenMode>resolveCiFriendliesOnly</flattenMode>
+					</configuration>
+					<executions>
+						<execution>
+							<id>flatten</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>flatten.clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<!--
             https://github.com/ulisesbocchio/jasypt-spring-boot
@@ -41,20 +72,8 @@
 				<version>3.0.3</version>
 			</plugin>
 			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<failOnError>false</failOnError>
-					<filesets>
-						<fileset>
-							<directory>${basedir}/</directory> // 目标文件夹
-							<includes>
-								<include>**/.flattened-pom.xml</include> // 按文件名筛选要清理的文件
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
-					</filesets>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
