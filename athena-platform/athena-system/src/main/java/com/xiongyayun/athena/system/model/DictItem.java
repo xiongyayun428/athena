@@ -35,6 +35,8 @@ public class DictItem extends BaseModel {
 	private Integer sortOrder;
 	@ApiModelProperty("是否启用？")
 	private Boolean enabled;
+	@ApiModelProperty("语言")
+	private String language;
 	@ApiModelProperty("是否允许修改")
 	private Boolean allowUpdate;
 	@ApiModelProperty("是否允许删除")

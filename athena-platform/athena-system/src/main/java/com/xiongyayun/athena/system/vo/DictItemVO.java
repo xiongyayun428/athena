@@ -20,6 +20,7 @@ public class DictItemVO extends BaseVO {
 	private String description;
 	private Integer sortOrder;
 	private Boolean enabled;
+	private String language;
 	private Boolean allowUpdate;
 	private Boolean allowDelete;
 }
