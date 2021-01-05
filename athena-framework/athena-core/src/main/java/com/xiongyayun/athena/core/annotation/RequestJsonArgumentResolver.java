@@ -99,8 +99,8 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 			}
 			jsonBody = sb.toString();
 			if(!StringUtils.hasLength(jsonBody)){
-				Map<String,String[]> params = request.getParameterMap();
-				Map tmp = new HashMap(params.size());
+				Map<String, String[]> params = request.getParameterMap();
+				Map<Object, Object> tmp = new HashMap<>(params.size());
 				for (Map.Entry<String,String[]> param:params.entrySet()) {
 					if(param.getValue().length == 1){
 						tmp.put(param.getKey(),param.getValue()[0]);

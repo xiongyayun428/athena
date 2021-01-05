@@ -50,39 +50,39 @@ public class ExceptionHandlerAdvice {
 	}
 
 	@ExceptionHandler(Throwable.class)
-    public ResBody handleException(Throwable e) {
+    public ResBody<?> handleException(Throwable e) {
         return translate(ErrorConstant.SYSTEM_ERROR_UNCAUGHT, null, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResBody handleException(NullPointerException e) {
+    public ResBody<?> handleException(NullPointerException e) {
         return translate(ErrorConstant.NULL_POINTER_EXCEPTION, null, e.getLocalizedMessage(), e);
     }
 
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResBody handleException(HttpRequestMethodNotSupportedException e) {
+    public ResBody<?> handleException(HttpRequestMethodNotSupportedException e) {
         return translate(ErrorConstant.HTTP_REQUEST_METHOD_NOT_SUPPORTED, new Object[] {e.getMethod()}, e.getLocalizedMessage(), e);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResBody handleException(NoHandlerFoundException e) {
+    public ResBody<?> handleException(NoHandlerFoundException e) {
         return translate(ErrorConstant.SYSTEM_NO_HANDLER_FOUND, new Object[] {e.getHttpMethod(), e.getRequestURL()}, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResBody handleException(IllegalArgumentException e) {
+    public ResBody<?> handleException(IllegalArgumentException e) {
         return translate(ErrorConstant.ILLEGAL_ARGUMENT_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResBody handleException(HttpMediaTypeNotSupportedException e) {
+    public ResBody<?> handleException(HttpMediaTypeNotSupportedException e) {
         return translate(ErrorConstant.HTTP_MEDIA_TYPE_NOT_SUPPORTED_EXCEPTION, new Object[] {e.getContentType()}, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(BindException.class)
-    public ResBody catchBindException(BindException e) {
+    public ResBody<?> catchBindException(BindException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
         if (fieldError == null) {
 			return translate(ErrorConstant.BIND_EXCEPTION, null, e.getMessage(), e);
@@ -92,12 +92,12 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(ClassCastException.class)
-    public ResBody handleException(ClassCastException e) {
+    public ResBody<?> handleException(ClassCastException e) {
         return translate(ErrorConstant.CLASS_CAST_EXCEPTION, null, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResBody handleException(MethodArgumentNotValidException e) {
+    public ResBody<?> handleException(MethodArgumentNotValidException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
 		if (fieldError == null) {
 			return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, null, e.getMessage(), e);
@@ -107,37 +107,37 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResBody handleException(HttpMessageNotReadableException e) {
+    public ResBody<?> handleException(HttpMessageNotReadableException e) {
         return translate(ErrorConstant.HTTP_MESSAGE_NOT_READABLE_EXCEPTION, null, e.getLocalizedMessage(), e);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResBody handleException(MissingServletRequestParameterException e) {
+    public ResBody<?> handleException(MissingServletRequestParameterException e) {
         return translate(ErrorConstant.MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION, new Object[] {e.getParameterName(), e.getParameterType()}, e.getLocalizedMessage(), e);
     }
 
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public ResBody catchMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+	public ResBody<?> catchMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
 		return translate(ErrorConstant.METHOD_ARGUMENT_TYPE_MISMATCH_EXCEPTION, new Object[] {e.getParameter().getMethod(), e.getName(), e.getValue(), e.getMessage()}, e.getLocalizedMessage(), e);
 	}
 
     @ExceptionHandler(TypeMismatchException.class)
-    public ResBody handleException(TypeMismatchException e) {
+    public ResBody<?> handleException(TypeMismatchException e) {
         return translate(ErrorConstant.TYPE_MISMATCH_EXCEPTION, new Object[] {e.getPropertyName(), e.getRequiredType()}, e.getLocalizedMessage(), e);
     }
 
 	@ExceptionHandler(MissingServletRequestPartException.class)
-	public ResBody handleException(MissingServletRequestPartException e) {
+	public ResBody<?> handleException(MissingServletRequestPartException e) {
 		return translate(ErrorConstant.MISSING_SERVLET_REQUEST_PART_EXCEPTION, new Object[] {e.getRequestPartName()}, e.getMessage(), e);
 	}
 
     @ExceptionHandler(MyBatisSystemException.class)
-    public ResBody handleException(MyBatisSystemException e) {
+    public ResBody<?> handleException(MyBatisSystemException e) {
         return translate(e.getClass().getName(), null, e.getMessage(), e);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResBody handleException(ConstraintViolationException e) {
+    public ResBody<?> handleException(ConstraintViolationException e) {
 		String msg = e.getConstraintViolations().stream()
 				.map( cv -> cv == null ? "null" : cv.getMessage() )
 //				.map( cv -> cv == null ? "null" : cv.getPropertyPath() + ": " + cv.getMessage() )
@@ -146,23 +146,23 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(AthenaRuntimeException.class)
-    public ResBody catchAthenaRuntimeException(AthenaRuntimeException e) {
+    public ResBody<?> catchAthenaRuntimeException(AthenaRuntimeException e) {
 		if (StringUtils.hasLength(e.getCode())) {
-			return new ResBody(e.getCode(), e.getMessage());
+			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
     }
 
     @ExceptionHandler(AthenaException.class)
-    public ResBody handleException(AthenaException e) {
+    public ResBody<?> handleException(AthenaException e) {
 		if (StringUtils.hasLength(e.getCode())) {
-			return new ResBody(e.getCode(), e.getMessage());
+			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
     }
 
-    protected ResBody translate(String key, @Nullable Object[] args, @Nullable String defaultMsg, @Nullable Throwable e) {
-        final ResBody resBody = new ResBody();
+    protected ResBody<?> translate(String key, @Nullable Object[] args, @Nullable String defaultMsg, @Nullable Throwable e) {
+        final ResBody<?> resBody = new ResBody<>();
         if (i18nService == null) {
         	throw new RuntimeException("请配置i18nService");
 		}

@@ -17,7 +17,11 @@ import lombok.Setter;
 @ApiModel("返回数据")
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody<T> implements ResponseEntity {
-	private final I18nService i18nService;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private I18nService i18nService;
     private static final String SUCCESS_CODE = "000000";
     private static final String SUCCESS_MSG = "SUCCESS";
 
@@ -83,22 +87,22 @@ public class ResBody<T> implements ResponseEntity {
     	return System.currentTimeMillis();
 	}
 
-    public ResBody withCode(String rtnCode) {
+    public ResBody<T> withCode(String rtnCode) {
         this.rtnCode = rtnCode;
         return this;
     }
 
-    public ResBody withMsg(String msg) {
+    public ResBody<T> withMsg(String msg) {
         this.rtnMsg = msg;
         return this;
     }
 
-    public ResBody withArgs(Object[] args) {
+    public ResBody<T> withArgs(Object[] args) {
         this.args = args;
         return this;
     }
 
-	public ResBody withData(T data) {
+	public ResBody<T> withData(T data) {
 		this.rtnData = data;
 		return this;
 	}

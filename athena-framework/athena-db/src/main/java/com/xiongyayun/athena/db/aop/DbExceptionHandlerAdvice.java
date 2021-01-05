@@ -29,21 +29,21 @@ public class DbExceptionHandlerAdvice extends ExceptionHandlerAdvice {
 	}
 
 	@ExceptionHandler(BadSqlGrammarException.class)
-	public ResBody handleException(BadSqlGrammarException e) {
+	public ResBody<?> handleException(BadSqlGrammarException e) {
 		SQLException se = e.getSQLException();
 		return translate(ErrorConstant.BAD_SQL_GRAMMAR_EXCEPTION, new Object[] {se.getMessage(), se.getErrorCode(), se.getSQLState()}, se.getLocalizedMessage(), e);
 	}
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResBody handleException(DataIntegrityViolationException e) {
+	public ResBody<?> handleException(DataIntegrityViolationException e) {
 		return translate(ErrorConstant.DATA_INTEGRITY_VIOLATION_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
 	}
 
 	@ExceptionHandler(SQLException.class)
-	public ResBody handleException(SQLException e) {
+	public ResBody<?> handleException(SQLException e) {
 		return translate(ErrorConstant.SQL_EXCEPTION, new Object[] {e.getErrorCode(), e.getSQLState()}, e.getLocalizedMessage(), e);
 	}
 	@ExceptionHandler(TooManyResultsException.class)
-	public ResBody handleException(TooManyResultsException e) {
+	public ResBody<?> handleException(TooManyResultsException e) {
 		return translate(ErrorConstant.TOO_MANY_RESULTS_EXCEPTION, new Object[] {e.getMessage()}, e.getLocalizedMessage(), e);
 	}
 
