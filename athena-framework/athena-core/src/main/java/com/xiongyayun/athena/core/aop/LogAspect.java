@@ -14,6 +14,7 @@ import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -92,6 +93,7 @@ public class LogAspect {
 		}
 		String params;
 		try {
+			// TODO 这里还存在问题
 			params = objectMapper.writeValueAsString(args);
 		} catch (JsonProcessingException e) {
 			params = Arrays.toString(point.getArgs());
