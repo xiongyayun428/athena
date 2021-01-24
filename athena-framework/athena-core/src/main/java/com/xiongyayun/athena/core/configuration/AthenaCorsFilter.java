@@ -38,10 +38,8 @@ public class AthenaCorsFilter extends HttpFilter {
 			if (allowOriginSet.contains(originHeader)) {
 				res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, allowOrigin);
 			}
-		} else {
-			if (StringUtils.hasLength(originHeader)) {
-				res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, originHeader);
-			}
+		} else if (StringUtils.hasLength(originHeader)) {
+			res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, originHeader);
 		}
 		// 设置访问源请求头
 		List<String> allowHeaders = new ArrayList<>();
@@ -52,7 +50,7 @@ public class AthenaCorsFilter extends HttpFilter {
 		allowHeaders.add(HttpHeaders.AUTHORIZATION);
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, String.join(",", allowHeaders));
 		// 跨域session共享
-		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString());
 		// 设置访问源请求方法
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.joining(",")));
 		// 设置返回请求头

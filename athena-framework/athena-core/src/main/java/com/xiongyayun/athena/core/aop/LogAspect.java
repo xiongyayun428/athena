@@ -99,33 +99,33 @@ public class LogAspect {
 			params = Arrays.toString(point.getArgs());
 			LOG.error("序列化请求参数异常", e);
 		}
-		if (annotation.save()) {
-			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-			if (attributes != null) {
-				HttpServletRequest request = attributes.getRequest();
+		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		Journal journal = new Journal();
+		if (attributes != null) {
+			HttpServletRequest request = attributes.getRequest();
 //            SystemUtil.logRequest(request);
-
-				Journal journal = new Journal();
 //			logger.setId(IdUtil.);
-				journal.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
-				journal.setHttpMethod(request.getMethod());
-				journal.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
-				String queryString = request.getQueryString();
-				String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
-				journal.setUrl(request.getRequestURL().toString() + queryClause);
-				journal.setIp(SystemUtil.getClientIP(request));
+			journal.setAnnotation(String.join(",", Arrays.asList(annotation.value())));
+			journal.setHttpMethod(request.getMethod());
+			journal.setClassMethod(signature.getDeclaringTypeName() + "." + signature.getName());
+			String queryString = request.getQueryString();
+			String queryClause = (StringUtils.hasLength(queryString) ? "?" + queryString : "");
+			journal.setUrl(request.getRequestURL().toString() + queryClause);
+			journal.setIp(SystemUtil.getClientIP(request));
 //			LOGGER_THREAD_LOCAL.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
-				journal.setRequestBody(params);
+			journal.setRequestBody(params);
 //        LOGGER_THREAD_LOCAL.get().setLogType(AppConstants.LOG_TYPE_HTTP);
 //			String params = request.getParameterMap().entrySet().stream()
 //					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
 //					.collect(Collectors.joining(", "));
 //			System.out.println(params);
 //			LOGGER_THREAD_LOCAL.get().setReqParams(params);
-				LOGGER_THREAD_LOCAL.set(journal);
-			}
+			LOGGER_THREAD_LOCAL.set(journal);
 		}
-		LOG.info("[{}] {} 请求参数：{}", String.join(",", Arrays.asList(annotation.value())), uuid, params);
+		if (annotation.save()) {
+
+		}
+		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), uuid, params);
     }
 
     /**
@@ -141,7 +141,7 @@ public class LogAspect {
 		Log annotation = method.getAnnotation(Log.class);
 		String annotationValue = String.join(",", Arrays.asList(annotation.value()));
         if (null == resultValue) {
-			LOG.info("[{}] {} 耗时：{}ms，未返回数据", annotationValue, uuid, spendTime);
+			LOG.info("{} [{}] {} 耗时：{}ms，未返回数据", LOGGER_THREAD_LOCAL.get().getUrl(), annotationValue, uuid, spendTime);
             return;
         }
         String value = resultValue.toString();
