@@ -82,13 +82,13 @@ public class PentahoKettleUtil {
 			trans.setArguments(arguments);
 			// 添加运行日志监听
 //			trans.setLogLevel(LogLevel.DETAILED);
-			KettleLoggingEventListener kettleLoggingEventListener = printLog();
+//			KettleLoggingEventListener kettleLoggingEventListener = printLog();
 			// 执行转换
 			trans.execute(null);
 			// 等待转换执行结束
 			trans.waitUntilFinished();
 			// 删除运行日志监听
-			KettleLogStore.getAppender().removeLoggingEventListener(kettleLoggingEventListener);
+//			KettleLogStore.getAppender().removeLoggingEventListener(kettleLoggingEventListener);
 			// 抛出异常
 			if (trans.getErrors() > 0) {
 				throw new Exception("执行转换发生异常，异常个数[" + trans.getErrors() + "]");
@@ -162,11 +162,11 @@ public class PentahoKettleUtil {
 			job.setArguments(arguments);
 			// 添加运行日志监听
 //			job.setLogLevel(LogLevel.BASIC);
-			KettleLoggingEventListener kettleLoggingEventListener = printLog();
+//			KettleLoggingEventListener kettleLoggingEventListener = printLog();
 			job.start();
 			job.waitUntilFinished();
 			// 删除运行日志监听
-			KettleLogStore.getAppender().removeLoggingEventListener(kettleLoggingEventListener);
+//			KettleLogStore.getAppender().removeLoggingEventListener(kettleLoggingEventListener);
 			if (job.getErrors() > 0) {
 				throw new Exception("执行job发生异常，异常个数[" + job.getErrors() + "]");
 			}
