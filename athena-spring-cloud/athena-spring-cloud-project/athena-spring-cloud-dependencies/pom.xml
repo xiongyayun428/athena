@@ -14,8 +14,8 @@
     <description>依赖</description>
 
     <properties>
-        <spring-cloud.version>2020.0.0</spring-cloud.version>
-		<alibaba-cloud.version>2.2.3.RELEASE</alibaba-cloud.version>
+        <spring-cloud.version>2020.0.1</spring-cloud.version>
+		<alibaba-cloud.version>2.2.5.RELEASE</alibaba-cloud.version>
 
 		<!--Plugin Versions-->
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
