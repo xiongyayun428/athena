@@ -4,6 +4,7 @@ import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.system.model.User;
 import com.xiongyayun.athena.system.service.UserService;
 import com.xiongyayun.athena.system.vo.UserVO;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
 @Validated
 @RestController
 @RequestMapping("/user")
+@Api(value = "user", tags = {"系统用户管理模块"})
 public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	@Resource

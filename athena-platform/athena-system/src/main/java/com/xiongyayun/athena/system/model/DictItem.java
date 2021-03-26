@@ -26,9 +26,9 @@ public class DictItem extends BaseModel {
 	@ApiModelProperty("数据字典主键ID")
 	private String dictId;
 	@ApiModelProperty("字典项显示值")
-	private String itemLabel;
+	private String label;
 	@ApiModelProperty("字典项值")
-	private String itemValue;
+	private String value;
 	@ApiModelProperty("描述")
 	private String description;
 	@ApiModelProperty("排序顺序")

@@ -124,10 +124,28 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
 		</dependency>
+		<!-- Swagger生成Api文档的增强解决方案 -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security.experimental</groupId>
+			<artifactId>spring-security-oauth2-authorization-server</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.nimbusds</groupId>-->
+<!--			<artifactId>nimbus-jose-jwt</artifactId>-->
+<!--			<version>9.7</version>-->
+<!--		</dependency>-->
 
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.cloud</groupId>-->
