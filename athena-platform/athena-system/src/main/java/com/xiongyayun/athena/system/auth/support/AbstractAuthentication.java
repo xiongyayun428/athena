@@ -2,7 +2,6 @@ package com.xiongyayun.athena.system.auth.support;
 
 import com.xiongyayun.athena.system.auth.Authentication;
 import com.xiongyayun.athena.system.auth.AuthorityBridge;
-import netscape.security.PrivilegeManager;
 
 /**
  * AbstractAuthentication
@@ -17,6 +16,7 @@ public abstract class AbstractAuthentication implements Authentication {
 
 	private transient String[] role;
 
+	@Override
 	public String[] getRole() {
 //		if (this.role == null) {
 //			this.role = PrivilegeManager.getRoleFromAuthentication(this);
@@ -24,10 +24,12 @@ public abstract class AbstractAuthentication implements Authentication {
 		return this.role;
 	}
 
+	@Override
 	public void setAuthorities(AuthorityBridge[] paramArrayOfAuthorityBridge) {
 		this.authorities = paramArrayOfAuthorityBridge;
 	}
 
+	@Override
 	public AuthorityBridge[] getAuthorities() {
 		if (this.authorities == null) {
 			return new AuthorityBridge[0];
@@ -37,10 +39,12 @@ public abstract class AbstractAuthentication implements Authentication {
 		return authorityBridges;
 	}
 
+	@Override
 	public boolean isAuthenticated() {
 		return this.authenticated;
 	}
 
+	@Override
 	public void setAuthenticated(boolean paramBoolean) {
 		this.authenticated = paramBoolean;
 	}

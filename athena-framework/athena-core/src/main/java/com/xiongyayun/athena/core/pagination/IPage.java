@@ -3,6 +3,7 @@ package com.xiongyayun.athena.core.pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2020/8/6
  */
 @ApiModel("分页")
-public interface IPage<T> {
+public interface IPage<T> extends Serializable {
 
 	/**
 	 * 当前页数

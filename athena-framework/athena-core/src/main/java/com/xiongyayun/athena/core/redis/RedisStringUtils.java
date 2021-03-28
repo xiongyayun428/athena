@@ -75,7 +75,7 @@ public class RedisStringUtils extends RedisUtils {
 			BoundValueOperations<String, T> ops = this.redisTemplate.boundValueOps(getRedisKey(key));
 			return ops.get();
 		} catch (Exception e) {
-			this.log.warn("get from Cache error! key = {" + key + "}", e);
+			log.warn("get from Cache error! key = {" + key + "}", e);
 			return null;
 		}
 	}
@@ -97,7 +97,7 @@ public class RedisStringUtils extends RedisUtils {
 			}
 			return value;
 		} catch (Exception e) {
-			this.log.warn("get from Cache error! key = {" + key + "}", e);
+			log.warn("get from Cache error! key = {" + key + "}", e);
 			return null;
 		}
 	}
@@ -106,7 +106,7 @@ public class RedisStringUtils extends RedisUtils {
 		try {
 			return this.redisTemplate.opsForValue().get(getRedisKey(key), start, end);
 		} catch (Exception e) {
-			this.log.warn("get from Cache error! key = {" + key + "}", e);
+			log.warn("get from Cache error! key = {" + key + "}", e);
 			return null;
 		}
 	}
@@ -119,8 +119,9 @@ public class RedisStringUtils extends RedisUtils {
 	 */
 	public <T> List<T> get(String... keys) {
 		List<T> list = new ArrayList();
-		for (String key : keys)
+		for (String key : keys) {
 			list.add(get(key));
+		}
 		return list;
 	}
 
@@ -132,8 +133,9 @@ public class RedisStringUtils extends RedisUtils {
 	 */
 	public <T> List<T> get(Collection<String> keys) {
 		List<T> list = new ArrayList();
-		for (String key : keys)
+		for (String key : keys) {
 			list.add(get(key));
+		}
 		return list;
 	}
 

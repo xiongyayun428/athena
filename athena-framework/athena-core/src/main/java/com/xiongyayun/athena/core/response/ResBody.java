@@ -18,7 +18,7 @@ import lombok.Setter;
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody<T> implements ResponseEntity {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private I18nService i18nService;

@@ -29,8 +29,9 @@ public class RedisHashUtils extends RedisUtils {
 	}
 
 	public <T> T getMapField(String key, String field) {
-		if (!StringUtils.hasLength(field))
+		if (!StringUtils.hasLength(field)) {
 			return null;
+		}
 		return (T)this.redisTemplate.boundHashOps(getRedisKey(key)).get(field);
 	}
 
@@ -52,8 +53,9 @@ public class RedisHashUtils extends RedisUtils {
 
 	public Long putHashMap(String key, Map map, long time) {
 		addMap(key, map);
-		if (time > 0L)
+		if (time > 0L) {
 			setExpireTime(key, Long.valueOf(time));
+		}
 		return getMapSize(key);
 	}
 
@@ -70,8 +72,9 @@ public class RedisHashUtils extends RedisUtils {
 		Map<String, Object> map = getMap(key);
 		Set<String> stringSet = map.keySet();
 		for (String s : stringSet) {
-			if (Pattern.compile(blear).matcher(s).matches())
-				this.redisTemplate.boundHashOps(getRedisKey(key)).delete(new Object[] { s });
+			if (Pattern.compile(blear).matcher(s).matches()) {
+				this.redisTemplate.boundHashOps(getRedisKey(key)).delete(new Object[]{s});
+			}
 		}
 	}
 }

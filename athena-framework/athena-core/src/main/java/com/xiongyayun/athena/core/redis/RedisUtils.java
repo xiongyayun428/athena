@@ -4,11 +4,12 @@ import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.DataType;
-import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -42,12 +43,13 @@ public class RedisUtils {
 	}
 
 	public static RedisUtils getInstance() {
-		if (redisUtils == null)
+		if (redisUtils == null) {
 			synchronized (RedisUtils.class) {
 				if (redisUtils == null) {
 					redisUtils = new RedisUtils(SpringContextUtil.getBean("redisTemplate"));
 				}
 			}
+		}
 		return redisUtils;
 	}
 

@@ -2,7 +2,6 @@ package com.xiongyayun.athena.core.utils;
 
 import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +40,7 @@ public class SafeDate {
 	 */
 	public static SimpleDateFormat getDateFormat(String pattern) {
         if (SDF.get() == null) {
+			SDF.remove();
 			SDF.set(new SimpleDateFormat());
         }
         SimpleDateFormat local = SDF.get();

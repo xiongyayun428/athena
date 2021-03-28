@@ -62,11 +62,13 @@ public class RedisZSetUtils extends RedisUtils {
 	}
 
 	public Boolean addZSet(String key, double[] score, Object[] value) {
-		if (score.length != value.length)
+		if (score.length != value.length) {
 			return Boolean.valueOf(false);
+		}
 		for (int i = 0; i < score.length; i++) {
-			if (!addZSet(key, score[i], value[i]).booleanValue())
+			if (!addZSet(key, score[i], value[i]).booleanValue()) {
 				return Boolean.valueOf(false);
+			}
 		}
 		return Boolean.valueOf(true);
 	}

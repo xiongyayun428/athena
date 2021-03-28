@@ -7,6 +7,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * I18nService
  *
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @date 2019-05-26
  */
 @Component
-public class I18nService {
+public class I18nService implements Serializable {
     private final MessageSource messageSource;
 
     @Autowired

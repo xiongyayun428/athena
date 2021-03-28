@@ -41,14 +41,14 @@ public class RedisSetUtils extends RedisUtils {
 				boo = this.redisTemplate.boundSetOps(getRedisKey(key)).isMember(obj);
 				break;
 			} catch (Exception e) {
-				this.log.error("key[" + key + "],obj[" + obj + "]" + e.getMessage());
+				log.error("key[" + key + "],obj[" + obj + "]" + e.getMessage());
 				t++;
 				if (t > 3) {
 					break;
 				}
 			}
 		}
-		this.log.info("key[" + key + "],obj[" + obj + "]" + boo);
+		log.info("key[" + key + "],obj[" + obj + "]" + boo);
 		return boo;
 	}
 	public <V> Set<V> getSet(String key) {

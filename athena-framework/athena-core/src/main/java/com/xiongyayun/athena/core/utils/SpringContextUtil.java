@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * SpringContextUtil
  *
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @date 2019-05-31
  */
 @Component("springContextUtil")
-public class SpringContextUtil implements ApplicationContextAware {
+public class SpringContextUtil implements ApplicationContextAware, Serializable {
     /**
      * Spring应用上下文环境
      */

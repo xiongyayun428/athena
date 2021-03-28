@@ -48,12 +48,14 @@ public class RedisLock {
 		Object obj = null;
 		try {
 			obj = redisTemplate.execute(new RedisCallback<Object>() {
+				@Override
 				public Object doInRedis(RedisConnection connection) throws DataAccessException {
 					StringRedisSerializer serializer = new StringRedisSerializer();
 					byte[] data = connection.get(serializer.serialize(key));
 					connection.close();
-					if (data == null)
+					if (data == null) {
 						return null;
+					}
 					return serializer.deserialize(data);
 				}
 			});

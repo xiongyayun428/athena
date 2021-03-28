@@ -1,6 +1,5 @@
 package com.xiongyayun.athena.core.annotation;
 
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,7 +42,7 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 //		HttpMethod httpMethod = (inputMessage instanceof HttpRequest ? ((HttpRequest) inputMessage).getMethod() : null);
 		JSONObject jsonObject = getJsonObject(webRequest);
 		String value = getParamName(parameter, requestJson);
-		Object paramValue = getParamValue(jsonObject,value);
+		Object paramValue = getParamValue(jsonObject, value);
 
 
 		if (paramValue == null) {
@@ -54,7 +53,7 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 		}
 
 		Class<?> classType = parameter.getParameterType();
-		if (paramValue.getClass().equals(JSONObject.class)){
+		if (paramValue.getClass().equals(JSONObject.class)) {
 			paramValue = OBJECT_MAPPER.readValue(paramValue.toString(), classType);
 		}
 		return paramValue;
@@ -71,12 +70,12 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 		return value;
 	}
 
-	private Object getParamValue(JSONObject jsonObject,String value) {
+	private Object getParamValue(JSONObject jsonObject, String value) {
 		if (jsonObject == null) {
 			return null;
 		}
-		for (String key: jsonObject.keySet()) {
-			if(key.equalsIgnoreCase(value)){
+		for (String key : jsonObject.keySet()) {
+			if (key.equalsIgnoreCase(value)) {
 				return jsonObject.get(key);
 			}
 		}
@@ -85,7 +84,7 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 
 	private JSONObject getJsonObject(NativeWebRequest webRequest) throws Exception {
 		String jsonBody = (String) webRequest.getAttribute(KEY, NativeWebRequest.SCOPE_REQUEST);
-		if(!StringUtils.hasLength(jsonBody)){
+		if (!StringUtils.hasLength(jsonBody)) {
 			HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
 			if (request == null) {
 				return null;
@@ -98,14 +97,14 @@ public class RequestJsonArgumentResolver implements HandlerMethodArgumentResolve
 				sb.append(buf, 0, rd);
 			}
 			jsonBody = sb.toString();
-			if(!StringUtils.hasLength(jsonBody)){
+			if (!StringUtils.hasLength(jsonBody)) {
 				Map<String, String[]> params = request.getParameterMap();
 				Map<Object, Object> tmp = new HashMap<>(params.size());
-				for (Map.Entry<String,String[]> param:params.entrySet()) {
-					if(param.getValue().length == 1){
-						tmp.put(param.getKey(),param.getValue()[0]);
-					}else{
-						tmp.put(param.getKey(),param.getValue());
+				for (Map.Entry<String, String[]> param : params.entrySet()) {
+					if (param.getValue().length == 1) {
+						tmp.put(param.getKey(), param.getValue()[0]);
+					} else {
+						tmp.put(param.getKey(), param.getValue());
 					}
 				}
 				jsonBody = JSON.toJSONString(tmp);

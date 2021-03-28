@@ -16,8 +16,9 @@ public class AuthenticationFactory {
 		HttpSession httpSession = req.getSession(false);
 		if (httpSession != null) {
 			Object object = httpSession.getAttribute(authKey);
-			if (object instanceof Authentication)
-				authentication = (Authentication)object;
+			if (object instanceof Authentication) {
+				authentication = (Authentication) object;
+			}
 		}
 //		if (authentication == null) {
 //			ExtraClassManagerProvider extraClassManagerProvider = (ExtraClassManagerProvider)PluginModule.getAgent(PluginModule.ExtraCore);

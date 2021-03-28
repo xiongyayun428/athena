@@ -11,8 +11,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisListUtils extends RedisUtils {
 	public void addList(String key, List<Object> objectList) {
-		for (Object obj : objectList)
+		for (Object obj : objectList) {
 			addList(key, obj);
+		}
 	}
 
 	public <V> long addList(String key, V obj) {
@@ -37,13 +38,15 @@ public class RedisListUtils extends RedisUtils {
 
 	public long removeListValue(String key, Object... objects) {
 		long r = 0L;
-		for (Object value : objects)
+		for (Object value : objects) {
 			r += removeListValue(key, value);
+		}
 		return r;
 	}
 	public void removeOpsList(String key) {
-		while (this.redisTemplate.opsForList().size(key).longValue() > 0L)
+		while (this.redisTemplate.opsForList().size(key).longValue() > 0L) {
 			this.redisTemplate.opsForList().leftPop(key);
+		}
 	}
 
 	public void addOpsList(String key, Object object) {
@@ -65,10 +68,11 @@ public class RedisListUtils extends RedisUtils {
 	public <T> T popQueue(String key) {
 		try {
 			String keyStr = getRedisKey(key);
-			if (this.redisTemplate.opsForList().size(keyStr).longValue() > 0L)
-				return (T)this.redisTemplate.opsForList().rightPop(keyStr, 1L, TimeUnit.SECONDS);
+			if (this.redisTemplate.opsForList().size(keyStr).longValue() > 0L) {
+				return (T) this.redisTemplate.opsForList().rightPop(keyStr, 1L, TimeUnit.SECONDS);
+			}
 		} catch (Exception e) {
-			this.log.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 		return null;
 	}

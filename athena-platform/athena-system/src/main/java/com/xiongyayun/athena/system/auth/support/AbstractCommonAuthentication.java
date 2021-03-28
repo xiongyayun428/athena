@@ -10,10 +10,12 @@ import com.xiongyayun.athena.system.auth.CommonAuthentication;
  */
 public abstract class AbstractCommonAuthentication extends AbstractAuthentication implements CommonAuthentication {
 
+	@Override
 	public Object getPrincipal() {
 		return getUserName();
 	}
 
+	@Override
 	public Object getCredentials() {
 		return getPassWord();
 	}

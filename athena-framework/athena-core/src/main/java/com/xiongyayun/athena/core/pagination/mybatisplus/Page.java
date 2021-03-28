@@ -1,6 +1,5 @@
 package com.xiongyayun.athena.core.pagination.mybatisplus;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -24,7 +23,7 @@ import org.springframework.util.ObjectUtils;
 @JsonInclude()
 @JsonIgnoreProperties({ "pages", "current", "size", "optimizeCountSql", "searchCount", "hitCount", "orders", "countId", "maxLimit" })
 @JsonPropertyOrder({"total", "pageCount", "pageIndex", "pageSize", "hasPrevious", "hasNext", "records"})
-public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T>, com.xiongyayun.athena.core.pagination.IPage<T> {
+public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements com.baomidou.mybatisplus.core.metadata.IPage<T>, com.xiongyayun.athena.core.pagination.IPage<T> {
 
 	public Page() {
 	}

@@ -10,7 +10,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.schema.ScalarType;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.*;
@@ -60,10 +59,10 @@ public class Swagger3Config implements WebMvcConfigurer {
 				.paths(PathSelectors.any())
 				.build()
 //				.globalRequestParameters(getGlobalRequestParameters())
-				.globalResponses(HttpMethod.GET, getGlobalResonseMessage())
-				.globalResponses(HttpMethod.POST, getGlobalResonseMessage())
-				.globalResponses(HttpMethod.PUT, getGlobalResonseMessage())
-				.globalResponses(HttpMethod.DELETE, getGlobalResonseMessage())
+				.globalResponses(HttpMethod.GET, getGlobalResponseMessage())
+				.globalResponses(HttpMethod.POST, getGlobalResponseMessage())
+				.globalResponses(HttpMethod.PUT, getGlobalResponseMessage())
+				.globalResponses(HttpMethod.DELETE, getGlobalResponseMessage())
 				// 支持的通讯协议集合
 				.protocols(this.newHashSet("https", "http"))
 //				// 授权信息设置，必要的header token等认证信息
@@ -133,12 +132,12 @@ public class Swagger3Config implements WebMvcConfigurer {
 	 * 生成通用响应信息
 	 * @return
 	 */
-	private List<Response> getGlobalResonseMessage() {
+	private List<Response> getGlobalResponseMessage() {
 		List<Response> responseList = new ArrayList<>();
 		responseList.add(new ResponseBuilder().code("200").description("请求成功").build());
 		responseList.add(new ResponseBuilder().code("400").description("参数错误").build());
 		responseList.add(new ResponseBuilder().code("401").description("没有认证").build());
-		responseList.add(new ResponseBuilder().code("403").description("没有没有访问权限").build());
+		responseList.add(new ResponseBuilder().code("403").description("没有访问权限").build());
 		responseList.add(new ResponseBuilder().code("404").description("找不到资源").build());
 		responseList.add(new ResponseBuilder().code("500").description("服务器内部错误").build());
 		responseList.add(new ResponseBuilder().code("503").description("Hystrix异常").build());

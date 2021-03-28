@@ -25,7 +25,7 @@
 
 		<athena-boot.version>0.0.1-SNAPSHOT</athena-boot.version>
 		<athena-cloud.version>0.0.1-SNAPSHOT</athena-cloud.version>
-		<hutool-all.version>5.3.10</hutool-all.version>
+		<hutool-all.version>5.6.1</hutool-all.version>
 	</properties>
 
 	<modules>
@@ -136,7 +136,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.12</version>
+				<version>1.18.18</version>
 			</dependency>
 
 <!--			<dependency>-->
