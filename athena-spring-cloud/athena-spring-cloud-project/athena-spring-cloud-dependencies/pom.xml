@@ -21,7 +21,7 @@
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
-		<flatten-maven-plugin.version>1.2.5</flatten-maven-plugin.version>
+		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
 		<xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
