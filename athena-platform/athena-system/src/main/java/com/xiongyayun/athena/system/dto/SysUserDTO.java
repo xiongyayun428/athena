@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.system.dto;
 
-import com.xiongyayun.athena.system.model.User;
+import java.io.Serializable;
 
 /**
  * UserDto
@@ -8,5 +8,5 @@ import com.xiongyayun.athena.system.model.User;
  * @author Yayun.Xiong
  * @date 2020/11/28
  */
-public class UserDto extends User {
+public class SysUserDTO implements Serializable {
 }

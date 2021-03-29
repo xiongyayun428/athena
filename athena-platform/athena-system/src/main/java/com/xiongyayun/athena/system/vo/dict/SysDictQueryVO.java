@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("数据字典")
-public class DictVO extends BaseVO {
+public class SysDictQueryVO extends BaseVO {
 	@ApiModelProperty(value = "数据字典主键ID", required = true)
 	@NotBlank(message = "数据字典主键ID不能为空", groups = {Grpup.Update.class})
 	private String id;

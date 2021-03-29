@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiongyayun.athena.system.model.User;
+import com.xiongyayun.athena.system.model.SysUser;
 
 /**
  * UserMapper
@@ -9,5 +9,5 @@ import com.xiongyayun.athena.system.model.User;
  * @author Yayun.Xiong
  * @date 2019-06-05 17:16
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface SysUserMapper extends BaseMapper<SysUser> {
 }

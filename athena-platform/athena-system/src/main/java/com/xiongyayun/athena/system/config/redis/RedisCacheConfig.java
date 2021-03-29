@@ -27,8 +27,8 @@ import java.util.Map;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/2/26
  */
-//@Configuration
-//@EnableCaching
+@Configuration
+@EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
 	@Resource
 	private ResourceLoader resourceLoader;
@@ -36,7 +36,8 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	@Bean
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
 		RedisCacheConfiguration defaultCacheConfig = this.getRedisCacheConfigurationWithTtl(Duration.ofDays(1))
-				.computePrefixWith(cacheName -> "caching:" + cacheName);
+//				.computePrefixWith(cacheName -> "caching:" + cacheName)
+				;
 		return new AthenaRedisCacheManager(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory), defaultCacheConfig);
 
 //		return RedisCacheManager.builder(redisConnectionFactory)

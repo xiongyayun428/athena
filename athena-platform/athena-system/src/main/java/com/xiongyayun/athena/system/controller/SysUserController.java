@@ -1,8 +1,8 @@
 package com.xiongyayun.athena.system.controller;
 
 import com.xiongyayun.athena.core.annotation.Log;
-import com.xiongyayun.athena.system.model.User;
-import com.xiongyayun.athena.system.service.UserService;
+import com.xiongyayun.athena.system.model.SysUser;
+import com.xiongyayun.athena.system.service.SysUserService;
 import com.xiongyayun.athena.system.vo.UserVO;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -21,33 +21,33 @@ import javax.annotation.Resource;
  */
 @Validated
 @RestController
-@RequestMapping("/user")
-@Api(value = "user", tags = {"系统用户管理模块"})
-public class UserController {
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("/sys/user")
+@Api(value = "sysUser", tags = {"系统用户管理模块"})
+public class SysUserController {
+	private static final Logger log = LoggerFactory.getLogger(SysUserController.class);
 	@Resource
-	private UserService userService;
+	private SysUserService sysUserService;
 
 	@Log("创建用户")
 	@PostMapping("create")
 	public Long create(@RequestBody UserVO vo) {
 		// TODO vo校验
-		User user = new User();
+		SysUser user = new SysUser();
 		BeanUtils.copyProperties(vo, user);
-		this.userService.create(user);
+		this.sysUserService.save(user);
 		return user.getUserId();
 	}
 
 	@Log("删除用户")
 	@GetMapping("delete")
 	public void delete(@RequestParam("userid") Long userId) {
-		this.userService.deleteById(userId);
+		this.sysUserService.removeById(userId);
 	}
 
 	@Log("获取用户详情")
 	@GetMapping("get")
 	public void get(@RequestParam("userid") Long userId) {
-		this.userService.selectById(userId);
+		this.sysUserService.getById(userId);
 	}
 
 
@@ -55,9 +55,9 @@ public class UserController {
 	@PostMapping("update")
 	public void update(@RequestBody UserVO vo) {
 		// TODO vo校验
-		User user = new User();
+		SysUser user = new SysUser();
 		BeanUtils.copyProperties(vo, user);
-		this.userService.updateById(user);
+		this.sysUserService.updateById(user);
 	}
 
 //	@Autowired

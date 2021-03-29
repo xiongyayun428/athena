@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.xiongyayun.athena.db.model.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * Menu
@@ -12,6 +13,7 @@ import lombok.EqualsAndHashCode;
  * @date 2021/2/26
  */
 @Data
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @TableName("`menu`")
 public class Menu extends BaseModel {

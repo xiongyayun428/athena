@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiongyayun.athena.system.model.DictItem;
+import com.xiongyayun.athena.system.model.SysDictItem;
 
 /**
  * DictItemMapper
@@ -9,5 +9,5 @@ import com.xiongyayun.athena.system.model.DictItem;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2020/12/24
  */
-public interface DictItemMapper extends BaseMapper<DictItem> {
+public interface SysDictItemMapper extends BaseMapper<SysDictItem> {
 }

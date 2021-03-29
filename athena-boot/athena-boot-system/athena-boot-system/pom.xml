@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xiongyayun.platform</groupId>
-		<artifactId>athena-platform</artifactId>
+		<artifactId>athena-boot-system</artifactId>
 		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>athena-system</artifactId>
+	<artifactId>athena-boot-system</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Platform System</name>
 	<description>雅典娜系统服务</description>

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.xiongyayun.athena.db.model.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -19,9 +20,10 @@ import java.util.Date;
  * @date 2019-06-05
  */
 @Data
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName("`user`")
-public class User extends BaseModel {
+@TableName("`sys_user`")
+public class SysUser extends BaseModel {
 	private static final long serialVersionUID = 8047275337956610971L;
 
 	/**
@@ -35,20 +37,20 @@ public class User extends BaseModel {
 	 */
 	@NotBlank(message = "用户名不能为空")
 	@Size(min = 2, max = 20, message = "用户名长度必须为2-20个字符")
-	@TableField(value = "`user_name`")
-	private String userName;
+	@TableField(value = "`username`")
+	private String username;
 
 	/**
 	 * 真实姓名
 	 */
-	@TableField(value = "`real_name`")
-	private String realName;
+	@TableField(value = "`realname`")
+	private String realname;
 
 	/**
 	 * 昵称
 	 */
-	@TableField(value = "`nick_name`")
-	private String nickName;
+	@TableField(value = "`nickname`")
+	private String nickname;
 
 	/**
 	 * 限制登录的IP地址
