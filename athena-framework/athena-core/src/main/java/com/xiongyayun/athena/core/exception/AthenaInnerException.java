@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.joining;
 public interface AthenaInnerException extends Serializable {
 	Logger log = LoggerFactory.getLogger(AthenaInnerException.class);
 	ConcurrentMap<String, String> EXCEPTION_CACHE = new ConcurrentHashMap<>(8);
-	I18nService I18N_SERVICE = SpringContextUtil.getBean(I18nService.class);
 
 	/**
 	 * 参数
@@ -46,6 +45,7 @@ public interface AthenaInnerException extends Serializable {
 			return message;
 		}
 		try {
+			I18nService I18N_SERVICE = SpringContextUtil.getBean(I18nService.class);
 			message = I18N_SERVICE.get(getMessage(), this.getArgs(), getMessage());
 			EXCEPTION_CACHE.put(key, message);
 			return message;

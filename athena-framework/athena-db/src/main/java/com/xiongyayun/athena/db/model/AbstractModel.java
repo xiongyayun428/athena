@@ -27,14 +27,14 @@ public abstract class AbstractModel implements Model {
 	@ApiModelProperty("创建时间")
 	@TableField("create_time")
 	private Date createTime;
-	/** 最后修改人，在这个实体被update/delete的时候，会设置值 */
-	@ApiModelProperty("最后修改人")
+	/** 最后更新用户，在这个实体被update/delete的时候，会设置值 */
+	@ApiModelProperty("最后更新用户")
 	@TableField("update_by")
-	private Long updateBy;
-	/** 最后修改时间，在这个实体被update/delete的时候，会设置值 */
-	@ApiModelProperty("最后修改时间")
+	private Long lastUpdateBy;
+	/** 最后更新时间，在这个实体被update/delete的时候，会设置值 */
+	@ApiModelProperty("最后更新时间")
 	@TableField("update_time")
-	private Date updateTime;
+	private Date lastUpdateTime;
 
 	/**
 	 * 创建人
@@ -48,8 +48,9 @@ public abstract class AbstractModel implements Model {
 	 * 创建人
 	 * @param createBy	创建人ID
 	 */
-	public void setCreateBy(Long createBy) {
+	public AbstractModel setCreateBy(Long createBy) {
 		this.createBy = createBy;
+		return this;
 	}
 
 	/**
@@ -64,39 +65,42 @@ public abstract class AbstractModel implements Model {
 	 * 创建时间
 	 * @param createTime	创建时间
 	 */
-	public void setCreateTime(Date createTime) {
+	public AbstractModel setCreateTime(Date createTime) {
 		this.createTime = createTime;
+		return this;
 	}
 
 	/**
-	 * 最后修改人
-	 * @return	最后修改人ID
+	 * 最后更新用户
+	 * @return	最后更新用户
 	 */
-	public Long getUpdateBy() {
-		return updateBy;
+	public Long getLastUpdateBy() {
+		return lastUpdateBy;
 	}
 
 	/**
-	 * 最后修改人
-	 * @param updateBy	最后修改人ID
+	 * 最后更新用户
+	 * @param lastUpdateBy	最后更新用户
 	 */
-	public void setUpdateBy(Long updateBy) {
-		this.updateBy = updateBy;
+	public AbstractModel setLastUpdateBy(Long lastUpdateBy) {
+		this.lastUpdateBy = lastUpdateBy;
+		return this;
 	}
 
 	/**
-	 * 最后修改时间
-	 * @return	最后修改时间
+	 * 最后更新时间
+	 * @return	最后更新时间
 	 */
-	public Date getUpdateTime() {
-		return updateTime;
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
 	}
 
 	/**
-	 * 最后修改时间
-	 * @param updateTime	最后修改时间
+	 * 最后更新时间
+	 * @param lastUpdateTime	最后更新时间
 	 */
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public AbstractModel setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+		return this;
 	}
 }
