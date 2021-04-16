@@ -15,17 +15,16 @@
 
     <properties>
 		<main.basedir>${basedir}/../../..</main.basedir>
-        <spring-boot.version>2.4.4</spring-boot.version>
-<!--        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>-->
+        <spring-boot.version>2.4.5</spring-boot.version>
 		<spring-boot-admin.version>2.4.0</spring-boot-admin.version>
 		<druid.version>1.2.5</druid.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
         <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
 
-        <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
+        <spring-security-oauth2.version>2.5.1.RELEASE</spring-security-oauth2.version>
         <java-jwt.version>3.11.0</java-jwt.version>
-        <hutool-all.version>5.6.1</hutool-all.version>
+        <hutool-all.version>5.6.3</hutool-all.version>
         <mybatis-plus-boot.version>3.4.2</mybatis-plus-boot.version>
         <mybatis-spring-boot.version>2.1.4</mybatis-spring-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>

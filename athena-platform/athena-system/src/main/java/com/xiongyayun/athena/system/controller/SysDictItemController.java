@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * SysDictItemController
+ * 系统数据字典项
  *
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/3/29

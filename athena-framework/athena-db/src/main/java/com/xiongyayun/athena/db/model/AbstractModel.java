@@ -22,25 +22,25 @@ public abstract class AbstractModel implements Model {
 	/** 创建人，在这个实体被insert的时候，会设置值 */
 	@ApiModelProperty("创建人")
 	@TableField("create_by")
-	private Long createBy;
+	private String createBy;
 	/** 创建时间，在这个实体被insert的时候，会设置值 */
 	@ApiModelProperty("创建时间")
 	@TableField("create_time")
 	private Date createTime;
 	/** 最后更新用户，在这个实体被update/delete的时候，会设置值 */
 	@ApiModelProperty("最后更新用户")
-	@TableField("update_by")
-	private Long lastUpdateBy;
+	@TableField("last_update_by")
+	private String lastUpdateBy;
 	/** 最后更新时间，在这个实体被update/delete的时候，会设置值 */
 	@ApiModelProperty("最后更新时间")
-	@TableField("update_time")
+	@TableField("last_update_time")
 	private Date lastUpdateTime;
 
 	/**
 	 * 创建人
 	 * @return	创建人ID
 	 */
-	public Long getCreateBy() {
+	public String getCreateBy() {
 		return createBy;
 	}
 
@@ -48,7 +48,7 @@ public abstract class AbstractModel implements Model {
 	 * 创建人
 	 * @param createBy	创建人ID
 	 */
-	public AbstractModel setCreateBy(Long createBy) {
+	public AbstractModel setCreateBy(String createBy) {
 		this.createBy = createBy;
 		return this;
 	}
@@ -74,7 +74,7 @@ public abstract class AbstractModel implements Model {
 	 * 最后更新用户
 	 * @return	最后更新用户
 	 */
-	public Long getLastUpdateBy() {
+	public String getLastUpdateBy() {
 		return lastUpdateBy;
 	}
 
@@ -82,7 +82,7 @@ public abstract class AbstractModel implements Model {
 	 * 最后更新用户
 	 * @param lastUpdateBy	最后更新用户
 	 */
-	public AbstractModel setLastUpdateBy(Long lastUpdateBy) {
+	public AbstractModel setLastUpdateBy(String lastUpdateBy) {
 		this.lastUpdateBy = lastUpdateBy;
 		return this;
 	}

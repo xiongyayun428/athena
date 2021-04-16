@@ -1,30 +1,27 @@
-package com.xiongyayun.athena.system.dto;
+package com.xiongyayun.athena.system.vo.user;
 
+import com.xiongyayun.athena.system.vo.dict.Grpup;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * UserDto
+ * SysUserAddVO
  *
- * @author Yayun.Xiong
- * @date 2020/11/28
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2021/4/15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class SysUserDTO implements Serializable {
+public class SysUserAddVO implements Serializable {
 	@NotBlank(message = "用户名不能为空")
-	@Size(min = 6, max = 32)
 	private String username;
 	@NotBlank(message = "密码不能为空")
-	@Size(min = 6, max = 64)
 	private String password;
 	private String realname;
 	private String nickname;
-	private String lastVisitIp;
 }

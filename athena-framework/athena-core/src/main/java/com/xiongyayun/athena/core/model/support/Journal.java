@@ -43,7 +43,7 @@ public class Journal {
     /**
      * 请求体
      */
-    private String requestBody;
+    private byte[] requestBody;
     /**
      * 响应体
      */

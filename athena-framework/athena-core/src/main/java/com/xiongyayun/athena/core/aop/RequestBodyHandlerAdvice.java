@@ -69,9 +69,17 @@ public class RequestBodyHandlerAdvice  implements RequestBodyAdvice {
 		}
 		HttpServletRequest request = servletRequestAttributes.getRequest();
 		try {
-			log.info(">>> [{}]: {}.{}({})", request.getServletPath(), method.getDeclaringClass().getName(), method.getName(), objectMapper.writeValueAsString(body));
+			if (log.isDebugEnabled()) {
+				log.debug(">>> [{}]: {}.{}({})", request.getServletPath(), method.getDeclaringClass().getName(), method.getName(), objectMapper.writeValueAsString(body));
+			} else {
+				log.info(">>> [{}]: {}", request.getServletPath(), objectMapper.writeValueAsString(body));
+			}
 		} catch (JsonProcessingException e) {
-			log.info(">>> [{}]: {}.{}:{}", request.getServletPath(), method.getDeclaringClass().getName(), method.getName(), body);
+			if (log.isDebugEnabled()) {
+				log.debug(">>> [{}]: {}.{}({})", request.getServletPath(), method.getDeclaringClass().getName(), method.getName(), body);
+			} else {
+				log.info(">>> [{}]: {}", request.getServletPath(), body);
+			}
 			log.error(e.getMessage(), e);
 		}
         return body;

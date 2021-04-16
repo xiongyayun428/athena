@@ -1,10 +1,15 @@
 package com.xiongyayun.athena.system.controller;
 
 import com.xiongyayun.athena.core.annotation.Log;
+import com.xiongyayun.athena.core.utils.SystemUtil;
+import com.xiongyayun.athena.system.dto.SysUserDTO;
+import com.xiongyayun.athena.system.model.SysDict;
 import com.xiongyayun.athena.system.model.SysUser;
 import com.xiongyayun.athena.system.service.SysUserService;
 import com.xiongyayun.athena.system.vo.UserVO;
+import com.xiongyayun.athena.system.vo.user.SysUserAddVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -12,9 +17,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * User
+ * 系统用户
  *
  * @author Yayun.Xiong
  * @date 2019-03-03 16:29
@@ -30,26 +36,25 @@ public class SysUserController {
 
 	@Log("创建用户")
 	@PostMapping("create")
-	public Long create(@RequestBody UserVO vo) {
+	public boolean create(@Validated @RequestBody SysUserAddVO vo, HttpServletRequest request) {
 		// TODO vo校验
-		SysUser user = new SysUser();
-		BeanUtils.copyProperties(vo, user);
-		this.sysUserService.save(user);
-		return user.getUserId();
+		SysUserDTO dto = new SysUserDTO();
+		BeanUtils.copyProperties(vo, dto);
+		dto.setLastVisitIp(SystemUtil.getClientIP(request));
+		return this.sysUserService.create(dto);
 	}
 
 	@Log("删除用户")
-	@GetMapping("delete")
-	public void delete(@RequestParam("userid") Long userId) {
-		this.sysUserService.removeById(userId);
+	@DeleteMapping("/delete/{userid}")
+	public boolean delete(@ApiParam("主键ID") @PathVariable("userid") String userid) {
+		return this.sysUserService.removeById(userid);
 	}
 
 	@Log("获取用户详情")
 	@GetMapping("get")
-	public void get(@RequestParam("userid") Long userId) {
-		this.sysUserService.getById(userId);
+	public SysUser get(@ApiParam("主键ID") @RequestParam("userid") String userId) {
+		return this.sysUserService.getById(userId);
 	}
-
 
 	@Log("更新用户详情")
 	@PostMapping("update")

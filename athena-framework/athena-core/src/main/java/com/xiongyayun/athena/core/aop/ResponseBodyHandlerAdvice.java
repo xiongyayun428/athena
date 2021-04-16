@@ -47,7 +47,7 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
 			return body;
         }
 		if (body instanceof ResBody) {
-			print(body, response);
+			print(body, request, response);
 			return body;
 		}
 
@@ -56,16 +56,16 @@ public class ResponseBodyHandlerAdvice implements ResponseBodyAdvice<Object> {
 //			response.getHeaders().setContentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE));
 //			return print(resBody, response);
 //		}
-		print(resBody, response);
+		print(resBody, request, response);
 		return resBody;
     }
 
-    private void print(Object body, ServerHttpResponse response) {
+    private void print(Object body, ServerHttpRequest request, ServerHttpResponse response) {
 		try {
 			response.getHeaders().setContentType(MediaType.parseMediaType(MediaType.APPLICATION_JSON_VALUE));
 			String value = objectMapper.writeValueAsString(body);
 			String truncatedValue = (LIMIT_LENGTH && value.length() > LIMIT ? value.substring(0, LIMIT) + " (truncated)..." : value);
-			log.info("<<< [RESPONSE]: {}", truncatedValue);
+			log.info("<<< [{}]: {}", request.getURI().getPath(), truncatedValue);
 		} catch (JsonProcessingException e) {
 			log.error("<<< 返回String类型错误: " + e.getMessage(), e);
 		}

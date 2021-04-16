@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * MenuController
+ * 系统菜单服务
  *
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/2/26
@@ -25,9 +25,9 @@ import javax.annotation.Resource;
 @Validated
 @CacheConfig(cacheNames = "menuCache")
 @RestController
-@RequestMapping("/menu")
-@Api(tags = {"菜单服务"})
-public class MenuController {
+@RequestMapping("/sys/menu")
+@Api(tags = {"系统菜单服务"})
+public class SysMenuController {
 	@Resource
 	private MenuMapper menuMapper;
 

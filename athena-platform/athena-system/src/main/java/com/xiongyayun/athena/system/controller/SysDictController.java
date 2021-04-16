@@ -36,7 +36,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * DictController
+ * 系统数据字典
  *
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2020/12/24
@@ -79,7 +79,7 @@ public class SysDictController {
 	@Log("获取全部字典数据")
 	@ApiOperation("获取全部字典数据")
 	@Cacheable(cacheNames = CacheConstant.SYS_DICT_CACHE)
-	@GetMapping("/queryAllDictItems")
+	@RequestMapping("/queryAllDictItems")
 	public Map<String, List<SysDictItemVO>> queryAllDictItems() {
 		return sysDictService.queryAllDictItems();
 	}

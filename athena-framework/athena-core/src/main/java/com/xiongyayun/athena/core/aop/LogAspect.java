@@ -24,6 +24,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,20 +86,17 @@ public class LogAspect {
 		START_TIME_THREAD_LOCAL.set(System.currentTimeMillis());
 		String uuid = IdUtil.simpleUUID();
 		UUID_THREAD_LOCAL.set(uuid);
-		Map<String, Object> args = new HashMap<>(parameterNames.length);
-		if (parameterNames.length > 0) {
-			for (int i = 0; i < parameterNames.length; i++) {
-				args.put(parameterNames[i], parameterValues[i]);
-			}
-		}
-		String params;
-		try {
-			// TODO 这里还存在问题
-			params = objectMapper.writeValueAsString(args);
-		} catch (JsonProcessingException e) {
-			params = Arrays.toString(point.getArgs());
-			LOG.error("序列化请求参数异常", e);
-		}
+//		Map<String, Object> args = new HashMap<>(parameterNames.length);
+//		if (parameterNames.length > 0) {
+//			for (int i = 0; i < parameterNames.length; i++) {
+//				try {
+//					args.put(parameterNames[i], parameterValues[i]);
+//				} catch (JsonProcessingException e) {
+//					args.put(parameterNames[i], Arrays.toString(point.getArgs()));
+//					LOG.error("序列化请求参数异常: " + parameterNames[i], e);
+//				}
+//			}
+//		}
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		Journal journal = new Journal();
 		if (attributes != null) {
@@ -113,7 +111,7 @@ public class LogAspect {
 			journal.setUrl(request.getRequestURL().toString() + queryClause);
 			journal.setIp(SystemUtil.getClientIP(request));
 //			LOGGER_THREAD_LOCAL.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
-			journal.setRequestBody(params);
+//			journal.setRequestBody(params);
 //        LOGGER_THREAD_LOCAL.get().setLogType(AppConstants.LOG_TYPE_HTTP);
 //			String params = request.getParameterMap().entrySet().stream()
 //					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
@@ -125,7 +123,7 @@ public class LogAspect {
 		if (annotation.save()) {
 
 		}
-		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), uuid, params);
+		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), uuid, Arrays.toString(point.getArgs()));
     }
 
     /**

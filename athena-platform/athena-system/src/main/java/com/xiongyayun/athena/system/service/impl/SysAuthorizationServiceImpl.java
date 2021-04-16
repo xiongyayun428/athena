@@ -6,6 +6,7 @@ import com.xiongyayun.athena.system.model.SysPasswordPolicy;
 import com.xiongyayun.athena.system.service.SysAuthorizationService;
 import com.xiongyayun.athena.system.service.SysDictService;
 import com.xiongyayun.athena.system.service.SysUserService;
+import com.xiongyayun.athena.system.vo.SysLoginVO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -26,6 +27,11 @@ public class SysAuthorizationServiceImpl implements SysAuthorizationService {
 
 	@Resource
 	private SysPasswordPolicyMapper sysPasswordPolicyMapper;
+
+	@Override
+	public void login(SysLoginVO vo) {
+
+	}
 
 	@Override
 	public boolean passwordValid(String password, String policyType) {

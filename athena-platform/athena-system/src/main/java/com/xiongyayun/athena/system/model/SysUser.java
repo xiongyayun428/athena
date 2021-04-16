@@ -31,7 +31,7 @@ public class SysUser extends BaseModel {
 	 * 用户主键ID
 	 */
 	@TableId(value = "user_id", type = IdType.ASSIGN_ID)
-	private Long userId;
+	private String userId;
 
 	/**
 	 * 用户名
@@ -80,13 +80,13 @@ public class SysUser extends BaseModel {
 	private Integer status;
 
 	/**
-	 * 最近登录的IP地址
+	 * 最近访问的IP地址
 	 */
 	@TableField(value = "last_visit_ip")
 	private String lastVisitIp;
 
 	/**
-	 * 最近登录的时间
+	 * 最近访问的时间
 	 */
 	@TableField(value = "last_visit_date")
 	private Date lastVisitDate;
