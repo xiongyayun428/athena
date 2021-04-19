@@ -3,11 +3,9 @@ package com.xiongyayun.athena.system.controller;
 import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import com.xiongyayun.athena.system.dto.SysUserDTO;
-import com.xiongyayun.athena.system.model.SysDict;
 import com.xiongyayun.athena.system.model.SysUser;
 import com.xiongyayun.athena.system.service.SysUserService;
-import com.xiongyayun.athena.system.vo.UserVO;
-import com.xiongyayun.athena.system.vo.user.SysUserAddVO;
+import com.xiongyayun.athena.system.vo.SysUserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -36,8 +34,7 @@ public class SysUserController {
 
 	@Log("创建用户")
 	@PostMapping("create")
-	public boolean create(@Validated @RequestBody SysUserAddVO vo, HttpServletRequest request) {
-		// TODO vo校验
+	public boolean create(@Validated @RequestBody SysUserVO vo, HttpServletRequest request) {
 		SysUserDTO dto = new SysUserDTO();
 		BeanUtils.copyProperties(vo, dto);
 		dto.setLastVisitIp(SystemUtil.getClientIP(request));
@@ -58,11 +55,11 @@ public class SysUserController {
 
 	@Log("更新用户详情")
 	@PostMapping("update")
-	public void update(@RequestBody UserVO vo) {
-		// TODO vo校验
-		SysUser user = new SysUser();
-		BeanUtils.copyProperties(vo, user);
-		this.sysUserService.updateById(user);
+	public boolean update(@Validated @RequestBody SysUserVO vo, HttpServletRequest request) {
+		SysUserDTO dto = new SysUserDTO();
+		BeanUtils.copyProperties(vo, dto);
+		dto.setLastVisitIp(SystemUtil.getClientIP(request));
+		return this.sysUserService.update(dto);
 	}
 
 //	@Autowired

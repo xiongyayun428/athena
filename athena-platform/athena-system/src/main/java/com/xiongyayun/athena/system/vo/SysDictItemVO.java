@@ -1,9 +1,11 @@
-package com.xiongyayun.athena.system.vo.dict;
+package com.xiongyayun.athena.system.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * SysDictVO
@@ -14,7 +16,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @ApiModel("数据字典项")
-public class SysDictItemVO {
+public class SysDictItemVO implements Serializable {
 	@ApiModelProperty("字典项显示值")
 	private String label;
 	@ApiModelProperty("字典项值")

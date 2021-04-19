@@ -1,10 +1,15 @@
 package com.xiongyayun.athena.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiongyayun.athena.core.ValidationGroup;
+import com.xiongyayun.athena.system.dto.SysDictDTO;
+import com.xiongyayun.athena.system.dto.SysUserDTO;
 import com.xiongyayun.athena.system.model.SysDict;
 import com.xiongyayun.athena.system.model.SysDictItem;
-import com.xiongyayun.athena.system.vo.dict.SysDictItemVO;
+import com.xiongyayun.athena.system.vo.SysDictItemVO;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +19,7 @@ import java.util.Map;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/3/29
  */
+@Validated
 public interface SysDictService extends IService<SysDict> {
 
 	/**
@@ -43,4 +49,20 @@ public interface SysDictService extends IService<SysDict> {
 	 * @return
 	 */
 	boolean save(SysDict sysDict, List<SysDictItem> sysDictItems);
+
+	/**
+	 * 创建数据字典
+	 * @param dto
+	 * @return
+	 */
+	@Validated({ValidationGroup.Create.class})
+	boolean create(@Valid SysDictDTO dto);
+
+	/**
+	 * 更新数据字典
+	 * @param dto
+	 * @return
+	 */
+	@Validated({ValidationGroup.Update.class})
+	boolean update(@Valid SysDictDTO dto);
 }

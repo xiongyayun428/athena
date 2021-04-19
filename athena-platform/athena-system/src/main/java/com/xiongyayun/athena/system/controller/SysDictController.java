@@ -3,16 +3,19 @@ package com.xiongyayun.athena.system.controller;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.xiongyayun.athena.core.ValidationGroup;
 import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.pagination.IPage;
 import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
 import com.xiongyayun.athena.core.utils.ClassUtil;
 import com.xiongyayun.athena.system.constant.CacheConstant;
+import com.xiongyayun.athena.system.dto.SysDictDTO;
 import com.xiongyayun.athena.system.mapper.SysDictMapper;
 import com.xiongyayun.athena.system.model.SysDict;
 import com.xiongyayun.athena.system.service.SysDictService;
-import com.xiongyayun.athena.system.vo.dict.*;
+import com.xiongyayun.athena.system.vo.SysDictItemVO;
+import com.xiongyayun.athena.system.vo.SysDictVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -59,7 +62,7 @@ public class SysDictController {
 	@Log("数据字典分页查询")
 	@ApiOperation("数据字典分页查询")
 	@PostMapping("/selectPage")
-	public IPage<SysDict> selectPage(@RequestBody(required = false) SysDictQueryVO vo) {
+	public IPage<SysDict> selectPage(@RequestBody(required = false) SysDictVO vo) {
 		SysDict sysDict = new SysDict();
 		BeanUtils.copyProperties(vo, sysDict);
 		Page<SysDict> page = new Page<>(vo.getPageIndex(), vo.getPageSize());
@@ -102,27 +105,17 @@ public class SysDictController {
 	@Log("数据字典新增")
 	@ApiOperation(value = "数据字典新增", notes = "系统内置数据字典", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	// TODO 添加 consumes produces swagger界面打不开，会报错
-//	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PostMapping("/add")
-	public SysDict add(@RequestBody @Validated({Grpup.Add.class}) DictAddVO vo) {
-		SysDict sysDict = new SysDict();
-		SysDict exist = this.sysDictService.queryDictByCode(vo.getDictCode());
-		if (exist != null) {
-			throw new AthenaRuntimeException("数据字典已存在!");
-		}
-		BeanUtils.copyProperties(vo, sysDict);
-		sysDict.setId(null);
-		if (dictMapper.insert(sysDict) > 0) {
-			return this.sysDictService.queryDictByCode(sysDict.getDictCode());
-		}
-		return null;
+//	@PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("/create")
+	public boolean create(@RequestBody @Validated({ValidationGroup.Create.class}) SysDictDTO dto) {
+		return this.sysDictService.create(dto);
 	}
 
 	@Log("数据字典修改")
 	@CacheEvict(cacheNames = CacheConstant.SYS_DICT_CACHE, allEntries = true)
 	@ApiOperation(value = "数据字典修改", notes = "系统内置数据字典", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping("/update")
-	public int update(@RequestBody @Validated({Grpup.Update.class}) DictUpdateVO vo) {
+	public int update(@RequestBody @Validated({ValidationGroup.Update.class}) SysDictDTO vo) {
 		SysDict sysDict = new SysDict();
 		SysDict exist = this.sysDictService.queryDictByCode(vo.getDictCode());
 		if (exist == null) {

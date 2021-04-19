@@ -1,12 +1,12 @@
 package com.xiongyayun.athena.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiongyayun.athena.core.pagination.IPage;
-import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
+import com.xiongyayun.athena.core.ValidationGroup;
 import com.xiongyayun.athena.system.dto.SysUserDTO;
 import com.xiongyayun.athena.system.model.SysUser;
+import org.springframework.validation.annotation.Validated;
 
-import java.io.Serializable;
+import javax.validation.Valid;
 
 /**
  * 系统用户服务
@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @author Yayun.Xiong
  * @date 2019-05-19
  */
+@Validated
 public interface SysUserService extends IService<SysUser> {
 
 	/**
@@ -21,5 +22,14 @@ public interface SysUserService extends IService<SysUser> {
 	 * @param dto
 	 * @return
 	 */
-	boolean create(SysUserDTO dto);
+	@Validated({ValidationGroup.Create.class})
+	boolean create(@Valid SysUserDTO dto);
+
+	/**
+	 * 更新用户
+	 * @param dto
+	 * @return
+	 */
+	@Validated({ValidationGroup.Update.class})
+	boolean update(@Valid SysUserDTO dto);
 }

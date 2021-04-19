@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.system.constant.CacheConstant;
+import com.xiongyayun.athena.system.dto.SysDictDTO;
+import com.xiongyayun.athena.system.dto.SysUserDTO;
 import com.xiongyayun.athena.system.mapper.SysDictItemMapper;
 import com.xiongyayun.athena.system.mapper.SysDictMapper;
 import com.xiongyayun.athena.system.model.SysDict;
 import com.xiongyayun.athena.system.model.SysDictItem;
+import com.xiongyayun.athena.system.model.SysUser;
 import com.xiongyayun.athena.system.service.SysDictService;
-import com.xiongyayun.athena.system.vo.dict.SysDictItemVO;
+import com.xiongyayun.athena.system.vo.SysDictItemVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,5 +104,33 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 			return false;
 		}
 		return flag;
+	}
+
+	@Override
+	public boolean updateById(SysDict entity) {
+		SysDict existEntity = this.getOne(Wrappers.<SysDict>lambdaQuery().eq(SysDict::getId, entity.getId()));
+		if (existEntity == null) {
+			throw new AthenaRuntimeException("数据字典不存在");
+		}
+		return super.updateById(entity);
+	}
+
+	@Override
+	public boolean create(SysDictDTO dto) {
+		SysDict sysDict = new SysDict();
+		SysDict exist = this.queryDictByCode(dto.getDictCode());
+		if (exist != null) {
+			throw new AthenaRuntimeException("数据字典已存在!");
+		}
+		BeanUtils.copyProperties(dto, sysDict);
+		sysDict.setId(null);
+		return this.save(sysDict);
+	}
+
+	@Override
+	public boolean update(SysDictDTO dto) {
+		SysDict sysDict = new SysDict();
+		BeanUtils.copyProperties(dto, sysDict);
+		return this.updateById(sysDict);
 	}
 }

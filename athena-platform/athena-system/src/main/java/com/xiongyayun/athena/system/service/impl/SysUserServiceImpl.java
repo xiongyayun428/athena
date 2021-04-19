@@ -18,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
  * @date 2019-05-19
  */
 @Service
-@Validated
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
 	@Override
@@ -27,14 +26,29 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		if (existEntity != null) {
 			throw new AthenaRuntimeException("用户名已存在");
 		}
-		super.save(user);
-		return true;
+		return super.save(user);
 	}
 
 	@Override
-	public boolean create(@Validated SysUserDTO dto) {
+	public boolean updateById(SysUser entity) {
+		SysUser existEntity = this.getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserId, entity.getUserId()));
+		if (existEntity == null) {
+			throw new AthenaRuntimeException("用户不存在");
+		}
+		return super.updateById(entity);
+	}
+
+	@Override
+	public boolean create(SysUserDTO dto) {
 		SysUser user = new SysUser();
 		BeanUtils.copyProperties(dto, user);
 		return this.save(user);
+	}
+
+	@Override
+	public boolean update(SysUserDTO dto) {
+		SysUser user = new SysUser();
+		BeanUtils.copyProperties(dto, user);
+		return this.updateById(user);
 	}
 }

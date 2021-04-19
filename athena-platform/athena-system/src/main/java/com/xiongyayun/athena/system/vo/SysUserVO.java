@@ -1,6 +1,7 @@
-package com.xiongyayun.athena.system.vo.user;
+package com.xiongyayun.athena.system.vo;
 
-import com.xiongyayun.athena.system.vo.dict.Grpup;
+import com.xiongyayun.athena.core.ValidationGroup;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -17,7 +18,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class SysUserAddVO implements Serializable {
+@ApiModel("系统用户")
+public class SysUserVO implements Serializable {
+	@NotBlank(groups = {ValidationGroup.Update.class}, message = "用户主键不能为空")
+	private String userId;
 	@NotBlank(message = "用户名不能为空")
 	private String username;
 	@NotBlank(message = "密码不能为空")
