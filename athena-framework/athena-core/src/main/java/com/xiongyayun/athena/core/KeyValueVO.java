@@ -26,11 +26,13 @@ public class KeyValueVO implements Serializable {
 	}
 
 	public KeyValueVO setValue(String value) {
-		switch (value) {
+		switch (value.toLowerCase()) {
 			case "ascend":
+			case "asc":
 				this.value = "ASC";
 				break;
 			case "descend":
+			case "desc":
 				this.value = "DESC";
 				break;
 			default:

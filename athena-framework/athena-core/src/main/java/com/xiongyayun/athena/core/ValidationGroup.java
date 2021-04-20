@@ -1,5 +1,7 @@
 package com.xiongyayun.athena.core;
 
+import javax.validation.groups.Default;
+
 /**
  * ValidationGroup
  *
@@ -10,10 +12,10 @@ public interface ValidationGroup {
 	/**
 	 * validation分组校验使用，创建的时候需要校验
 	 */
-	interface Create {}
+	interface Create extends Default {}
 
 	/**
 	 * validation分组校验使用，更新的时候需要校验
 	 */
-	interface Update {}
+	interface Update extends Default {}
 }

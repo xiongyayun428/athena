@@ -1,5 +1,6 @@
 package com.xiongyayun.athena.db.model;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.xiongyayun.athena.core.model.Model;
 import io.swagger.annotations.ApiModel;
@@ -21,19 +22,19 @@ public abstract class AbstractModel implements Model {
 	private static final long serialVersionUID = 6041192812226723245L;
 	/** 创建人，在这个实体被insert的时候，会设置值 */
 	@ApiModelProperty("创建人")
-	@TableField("create_by")
+//	@TableField(value = "create_by", fill = FieldFill.INSERT)
 	private String createBy;
 	/** 创建时间，在这个实体被insert的时候，会设置值 */
 	@ApiModelProperty("创建时间")
-	@TableField("create_time")
+//	@TableField(value = "create_time", fill = FieldFill.INSERT)
 	private Date createTime;
 	/** 最后更新用户，在这个实体被update/delete的时候，会设置值 */
 	@ApiModelProperty("最后更新用户")
-	@TableField("last_update_by")
+//	@TableField(value = "last_update_by", fill = FieldFill.UPDATE)
 	private String lastUpdateBy;
 	/** 最后更新时间，在这个实体被update/delete的时候，会设置值 */
 	@ApiModelProperty("最后更新时间")
-	@TableField("last_update_time")
+//	@TableField(value = "last_update_time", fill = FieldFill.UPDATE)
 	private Date lastUpdateTime;
 
 	/**
