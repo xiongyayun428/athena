@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName("`sys_dict_item`")
+@TableName("sys_dict_item")
 public class SysDictItem extends BaseModel {
 	@TableId(type = IdType.ASSIGN_ID)
 	@ApiModelProperty("主键ID")

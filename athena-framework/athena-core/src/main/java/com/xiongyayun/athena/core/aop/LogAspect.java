@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.xiongyayun.athena.core.annotation.Log;
+import com.xiongyayun.athena.core.context.RequestNoContext;
 import com.xiongyayun.athena.core.model.support.Journal;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import org.aspectj.lang.JoinPoint;
@@ -42,7 +43,6 @@ public class LogAspect {
     private static final int LIMIT = 1024;
 
     private static final ThreadLocal<Long> START_TIME_THREAD_LOCAL = new ThreadLocal<>();
-    private static final ThreadLocal<String> UUID_THREAD_LOCAL = new ThreadLocal<>();
     private static final ThreadLocal<Journal> LOGGER_THREAD_LOCAL = new ThreadLocal<>();
 
 
@@ -84,8 +84,7 @@ public class LogAspect {
         	return;
 		}
 		START_TIME_THREAD_LOCAL.set(System.currentTimeMillis());
-		String uuid = IdUtil.simpleUUID();
-		UUID_THREAD_LOCAL.set(uuid);
+
 //		Map<String, Object> args = new HashMap<>(parameterNames.length);
 //		if (parameterNames.length > 0) {
 //			for (int i = 0; i < parameterNames.length; i++) {
@@ -123,7 +122,7 @@ public class LogAspect {
 		if (annotation.save()) {
 
 		}
-		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), uuid, Arrays.toString(point.getArgs()));
+		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), RequestNoContext.get(), Arrays.toString(point.getArgs()));
     }
 
     /**
@@ -133,7 +132,7 @@ public class LogAspect {
     @AfterReturning(returning = "resultValue", pointcut = "doAspect()")
     public void afterReturning(JoinPoint point, Object resultValue) {
 		long spendTime = System.currentTimeMillis() - START_TIME_THREAD_LOCAL.get();
-		String uuid = UUID_THREAD_LOCAL.get();
+		String uuid = RequestNoContext.get();
 		MethodSignature signature = (MethodSignature) point.getSignature();
 		Method method = signature.getMethod();
 		Log annotation = method.getAnnotation(Log.class);
@@ -195,7 +194,6 @@ public class LogAspect {
 
     private void clear() {
 		LOGGER_THREAD_LOCAL.remove();
-		UUID_THREAD_LOCAL.remove();
 		START_TIME_THREAD_LOCAL.remove();
 	}
 

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import com.xiongyayun.athena.system.core.constant.CacheConstant;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictDTO;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictItemDTO;
@@ -22,9 +23,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -58,8 +57,19 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	}
 
 	@Override
-	public List<String> queryDictItems(String code) {
-		return queryDictItemsByCode(code).stream().map(item -> item.getValue()).collect(Collectors.toList());
+	public List<String> queryDictItems(String... code) {
+		SysDictServiceImpl sysDictService = SpringContextUtil.getBean(SysDictServiceImpl.class);
+		return Arrays.stream(code)
+				.filter(value -> StringUtils.hasLength(value))
+				// 因为@Cacheable 是使用AOP 代理实现的，通过创建内部类来代理缓存方法，这样就会导致类内部的方法调用类内部的缓存方法不会走代理，不会走代理，就不能正常创建缓存，所以每次都需要去调用数据库。
+				// @Cacheable 方法不能进行内部调用，否则缓存无法创建
+//				.map(this::queryDictItemsByCode)
+				.map(sysDictService::queryDictItemsByCode)
+				.filter(value -> !ObjectUtils.isEmpty(value))
+				.map(value -> value.stream().map(item -> item.getValue()).collect(Collectors.toList()))
+				.flatMap(Collection::stream)
+				.collect(Collectors.toList())
+				;
 	}
 
 	@Override
@@ -85,7 +95,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 			}).collect(Collectors.toList());
 			res.put(dict.getDictCode(), dictModelList);
 		}
-		log.debug("-------加载所有系统字典-----" + res.toString());
+		log.debug("-------加载所有系统字典-----");
 		return res;
 	}
 

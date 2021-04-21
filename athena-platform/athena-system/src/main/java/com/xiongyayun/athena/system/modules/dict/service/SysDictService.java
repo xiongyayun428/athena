@@ -2,6 +2,7 @@ package com.xiongyayun.athena.system.modules.dict.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiongyayun.athena.core.ValidationGroup;
+import com.xiongyayun.athena.core.validation.dict.DictService;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictDTO;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictItemDTO;
 import com.xiongyayun.athena.system.modules.dict.model.SysDict;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @date 2021/3/29
  */
 @Validated
-public interface SysDictService extends IService<SysDict> {
+public interface SysDictService extends IService<SysDict>, DictService {
 
 	/**
 	 * 根据代码查询字典数据
@@ -36,13 +37,6 @@ public interface SysDictService extends IService<SysDict> {
 	 * @return
 	 */
 	List<SysDictItem> queryDictItemsByCode(String code);
-
-	/**
-	 * 根据代码查询字典项数据
-	 * @param code
-	 * @return
-	 */
-	List<String> queryDictItems(String code);
 
 	/**
 	 * 查询所有有效数据字典

@@ -1,5 +1,7 @@
 package com.xiongyayun.athena.core.validation.dict;
 
+import com.xiongyayun.athena.core.validation.date.Date;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
@@ -19,7 +21,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Constraint(validatedBy = DictValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RUNTIME)
+@Repeatable(Dict.List.class)
 public @interface Dict {
 	String message() default "不正确的字典值，请检查数据库中是否录入该字典项";
 
@@ -30,7 +33,7 @@ public @interface Dict {
 	/**
 	 * 字典的类型
 	 */
-	String[] dictCode() default {};
+//	String[] dictCode() default {};
 
 	String[] value();
 

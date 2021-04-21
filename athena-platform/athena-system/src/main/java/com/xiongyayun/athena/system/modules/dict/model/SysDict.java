@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName("`sys_dict`")
+@TableName("sys_dict")
 public class SysDict extends BaseModel {
 	/** 指定主键生成策略使用雪花算法（默认策略）*/
 	@TableId(type = IdType.ASSIGN_ID)

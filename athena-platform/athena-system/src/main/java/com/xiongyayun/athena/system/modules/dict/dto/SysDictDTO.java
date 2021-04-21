@@ -1,7 +1,6 @@
 package com.xiongyayun.athena.system.modules.dict.dto;
 
 import com.xiongyayun.athena.core.ValidationGroup;
-import com.xiongyayun.athena.core.validation.dict.Dict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,7 +34,6 @@ public class SysDictDTO implements Serializable {
 	private String dictCode;
 
 	@ApiModelProperty("数据字典描述")
-	@Dict("status")
 	private String description;
 	@ApiModelProperty("数据字典是否启用？默认启用")
 	private Boolean enabled;
