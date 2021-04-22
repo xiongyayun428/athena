@@ -1,7 +1,5 @@
 package com.xiongyayun.athena.core.validation.dict;
 
-import com.xiongyayun.athena.core.validation.date.Date;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;

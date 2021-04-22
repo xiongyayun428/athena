@@ -30,8 +30,6 @@ public class DictItemVO extends BaseVO {
 	private String description;
 	@ApiModelProperty("数据字典项排序顺序")
 	private Integer sortOrder;
-	@ApiModelProperty("数据字典项语言？默认中文")
-	private String language;
 	@ApiModelProperty("数据字典项是否启用？默认启用")
 	private Boolean enabled;
 	@ApiModelProperty("数据字典项是否允许修改？默认允许")

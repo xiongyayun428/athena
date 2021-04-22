@@ -1,12 +1,19 @@
 package com.xiongyayun.athena.core.validation.dict;
 
 import cn.hutool.extra.spring.SpringUtil;
+import com.xiongyayun.athena.core.constant.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * DictValidator

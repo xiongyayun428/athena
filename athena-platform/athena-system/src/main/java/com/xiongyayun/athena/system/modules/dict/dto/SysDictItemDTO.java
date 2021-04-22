@@ -41,10 +41,6 @@ public class SysDictItemDTO implements Serializable {
 	private Integer sortOrder;
 	@ApiModelProperty("是否启用？")
 	private Boolean enabled;
-	@ApiModelProperty("语言")
-	@Dict(value = "language", message = "语言不正确")
-	@DateTimeFormat
-	private String language;
 	@ApiModelProperty("是否允许修改")
 	private Boolean allowUpdate;
 	@ApiModelProperty("是否允许删除")

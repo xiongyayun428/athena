@@ -64,7 +64,7 @@ public class SysUserController {
 	@Log("删除用户")
 	@DeleteMapping("/delete/{userid}")
 	public boolean delete(@ApiParam("主键ID") @PathVariable("userid") String userid) {
-		return this.sysUserService.removeById(userid);
+		return this.sysUserService.delete(userid);
 	}
 
 	@Log("获取用户详情")

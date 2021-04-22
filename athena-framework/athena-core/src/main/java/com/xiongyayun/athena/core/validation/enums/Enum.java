@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.annotation.validator;
+package com.xiongyayun.athena.core.validation.enums;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

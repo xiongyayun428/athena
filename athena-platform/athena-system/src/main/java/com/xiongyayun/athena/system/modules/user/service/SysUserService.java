@@ -32,4 +32,11 @@ public interface SysUserService extends IService<SysUser> {
 	 */
 	@Validated({ValidationGroup.Update.class})
 	boolean update(@Valid SysUserDTO dto);
+
+	/**
+	 * 删除用户
+	 * @param userid
+	 * @return
+	 */
+	boolean delete(String userid);
 }

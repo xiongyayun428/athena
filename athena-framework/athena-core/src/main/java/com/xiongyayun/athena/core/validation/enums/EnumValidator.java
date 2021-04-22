@@ -1,4 +1,6 @@
-package com.xiongyayun.athena.core.annotation.validator;
+package com.xiongyayun.athena.core.validation.enums;
+
+import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -11,7 +13,6 @@ import java.lang.reflect.Method;
  * @date 2019-06-25
  */
 public class EnumValidator implements ConstraintValidator<Enum, Object> {
-
 	private Enum annotation;
 
 	@Override
@@ -34,7 +35,7 @@ public class EnumValidator implements ConstraintValidator<Enum, Object> {
 				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new AthenaRuntimeException(e.getMessage(), e);
 		}
 		return false;
 	}

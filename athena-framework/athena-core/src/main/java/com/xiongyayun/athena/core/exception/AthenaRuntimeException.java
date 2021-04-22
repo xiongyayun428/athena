@@ -1,13 +1,14 @@
 package com.xiongyayun.athena.core.exception;
 
 import com.xiongyayun.athena.core.ErrorConstant;
+import com.xiongyayun.athena.core.exception.enums.AthenaExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.lang.Nullable;
 
 /**
- * AthenaRuntimeException
+ * 运行时异常
  *
  * @author 熊亚运
  * @date 2019-05-21
@@ -62,6 +63,28 @@ public class AthenaRuntimeException extends NestedRuntimeException implements At
 	public AthenaRuntimeException(@Nullable String message, @Nullable String code, @Nullable Throwable cause) {
 		super(message, cause);
 		this.code = code;
+	}
+
+	public AthenaRuntimeException(@Nullable AthenaExceptionEnum athenaExceptionEnum) {
+		super(athenaExceptionEnum.getMessage());
+		this.code = athenaExceptionEnum.getCode();
+	}
+
+	public AthenaRuntimeException(@Nullable AthenaExceptionEnum athenaExceptionEnum, @Nullable Object[] args) {
+		super(athenaExceptionEnum.getMessage());
+		this.code = athenaExceptionEnum.getCode();
+		this.args = args;
+	}
+
+	public AthenaRuntimeException(@Nullable AthenaExceptionEnum athenaExceptionEnum, @Nullable Throwable cause) {
+		super(athenaExceptionEnum.getMessage(), cause);
+		this.code = athenaExceptionEnum.getCode();
+	}
+
+	public AthenaRuntimeException(@Nullable AthenaExceptionEnum athenaExceptionEnum, @Nullable Object[] args, @Nullable Throwable cause) {
+		super(athenaExceptionEnum.getMessage(), cause);
+		this.code = athenaExceptionEnum.getCode();
+		this.args = args;
 	}
 
 }

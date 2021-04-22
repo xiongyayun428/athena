@@ -50,4 +50,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		BeanUtils.copyProperties(dto, user);
 		return this.updateById(user);
 	}
+
+	@Override
+	public boolean delete(String userid) {
+		return this.removeById(userid);
+	}
 }

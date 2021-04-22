@@ -50,10 +50,11 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	public List<SysDictItem> queryDictItemsByCode(String code) {
 		SysDict sysDict = this.queryDictByCode(code);
 		if (ObjectUtils.isEmpty(sysDict)) {
-//			throw new AthenaRuntimeException("数据字典编码不存在!");
 			return null;
 		}
-		return sysDictItemMapper.selectList(Wrappers.<SysDictItem>lambdaQuery().eq(SysDictItem::getDictId, sysDict.getId()));
+		return sysDictItemMapper.selectList(Wrappers.<SysDictItem>lambdaQuery()
+				.eq(SysDictItem::getDictId, sysDict.getId())
+		);
 	}
 
 	@Override
@@ -205,6 +206,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 		}
 		return sysDictItemMapper.selectOne(Wrappers.<SysDictItem>lambdaQuery()
 				.eq(SysDictItem::getDictId, dto.getDictId())
-				.eq(SysDictItem::getValue, dto.getValue()));
+				.eq(SysDictItem::getValue, dto.getValue())
+		);
 	}
 }

@@ -18,4 +18,6 @@ public interface ValidationGroup {
 	 * validation分组校验使用，更新的时候需要校验
 	 */
 	interface Update extends Default {}
+
+	interface Delete extends Default {}
 }

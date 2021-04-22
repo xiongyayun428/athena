@@ -11,4 +11,9 @@ public interface CommonConstant {
 	 * 请求号在header中的唯一标识
 	 */
 	String REQUEST_NO_HEADER_NAME = "Request-No";
+
+	/**
+	 * 语言
+	 */
+	String LANGUAGE = "language";
 }
