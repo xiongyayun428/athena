@@ -2,7 +2,7 @@ package com.xiongyayun.athena.system.modules.user.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.system.modules.user.mapper.SysPasswordPolicyMapper;
-import com.xiongyayun.athena.system.modules.user.model.SysPasswordPolicy;
+import com.xiongyayun.athena.system.modules.user.entity.SysPasswordPolicy;
 import com.xiongyayun.athena.system.modules.user.service.SysAuthorizationService;
 import com.xiongyayun.athena.system.modules.dict.service.SysDictService;
 import com.xiongyayun.athena.system.modules.user.service.SysUserService;

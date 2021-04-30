@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.db.aop;
 
-import com.xiongyayun.athena.core.ErrorConstant;
+import com.xiongyayun.athena.core.constant.ErrorConstant;
 import com.xiongyayun.athena.core.aop.ExceptionHandlerAdvice;
 import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.response.ResBody;

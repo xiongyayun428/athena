@@ -6,7 +6,7 @@ package com.xiongyayun.athena.core.constant;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/4/21
  */
-public interface SymbolConstant {
+public interface SymbolConstant extends Constant {
 	String PERIOD = ".";
 
 	String COMMA = ",";

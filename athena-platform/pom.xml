@@ -63,34 +63,28 @@
                 <artifactId>athena-db</artifactId>
 				<version>${project.version}</version>
             </dependency>
+			<dependency>
+				<groupId>com.xiongyayun.framework</groupId>
+				<artifactId>athena-security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
             <dependency>
                 <groupId>com.xiongyayun.framework</groupId>
                 <artifactId>athena-util</artifactId>
 				<version>${project.version}</version>
             </dependency>
 
-			<dependency>
-				<groupId>com.xiongyayun.platform</groupId>
-				<artifactId>athena-user</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>io.springfox</groupId>
-				<artifactId>springfox-boot-starter</artifactId>
-				<version>3.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.xiaoymin</groupId>
-				<artifactId>knife4j-spring-boot-starter</artifactId>
-				<version>3.0.2</version>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.xiongyayun.platform</groupId>-->
+<!--				<artifactId>athena-user</artifactId>-->
+<!--				<version>${project.version}</version>-->
+<!--			</dependency>-->
         </dependencies>
     </dependencyManagement>
 
     <modules>
 <!--        <module>athena-admin</module>-->
-<!--        <module>athena-auth</module>-->
+        <module>athena-auth</module>
 <!--        <module>athena-config-server</module>-->
 <!--        <module>athena-consul-discovery</module>-->
 <!--        <module>athena-core</module>-->
@@ -100,7 +94,7 @@
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
         <module>athena-spring-boot-admin</module>
-        <module>athena-sso</module>
+        <module>athena-oauth</module>
         <module>athena-system</module>
 <!--        <module>athena-user-api</module>-->
 <!--        <module>athena-service</module>-->

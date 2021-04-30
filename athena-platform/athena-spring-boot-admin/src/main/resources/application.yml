@@ -32,14 +32,14 @@ spring:
     admin:
       ui:
         title: "雅典娜应用监控管理"
-        favicon: static/favicon.ico
-        brand: "<img src='static/img/icon-spring-boot-admin.svg'><span>雅典娜应用监控管理</span>"
+        favicon: favicon.ico
+        brand: "<img src='img/icon-spring-boot-admin.svg'><span>雅典娜应用监控管理</span>"
 #      notify:
 #        mail:
 #          from: xiongyayun428@163.com
 #          to: 531158453@qq.com
 #          cc: xiongyayun428@163.com
-#        dingtalk:
+#        dingTalk:
 #          enabled: true
 #          webhook-token: https://oapi.dingtalk.com/robot/send?access_token=5f588ab27b1f7c1f0b2bd82cbe3ee609554141bbf51fad8f133ef2a747945c2f
 logging:

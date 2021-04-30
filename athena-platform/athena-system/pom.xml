@@ -119,6 +119,10 @@
 			<artifactId>athena-db</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.xiongyayun.framework</groupId>
+			<artifactId>athena-security</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-autoconfigure</artifactId>
 		</dependency>
@@ -129,12 +133,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
 		</dependency>
 	</dependencies>
 

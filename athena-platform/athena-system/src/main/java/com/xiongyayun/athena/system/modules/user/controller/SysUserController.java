@@ -3,7 +3,7 @@ package com.xiongyayun.athena.system.modules.user.controller;
 import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import com.xiongyayun.athena.system.modules.user.dto.SysUserDTO;
-import com.xiongyayun.athena.system.modules.user.model.SysUser;
+import com.xiongyayun.athena.system.modules.user.entity.SysUser;
 import com.xiongyayun.athena.system.modules.user.service.SysUserService;
 import com.xiongyayun.athena.system.modules.user.vo.SysUserVO;
 import io.swagger.annotations.Api;

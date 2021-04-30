@@ -1,5 +1,6 @@
 package com.xiongyayun.athena.system;
 
+import com.xiongyayun.athena.core.AthenaApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,31 +28,12 @@ import java.net.UnknownHostException;
 @SpringBootApplication(scanBasePackages = { "com.xiongyayun.athena" })
 @EnableDiscoveryClient // 开启服务注册发现功能
 //@EnableFeignClients(basePackages = "com.xiongyayun.athena")
-@MapperScan("com.xiongyayun.athena.system.**.mapper")
+//@MapperScan("com.xiongyayun.athena.system.**.mapper")
 @RefreshScope
 public class SystemApplication {
-	private static final Logger log = LoggerFactory.getLogger(SystemApplication.class);
 
-	public static void main(String[] args) throws UnknownHostException {
-		ConfigurableApplicationContext context = SpringApplication.run(SystemApplication.class, args);
-		String name = ManagementFactory.getRuntimeMXBean().getName();
-		String pid = name.split("@")[0];
-		Environment env = context.getEnvironment();
-		String port = env.getProperty("server.port", "8080"), contextPath = env.getProperty("server.servlet.context-path", "");
-		String origin = "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + port + contextPath;
-		log.info("\n--------------------------------------------------------------------------------------------------------------------\n\t" +
-						"Application '{}' is running! Pid: {}, Access URLs:\n\t" +
-						"Local: \t\t\thttp://localhost:{}{}\n\t" +
-						"External: \t\t" + origin + "\n\t" +
-						"Druid Monitor: \t" + origin + "/druid/\n\t" +
-						"Api Docs: \t\t" + origin + "/swagger-ui/\n\t" +
-						"Api Docs: \t\t" + origin + "/doc.html" +
-						"\n--------------------------------------------------------------------------------------------------------------------",
-				env.getProperty("spring.application.name", context.getId()),
-				pid,
-				port,
-				contextPath
-		);
+	public static void main(String[] args) {
+		AthenaApplication.run(SystemApplication.class, args);
 	}
 
 }

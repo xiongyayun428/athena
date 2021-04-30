@@ -2,7 +2,7 @@ package com.xiongyayun.athena.system.modules.menu.controller;
 
 import com.xiongyayun.athena.core.annotation.Log;
 import com.xiongyayun.athena.system.modules.menu.mapper.MenuMapper;
-import com.xiongyayun.athena.system.modules.menu.model.Menu;
+import com.xiongyayun.athena.system.modules.menu.entity.Menu;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

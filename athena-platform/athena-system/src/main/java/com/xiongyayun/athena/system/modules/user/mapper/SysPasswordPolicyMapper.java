@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.system.modules.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiongyayun.athena.system.modules.user.model.SysPasswordPolicy;
+import com.xiongyayun.athena.system.modules.user.entity.SysPasswordPolicy;
 
 /**
  * 系统密码策略

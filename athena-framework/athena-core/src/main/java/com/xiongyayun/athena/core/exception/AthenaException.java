@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.core.exception;
 
-import com.xiongyayun.athena.core.ErrorConstant;
+import com.xiongyayun.athena.core.constant.ErrorConstant;
 import com.xiongyayun.athena.core.exception.enums.AthenaExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

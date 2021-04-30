@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.system.modules.dict.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xiongyayun.athena.system.modules.dict.model.SysDict;
+import com.xiongyayun.athena.system.modules.dict.entity.SysDict;
 
 /**
  * DictMapper

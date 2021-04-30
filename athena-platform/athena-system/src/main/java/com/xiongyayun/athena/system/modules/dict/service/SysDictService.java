@@ -1,12 +1,12 @@
 package com.xiongyayun.athena.system.modules.dict.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiongyayun.athena.core.ValidationGroup;
+import com.xiongyayun.athena.core.validation.ValidationGroup;
 import com.xiongyayun.athena.core.validation.dict.DictService;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictDTO;
 import com.xiongyayun.athena.system.modules.dict.dto.SysDictItemDTO;
-import com.xiongyayun.athena.system.modules.dict.model.SysDict;
-import com.xiongyayun.athena.system.modules.dict.model.SysDictItem;
+import com.xiongyayun.athena.system.modules.dict.entity.SysDict;
+import com.xiongyayun.athena.system.modules.dict.entity.SysDictItem;
 import com.xiongyayun.athena.system.modules.dict.vo.SysDictItemVO;
 import org.springframework.validation.annotation.Validated;
 

@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.system.modules.user.vo;
 
-import com.xiongyayun.athena.core.ValidationGroup;
+import com.xiongyayun.athena.core.validation.ValidationGroup;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

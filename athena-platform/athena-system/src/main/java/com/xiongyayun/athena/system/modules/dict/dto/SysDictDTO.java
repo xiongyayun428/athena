@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.system.modules.dict.dto;
 
-import com.xiongyayun.athena.core.ValidationGroup;
+import com.xiongyayun.athena.core.validation.ValidationGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

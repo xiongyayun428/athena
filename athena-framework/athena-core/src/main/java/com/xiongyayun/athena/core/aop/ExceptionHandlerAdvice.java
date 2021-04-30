@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.core.aop;
 
-import com.xiongyayun.athena.core.ErrorConstant;
+import com.xiongyayun.athena.core.constant.ErrorConstant;
 import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.i18n.I18nService;
