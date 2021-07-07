@@ -5,6 +5,7 @@ import com.xiongyayun.athena.core.exception.enums.AthenaExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedCheckedException;
+import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.Nullable;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.lang.Nullable;
  * @author 熊亚运
  * @date 2019-05-21
  */
-public class AthenaException extends NestedCheckedException implements AthenaInnerException {
+public class AthenaException extends Exception implements AthenaInnerException {
     private static final long serialVersionUID = -5547644358612306631L;
 	protected static final Logger log = LoggerFactory.getLogger(AthenaException.class);
 
@@ -85,5 +86,52 @@ public class AthenaException extends NestedCheckedException implements AthenaInn
 		super(athenaExceptionEnum.getMessage(), cause);
 		this.code = athenaExceptionEnum.getCode();
 		this.args = args;
+	}
+
+	@Nullable
+	public String getDefaultMessage() {
+		return NestedExceptionUtils.buildMessage(super.getMessage(), getCause());
+	}
+
+	@Nullable
+	public Throwable getRootCause() {
+		return NestedExceptionUtils.getRootCause(this);
+	}
+
+	/**
+	 * 获取最具体的错误信息
+	 * @return
+	 */
+	public Throwable getMostSpecificCause() {
+		Throwable rootCause = getRootCause();
+		return (rootCause != null ? rootCause : this);
+	}
+
+	public boolean contains(@Nullable Class<?> exType) {
+		if (exType == null) {
+			return false;
+		}
+		if (exType.isInstance(this)) {
+			return true;
+		}
+		Throwable cause = getCause();
+		if (cause == this) {
+			return false;
+		}
+		if (cause instanceof NestedCheckedException) {
+			return ((NestedCheckedException) cause).contains(exType);
+		}
+		else {
+			while (cause != null) {
+				if (exType.isInstance(cause)) {
+					return true;
+				}
+				if (cause.getCause() == cause) {
+					break;
+				}
+				cause = cause.getCause();
+			}
+			return false;
+		}
 	}
 }

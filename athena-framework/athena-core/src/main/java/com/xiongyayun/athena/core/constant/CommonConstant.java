@@ -8,6 +8,7 @@ package com.xiongyayun.athena.core.constant;
  */
 public interface CommonConstant extends Constant {
 	String ACCESS_TOKEN = "Access-Token";
+	String REFRESH_TOKEN = "Refresh-Token";
 	/**
 	 * 请求号在header中的唯一标识
 	 */

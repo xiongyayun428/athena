@@ -148,6 +148,9 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(AthenaRuntimeException.class)
     public ResBody<?> catchAthenaRuntimeException(AthenaRuntimeException e) {
 		if (StringUtils.hasLength(e.getCode())) {
+			if (e.getMostSpecificCause() != null) {
+				log.error(e.getDefaultMessage(), e.getMostSpecificCause());
+			}
 			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
@@ -156,6 +159,9 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(AthenaException.class)
     public ResBody<?> handleException(AthenaException e) {
 		if (StringUtils.hasLength(e.getCode())) {
+			if (e.getMostSpecificCause() != null) {
+				log.error(e.getDefaultMessage(), e.getMostSpecificCause());
+			}
 			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);

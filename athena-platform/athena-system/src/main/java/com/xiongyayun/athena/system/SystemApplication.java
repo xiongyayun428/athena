@@ -28,7 +28,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication(scanBasePackages = { "com.xiongyayun.athena" })
 @EnableDiscoveryClient // 开启服务注册发现功能
 //@EnableFeignClients(basePackages = "com.xiongyayun.athena")
-//@MapperScan("com.xiongyayun.athena.system.**.mapper")
+@MapperScan("com.xiongyayun.**.mapper")
 @RefreshScope
 public class SystemApplication {
 

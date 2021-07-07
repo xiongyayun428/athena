@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/4/23
  */
 @Configuration
-@MapperScan("com.xiongyayun.**.mapper")
 public class MybatisPlusConfig {
 
 	/**
@@ -23,7 +22,10 @@ public class MybatisPlusConfig {
 	@Bean
 	public MybatisPlusInterceptor mybatisPlusInterceptor() {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-		interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+		PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+		// 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
+		paginationInterceptor.setOverflow(true);
+		interceptor.addInnerInterceptor(paginationInterceptor);
 		return interceptor;
 	}
 

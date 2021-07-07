@@ -4,6 +4,7 @@ import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.NestedExceptionUtils;
 
 import java.io.Serializable;
 import java.util.Arrays;

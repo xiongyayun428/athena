@@ -7,6 +7,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.impl.PublicClaims;
 import com.auth0.jwt.interfaces.Claim;
 import com.xiongyayun.athena.core.exception.AthenaException;
@@ -62,7 +63,9 @@ public class JwtUtil {
                 Set<String> keys = data.keySet();
                 for (String key : keys) {
                     Object value = data.get(key);
-                    if (value instanceof String) {
+                    if (value == null) {
+                    	continue;
+					} else if (value instanceof String) {
                         builder.withClaim(key, value.toString());
                     } else if (value instanceof Long) {
                         builder.withClaim(key, Long.parseLong(value.toString()) + "");
@@ -84,8 +87,8 @@ public class JwtUtil {
                 }
             }
             return builder.sign(HS256());
-        } catch (JWTCreationException exception) {
-            // Invalid createTokening configuration / Couldn't convert Claims.
+        } catch (JWTCreationException e) {
+            log.error(e.getMessage(), e);
         }
         return null;
     }
@@ -132,21 +135,20 @@ public class JwtUtil {
     public static Map<String, Claim> verify(String token) throws AthenaException {
         try {
             if (token == null || "".equals(token.trim())) {
-                log.debug("assessToken is null");
-                return null;
+				throw new AthenaException("令牌不能为空");
             }
             JWTVerifier verifier = JWT.require(HS256()).withIssuer(ISSUER).build();
             return verifier.verify(token).getClaims();
         } catch (Exception e) {
-            log.error("令牌验证失败！", e);
+            log.error("令牌验证失败！ -->" + token, e);
             if (e instanceof InvalidClaimException) {
-                log.error("---------token------" + token);
-                throw new AthenaException("InvalidClaimException", e);
+                throw new AthenaException("令牌数据异常", e);
             } else if (e instanceof JWTVerificationException) {
-                log.error("---------token------" + token);
-                throw new AthenaException("JWTVerificationException", e);
+                throw new AthenaException("令牌验证未通过", e);
+            } else if (e instanceof TokenExpiredException) {
+                throw new AthenaException("令牌已过期", e);
             }
-            throw new AthenaException("JWTVerificationException", e);
+            throw new AthenaException(e.getMessage(), e);
         }
     }
 
