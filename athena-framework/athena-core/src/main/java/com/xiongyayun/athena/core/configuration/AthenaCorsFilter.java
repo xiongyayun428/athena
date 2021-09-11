@@ -1,5 +1,6 @@
 package com.xiongyayun.athena.core.configuration;
 
+import com.xiongyayun.athena.core.constant.CommonConstant;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -48,6 +49,7 @@ public class AthenaCorsFilter extends HttpFilter {
 		allowHeaders.add(HttpHeaders.CONTENT_TYPE);
 		allowHeaders.add(HttpHeaders.ACCEPT);
 		allowHeaders.add(HttpHeaders.AUTHORIZATION);
+		allowHeaders.add(CommonConstant.ACCESS_TOKEN);
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, String.join(",", allowHeaders));
 		// 跨域session共享
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.TRUE.toString());
@@ -64,6 +66,8 @@ public class AthenaCorsFilter extends HttpFilter {
 		exposeHeaders.add(HttpHeaders.CONTENT_DISPOSITION);
 		exposeHeaders.add(HttpHeaders.LAST_MODIFIED);
 		exposeHeaders.add(HttpHeaders.PRAGMA);
+		exposeHeaders.add(CommonConstant.ACCESS_TOKEN);
+		exposeHeaders.add(CommonConstant.REFRESH_TOKEN);
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, String.join(",", exposeHeaders));
 		// 授权的时间
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");

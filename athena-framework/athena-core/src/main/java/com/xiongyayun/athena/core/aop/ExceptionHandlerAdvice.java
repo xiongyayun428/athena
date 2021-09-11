@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.core.aop;
 
-import com.xiongyayun.athena.core.ErrorConstant;
+import com.xiongyayun.athena.core.constant.ErrorConstant;
 import com.xiongyayun.athena.core.exception.AthenaException;
 import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.i18n.I18nService;
@@ -103,7 +103,7 @@ public class ExceptionHandlerAdvice {
 			return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, null, e.getMessage(), e);
 		}
         Object[] args = {fieldError.getField(), fieldError.getDefaultMessage()};
-        return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, args, fieldError.getDefaultMessage(), e);
+        return translate(ErrorConstant.METHOD_ARGUMENT_NOT_VALID_EXCEPTION, args, fieldError.getDefaultMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -148,6 +148,9 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(AthenaRuntimeException.class)
     public ResBody<?> catchAthenaRuntimeException(AthenaRuntimeException e) {
 		if (StringUtils.hasLength(e.getCode())) {
+			if (e.getMostSpecificCause() != null) {
+				log.error(e.getDefaultMessage(), e.getMostSpecificCause());
+			}
 			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
@@ -156,10 +159,17 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(AthenaException.class)
     public ResBody<?> handleException(AthenaException e) {
 		if (StringUtils.hasLength(e.getCode())) {
+			if (e.getMostSpecificCause() != null) {
+				log.error(e.getDefaultMessage(), e.getMostSpecificCause());
+			}
 			return new ResBody<>(e.getCode(), e.getMessage());
 		}
         return translate(e.getMessage(), e.getArgs(), e.getMessage(), e);
     }
+
+	protected ResBody<?> translate(String key, @Nullable Object[] args, @Nullable String defaultMsg) {
+    	return translate(key, args, defaultMsg, null);
+	}
 
     protected ResBody<?> translate(String key, @Nullable Object[] args, @Nullable String defaultMsg, @Nullable Throwable e) {
         final ResBody<?> resBody = new ResBody<>();
@@ -200,25 +210,10 @@ public class ExceptionHandlerAdvice {
         if (e != null) {
             log.error(resBody.getRtnMsg(), e);
         } else {
-            log.error(resBody.getRtnMsg());
+            log.info(resBody.getRtnMsg());
         }
         return resBody;
     }
 
-//    class KeyValue {
-//    	private String key;
-//    	private String value;
-//    	public KeyValue(String key, String value) {
-//    		this.key = key;
-//    		this.value = value;
-//		}
-//
-//		public String getKey() {
-//    		return this.key;
-//		}
-//
-//		public String getValue() {
-//			return value;
-//		}
-//	}
+
 }

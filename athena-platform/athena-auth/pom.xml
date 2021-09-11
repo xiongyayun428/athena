@@ -1,19 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>athena-auth</artifactId>
-    <packaging>jar</packaging>
-    <name>Athena Auth</name>
-    <description>雅典娜认证授权平台</description>
-
-    <parent>
-        <groupId>com.xiongyayun</groupId>
-        <artifactId>athena-platform</artifactId>
-        <version>${revision}</version>
-    </parent>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xiongyayun.platform</groupId>
+		<artifactId>athena-platform</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>athena-auth</artifactId>
+	<packaging>jar</packaging>
+	<name>Athena Platform Auth</name>
+	<description>雅典娜认证授权平台</description>
 
     <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+
         <dependency>
 			<groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-actuator</artifactId>
@@ -23,7 +40,7 @@
             <artifactId>athena-spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.xiongyayun</groupId>
+            <groupId>com.xiongyayun.framework</groupId>
             <artifactId>athena-core</artifactId>
         </dependency>
 <!--        <dependency>-->
@@ -31,20 +48,45 @@
 <!--            <artifactId>athena-user</artifactId>-->
 <!--        </dependency>-->
         <dependency>
-            <groupId>com.xiongyayun</groupId>
+            <groupId>com.xiongyayun.framework</groupId>
             <artifactId>athena-db</artifactId>
         </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>de.codecentric</groupId>-->
+<!--            <artifactId>spring-boot-admin-starter-client</artifactId>-->
+<!--        </dependency>-->
 <!--		<dependency>-->
 <!--			<groupId>com.xiongyayun</groupId>-->
 <!--			<artifactId>athena-plugin-oauth2-client</artifactId>-->
 <!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.xiongyayun.boot</groupId>-->
+<!--			<artifactId>athena-spring-boot-plugin-oauth2-server</artifactId>-->
+<!--		</dependency>-->
+
+
 		<dependency>
-			<groupId>com.xiongyayun.boot</groupId>
-			<artifactId>athena-spring-boot-plugin-oauth2-server</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.6.0-1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.6.0</version>
 		</dependency>
     </dependencies>
 

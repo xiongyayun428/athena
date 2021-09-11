@@ -1,10 +1,9 @@
 package com.xiongyayun.athena;
 
-import org.springframework.boot.SpringApplication;
+import com.xiongyayun.athena.core.AthenaApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 认证授权服务
@@ -17,11 +16,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableFeignClients(basePackages = { "com.xiongyayun.athena" })
 @EnableDiscoveryClient
-//@ComponentScan(basePackages = { "com.xiongyayun.athena" })
 public class AuthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthApplication.class, args);
+		AthenaApplication.run(AuthApplication.class, args);
 	}
 
 }

@@ -4,6 +4,7 @@ import com.xiongyayun.athena.core.i18n.I18nService;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.NestedExceptionUtils;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -21,7 +22,6 @@ import static java.util.stream.Collectors.joining;
 public interface AthenaInnerException extends Serializable {
 	Logger log = LoggerFactory.getLogger(AthenaInnerException.class);
 	ConcurrentMap<String, String> EXCEPTION_CACHE = new ConcurrentHashMap<>(8);
-	I18nService I18N_SERVICE = SpringContextUtil.getBean(I18nService.class);
 
 	/**
 	 * 参数
@@ -46,6 +46,7 @@ public interface AthenaInnerException extends Serializable {
 			return message;
 		}
 		try {
+			I18nService I18N_SERVICE = SpringContextUtil.getBean(I18nService.class);
 			message = I18N_SERVICE.get(getMessage(), this.getArgs(), getMessage());
 			EXCEPTION_CACHE.put(key, message);
 			return message;

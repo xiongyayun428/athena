@@ -1,12 +1,12 @@
 package com.xiongyayun.athena.core.aop;
 
-import cn.hutool.core.util.IdUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.xiongyayun.athena.core.annotation.Log;
-import com.xiongyayun.athena.core.model.support.Journal;
+import com.xiongyayun.athena.core.context.RequestNoContext;
+import com.xiongyayun.athena.core.entity.support.Journal;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -14,7 +14,6 @@ import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,8 +23,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 日志切面
@@ -41,7 +38,6 @@ public class LogAspect {
     private static final int LIMIT = 1024;
 
     private static final ThreadLocal<Long> START_TIME_THREAD_LOCAL = new ThreadLocal<>();
-    private static final ThreadLocal<String> UUID_THREAD_LOCAL = new ThreadLocal<>();
     private static final ThreadLocal<Journal> LOGGER_THREAD_LOCAL = new ThreadLocal<>();
 
 
@@ -83,22 +79,18 @@ public class LogAspect {
         	return;
 		}
 		START_TIME_THREAD_LOCAL.set(System.currentTimeMillis());
-		String uuid = IdUtil.simpleUUID();
-		UUID_THREAD_LOCAL.set(uuid);
-		Map<String, Object> args = new HashMap<>(parameterNames.length);
-		if (parameterNames.length > 0) {
-			for (int i = 0; i < parameterNames.length; i++) {
-				args.put(parameterNames[i], parameterValues[i]);
-			}
-		}
-		String params;
-		try {
-			// TODO 这里还存在问题
-			params = objectMapper.writeValueAsString(args);
-		} catch (JsonProcessingException e) {
-			params = Arrays.toString(point.getArgs());
-			LOG.error("序列化请求参数异常", e);
-		}
+
+//		Map<String, Object> args = new HashMap<>(parameterNames.length);
+//		if (parameterNames.length > 0) {
+//			for (int i = 0; i < parameterNames.length; i++) {
+//				try {
+//					args.put(parameterNames[i], parameterValues[i]);
+//				} catch (JsonProcessingException e) {
+//					args.put(parameterNames[i], Arrays.toString(point.getArgs()));
+//					LOG.error("序列化请求参数异常: " + parameterNames[i], e);
+//				}
+//			}
+//		}
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		Journal journal = new Journal();
 		if (attributes != null) {
@@ -113,7 +105,7 @@ public class LogAspect {
 			journal.setUrl(request.getRequestURL().toString() + queryClause);
 			journal.setIp(SystemUtil.getClientIP(request));
 //			LOGGER_THREAD_LOCAL.get().setArgs(JSONUtil.toJsonStr(point.getArgs()));
-			journal.setRequestBody(params);
+//			journal.setRequestBody(params);
 //        LOGGER_THREAD_LOCAL.get().setLogType(AppConstants.LOG_TYPE_HTTP);
 //			String params = request.getParameterMap().entrySet().stream()
 //					.map(entry -> entry.getKey() + ":" + Arrays.toString(entry.getValue()))
@@ -125,7 +117,7 @@ public class LogAspect {
 		if (annotation.save()) {
 
 		}
-		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), uuid, params);
+		LOG.info("{} [{}] {} 请求参数：{}", journal.getUrl(), String.join(",", Arrays.asList(annotation.value())), RequestNoContext.get(), Arrays.toString(point.getArgs()));
     }
 
     /**
@@ -135,7 +127,7 @@ public class LogAspect {
     @AfterReturning(returning = "resultValue", pointcut = "doAspect()")
     public void afterReturning(JoinPoint point, Object resultValue) {
 		long spendTime = System.currentTimeMillis() - START_TIME_THREAD_LOCAL.get();
-		String uuid = UUID_THREAD_LOCAL.get();
+		String uuid = RequestNoContext.get();
 		MethodSignature signature = (MethodSignature) point.getSignature();
 		Method method = signature.getMethod();
 		Log annotation = method.getAnnotation(Log.class);
@@ -197,7 +189,6 @@ public class LogAspect {
 
     private void clear() {
 		LOGGER_THREAD_LOCAL.remove();
-		UUID_THREAD_LOCAL.remove();
 		START_TIME_THREAD_LOCAL.remove();
 	}
 

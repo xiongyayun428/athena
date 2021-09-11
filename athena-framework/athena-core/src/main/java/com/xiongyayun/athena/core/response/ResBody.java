@@ -7,6 +7,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 返回体
@@ -15,8 +18,9 @@ import lombok.Setter;
  * @date 2019-05-21
  */
 @ApiModel("返回数据")
+@Accessors(chain = true)
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
-public class ResBody<T> implements ResponseEntity {
+public class ResBody<T> implements Serializable {
 	/**
 	 *
 	 */

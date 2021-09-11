@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xiongyayun.athena.db.model.BaseModel;
+import com.xiongyayun.athena.core.entity.BaseModel;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

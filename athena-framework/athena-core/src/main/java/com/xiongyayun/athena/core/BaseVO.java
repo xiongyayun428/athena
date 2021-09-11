@@ -41,4 +41,46 @@ public abstract class BaseVO implements Serializable {
 	public void setSort(KeyValueVO[] sort) {
 		this.sort = sort;
 	}
+
+	public class KeyValueVO implements Serializable {
+		@ApiModelProperty("排序字段")
+		private String key;
+		@ApiModelProperty("排序方式")
+		private String value;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			switch (value.toLowerCase()) {
+				case "ascend":
+				case "asc":
+					this.value = "ASC";
+					break;
+				case "descend":
+				case "desc":
+					this.value = "DESC";
+					break;
+				default:
+					throw new IllegalArgumentException("排序参数错误");
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "KeyValueVO{" +
+					"key='" + key + '\'' +
+					", value='" + value + '\'' +
+					'}';
+		}
+	}
 }

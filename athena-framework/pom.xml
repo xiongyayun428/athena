@@ -31,6 +31,7 @@
 	<modules>
 		<module>athena-core</module>
 		<module>athena-db</module>
+		<module>athena-security</module>
 		<module>athena-util</module>
 	</modules>
 
@@ -118,11 +119,6 @@
 <!--				<scope>compile</scope>-->
 <!--				<optional>true</optional>-->
 <!--			</dependency>-->
-			<dependency>
-				<groupId>com.auth0</groupId>
-				<artifactId>java-jwt</artifactId>
-				<version>3.10.3</version>
-			</dependency>
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
