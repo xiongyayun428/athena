@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>athena-spring-boot-starters</artifactId>
+        <groupId>com.xiongyayun.boot</groupId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>athena-spring-boot-starter-redis</artifactId>
+	<packaging>jar</packaging>
+	<name>Athena Spring Boot Starter Redis</name>
+
+    <properties>
+        <main.basedir>${basedir}/../../..</main.basedir>
+    </properties>
+
+    <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.boot</groupId>
+			<artifactId>athena-spring-boot-redis</artifactId>
+		</dependency>
+    </dependencies>
+
+</project>

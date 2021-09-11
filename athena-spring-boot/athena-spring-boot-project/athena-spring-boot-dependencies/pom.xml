@@ -15,28 +15,28 @@
 
     <properties>
 		<main.basedir>${basedir}/../../..</main.basedir>
-        <spring-boot.version>2.4.4</spring-boot.version>
+        <spring-boot.version>2.5.4</spring-boot.version>
 <!--        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>-->
-		<spring-boot-admin.version>2.4.0</spring-boot-admin.version>
-		<druid.version>1.2.5</druid.version>
+		<spring-boot-admin.version>2.5.1</spring-boot-admin.version>
+		<druid.version>1.2.6</druid.version>
 
         <aliyun-sdk-oss.version>3.11.1</aliyun-sdk-oss.version>
-        <alibaba-nacos.version>0.2.7</alibaba-nacos.version>
+        <alibaba-nacos.version>0.2.10</alibaba-nacos.version>
 
-        <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
+        <spring-security-oauth2.version>2.5.1.RELEASE</spring-security-oauth2.version>
         <java-jwt.version>3.11.0</java-jwt.version>
-        <hutool-all.version>5.6.1</hutool-all.version>
-        <mybatis-plus-boot.version>3.4.2</mybatis-plus-boot.version>
-        <mybatis-spring-boot.version>2.1.4</mybatis-spring-boot.version>
+        <hutool-all.version>5.7.12</hutool-all.version>
+        <mybatis-plus-boot.version>3.4.3.3</mybatis-plus-boot.version>
+        <mybatis-spring-boot.version>2.2.0</mybatis-spring-boot.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
         <tk.mybatis.mapper.version>4.1.5</tk.mybatis.mapper.version>
-        <pagehelper-spring-boot.version>1.3.0</pagehelper-spring-boot.version>
-        <pagehelper.version>5.2.0</pagehelper.version>
-        <jasypt-spring-boot.version>3.0.3</jasypt-spring-boot.version>
-        <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
+        <pagehelper-spring-boot.version>1.3.1</pagehelper-spring-boot.version>
+        <pagehelper.version>5.2.1</pagehelper.version>
+        <jasypt-spring-boot.version>3.0.4</jasypt-spring-boot.version>
+        <alibaba-fastjson.version>1.2.78</alibaba-fastjson.version>
         <flywaydb.version>7.3.2</flywaydb.version>
-        <pentaho-kettle.version>9.2.0.0-251</pentaho-kettle.version>
+        <pentaho-kettle.version>9.3.0.0-166</pentaho-kettle.version>
         <xxl-job.version>2.3.0</xxl-job.version>
 
         <!-- Plugin versions -->

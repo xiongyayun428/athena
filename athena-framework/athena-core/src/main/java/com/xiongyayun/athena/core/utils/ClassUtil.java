@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * ClassUtil
@@ -44,5 +47,22 @@ public class ClassUtil {
 		byte[] items = fieldName.getBytes();
 		items[0] = (byte) ((char) items[0] - 'a' + 'A');
 		return new String(items);
+	}
+
+	/**
+	 * 获取类的所有属性，包括父类
+	 *
+	 * @param clazz
+	 * @return
+	 */
+	public static Field[] getAllFields(Class<?> clazz) {
+		List<Field> fieldList = new ArrayList<>();
+		while (clazz != null) {
+			fieldList.addAll(new ArrayList<>(Arrays.asList(clazz.getDeclaredFields())));
+			clazz = clazz.getSuperclass();
+		}
+		Field[] fields = new Field[fieldList.size()];
+		fieldList.toArray(fields);
+		return fields;
 	}
 }

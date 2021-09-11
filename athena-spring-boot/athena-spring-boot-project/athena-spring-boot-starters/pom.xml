@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
     <name>Athena Spring Boot Starters</name>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-    </properties>
+<!--    <properties>-->
+<!--        <main.basedir>${basedir}/../..</main.basedir>-->
+<!--    </properties>-->
 
 	<dependencies>
 		<dependency>
@@ -29,17 +29,23 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.xiongyayun.boot</groupId>
-				<artifactId>athena-spring-boot-plugin-security</artifactId>
+				<artifactId>athena-spring-boot-redis</artifactId>
 				<version>${revision}</version>
 			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.xiongyayun.boot</groupId>-->
+<!--				<artifactId>athena-spring-boot-plugin-security</artifactId>-->
+<!--				<version>${revision}</version>-->
+<!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 
     <modules>
         <module>athena-spring-boot-starter</module>
-        <module>athena-spring-boot-starter-docker</module>
-        <module>athena-spring-boot-starter-mybatis</module>
-        <module>athena-spring-boot-starter-parent</module>
+<!--        <module>athena-spring-boot-starter-docker</module>-->
+<!--        <module>athena-spring-boot-starter-mybatis</module>-->
+<!--        <module>athena-spring-boot-starter-parent</module>-->
+        <module>athena-spring-boot-starter-redis</module>
     </modules>
 
 </project>

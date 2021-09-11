@@ -1,0 +1,35 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: athena-system
+    description: 系统管理
+#  config:
+#    import:
+#      - classpath:config/common.yml
+#      - classpath:config/log.yml
+#      - classpath:config/datasource.yml
+#      - classpath:config/jasypt.yml
+#      - classpath:config/springboot-admin-client.yml
+  redis:
+    # Redis数据库索引
+    database: 1
+    # 单机使用，对应服务器ip，哨兵模式下不用配置
+    #host: 127.0.0.1
+    # 单机使用，对应端口号，哨兵模式下不用配置
+    #port: 6379
+    password: 123456
+    lettuce:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    sentinel:
+      # 哨兵监听的Redis server的名称
+      master: mymaster
+      # 哨兵的配置列表
+      nodes:
+        - 10.17.81.144:26379
+        - 10.17.81.144:26479
+        - 10.17.81.144:26579

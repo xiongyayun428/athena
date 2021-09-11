@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xiongyayun.platform</groupId>
+		<artifactId>athena-system</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>athena-system-application</artifactId>
+	<packaging>jar</packaging>
+	<name>Athena Platform System Application</name>
+	<description>应用模块</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.xiongyayun.platform</groupId>
+			<artifactId>athena-system-client</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.platform</groupId>
+			<artifactId>athena-system-domain</artifactId>
+			<version>${revision}</version>
+		</dependency>
+
+		<!-- 通过Hibernate Validator使用Java Bean验证 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- 健康监控 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
