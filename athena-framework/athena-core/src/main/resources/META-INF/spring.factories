@@ -1,0 +1,11 @@
+# ??Spring Boot???????
+org.springframework.context.ApplicationListener=\
+  com.xiongyayun.athena.core.listener.ApplicationMessagePrintEventListener
+
+# ????
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xiongyayun.athena.core.listener.AppMessageAutoConfiguration
+
+# ApplicationContext??????????????
+org.springframework.context.ApplicationContextInitializer=\
+  com.xiongyayun.athena.core.context.SpringContextInitializer
