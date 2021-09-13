@@ -1,9 +1,7 @@
 package com.xiongyayun.athena.system.dao.menu.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xiongyayun.athena.db.model.BaseModel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,7 +12,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
 @TableName("`menu`")
-public class Menu extends BaseModel {
+public class Menu {
 }

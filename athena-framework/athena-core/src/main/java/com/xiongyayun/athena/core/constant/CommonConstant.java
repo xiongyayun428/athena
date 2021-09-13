@@ -18,4 +18,6 @@ public interface CommonConstant extends Constant {
 	 * 语言
 	 */
 	String LANGUAGE = "language";
+
+	String REGEX_MATCHES_CHINESE = "^.*[\u4E00-\u9FA5]+.*$";
 }

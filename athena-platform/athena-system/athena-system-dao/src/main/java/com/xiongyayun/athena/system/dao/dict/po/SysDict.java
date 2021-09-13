@@ -3,11 +3,9 @@ package com.xiongyayun.athena.system.dao.dict.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xiongyayun.athena.db.model.BaseModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -19,9 +17,8 @@ import lombok.experimental.Accessors;
 @ApiModel("数据字典")
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
 @TableName("`sys_dict`")
-public class SysDict extends BaseModel {
+public class SysDict {
 	// 指定主键生成策略使用雪花算法（默认策略）
 	@TableId(type = IdType.ASSIGN_ID)
 	@ApiModelProperty("主键ID")

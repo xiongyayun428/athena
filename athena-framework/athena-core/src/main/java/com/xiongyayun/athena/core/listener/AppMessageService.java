@@ -1,5 +1,6 @@
 package com.xiongyayun.athena.core.listener;
 
+import com.xiongyayun.athena.components.common.AppMessage;
 import org.springframework.context.ApplicationContext;
 
 /**

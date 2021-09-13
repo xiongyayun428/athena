@@ -6,7 +6,6 @@
 		<groupId>com.xiongyayun.framework</groupId>
 		<artifactId>athena-framework</artifactId>
 		<version>${revision}</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>athena-core</artifactId>
 	<packaging>jar</packaging>
@@ -100,10 +99,10 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.springfox</groupId>-->
+<!--			<artifactId>springfox-boot-starter</artifactId>-->
+<!--		</dependency>-->
 		<!-- Swagger生成Api文档的增强解决方案 -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
@@ -114,7 +113,13 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
-<!--		<dependency>-->
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<!--		<dependency>-->
 <!--			<groupId>com.fasterxml.jackson.core</groupId>-->
 <!--			<artifactId>jackson-core</artifactId>-->
 <!--		</dependency>-->

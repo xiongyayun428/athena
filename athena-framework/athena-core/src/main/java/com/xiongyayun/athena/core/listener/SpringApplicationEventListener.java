@@ -7,6 +7,12 @@ import org.springframework.util.ClassUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ *
+ * @param <E>
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2021/9/13
+ */
 public abstract class SpringApplicationEventListener<E extends SpringApplicationEvent> implements ApplicationListener<E> {
 	private static final String BOOTSTRAP_LISTENER = "org.springframework.cloud.bootstrap.BootstrapApplicationListener";
 	private AtomicInteger num = new AtomicInteger(0);

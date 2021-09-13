@@ -7,9 +7,9 @@
 		<groupId>com.xiongyayun.components</groupId>
 		<version>${revision}</version>
 	</parent>
-	<artifactId>athena-components-util</artifactId>
+	<artifactId>athena-components-common</artifactId>
 	<packaging>jar</packaging>
-	<name>Athena Util Components</name>
+	<name>Athena Common Components</name>
 	<description>组件</description>
 
 	<dependencies>

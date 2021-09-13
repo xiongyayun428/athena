@@ -1,25 +1,30 @@
 package com.xiongyayun.athena.core.listener;
 
+import com.xiongyayun.athena.components.common.AppMessage;
+import com.xiongyayun.athena.components.common.doc.ExtendPrintMsg;
 import com.xiongyayun.athena.core.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
-import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
-import java.lang.management.ManagementFactory;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+/**
+ *
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2021/9/13
+ */
 public final class ApplicationMessagePrinter {
 	private static final Logger log = LoggerFactory.getLogger(ApplicationMessagePrinter.class);
+	private static ApplicationContext applicationContext;
+
 
 	public ApplicationMessagePrinter() {
 		throw new IllegalArgumentException("can not create instance!");
@@ -43,46 +48,26 @@ public final class ApplicationMessagePrinter {
 			if (Objects.isNull(appMessageService)) {
 				appMessageService = new AppMessageService.DefaultAppMessageService();
 			}
+
+
 			AppMessage appMessage = appMessageService.loadAppMessage(context);
 			printAppMessage(mainClass, appMessage);
 		} catch (Exception e) {
-			log.warn("print app start message failure, cause by: {}", e.getMessage());
+			log.warn("print app start message failure, cause by: {}", e.getMessage(), e);
 		}
 	}
 
 	private static void printAppMessage(Class<?> mainClass, AppMessage appMessage) {
-//		String applicationName = (this.primarySources != null) ? ClassUtils.getShortName(this.primarySources) : "Application";
-//		String jvmName = ManagementFactory.getRuntimeMXBean().getName();
-//		String pid = jvmName.split("@")[0];
-//		String hostname = jvmName.split("@")[1];
-//		Environment env = context.getEnvironment();
-//		String port = env.getProperty("server.port", "8080"), contextPath = env.getProperty("server.servlet.context-path", "/");
-//		try {
-//
-//			String origin = "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + port + (contextPath.endsWith("/") ? contextPath : contextPath + "/");
-//			log.info("\n---------------------------------------------------------------------------------------------------------------------------\n\t" +
-//							applicationName + " '{}' is Running! using Java " + System.getProperty("java.version") + " on " + InetAddress.getLocalHost().getHostName() + " with PID: {}, Access URLs:\n\t" +
-//							"Local: \t\t\thttp://localhost:{}{}\n\t" +
-//							"External: \t\t" + origin + "\n\t" +
-//							"Profile(s): \t\t" + origin + "\n\t" +
-//							"Api Docs: \t\t" + origin + "swagger-ui/\n\t" +
-//							"Api Docs: \t\t" + origin + "doc.html\n\t" +
-//							"Druid Monitor: \t" + origin + "druid/" +
-//							"\n---------------------------------------------------------------------------------------------------------------------------",
-//					env.getProperty("spring.application.name", context.getId()),
-//					pid,
-//					port,
-//					contextPath
-//			);
-//		} catch (UnknownHostException e) {
-//			log.error(e.getMessage(), e);
-//		}
+		String extendMsg = extendMsg(appMessage);
+		if (StringUtils.hasLength(extendMsg)) {
+			extendMsg = "\n\t" + extendMsg;
+		}
 		String msg = "\n---------------------------------------------------------------------------------------------------------------------------\n\t"
 				+ "Application ''{0}'' is Running! using Java {1} on {2} with PID: {3}, Access URLs:\n\t"
 				+ "Local: \t\t\t{4}://localhost:{5}{6}\n\t"
 				+ "External: \t\t{7}://{8}:{9}{10}\n\t"
-				+ "Profile(s): \t\t{11}"
-				+ Arrays.toString(extendMsg(appMessage))
+				+ "Profile(s): \t{11}"
+				+ extendMsg
 				+ "\n---------------------------------------------------------------------------------------------------------------------------"
 				;
 		String printMessage = MessageFormat.format(msg,
@@ -91,11 +76,11 @@ public final class ApplicationMessagePrinter {
 				, appMessage.getHostName()
 				, appMessage.getPid()
 				, appMessage.getProtocol()
-				, appMessage.getPort()
+				, appMessage.getPort().toString()
 				, appMessage.getContextPath()
 				, appMessage.getProtocol()
 				, appMessage.getIp()
-				, appMessage.getPort()
+				, appMessage.getPort().toString()
 				, appMessage.getContextPath()
 				, Arrays.toString(appMessage.getProfiles())
 		);
@@ -115,11 +100,13 @@ public final class ApplicationMessagePrinter {
 		return LoggerFactory.getLogger(mainClass);
 	}
 
-	protected static String[] extendMsg(AppMessage appMessage) {
-		List<String> msg = new ArrayList<>();
-		msg.add("\n\tApi Docs: \t\t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "swagger-ui/\n\t");
-		msg.add("Api Docs: \t\t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "doc.html\n\t");
-		msg.add("Druid Monitor: \t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "druid/");
-		return (String[]) msg.toArray();
+	protected static String extendMsg(AppMessage appMessage) {
+		return SpringContextUtil.getApplicationContext().getBeansOfType(ExtendPrintMsg.class).values().stream().map(bean -> {
+			List<String> extendMsg = bean.printMsg(appMessage);
+			if (Objects.isNull(extendMsg)) {
+				extendMsg = new ArrayList<>();
+			}
+			return String.join("", extendMsg);
+		}).collect(Collectors.joining("\n\t"));
 	}
 }
