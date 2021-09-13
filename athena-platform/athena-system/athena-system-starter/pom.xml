@@ -85,7 +85,7 @@
 
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
-			<artifactId>athena-components-swagger</artifactId>
+			<artifactId>athena-components-starter-swagger</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

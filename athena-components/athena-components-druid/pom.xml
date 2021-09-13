@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>athena-components</artifactId>
+		<groupId>com.xiongyayun.components</groupId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>athena-components-druid</artifactId>
+	<packaging>jar</packaging>
+	<name>Athena Druid Components</name>
+	<description>Druid组件</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-common</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+</project>

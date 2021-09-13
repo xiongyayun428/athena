@@ -45,7 +45,6 @@
 <!--        <module>athena-spring-boot-starter-docker</module>-->
 <!--        <module>athena-spring-boot-starter-mybatis</module>-->
 <!--        <module>athena-spring-boot-starter-parent</module>-->
-        <module>athena-spring-boot-starter-redis</module>
     </modules>
 
 </project>

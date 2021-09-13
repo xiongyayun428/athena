@@ -1,7 +1,5 @@
 package com.xiongyayun.athena.core;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 /**
@@ -11,11 +9,11 @@ import java.io.Serializable;
  * @date 2020/12/24
  */
 public abstract class BaseVO implements Serializable {
-	@ApiModelProperty("当前页")
+	/** 当前页 */
 	private Long pageIndex;
-	@ApiModelProperty("每页显示条数")
+	/** 每页显示条数 */
 	private Long pageSize;
-	@ApiModelProperty("排序")
+	/** 排序 */
 	private KeyValueVO[] sort;
 
 	public Long getPageIndex() {
@@ -43,9 +41,9 @@ public abstract class BaseVO implements Serializable {
 	}
 
 	public class KeyValueVO implements Serializable {
-		@ApiModelProperty("排序字段")
+		/** 排序字段 */
 		private String key;
-		@ApiModelProperty("排序方式")
+		/** 排序方式 */
 		private String value;
 
 		public String getKey() {

@@ -10,20 +10,17 @@
 	<artifactId>athena-components-swagger</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Swagger Components</name>
-	<description>组件</description>
+	<description>Swagger组件</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-common</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

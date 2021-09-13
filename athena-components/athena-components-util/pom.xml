@@ -10,7 +10,7 @@
 	<artifactId>athena-components-util</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Util Components</name>
-	<description>组件</description>
+	<description>Util组件</description>
 
 	<dependencies>
 		<dependency>

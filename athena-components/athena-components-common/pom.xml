@@ -10,7 +10,7 @@
 	<artifactId>athena-components-common</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Common Components</name>
-	<description>组件</description>
+	<description>公共组件</description>
 
 	<dependencies>
 		<dependency>

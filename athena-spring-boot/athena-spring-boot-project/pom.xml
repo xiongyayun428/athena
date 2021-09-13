@@ -24,7 +24,6 @@
         <module>athena-spring-boot-autoconfigure</module>
         <module>athena-spring-boot-dependencies</module>
         <module>athena-spring-boot-parent</module>
-        <module>athena-spring-boot-redis</module>
 <!--         <module>athena-spring-boot-plugins</module> -->
          <module>athena-spring-boot-starters</module>
         <module>athena-spring-boot-tools</module>

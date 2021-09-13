@@ -15,33 +15,33 @@ public class IPv4Util {
 	/**
 	 * 把IP地址转化为字节数组
 	 *
-	 * @param ipAddr
+	 * @param host
 	 * @return byte[]
 	 */
-	public static byte[] ipToBytesByInet(String ipAddr) {
+	public static byte[] ipToBytesByInet(String host) {
 		try {
-			return InetAddress.getByName(ipAddr).getAddress();
+			return InetAddress.getByName(host).getAddress();
 		} catch (Exception e) {
-			throw new IllegalArgumentException(ipAddr + " is invalid IP");
+			throw new IllegalArgumentException(host + " is invalid IP");
 		}
 	}
 
 	/**
 	 * 把IP地址转化为int
-	 * @param ipAddr
+	 * @param ip
 	 * @return ip的int地址
 	 */
-	public static byte[] ipToBytesByReg(String ipAddr) {
+	public static byte[] ipToBytesByReg(String ip) {
 		byte[] ret = new byte[4];
 		try {
-			String[] ipArr = ipAddr.split("\\.");
+			String[] ipArr = ip.split("\\.");
 			ret[0] = (byte) (Integer.parseInt(ipArr[0]) & 0xFF);
 			ret[1] = (byte) (Integer.parseInt(ipArr[1]) & 0xFF);
 			ret[2] = (byte) (Integer.parseInt(ipArr[2]) & 0xFF);
 			ret[3] = (byte) (Integer.parseInt(ipArr[3]) & 0xFF);
 			return ret;
 		} catch (Exception e) {
-			throw new IllegalArgumentException(ipAddr + " is invalid IP");
+			throw new IllegalArgumentException(ip + " is invalid IP");
 		}
 
 	}
@@ -75,14 +75,14 @@ public class IPv4Util {
 	/**
 	 * 把IP地址转化为int
 	 *
-	 * @param ipAddr
+	 * @param ip
 	 * @return int
 	 */
-	public static int ipToInt(String ipAddr) {
+	public static int ipToInt(String ip) {
 		try {
-			return bytesToInt(ipToBytesByInet(ipAddr));
+			return bytesToInt(ipToBytesByInet(ip));
 		} catch (Exception e) {
-			throw new IllegalArgumentException(ipAddr + " is invalid IP");
+			throw new IllegalArgumentException(ip + " is invalid IP");
 		}
 	}
 
@@ -93,12 +93,12 @@ public class IPv4Util {
 	 * @return byte[]
 	 */
 	public static byte[] intToBytes(int ipInt) {
-		byte[] ipAddr = new byte[INADDRSZ];
-		ipAddr[0] = (byte) ((ipInt >>> 24) & 0xFF);
-		ipAddr[1] = (byte) ((ipInt >>> 16) & 0xFF);
-		ipAddr[2] = (byte) ((ipInt >>> 8) & 0xFF);
-		ipAddr[3] = (byte) (ipInt & 0xFF);
-		return ipAddr;
+		byte[] byteOfIp = new byte[INADDRSZ];
+		byteOfIp[0] = (byte) ((ipInt >>> 24) & 0xFF);
+		byteOfIp[1] = (byte) ((ipInt >>> 16) & 0xFF);
+		byteOfIp[2] = (byte) ((ipInt >>> 8) & 0xFF);
+		byteOfIp[3] = (byte) (ipInt & 0xFF);
+		return byteOfIp;
 	}
 
 	/**
@@ -121,16 +121,13 @@ public class IPv4Util {
 	 * @return int[]
 	 */
 	public static int[] getIPIntScope(String ipAndMask) {
-
 		String[] ipArr = ipAndMask.split("/");
 		if (ipArr.length != 2) {
-			throw new IllegalArgumentException("invalid ipAndMask with: "
-					+ ipAndMask);
+			throw new IllegalArgumentException("invalid ipAndMask with: " + ipAndMask);
 		}
 		int netMask = Integer.valueOf(ipArr[1].trim());
 		if (netMask < 0 || netMask > 31) {
-			throw new IllegalArgumentException("invalid ipAndMask with: "
-					+ ipAndMask);
+			throw new IllegalArgumentException("invalid ipAndMask with: " + ipAndMask);
 		}
 		int ipInt = IPv4Util.ipToInt(ipArr[0]);
 		int netIP = ipInt & (0xFFFFFFFF << (32 - netMask));
@@ -147,8 +144,7 @@ public class IPv4Util {
 	 */
 	public static String[] getIPAddrScope(String ipAndMask) {
 		int[] ipIntArr = IPv4Util.getIPIntScope(ipAndMask);
-		return new String[]{IPv4Util.intToIp(ipIntArr[0]),
-				IPv4Util.intToIp(ipIntArr[0])};
+		return new String[]{IPv4Util.intToIp(ipIntArr[0]), IPv4Util.intToIp(ipIntArr[0])};
 	}
 
 	/**
@@ -173,8 +169,7 @@ public class IPv4Util {
 			int hostScope = netIP + ipcount;
 			return new int[]{netIP, hostScope};
 		} catch (Exception e) {
-			throw new IllegalArgumentException("invalid ip scope express  ip:"
-					+ ipAddr + "  mask:" + mask);
+			throw new IllegalArgumentException("invalid ip scope express  ip:" + ipAddr + "  mask:" + mask);
 		}
 
 	}
@@ -188,8 +183,7 @@ public class IPv4Util {
 	 */
 	public static String[] getIPStrScope(String ipAddr, String mask) {
 		int[] ipIntArr = IPv4Util.getIPIntScope(ipAddr, mask);
-		return new String[]{IPv4Util.intToIp(ipIntArr[0]),
-				IPv4Util.intToIp(ipIntArr[0])};
+		return new String[]{IPv4Util.intToIp(ipIntArr[0]), IPv4Util.intToIp(ipIntArr[0])};
 	}
 
 	/**
@@ -252,8 +246,7 @@ public class IPv4Util {
 
 
 	public static String inet_ntoa(long add) {
-		return ((add & 0xff000000) >> 24) + "." + ((add & 0xff0000) >> 16)
-				+ "." + ((add & 0xff00) >> 8) + "." + ((add & 0xff));
+		return ((add & 0xff000000) >> 24) + "." + ((add & 0xff0000) >> 16) + "." + ((add & 0xff00) >> 8) + "." + ((add & 0xff));
 	}
 
 	public static long inet_aton(Inet4Address add) {

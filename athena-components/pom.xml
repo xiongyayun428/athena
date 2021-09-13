@@ -27,7 +27,11 @@
 	</properties>
 
 	<modules>
+		<module>athena-components-autoconfigure</module>
 		<module>athena-components-common</module>
+		<module>athena-components-druid</module>
+		<module>athena-components-redis</module>
+		<module>athena-components-starter</module>
 		<module>athena-components-swagger</module>
 		<module>athena-components-util</module>
 	</modules>

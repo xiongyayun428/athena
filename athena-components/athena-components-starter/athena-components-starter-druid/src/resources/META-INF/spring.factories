@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xiongyayun.athena.components.druid.autoconfigure.RemoveDruidAdAutoConfigure

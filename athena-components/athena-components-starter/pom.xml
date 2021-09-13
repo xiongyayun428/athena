@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>athena-components</artifactId>
+		<groupId>com.xiongyayun.components</groupId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>athena-components-starter</artifactId>
+	<packaging>pom</packaging>
+	<name>Athena Components Starter</name>
+	<description>组件</description>
+
+	<modules>
+		<module>athena-components-starter-druid</module>
+		<module>athena-components-starter-redis</module>
+		<module>athena-components-starter-swagger</module>
+	</modules>
+
+
+</project>

@@ -31,11 +31,6 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
@@ -97,16 +92,6 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>1.6.2</version>
 			<scope>compile</scope>
-		</dependency>
-
-<!--		<dependency>-->
-<!--			<groupId>io.springfox</groupId>-->
-<!--			<artifactId>springfox-boot-starter</artifactId>-->
-<!--		</dependency>-->
-		<!-- Swagger生成Api文档的增强解决方案 -->
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>
