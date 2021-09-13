@@ -24,6 +24,7 @@
 	<modules>
 		<module>athena-spring-boot</module>
 		<module>athena-spring-cloud</module>
+		<module>athena-components</module>
 		<module>athena-framework</module>
 		<module>athena-platform</module>
 	</modules>

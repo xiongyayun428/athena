@@ -71,7 +71,7 @@ public class FileUtil {
 	 * @param multipartFile		待上传文件
 	 * @param destFilePath		目标上传目录
 	 * @param destFileName		目标上传文件名，为空时取上传的文件名
-	 * @return					上传的文件名
+	 * @return {@link UploadFile} 上传的文件名
 	 * @throws Exception		上传异常
 	 */
 	public static UploadFile upload(MultipartFile multipartFile, String destFilePath, String destFileName) throws Exception {
