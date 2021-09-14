@@ -1,9 +1,14 @@
-#
+# 监听Spring Boot启动的相关事件
 org.springframework.context.ApplicationListener=\
   com.xiongyayun.athena.core.listener.ApplicationMessagePrintEventListener
-
+# 自动装配，再其中可以通过@Bean方式或者@Import进行bean的注入
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.xiongyayun.athena.core.listener.AppMessageAutoConfiguration
-
+  com.xiongyayun.athena.core.listener.AppMessageAutoConfiguration,\
+  com.xiongyayun.athena.core.configuration.ValidatorConfiguration,\
+  com.xiongyayun.athena.core.configuration.WebMvcConfig,\
+  com.xiongyayun.athena.core.configuration.WebMvcConfig,\
+  com.xiongyayun.athena.core.configuration.Http2Configuration,\
+  com.xiongyayun.athena.core.mybatis.config.MybatisPlusConfig
+# ApplicationContext初始化完成之后会执行相关逻辑
 org.springframework.context.ApplicationContextInitializer=\
   com.xiongyayun.athena.core.context.SpringContextInitializer

@@ -7,16 +7,16 @@
 		<groupId>com.xiongyayun.components</groupId>
 		<version>${revision}</version>
 	</parent>
-	<artifactId>athena-components-starter</artifactId>
+	<artifactId>athena-components-starters</artifactId>
 	<packaging>pom</packaging>
-	<name>Athena Components Starter</name>
+	<name>Athena Components Starters</name>
 	<description>组件</description>
 
 	<modules>
+		<module>athena-components-starter</module>
 		<module>athena-components-starter-druid</module>
 		<module>athena-components-starter-redis</module>
 		<module>athena-components-starter-swagger</module>
 	</modules>
-
 
 </project>

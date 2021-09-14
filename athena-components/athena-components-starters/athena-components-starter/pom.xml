@@ -3,25 +3,19 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>athena-components-starter</artifactId>
+		<artifactId>athena-components-starters</artifactId>
 		<groupId>com.xiongyayun.components</groupId>
 		<version>${revision}</version>
 	</parent>
-	<artifactId>athena-components-starter-druid</artifactId>
+	<artifactId>athena-components-starter</artifactId>
 	<packaging>jar</packaging>
-	<name>Athena Components starter-druid</name>
+	<name>Athena Components Starter</name>
 	<description>组件</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
-			<artifactId>athena-components-druid</artifactId>
-			<version>${revision}</version>
+			<artifactId>athena-components-autoconfigure</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>
