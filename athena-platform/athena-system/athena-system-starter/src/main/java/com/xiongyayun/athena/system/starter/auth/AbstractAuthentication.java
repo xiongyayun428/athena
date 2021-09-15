@@ -1,6 +1,6 @@
 //package com.xiongyayun.athena.user.factory;
 //
-//import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+//import com.xiongyayun.athena.components.common.exception.AthenaRuntimeException;
 //import com.xiongyayun.athena.user.model.UserAuthorization;
 //import com.xiongyayun.athena.user.service.UserAuthorizationService;
 //import org.springframework.beans.factory.InitializingBean;

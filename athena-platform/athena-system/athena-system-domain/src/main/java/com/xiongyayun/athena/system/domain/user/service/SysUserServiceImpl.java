@@ -2,7 +2,7 @@
 //
 //import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 //import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-//import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+//import com.xiongyayun.athena.components.common.exception.AthenaRuntimeException;
 //import com.xiongyayun.athena.security.principal.UserPrincipal;
 //import com.xiongyayun.athena.system.core.constant.SystemConstant;
 //import com.xiongyayun.athena.system.modules.user.dto.SysUserDTO;

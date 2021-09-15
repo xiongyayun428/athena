@@ -3,7 +3,7 @@ package com.xiongyayun.athena.system.domain.user.service;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+import com.xiongyayun.athena.components.common.exception.AthenaRuntimeException;
 import com.xiongyayun.athena.core.entity.Entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
