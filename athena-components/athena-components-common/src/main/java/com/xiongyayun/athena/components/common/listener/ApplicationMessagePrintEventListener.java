@@ -1,9 +1,9 @@
-package com.xiongyayun.athena.core.listener;
+package com.xiongyayun.athena.components.common.listener;
 
+import com.xiongyayun.athena.components.common.ApplicationMessagePrinter;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.core.annotation.Order;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 启动完成消息输出事件
@@ -12,16 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2021/9/12
  */
 @Order
-public class ApplicationMessagePrintEventListener extends SpringApplicationEventListener<ApplicationReadyEvent> {
-	private static AtomicInteger num = new AtomicInteger(0);
+public class ApplicationMessagePrintEventListener implements ApplicationListener<ApplicationReadyEvent> {
 
 	@Override
-	protected void doEvent(ApplicationReadyEvent applicationReadyEvent) {
+	public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
 		ApplicationMessagePrinter.print(applicationReadyEvent.getApplicationContext(), applicationReadyEvent.getSpringApplication().getMainApplicationClass());
 	}
 
-	@Override
-	protected AtomicInteger getNum() {
-		return ApplicationMessagePrintEventListener.num;
-	}
 }

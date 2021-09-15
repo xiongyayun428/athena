@@ -8,18 +8,14 @@ import org.springframework.context.ApplicationContext;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/09/12
  */
-public interface AppMessageService {
-	AppMessage loadAppMessage(ApplicationContext context);
+public interface ApplicationMessageService {
+	ApplicationMessage loadMessage(ApplicationContext context);
 
-//	default AppMessage loadAppMessage(ApplicationContext context) {
-//		return new AppMessage();
-//	}
-
-	class DefaultAppMessageService implements AppMessageService {
+	class DefaultApplicationMessageService implements ApplicationMessageService {
 
 		@Override
-		public AppMessage loadAppMessage(ApplicationContext context) {
-			return new AppMessage();
+		public ApplicationMessage loadMessage(ApplicationContext context) {
+			return new ApplicationMessage();
 		}
 	}
 }

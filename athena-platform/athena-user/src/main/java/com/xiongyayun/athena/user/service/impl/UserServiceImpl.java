@@ -2,7 +2,7 @@ package com.xiongyayun.athena.user.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.core.pagination.IPage;
-import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
+import com.xiongyayun.athena.components.mybatis.mybatisplus.Page;
 import com.xiongyayun.athena.user.mapper.UserMapper;
 import com.xiongyayun.athena.user.model.User;
 import com.xiongyayun.athena.user.service.UserService;

@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.components.common.doc;
 
-import com.xiongyayun.athena.components.common.AppMessage;
+import com.xiongyayun.athena.components.common.ApplicationMessage;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface ExtendPrintMsg {
 	 * @param appMessage
 	 * @return
 	 */
-	List<String> printMsg(AppMessage appMessage);
+	List<String> printMsg(ApplicationMessage appMessage);
 }

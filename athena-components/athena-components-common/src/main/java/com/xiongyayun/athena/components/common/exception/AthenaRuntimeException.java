@@ -1,12 +1,11 @@
-package com.xiongyayun.athena.core.exception;
+package com.xiongyayun.athena.components.common.exception;
 
-import com.xiongyayun.athena.core.constant.ErrorConstant;
-import com.xiongyayun.athena.core.exception.enums.AthenaExceptionEnum;
+import com.xiongyayun.athena.components.common.constant.ErrorConstant;
+import com.xiongyayun.athena.components.common.exception.enums.AthenaExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedExceptionUtils;
-import org.springframework.core.NestedRuntimeException;
 import org.springframework.lang.Nullable;
 
 /**

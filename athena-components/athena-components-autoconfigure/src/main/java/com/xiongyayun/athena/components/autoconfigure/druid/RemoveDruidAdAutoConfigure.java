@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.components.druid.autoconfigure;
+package com.xiongyayun.athena.components.autoconfigure.druid;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;

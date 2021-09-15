@@ -10,7 +10,7 @@
 	<artifactId>athena-components-starters</artifactId>
 	<packaging>pom</packaging>
 	<name>Athena Components Starters</name>
-	<description>组件</description>
+	<description>组件启动器</description>
 
 	<modules>
 		<module>athena-components-starter</module>

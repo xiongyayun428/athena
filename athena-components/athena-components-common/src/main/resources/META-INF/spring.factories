@@ -1,0 +1,6 @@
+# 监听Spring Boot启动的相关事件
+org.springframework.context.ApplicationListener=\
+  com.xiongyayun.athena.components.common.listener.ApplicationMessagePrintEventListener
+# ApplicationContext初始化完成之后会执行相关逻辑
+org.springframework.context.ApplicationContextInitializer=\
+  com.xiongyayun.athena.components.common.context.SpringContextInitializer

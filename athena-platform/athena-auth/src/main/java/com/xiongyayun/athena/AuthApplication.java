@@ -1,6 +1,6 @@
 package com.xiongyayun.athena;
 
-import com.xiongyayun.athena.core.AthenaApplication;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -19,7 +19,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class AuthApplication {
 
 	public static void main(String[] args) {
-		AthenaApplication.run(AuthApplication.class, args);
+		SpringApplication.run(AuthApplication.class, args);
 	}
 
 }

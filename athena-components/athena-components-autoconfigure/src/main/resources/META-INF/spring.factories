@@ -1,0 +1,9 @@
+
+# 自动装配，再其中可以通过@Bean方式或者@Import进行bean的注入
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xiongyayun.athena.components.autoconfigure.swagger.SwaggerConfig,\
+  com.xiongyayun.athena.components.autoconfigure.common.CommonAutoConfigure,\
+  com.xiongyayun.athena.components.autoconfigure.common.ApplicationMessageAutoConfiguration,\
+  com.xiongyayun.athena.components.autoconfigure.mybatis.MybatisPlusAutoConfiguration,\
+  com.xiongyayun.athena.components.autoconfigure.cache.redis.RedisCacheConfig,\
+  com.xiongyayun.athena.components.autoconfigure.redis.RedisConfig

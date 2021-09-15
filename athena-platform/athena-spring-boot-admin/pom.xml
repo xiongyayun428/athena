@@ -58,6 +58,12 @@
 			<groupId>com.github.ulisesbocchio</groupId>
 			<artifactId>jasypt-spring-boot-starter</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-starter</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

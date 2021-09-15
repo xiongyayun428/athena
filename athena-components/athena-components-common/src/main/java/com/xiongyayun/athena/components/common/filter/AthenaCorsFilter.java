@@ -1,12 +1,9 @@
-package com.xiongyayun.athena.core.configuration;
+package com.xiongyayun.athena.components.common.filter;
 
-import com.xiongyayun.athena.core.constant.CommonConstant;
-import com.xiongyayun.athena.core.utils.SpringContextUtil;
-import org.springframework.core.annotation.Order;
+import com.xiongyayun.athena.components.common.constant.CommonConstant;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
@@ -24,14 +21,24 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2020/11/16
  */
-@Order
-@Component
 public class AthenaCorsFilter extends HttpFilter {
 	private static final long serialVersionUID = -8387103310559517243L;
+	private String allowOrigin;
+
+	public AthenaCorsFilter() {
+
+	}
+
+	/**
+	 * "app.cors.allow-origin"
+	 * @param allowOrigin
+	 */
+	public AthenaCorsFilter(String allowOrigin) {
+		this.allowOrigin = allowOrigin;
+	}
 
 	@Override
 	protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-		String allowOrigin = SpringContextUtil.getProperty("app.cors.allow-origin");
 		String originHeader = req.getHeader(HttpHeaders.ORIGIN);
 		// 设置访问源地址，不能使用*
 		if (StringUtils.hasLength(allowOrigin)) {

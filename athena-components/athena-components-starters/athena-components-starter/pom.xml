@@ -10,7 +10,7 @@
 	<artifactId>athena-components-starter</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Components Starter</name>
-	<description>组件</description>
+	<description>组件启动器</description>
 
 	<dependencies>
 		<dependency>

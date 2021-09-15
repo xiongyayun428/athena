@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.constant;
+package com.xiongyayun.athena.components.common.constant;
 
 import java.io.Serializable;
 

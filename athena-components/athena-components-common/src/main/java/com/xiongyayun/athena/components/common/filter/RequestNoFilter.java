@@ -1,10 +1,8 @@
-package com.xiongyayun.athena.core.configuration;
+package com.xiongyayun.athena.components.common.filter;
 
 import cn.hutool.core.util.IdUtil;
 import com.xiongyayun.athena.components.common.constant.CommonConstant;
-import com.xiongyayun.athena.core.context.RequestNoContext;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import com.xiongyayun.athena.components.common.context.RequestNoContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +14,9 @@ import java.io.IOException;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/4/21
  */
-@Order
-@Component
 public class RequestNoFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		Filter.super.init(filterConfig);
 	}
 
 	@Override
@@ -48,6 +43,5 @@ public class RequestNoFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		Filter.super.destroy();
 	}
 }

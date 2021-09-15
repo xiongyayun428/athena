@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.core.utils;
 
-import com.xiongyayun.athena.core.exception.AthenaException;
+import com.xiongyayun.athena.components.common.exception.AthenaException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.RequestContextHolder;

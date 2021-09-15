@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.exception;
+package com.xiongyayun.athena.components.common.exception;
 
 /**
  * AuthenticationException

@@ -1,12 +1,12 @@
 package com.xiongyayun.athena.components.common;
 
 /**
- * AppMessage
+ * ApplicationMessage
  *
  * @author Yayun.Xiong
  * @date 2021/9/13
  */
-public class AppMessage {
+public class ApplicationMessage {
 	private String applicationName;
 	private String hostName;
 	private String pid;

@@ -2,7 +2,7 @@ package com.xiongyayun.athena.core.aop;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xiongyayun.athena.core.response.ResBody;
+import com.xiongyayun.athena.components.common.ResBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;

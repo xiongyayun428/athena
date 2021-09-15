@@ -16,7 +16,6 @@
     <properties>
 		<main.basedir>${basedir}/../../..</main.basedir>
         <spring-boot.version>2.5.4</spring-boot.version>
-<!--        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>-->
 		<spring-boot-admin.version>2.5.1</spring-boot-admin.version>
 		<druid.version>1.2.6</druid.version>
 
@@ -40,6 +39,7 @@
         <xxl-job.version>2.3.0</xxl-job.version>
 
         <!-- Plugin versions -->
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<maven-plugin-api.version>3.6.3</maven-plugin-api.version>
 		<maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
 		<maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
@@ -395,27 +395,48 @@
         <!--plugin management-->
         <pluginManagement>
             <plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>build-info</goal>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
                 <plugin>
+					<!--
+					https://github.com/ulisesbocchio/jasypt-spring-boot
+					加密: mvn jasypt:encrypt-value -Djasypt.encryptor.password="the password" -Djasypt.plugin.value="需要加密的值"
+					解密: mvn jasypt:decrypt-value -Djasypt.encryptor.password="the password" -Djasypt.plugin.value="需要解密的值"
+					-->
                 	<groupId>com.github.ulisesbocchio</groupId>
                 	<artifactId>jasypt-maven-plugin</artifactId>
                 	<version>${jasypt-maven-plugin.version}</version>
                 </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+					<configuration>
+						<attach>true</attach>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>build-info</goal>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.spotify</groupId>
@@ -428,6 +449,7 @@
                 	<version>${build-helper-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
+					<!-- 添加flatten-maven-plugin用于替换${revision} -->
                 	<groupId>org.codehaus.mojo</groupId>
                 	<artifactId>flatten-maven-plugin</artifactId>
                 	<version>${flatten-maven-plugin.version}</version>

@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.components.redis.config;
+package com.xiongyayun.athena.components.autoconfigure.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -19,6 +19,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/2/26
  */
+@ConditionalOnBean(RedisConnectionFactory.class)
 @Configuration
 public class RedisConfig {
 	/**
@@ -28,7 +29,6 @@ public class RedisConfig {
 	 * @return
 	 */
 	@ConditionalOnMissingBean(RedisTemplate.class)
-	@ConditionalOnBean(RedisConnectionFactory.class)
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 		RedisTemplate<String, Object> template = new RedisTemplate<>();

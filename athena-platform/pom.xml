@@ -6,7 +6,6 @@
 		<groupId>com.xiongyayun</groupId>
 		<artifactId>athena</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.xiongyayun.platform</groupId>
     <artifactId>athena-platform</artifactId>
@@ -84,7 +83,7 @@
 
     <modules>
 <!--        <module>athena-admin</module>-->
-        <module>athena-auth</module>
+<!--        <module>athena-auth</module>-->
 <!--        <module>athena-config-server</module>-->
 <!--        <module>athena-consul-discovery</module>-->
 <!--        <module>athena-core</module>-->
@@ -94,7 +93,7 @@
 <!--        <module>athena-access</module>-->
 <!--        <module>athena-test</module>-->
         <module>athena-spring-boot-admin</module>
-        <module>athena-oauth</module>
+<!--        <module>athena-oauth</module>-->
         <module>athena-system</module>
 <!--        <module>athena-user-api</module>-->
 <!--        <module>athena-service</module>-->

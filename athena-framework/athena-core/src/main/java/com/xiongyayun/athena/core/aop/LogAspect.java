@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.xiongyayun.athena.core.annotation.Log;
-import com.xiongyayun.athena.core.context.RequestNoContext;
+import com.xiongyayun.athena.components.common.context.RequestNoContext;
 import com.xiongyayun.athena.core.entity.support.Journal;
 import com.xiongyayun.athena.core.utils.SystemUtil;
 import org.aspectj.lang.JoinPoint;

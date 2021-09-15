@@ -1,6 +1,8 @@
-package com.xiongyayun.athena.components.common;
+package com.xiongyayun.athena.components.autoconfigure;
 
-import com.xiongyayun.athena.core.utils.NetUtil;
+import com.xiongyayun.athena.components.common.ApplicationMessage;
+import com.xiongyayun.athena.components.common.ApplicationMessageService;
+import com.xiongyayun.athena.components.util.NetUtil;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
@@ -8,9 +10,15 @@ import org.springframework.core.env.Environment;
 import java.lang.management.ManagementFactory;
 import java.util.Objects;
 
+/**
+ * BootStartMessageService
+ *
+ * @author Yayun.Xiong
+ * @date 2021/9/14
+ */
 public class BootStartMessageService implements ApplicationMessageService {
 	@Override
-	public ApplicationMessage loadAppMessage(ApplicationContext context) {
+	public ApplicationMessage loadMessage(ApplicationContext context) {
 		ApplicationMessage appMessage = new ApplicationMessage();
 
 		String jvmName = ManagementFactory.getRuntimeMXBean().getName();

@@ -10,12 +10,13 @@
 	<artifactId>athena-components-starter-druid</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Components starter-druid</name>
-	<description>组件</description>
+	<description>Druid组件启动器</description>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-autoconfigure</artifactId>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>

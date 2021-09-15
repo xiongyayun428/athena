@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiongyayun.athena.user.mapper.UserMapper;
 import com.xiongyayun.athena.user.model.User;
 import com.xiongyayun.athena.user.service.UserService;
-import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
+import com.xiongyayun.athena.components.mybatis.mybatisplus.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

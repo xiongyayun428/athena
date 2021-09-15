@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.components.druid;
 
-import com.xiongyayun.athena.components.common.AppMessage;
+import com.xiongyayun.athena.components.common.ApplicationMessage;
 import com.xiongyayun.athena.components.common.doc.ExtendPrintMsg;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class DruidExtendPrintMsg implements ExtendPrintMsg {
 	 * @return
 	 */
 	@Override
-	public List<String> printMsg(AppMessage appMessage) {
+	public List<String> printMsg(ApplicationMessage appMessage) {
 		List<String> msg = new ArrayList<>();
 		msg.add("Druid Monitor: \t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "druid/");
 			return msg;

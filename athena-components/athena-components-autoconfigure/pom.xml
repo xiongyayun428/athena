@@ -13,7 +13,90 @@
 	<description>组件自动配置</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+		<!-- 与spring-boot-configuration-processor有什么区别呢？ -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-autoconfigure-processor</artifactId>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-metadata</artifactId>
+		</dependency>
+		<!-- 自动生成配置信息 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>io.undertow</groupId>
+			<artifactId>undertow-core</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-common</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-util</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-druid</artifactId>
+			<version>${revision}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-mybatis</artifactId>
+			<version>${revision}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-redis</artifactId>
+			<version>${revision}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-swagger</artifactId>
+			<version>${revision}</version>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 </project>

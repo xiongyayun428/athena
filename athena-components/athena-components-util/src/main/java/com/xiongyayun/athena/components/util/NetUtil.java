@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.utils;
+package com.xiongyayun.athena.components.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +13,16 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+/**
+ * NetUtil
+ *
+ * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
+ * @date 2021/09/12
+ */
 public class NetUtil {
 	private static final Logger log = LoggerFactory.getLogger(NetUtil.class);
 	public static final String LOCALHOST = "127.0.0.1";
-	public static final String ANYHOST = "0.0.0.0";
+	public static final String ANY_HOST = "0.0.0.0";
 	private static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\d{1,3}){3,5}$");
 	private static InetAddress localAddress;
 
@@ -83,6 +89,6 @@ public class NetUtil {
 			return false;
 		}
 		final String name = address.getHostAddress();
-		return name !=null && !ANYHOST.equals(name) && !LOCALHOST.equals(name) && IP_PATTERN.matcher(name).matches();
+		return name !=null && !ANY_HOST.equals(name) && !LOCALHOST.equals(name) && IP_PATTERN.matcher(name).matches();
 	}
 }

@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * AppMessageAutoConfiguration
+ * ApplicationMessageAutoConfiguration
  *
  * @author Yayun.Xiong
  * @date 2021/9/14
  */
 @Configuration
-public class AppMessageAutoConfiguration {
+public class ApplicationMessageAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean

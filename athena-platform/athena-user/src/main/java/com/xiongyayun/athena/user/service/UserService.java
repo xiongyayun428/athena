@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.user.service;
 
 import com.xiongyayun.athena.core.pagination.IPage;
-import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
+import com.xiongyayun.athena.components.mybatis.mybatisplus.Page;
 import com.xiongyayun.athena.user.model.User;
 
 import java.io.Serializable;

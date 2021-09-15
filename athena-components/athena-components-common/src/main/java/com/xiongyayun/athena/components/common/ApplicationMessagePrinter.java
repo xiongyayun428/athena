@@ -1,8 +1,7 @@
-package com.xiongyayun.athena.core.listener;
+package com.xiongyayun.athena.components.common;
 
-import com.xiongyayun.athena.components.common.AppMessage;
 import com.xiongyayun.athena.components.common.doc.ExtendPrintMsg;
-import com.xiongyayun.athena.core.utils.SpringContextUtil;
+import com.xiongyayun.athena.components.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -42,21 +41,20 @@ public final class ApplicationMessagePrinter {
 
 	public static void print(ApplicationContext context, Class<?> mainClass) {
 		try {
-			AppMessageService appMessageService = context.getBeanProvider(AppMessageService.class).getIfAvailable();
+			ApplicationMessageService appMessageService = context.getBeanProvider(ApplicationMessageService.class).getIfAvailable();
 			if (Objects.isNull(appMessageService)) {
-				appMessageService = new AppMessageService.DefaultAppMessageService();
+				appMessageService = new ApplicationMessageService.DefaultApplicationMessageService();
 			}
 
-
-			AppMessage appMessage = appMessageService.loadAppMessage(context);
-			printAppMessage(mainClass, appMessage);
+			ApplicationMessage appMessage = appMessageService.loadMessage(context);
+			print(context, mainClass, appMessage);
 		} catch (Exception e) {
 			log.warn("print app start message failure, cause by: {}", e.getMessage(), e);
 		}
 	}
 
-	private static void printAppMessage(Class<?> mainClass, AppMessage appMessage) {
-		String extendMsg = extendMsg(appMessage);
+	private static void print(ApplicationContext context, Class<?> mainClass, ApplicationMessage appMessage) {
+		String extendMsg = extendMsg(context, appMessage);
 		if (StringUtils.hasLength(extendMsg)) {
 			extendMsg = "\n\t" + extendMsg;
 		}
@@ -98,8 +96,8 @@ public final class ApplicationMessagePrinter {
 		return LoggerFactory.getLogger(mainClass);
 	}
 
-	protected static String extendMsg(AppMessage appMessage) {
-		return SpringContextUtil.getApplicationContext().getBeansOfType(ExtendPrintMsg.class).values().stream().map(bean -> {
+	protected static String extendMsg(ApplicationContext context, ApplicationMessage appMessage) {
+		return context.getBeansOfType(ExtendPrintMsg.class).values().stream().map(bean -> {
 			List<String> extendMsg = bean.printMsg(appMessage);
 			if (Objects.isNull(extendMsg)) {
 				extendMsg = new ArrayList<>();

@@ -1,7 +1,7 @@
-package com.xiongyayun.athena.core.exception;
+package com.xiongyayun.athena.components.common.exception;
 
 import com.xiongyayun.athena.components.common.i18n.I18nService;
-import com.xiongyayun.athena.core.utils.SpringContextUtil;
+import com.xiongyayun.athena.components.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

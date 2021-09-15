@@ -1,7 +1,7 @@
-package com.xiongyayun.athena.core.utils;
+package com.xiongyayun.athena.components.mybatis.mybatisplus.utils;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import org.springframework.util.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class ClassUtil {
 			TableField tf = field.getAnnotation(TableField.class);
 			if (tf != null) {
 				String tName = tf.value();
-				if (StringUtils.hasLength(tName)) {
+				if (StringUtils.isNotBlank(tName)) {
 					return tName;
 				}
 			}

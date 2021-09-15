@@ -1,6 +1,4 @@
-package com.xiongyayun.athena.core.constant;
-
-import com.xiongyayun.athena.components.common.constant.Constant;
+package com.xiongyayun.athena.components.common.constant;
 
 /**
  * 符号常量

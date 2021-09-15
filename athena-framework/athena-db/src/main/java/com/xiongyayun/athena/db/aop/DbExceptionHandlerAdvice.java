@@ -1,9 +1,9 @@
 package com.xiongyayun.athena.db.aop;
 
-import com.xiongyayun.athena.core.constant.ErrorConstant;
-import com.xiongyayun.athena.core.aop.ExceptionHandlerAdvice;
-import com.xiongyayun.athena.core.i18n.I18nService;
-import com.xiongyayun.athena.core.response.ResBody;
+import com.xiongyayun.athena.components.common.constant.ErrorConstant;
+import com.xiongyayun.athena.components.common.exception.ExceptionHandlerAdvice;
+import com.xiongyayun.athena.components.common.i18n.I18nService;
+import com.xiongyayun.athena.components.common.ResBody;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

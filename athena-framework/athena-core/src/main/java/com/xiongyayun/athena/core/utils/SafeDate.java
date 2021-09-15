@@ -1,7 +1,7 @@
 package com.xiongyayun.athena.core.utils;
 
-import com.xiongyayun.athena.core.exception.AthenaException;
-import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+import com.xiongyayun.athena.components.common.exception.AthenaException;
+import com.xiongyayun.athena.components.common.exception.AthenaRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

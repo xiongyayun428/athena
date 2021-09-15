@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.core.validation.enums;
 
-import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
+import com.xiongyayun.athena.components.common.exception.AthenaRuntimeException;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

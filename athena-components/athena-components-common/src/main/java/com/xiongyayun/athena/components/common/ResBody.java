@@ -1,13 +1,10 @@
-package com.xiongyayun.athena.core.response;
+package com.xiongyayun.athena.components.common;
 
-import com.fasterxml.jackson.annotation.*;
-import com.xiongyayun.athena.core.i18n.I18nService;
-import com.xiongyayun.athena.core.utils.SpringContextUtil;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.xiongyayun.athena.components.common.i18n.I18nService;
+import com.xiongyayun.athena.components.util.SpringContextUtil;
 
 import java.io.Serializable;
 
@@ -17,8 +14,6 @@ import java.io.Serializable;
  * @author 熊亚运
  * @date 2019-05-21
  */
-@ApiModel("返回数据")
-@Accessors(chain = true)
 @JsonPropertyOrder({"rtnCode", "rtnMsg", "rtnData"})
 public class ResBody<T> implements Serializable {
 	/**
@@ -32,28 +27,19 @@ public class ResBody<T> implements Serializable {
     /**
      * 返回码
      */
-	@ApiModelProperty("返回码")
-    @Setter
-    @Getter
     private String rtnCode;
 
     /**
      * 返回信息
      */
-	@ApiModelProperty("返回信息")
-    @Setter
     private String rtnMsg;
 
-	@ApiModelProperty("返回数据")
-    @Setter
-    @Getter
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T rtnData;
 
     @JsonIgnore
     private Object[] args;
 
-	@Setter
 	@JsonIgnore
     private long timestamp;
 
@@ -111,4 +97,27 @@ public class ResBody<T> implements Serializable {
 		return this;
 	}
 
+	public String getRtnCode() {
+		return rtnCode;
+	}
+
+	public void setRtnCode(String rtnCode) {
+		this.rtnCode = rtnCode;
+	}
+
+	public void setRtnMsg(String rtnMsg) {
+		this.rtnMsg = rtnMsg;
+	}
+
+	public T getRtnData() {
+		return rtnData;
+	}
+
+	public void setRtnData(T rtnData) {
+		this.rtnData = rtnData;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 }

@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.exception.enums;
+package com.xiongyayun.athena.components.common.exception.enums;
 
 /**
  * 异常枚举格式规范

@@ -10,9 +10,14 @@
 	<artifactId>athena-components-starter-swagger</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Components starter-swagger</name>
-	<description>组件</description>
+	<description>Swagger组件启动器</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.xiongyayun.components</groupId>
+			<artifactId>athena-components-autoconfigure</artifactId>
+			<version>${revision}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-swagger</artifactId>
@@ -21,13 +26,14 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
+			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<!-- Swagger生成Api文档的增强解决方案 -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
-			<optional>true</optional>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

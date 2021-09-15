@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.components.autoconfigure.redis;
+package com.xiongyayun.athena.components.autoconfigure.cache.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
@@ -30,14 +29,14 @@ import java.util.Map;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/2/26
  */
+@ConditionalOnBean(RedisConnectionFactory.class)
 @Configuration
-@EnableCaching
+//@EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
 	@Resource
 	private ResourceLoader resourceLoader;
 
 	@ConditionalOnMissingBean(CacheManager.class)
-	@ConditionalOnBean(RedisConnectionFactory.class)
 	@Bean
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
 		RedisCacheConfiguration defaultCacheConfig = this.getRedisCacheConfigurationWithTtl(Duration.ofDays(1))

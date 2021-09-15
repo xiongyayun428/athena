@@ -1,4 +1,4 @@
-package com.xiongyayun.athena.core.i18n;
+package com.xiongyayun.athena.components.common.i18n;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

@@ -1,8 +1,7 @@
-package com.xiongyayun.athena.core.mybatis.fieldfill;
+package com.xiongyayun.athena.components.mybatis;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
  * @author <a href="mailto:xiongyayun428@163.com">Yayun.Xiong</a>
  * @date 2021/4/23
  */
-@Component
 public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
 	private static final String CREATE_BY = "createBy";
 

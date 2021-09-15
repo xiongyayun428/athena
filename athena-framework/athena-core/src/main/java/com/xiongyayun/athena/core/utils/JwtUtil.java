@@ -10,7 +10,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.impl.PublicClaims;
 import com.auth0.jwt.interfaces.Claim;
-import com.xiongyayun.athena.core.exception.AthenaException;
+import com.xiongyayun.athena.components.common.exception.AthenaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

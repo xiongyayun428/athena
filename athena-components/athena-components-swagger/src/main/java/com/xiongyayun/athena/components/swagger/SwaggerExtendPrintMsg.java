@@ -1,6 +1,6 @@
 package com.xiongyayun.athena.components.swagger;
 
-import com.xiongyayun.athena.components.common.AppMessage;
+import com.xiongyayun.athena.components.common.ApplicationMessage;
 import com.xiongyayun.athena.components.common.doc.ExtendPrintMsg;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class SwaggerExtendPrintMsg implements ExtendPrintMsg {
 	 * @return
 	 */
 	@Override
-	public List<String> printMsg(AppMessage appMessage) {
+	public List<String> printMsg(ApplicationMessage appMessage) {
 		List<String> msg = new ArrayList<>();
 		msg.add("Api Docs: \t\t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "swagger-ui/\n\t");
 		msg.add("Api Docs: \t\t" + appMessage.getProtocol() + "://" + appMessage.getIp() + ":" + appMessage.getPort() + appMessage.getContextPath() + "doc.html");
