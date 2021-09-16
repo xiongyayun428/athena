@@ -21,10 +21,7 @@
 	</modules>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.xiongyayun.boot</groupId>
-			<artifactId>athena-spring-boot-autoconfigure</artifactId>
-		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

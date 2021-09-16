@@ -12,10 +12,6 @@
 	<name>Athena Spring Boot Autoconfigure</name>
     <description>自动配置</description>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-    </properties>
-
     <dependencies>
         <!--自动生成配置信息-->
         <dependency>

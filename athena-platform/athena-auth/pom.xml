@@ -34,10 +34,12 @@
         <dependency>
 			<groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-actuator</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-autoconfigure</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.xiongyayun.framework</groupId>

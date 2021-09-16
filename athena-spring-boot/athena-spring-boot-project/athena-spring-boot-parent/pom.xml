@@ -12,45 +12,42 @@
     <artifactId>athena-spring-boot-parent</artifactId>
     <name>Athena Spring Boot Parent</name>
     <description>Athena Spring Boot Parent</description>
+	<organization>
+		<name>Athena</name>
+	</organization>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.compilerVersion>${java.version}</maven.compiler.compilerVersion>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
     <build>
-        <plugins>
-            <!-- 编译 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <inherited>true</inherited>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <parameters>true</parameters>
-                </configuration>
-            </plugin>
-            <!-- 打包 -->
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Built-By>Athena</Built-By>
-                            <Email>xiongyayun428@163.com</Email>
-<!--                            <Automatic-Module-Name>${project.groupId}.${project.artifactId}</Automatic-Module-Name>-->
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${revision}</Implementation-Version>
-                            <Specification-Title>${project.artifactId}</Specification-Title>
-                            <Specification-Vendor>Athena</Specification-Vendor>
-                            <Specification-Version>${project.version}</Specification-Version>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!--打包跳过测试-->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-        </plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- 编译 -->
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<inherited>true</inherited>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<parameters>true</parameters>
+					</configuration>
+				</plugin>
+				<!--打包跳过测试-->
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<skipTests>true</skipTests>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
     </build>
 </project>

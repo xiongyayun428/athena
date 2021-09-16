@@ -10,7 +10,7 @@
 	<artifactId>athena-system-starter</artifactId>
 	<packaging>jar</packaging>
 	<name>Athena Platform System Starter</name>
-	<description>启动模块</description>
+	<description>System启动模块</description>
 
 	<dependencies>
 		<dependency>
@@ -103,6 +103,7 @@
 		<dependency>
 			<groupId>com.xiongyayun.boot</groupId>
 			<artifactId>athena-spring-boot-autoconfigure</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -122,6 +123,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

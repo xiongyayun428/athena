@@ -11,8 +11,4 @@
     <artifactId>athena-spring-boot-actuator-autoconfigure</artifactId>
 	<name>Athena Spring Boot Actuator Autoconfigure</name>
 
-	<properties>
-		<main.basedir>${basedir}/../..</main.basedir>
-	</properties>
-
 </project>

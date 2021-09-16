@@ -16,17 +16,11 @@
 	<description>Athena Spring Boot Build</description>
 
 	<properties>
-		<main.basedir>${basedir}/..</main.basedir>
 		<revision>0.0.1-SNAPSHOT</revision>
 
 		<git.url>https://github.com/xiongyayun428/athena</git.url>
 		<git.connection>scm:git:git://github.com/xiongyayun428/athena.git</git.connection>
 		<git.developerConnection>scm:git:ssh://git@github.com/xiongyayun428/athena.git</git.developerConnection>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<scm>

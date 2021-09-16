@@ -2,18 +2,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-        <groupId>com.xiongyayun.boot</groupId>
-        <artifactId>athena-spring-boot</artifactId>
-        <version>${revision}</version>
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
+	<groupId>com.xiongyayun.boot</groupId>
     <artifactId>athena-spring-boot-dependencies</artifactId>
+	<version>${revision}</version>
     <packaging>pom</packaging>
     <name>Athena Spring Boot Dependencies</name>
     <description>依赖</description>
 
     <properties>
+		<revision>0.0.1-SNAPSHOT</revision>
 		<main.basedir>${basedir}/../../..</main.basedir>
         <spring-boot.version>2.5.4</spring-boot.version>
 		<spring-boot-admin.version>2.5.1</spring-boot-admin.version>
@@ -74,52 +71,52 @@
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-actuator</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-autoconfigure</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-plugins</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
         	<dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
         	</dependency>
         	<dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-plugin-oauth2-client</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
         	</dependency>
         	<dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-plugin-oauth2-server</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
         	</dependency>
         	<dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-plugin-security</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
         	</dependency>
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-starters</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-starter-docker</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-starter-mybatis</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- druid -->
@@ -418,26 +415,43 @@
                 	<artifactId>jasypt-maven-plugin</artifactId>
                 	<version>${jasypt-maven-plugin.version}</version>
                 </plugin>
+				<!-- Source -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>${maven-source-plugin.version}</version>
-					<configuration>
-						<attach>true</attach>
-					</configuration>
+					<!-- 绑定source插件到Maven的生命周期,并在生命周期后执行绑定的source的goal -->
 					<executions>
 						<execution>
-							<phase>compile</phase>
+							<id>bundle-sources</id>
+							<!-- 绑定source插件到Maven的生命周期 -->
+							<phase>package</phase>
 							<goals>
-								<goal>jar</goal>
+								<goal>jar-no-fork</goal>
+								<goal>test-jar-no-fork</goal>
 							</goals>
 						</execution>
 					</executions>
 				</plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${maven-jar-plugin.version}</version>
-                </plugin>
+				<!-- 打包 -->
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+								<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+							</manifest>
+							<manifestEntries>
+								<Implementation-Description>${project.description}</Implementation-Description>
+								<Built-By>Athena</Built-By>
+								<Email>xiongyayun428@163.com</Email>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
@@ -492,6 +506,13 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 
 <!--        	<plugin>-->
 <!--                <groupId>org.codehaus.mojo</groupId>-->

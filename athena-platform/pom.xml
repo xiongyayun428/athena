@@ -3,9 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.xiongyayun</groupId>
-		<artifactId>athena</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>com.xiongyayun.boot</groupId>
+		<artifactId>athena-spring-boot-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xiongyayun.platform</groupId>
     <artifactId>athena-platform</artifactId>
@@ -39,7 +40,6 @@
 				<groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-dependencies</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
-<!--                <version>${revision}</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -101,40 +101,5 @@
 <!--        <module>athena-service-time</module>-->
 <!--        <module>athena-service-websocket</module>-->
     </modules>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                                <goal>build-info</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</configuration>
-				</plugin>
-            </plugins>
-        </pluginManagement>
-
-		<plugins>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-    </build>
 
 </project>
