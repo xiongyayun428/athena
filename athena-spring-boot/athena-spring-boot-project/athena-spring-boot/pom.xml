@@ -12,8 +12,4 @@
 	<name>Athena Spring Boot</name>
 	<description>Athena Spring Boot</description>
 
-	<properties>
-		<main.basedir>${basedir}/../..</main.basedir>
-	</properties>
-
 </project>

@@ -3,9 +3,9 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.xiongyayun</groupId>
-		<artifactId>athena</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>com.xiongyayun.boot</groupId>
+		<artifactId>athena-spring-boot-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.xiongyayun.components</groupId>
 	<artifactId>athena-components</artifactId>
@@ -15,13 +15,6 @@
 	<description>组件</description>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-
-		<main.user.dir>${basedir}</main.user.dir>
 		<revision>0.0.1-SNAPSHOT</revision>
 	</properties>
 
@@ -52,10 +45,38 @@
 				<version>${revision}</version>
 				<optional>true</optional>
 			</dependency>
-
 			<dependency>
 				<groupId>com.xiongyayun.components</groupId>
 				<artifactId>athena-components-autoconfigure</artifactId>
+				<version>${revision}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.components</groupId>
+				<artifactId>athena-components-util</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.components</groupId>
+				<artifactId>athena-components-druid</artifactId>
+				<version>${revision}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.components</groupId>
+				<artifactId>athena-components-mybatis</artifactId>
+				<version>${revision}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.components</groupId>
+				<artifactId>athena-components-redis</artifactId>
+				<version>${revision}</version>
+				<optional>true</optional>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.components</groupId>
+				<artifactId>athena-components-swagger</artifactId>
 				<version>${revision}</version>
 				<optional>true</optional>
 			</dependency>

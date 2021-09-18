@@ -13,10 +13,6 @@
 	<name>Athena Spring Cloud Project</name>
     <description>雅典娜项目</description>
 
-	<properties>
-		<main.basedir>${basedir}/..</main.basedir>
-	</properties>
-
     <modules>
         <module>athena-spring-cloud-dependencies</module>
     </modules>

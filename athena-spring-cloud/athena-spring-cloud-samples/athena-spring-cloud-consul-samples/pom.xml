@@ -6,7 +6,6 @@
         <groupId>com.xiongyayun.cloud</groupId>
         <artifactId>athena-spring-cloud-samples</artifactId>
 		<version>${revision}</version>
-		<relativePath /> <!-- lookup parent from repository -->
     </parent>
     <packaging>jar</packaging>
     <artifactId>athena-spring-cloud-consul-samples</artifactId>

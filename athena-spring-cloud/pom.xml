@@ -16,7 +16,6 @@
 	<description>雅典娜项目</description>
 
 	<properties>
-		<main.basedir>${basedir}/..</main.basedir>
 		<revision>0.0.1-SNAPSHOT</revision>
 
 		<git.url>https://github.com/xiongyayun428/athena</git.url>

@@ -66,35 +66,29 @@
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-common</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-util</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-druid</artifactId>
-			<version>${revision}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-mybatis</artifactId>
-			<version>${revision}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-redis</artifactId>
-			<version>${revision}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-swagger</artifactId>
-			<version>${revision}</version>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>

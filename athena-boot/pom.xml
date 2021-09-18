@@ -16,7 +16,6 @@
     <description>雅典娜平台</description>
 
 	<properties>
-		<main.basedir>${basedir}/..</main.basedir>
 		<revision>1.0.0-SNAPSHOT</revision>
 	</properties>
 

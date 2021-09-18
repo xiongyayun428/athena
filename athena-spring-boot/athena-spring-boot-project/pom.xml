@@ -5,20 +5,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xiongyayun.boot</groupId>
-        <artifactId>athena-spring-boot</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+        <artifactId>athena-spring-boot-build</artifactId>
+		<version>${revision}</version>
     </parent>
     <artifactId>athena-spring-boot-project</artifactId>
 	<packaging>pom</packaging>
 	<name>Athena Spring Boot Project</name>
     <description>雅典娜项目</description>
 
-	<properties>
-		<main.basedir>${basedir}/../..</main.basedir>
-	</properties>
-
     <modules>
-<!--        <module>athena-spring-boot</module>-->
+        <module>athena-spring-boot</module>
         <module>athena-spring-boot-actuator</module>
         <module>athena-spring-boot-actuator-autoconfigure</module>
         <module>athena-spring-boot-autoconfigure</module>

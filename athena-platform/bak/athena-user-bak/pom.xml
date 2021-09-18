@@ -13,10 +13,6 @@
     <name>Athena Service User</name>
     <description>用户服务</description>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-    </properties>
-
     <dependencies>
         <!-- Stream 消息驱动 -->
 <!--        <dependency>-->

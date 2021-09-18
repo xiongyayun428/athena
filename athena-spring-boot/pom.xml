@@ -9,10 +9,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.xiongyayun.boot</groupId>
-    <artifactId>athena-spring-boot</artifactId>
+    <artifactId>athena-spring-boot-build</artifactId>
 	<version>${revision}</version>
     <packaging>pom</packaging>
-    <name>Athena Spring Boot</name>
+    <name>Athena Spring Boot Build</name>
 	<description>Athena Spring Boot Build</description>
 
 	<properties>

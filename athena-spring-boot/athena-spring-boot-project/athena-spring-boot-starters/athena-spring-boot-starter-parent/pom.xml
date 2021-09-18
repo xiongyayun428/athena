@@ -12,7 +12,6 @@
 	<name>Athena Spring Boot Starter Docker</name>
 
     <properties>
-        <main.basedir>${basedir}/../../..</main.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>${java.version}</maven.compiler.source>

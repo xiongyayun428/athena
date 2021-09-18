@@ -17,12 +17,10 @@
 		<dependency>
 			<groupId>com.xiongyayun.platform</groupId>
 			<artifactId>athena-system-client</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.platform</groupId>
 			<artifactId>athena-system-domain</artifactId>
-			<version>${revision}</version>
 		</dependency>
 
 		<!-- 通过Hibernate Validator使用Java Bean验证 -->

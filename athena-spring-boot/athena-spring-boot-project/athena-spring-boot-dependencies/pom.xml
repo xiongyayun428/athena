@@ -2,16 +2,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xiongyayun.boot</groupId>
+	<parent>
+		<groupId>com.xiongyayun.boot</groupId>
+		<artifactId>athena-spring-boot-build</artifactId>
+		<version>${revision}</version>
+		<relativePath>../../pom.xml</relativePath> <!-- lookup parent from repository -->
+	</parent>
     <artifactId>athena-spring-boot-dependencies</artifactId>
-	<version>${revision}</version>
     <packaging>pom</packaging>
     <name>Athena Spring Boot Dependencies</name>
     <description>依赖</description>
 
     <properties>
-		<revision>0.0.1-SNAPSHOT</revision>
-		<main.basedir>${basedir}/../../..</main.basedir>
         <spring-boot.version>2.5.4</spring-boot.version>
 		<spring-boot-admin.version>2.5.1</spring-boot-admin.version>
 		<druid.version>1.2.6</druid.version>
@@ -59,6 +61,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-parent</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-dependencies</artifactId>

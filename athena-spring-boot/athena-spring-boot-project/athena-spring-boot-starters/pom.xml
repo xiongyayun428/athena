@@ -12,10 +12,6 @@
     <packaging>pom</packaging>
     <name>Athena Spring Boot Starters</name>
 
-<!--    <properties>-->
-<!--        <main.basedir>${basedir}/../..</main.basedir>-->
-<!--    </properties>-->
-
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -27,11 +23,11 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>com.xiongyayun.boot</groupId>
-				<artifactId>athena-spring-boot-redis</artifactId>
-				<version>${revision}</version>
-			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.xiongyayun.boot</groupId>-->
+<!--				<artifactId>athena-spring-boot-redis</artifactId>-->
+<!--				<version>${revision}</version>-->
+<!--			</dependency>-->
 <!--			<dependency>-->
 <!--				<groupId>com.xiongyayun.boot</groupId>-->
 <!--				<artifactId>athena-spring-boot-plugin-security</artifactId>-->

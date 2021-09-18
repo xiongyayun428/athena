@@ -21,4 +21,34 @@
 		<module>athena-system-starter</module>
 	</modules>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.xiongyayun.platform</groupId>
+				<artifactId>athena-system-application</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.platform</groupId>
+				<artifactId>athena-system-client</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.platform</groupId>
+				<artifactId>athena-system-dao</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.platform</groupId>
+				<artifactId>athena-system-domain</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.xiongyayun.platform</groupId>
+				<artifactId>athena-system-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 </project>

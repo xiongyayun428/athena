@@ -13,10 +13,6 @@
     <name>Athena Spring Boot Plugins</name>
     <description>插件</description>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-    </properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

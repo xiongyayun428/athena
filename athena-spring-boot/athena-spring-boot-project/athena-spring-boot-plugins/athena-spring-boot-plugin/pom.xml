@@ -6,15 +6,10 @@
 		<groupId>com.xiongyayun.boot</groupId>
 		<artifactId>athena-spring-boot-plugins</artifactId>
 		<version>${revision}</version>
-		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
     <artifactId>athena-spring-boot-plugin</artifactId>
     <name>Athena Spring Boot Plugin</name>
     <description>插件基础</description>
-
-    <properties>
-        <main.basedir>${basedir}/../../..</main.basedir>
-    </properties>
 
     <dependencies>
         <dependency>

@@ -16,12 +16,10 @@
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-autoconfigure</artifactId>
-			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-redis</artifactId>
-			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 

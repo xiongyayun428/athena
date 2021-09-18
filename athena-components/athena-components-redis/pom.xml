@@ -16,7 +16,6 @@
 		<dependency>
 			<groupId>com.xiongyayun.components</groupId>
 			<artifactId>athena-components-util</artifactId>
-			<version>${revision}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

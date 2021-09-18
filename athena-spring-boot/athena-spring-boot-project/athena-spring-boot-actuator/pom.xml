@@ -11,10 +11,6 @@
     <artifactId>athena-spring-boot-actuator</artifactId>
 	<name>Athena Spring Boot Actuator</name>
 
-    <properties>
-        <main.basedir>${basedir}/../..</main.basedir>
-    </properties>
-
     <dependencies>
 		<!-- 健康监控 spring-boot-starter-actuator 管理工具/web 查看堆栈，动态刷新配置 -->
         <dependency>
