@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xiongyayun.athena.spring.boot.actuator.autoconfigure.disk.DiskSpaceEndPointAutoconfigure,\
+  com.xiongyayun.athena.spring.boot.actuator.autoconfigure.metrics.disk.DiskMetricsAutoConfigure

@@ -34,7 +34,7 @@
         <jasypt-spring-boot.version>3.0.4</jasypt-spring-boot.version>
         <alibaba-fastjson.version>1.2.78</alibaba-fastjson.version>
         <flywaydb.version>7.3.2</flywaydb.version>
-        <pentaho-kettle.version>9.3.0.0-166</pentaho-kettle.version>
+        <pentaho-kettle.version>9.3.0.0-190</pentaho-kettle.version>
         <xxl-job.version>2.3.0</xxl-job.version>
 
         <!-- Plugin versions -->
@@ -49,6 +49,7 @@
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <xml-maven-plugin.version>1.0.2</xml-maven-plugin.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -87,11 +88,11 @@
                 <artifactId>athena-spring-boot-autoconfigure</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.xiongyayun.boot</groupId>
-                <artifactId>athena-spring-boot-plugins</artifactId>
-                <version>${revision}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.xiongyayun.boot</groupId>-->
+<!--                <artifactId>athena-spring-boot-plugins</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--            </dependency>-->
         	<dependency>
                 <groupId>com.xiongyayun.boot</groupId>
                 <artifactId>athena-spring-boot-starter</artifactId>
@@ -227,7 +228,7 @@
         	<dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus-boot.version}</version>
+                <version>3.5.0</version>
         	</dependency>
         	<dependency>
                 <groupId>com.baomidou</groupId>
@@ -513,10 +514,17 @@
                 	<artifactId>flyway-maven-plugin</artifactId>
                 	<version>${flywaydb.version}</version>
                 </plugin>
+				<!-- 代码覆盖率 -->
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-maven-plugin.version}</version>
+				</plugin>
             </plugins>
         </pluginManagement>
 
 		<plugins>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>flatten-maven-plugin</artifactId>

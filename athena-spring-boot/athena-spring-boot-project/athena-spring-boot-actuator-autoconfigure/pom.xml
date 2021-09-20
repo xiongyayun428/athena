@@ -11,4 +11,16 @@
     <artifactId>athena-spring-boot-actuator-autoconfigure</artifactId>
 	<name>Athena Spring Boot Actuator Autoconfigure</name>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.xiongyayun.boot</groupId>
+			<artifactId>athena-spring-boot-actuator</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.boot</groupId>
+			<artifactId>athena-spring-boot-autoconfigure</artifactId>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 </project>

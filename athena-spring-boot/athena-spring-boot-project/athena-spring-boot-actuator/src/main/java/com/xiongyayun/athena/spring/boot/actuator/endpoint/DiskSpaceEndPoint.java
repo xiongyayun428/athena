@@ -2,7 +2,6 @@ package com.xiongyayun.athena.spring.boot.actuator.endpoint;
 
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
-import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
 import java.util.HashMap;
@@ -15,8 +14,7 @@ import java.util.Map;
  * @author 熊亚运
  * @date 2019-06-17
  */
-@Configuration
-@Endpoint(id = "diskspace")
+@Endpoint(id = "myDiskSpace")
 public class DiskSpaceEndPoint {
     /**
      * GET

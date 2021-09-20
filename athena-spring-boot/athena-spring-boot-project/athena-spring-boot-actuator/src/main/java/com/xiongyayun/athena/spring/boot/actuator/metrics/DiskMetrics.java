@@ -3,7 +3,6 @@ package com.xiongyayun.athena.spring.boot.actuator.metrics;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.binder.MeterBinder;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 
@@ -13,7 +12,6 @@ import java.io.File;
  * @author 熊亚运
  * @date 2019-06-17
  */
-@Component
 public class DiskMetrics implements MeterBinder {
 
     private File rootFilePath;
