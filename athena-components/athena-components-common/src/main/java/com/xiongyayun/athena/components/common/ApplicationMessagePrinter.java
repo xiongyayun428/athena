@@ -26,7 +26,7 @@ public final class ApplicationMessagePrinter {
 	public ApplicationMessagePrinter() {
 		throw new IllegalArgumentException("can not create instance!");
 	}
-
+	
 	public static void print() {
 		print(SpringContextUtil.getApplicationContext());
 	}
@@ -72,11 +72,11 @@ public final class ApplicationMessagePrinter {
 				, appMessage.getHostName()
 				, appMessage.getPid()
 				, appMessage.getProtocol()
-				, appMessage.getPort().toString()
+				, String.valueOf(appMessage.getPort())
 				, appMessage.getContextPath()
 				, appMessage.getProtocol()
 				, appMessage.getIp()
-				, appMessage.getPort().toString()
+				, String.valueOf(appMessage.getPort())
 				, appMessage.getContextPath()
 				, Arrays.toString(appMessage.getProfiles())
 		);
@@ -89,14 +89,14 @@ public final class ApplicationMessagePrinter {
 			String className = Arrays.stream(elements)
 					.filter(element -> "main".equals(element.getMethodName()))
 					.findFirst()
-					.map(element -> element.getClassName())
+					.map(StackTraceElement::getClassName)
 					.orElse(ApplicationMessagePrinter.class.getName());
 			return LoggerFactory.getLogger(className);
 		}
 		return LoggerFactory.getLogger(mainClass);
 	}
 
-	protected static String extendMsg(ApplicationContext context, ApplicationMessage appMessage) {
+	private static String extendMsg(ApplicationContext context, ApplicationMessage appMessage) {
 		return context.getBeansOfType(ExtendPrintMsg.class).values().stream().map(bean -> {
 			List<String> extendMsg = bean.printMsg(appMessage);
 			if (Objects.isNull(extendMsg)) {

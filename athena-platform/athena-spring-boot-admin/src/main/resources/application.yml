@@ -1,5 +1,6 @@
 server:
   port: 10000
+  shutdown: graceful
 spring:
   application:
     name: athena-spring-boot-admin

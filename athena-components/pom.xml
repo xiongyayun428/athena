@@ -6,6 +6,7 @@
 		<groupId>com.xiongyayun.boot</groupId>
 		<artifactId>athena-spring-boot-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xiongyayun.components</groupId>
 	<artifactId>athena-components</artifactId>
