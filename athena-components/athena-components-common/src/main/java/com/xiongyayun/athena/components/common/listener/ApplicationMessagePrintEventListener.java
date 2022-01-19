@@ -43,7 +43,7 @@ public class ApplicationMessagePrintEventListener implements ApplicationListener
 	}
 
 	protected void doEvent(ApplicationReadyEvent applicationReadyEvent) {
-		ApplicationMessagePrinter.print(applicationReadyEvent.getApplicationContext(), applicationReadyEvent.getSpringApplication().getMainApplicationClass());
+		ApplicationMessagePrinter.main(applicationReadyEvent.getApplicationContext(), applicationReadyEvent.getSpringApplication().getMainApplicationClass());
 	}
 
 }

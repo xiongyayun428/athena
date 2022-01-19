@@ -26,20 +26,20 @@ public final class ApplicationMessagePrinter {
 	public ApplicationMessagePrinter() {
 		throw new IllegalArgumentException("can not create instance!");
 	}
-	
-	public static void print() {
-		print(SpringContextUtil.getApplicationContext());
+
+	public static void main() {
+		main(SpringContextUtil.getApplicationContext());
 	}
 
-	public static void print(ApplicationContext context) {
-		print(context, null);
+	public static void main(ApplicationContext context) {
+		main(context, null);
 	}
 
-	public static void print(Class<?> mainClass) {
-		print(SpringContextUtil.getApplicationContext(), mainClass);
+	public static void main(Class<?> mainClass) {
+		main(SpringContextUtil.getApplicationContext(), mainClass);
 	}
 
-	public static void print(ApplicationContext context, Class<?> mainClass) {
+	public static void main(ApplicationContext context, Class<?> mainClass) {
 		try {
 			ApplicationMessageService appMessageService = context.getBeanProvider(ApplicationMessageService.class).getIfAvailable();
 			if (Objects.isNull(appMessageService)) {
@@ -47,13 +47,13 @@ public final class ApplicationMessagePrinter {
 			}
 
 			ApplicationMessage appMessage = appMessageService.loadMessage(context);
-			print(context, mainClass, appMessage);
+			main(context, mainClass, appMessage);
 		} catch (Exception e) {
 			log.warn("print app start message failure, cause by: {}", e.getMessage(), e);
 		}
 	}
 
-	private static void print(ApplicationContext context, Class<?> mainClass, ApplicationMessage appMessage) {
+	private static void main(ApplicationContext context, Class<?> mainClass, ApplicationMessage appMessage) {
 		String extendMsg = extendMsg(context, appMessage);
 		if (StringUtils.hasLength(extendMsg)) {
 			extendMsg = "\n\t" + extendMsg;

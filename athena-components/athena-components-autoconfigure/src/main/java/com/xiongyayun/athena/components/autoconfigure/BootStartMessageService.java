@@ -2,7 +2,7 @@ package com.xiongyayun.athena.components.autoconfigure;
 
 import com.xiongyayun.athena.components.common.ApplicationMessage;
 import com.xiongyayun.athena.components.common.ApplicationMessageService;
-import com.xiongyayun.athena.components.util.NetUtil;
+import com.xiongyayun.athena.components.util.NetUtils;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
@@ -50,6 +50,6 @@ public class BootStartMessageService implements ApplicationMessageService {
 	}
 
 	protected String getActualIp() {
-		return NetUtil.getLocalIpAddress();
+		return NetUtils.getLocalIpAddress();
 	}
 }
