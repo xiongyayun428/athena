@@ -53,6 +53,7 @@ public class AthenaCorsFilter extends HttpFilter {
 		List<String> allowHeaders = new ArrayList<>();
 		allowHeaders.add(HttpHeaders.ORIGIN);
 		allowHeaders.add("X-Requested-With");
+		allowHeaders.add(HttpHeaders.CACHE_CONTROL);
 		allowHeaders.add(HttpHeaders.CONTENT_TYPE);
 		allowHeaders.add(HttpHeaders.ACCEPT);
 		allowHeaders.add(HttpHeaders.AUTHORIZATION);
@@ -65,14 +66,16 @@ public class AthenaCorsFilter extends HttpFilter {
 		// 设置返回请求头
 		List<String> exposeHeaders = new ArrayList<>();
 		exposeHeaders.add(HttpHeaders.CACHE_CONTROL);
-		exposeHeaders.add(HttpHeaders.CONTENT_LANGUAGE);
-		exposeHeaders.add(HttpHeaders.CONTENT_TYPE);
-		exposeHeaders.add(HttpHeaders.CONTENT_RANGE);
-		exposeHeaders.add(HttpHeaders.CONTENT_LENGTH);
-		exposeHeaders.add(HttpHeaders.CONTENT_ENCODING);
 		exposeHeaders.add(HttpHeaders.CONTENT_DISPOSITION);
+		exposeHeaders.add(HttpHeaders.CONTENT_ENCODING);
+		exposeHeaders.add(HttpHeaders.CONTENT_LANGUAGE);
+		exposeHeaders.add(HttpHeaders.CONTENT_LENGTH);
+		exposeHeaders.add(HttpHeaders.CONTENT_LOCATION);
+		exposeHeaders.add(HttpHeaders.CONTENT_RANGE);
+		exposeHeaders.add(HttpHeaders.CONTENT_TYPE);
 		exposeHeaders.add(HttpHeaders.LAST_MODIFIED);
 		exposeHeaders.add(HttpHeaders.PRAGMA);
+		exposeHeaders.add(HttpHeaders.EXPIRES);
 		exposeHeaders.add(CommonConstant.ACCESS_TOKEN);
 		exposeHeaders.add(CommonConstant.REFRESH_TOKEN);
 		res.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, String.join(",", exposeHeaders));
