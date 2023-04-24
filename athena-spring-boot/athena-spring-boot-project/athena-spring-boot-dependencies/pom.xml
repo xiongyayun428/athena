@@ -35,7 +35,7 @@
         <alibaba-fastjson.version>1.2.78</alibaba-fastjson.version>
         <flywaydb.version>7.3.2</flywaydb.version>
         <pentaho-kettle.version>9.3.0.0-190</pentaho-kettle.version>
-        <xxl-job.version>2.3.0</xxl-job.version>
+        <xxl-job.version>2.3.1</xxl-job.version>
 
         <!-- Plugin versions -->
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
